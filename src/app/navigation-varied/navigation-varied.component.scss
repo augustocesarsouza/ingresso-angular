@@ -1,0 +1,21 @@
+.container-navigation-varied {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(32 35 128);
+  height: 56px;
+}
+
+.ul-all-routes {
+  display: flex;
+  gap: 10px;
+  list-style-type: none;
+  margin-bottom: 0px;
+  padding-left: 0px;
+  margin: 0px 35px;
+  width: 1400px;
+
+  li {
+    color: rgb(132 182 255);
+  }
+}

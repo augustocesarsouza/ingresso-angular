@@ -1,0 +1,42 @@
+.container-navigation-ingresso-main {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(to left, #202380, #3255e2);
+
+  svg {
+    width: 35px;
+    height: 35px;
+    fill: #fff;
+  }
+}
+
+.container-navigation-ingresso {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 15px;
+  width: 1443px;
+}
+
+.container-img-and-selection-region {
+  display: flex;
+}
+
+.container-region {
+  display: flex;
+  align-items: center;
+
+  >p {
+    margin-bottom: 0px;
+    font-size: 16px;
+    color: #fff;
+  }
+}
+
+.container-svg-location{
+  display: flex;
+}
+
+.container-loupe-login-register-question-mark {
+  display: flex;
+  align-items: center;
+}
