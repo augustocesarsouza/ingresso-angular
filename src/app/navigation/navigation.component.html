@@ -1,0 +1,240 @@
+<div class="container-navigation-ingresso-main">
+  <div class="container-navigation-ingresso">
+    <div class="container-img-and-selection-region">
+      <div class="container-img-ingresso">
+        <img
+          src="https://res.cloudinary.com/dyqsqg7pk/image/upload/v1698064983/IngressoImg/ingressologoTrans_in34qn.png"
+          alt="ingresso-img"
+        />
+      </div>
+      <div class="container-region-and-floating">
+        <div
+          class="container-region"
+          (click)="onClickChoseRegion()"
+          (mouseenter)="onMouseEnterRandom()"
+          (mouseleave)="onMouseLeaveRandom()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 64 64"
+            class="mx-0 my-auto h-7 w-7 fill-[#DDE3F8] pr-[6px] md:h-9 md:w-9"
+          >
+            <path
+              d="M33.118 52.733c.924-.936 1.653-1.527 2.995-2.983 2.676-2.902 1.103-1.022 6.519-6.794 5.415-5.772 6.835-9.499 6.835-14.612C49.467 18.307 42.045 9 32.053 9S14.49 18.307 14.49 28.344c0 4.944 2.233 9.007 6.914 14.475 4.68 5.469 3.588 3.963 6.45 6.931 1.316 1.364 1.674 1.699 2.6 2.616.193.192 1.387 1.144 1.549 1.3.178-.176.897-.71 1.116-.933zM10.333 27.49c0-12.236 9.484-22.156 22.025-22.156s21.309 9.92 21.309 22.156c0 6.3-2.697 12.832-7.821 17.824-1.18 1.285-3.84 4.32-6.72 7.253a310 310 0 0 1-3.893 3.915c-.549.54-.99.965-1.313 1.264q-.272.251-.45.4c-.572.474-.73.505-1.358.52-1.002.023-.947-.04-6.672-5.806-3.062-3.084-5.751-5.897-6.737-7.074-5.106-5.636-8.37-12.198-8.37-18.296M31.96 39c-5.575 0-10.626-5.102-10.626-10.973 0-5.87 5.051-10.36 10.626-10.36s10.708 4.49 10.708 10.36S37.535 39 31.96 39m.036-4c3.61 0 6.672-3.081 6.672-6.878s-3.062-6.455-6.67-6.455c-3.61 0-6.664 2.571-6.664 6.368S28.387 35 31.995 35z"
+            ></path>
+          </svg>
+          <p>Campinas</p>
+        </div>
+        <div class="container-svg-arrow" *ngIf="isClickedRegion">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+            <path
+              d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"
+            />
+          </svg>
+        </div>
+        <div
+          class="container-region-floating"
+          *ngIf="isClickedRegion"
+          (mouseenter)="onMouseEnterRandom()"
+          (mouseleave)="onMouseLeaveRandom()"
+        >
+          <div class="container-where-you-is">
+            <h1>Você está em: Campinas</h1>
+            <div class="container-att-location-gps-svg">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 64 64"
+                class="injected-svg"
+                data-src="/images/gps.svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                role="img"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M53.377 12.827L39.722 54.315c-.625 1.9-3.315 1.955-4.02.084l-7.316-19.406-19.234-7.165c-1.879-.7-1.828-3.352.077-3.98l41.45-13.68c1.66-.547 3.24 1.011 2.698 2.66zm-5.531 2.601l-32.07 9.846c-.61.187-.62.515-.032.733L32 32l5.415 15.153c.213.595.552.584.75-.006l10.418-30.973c.2-.598-.12-.935-.737-.746z"
+                ></path>
+              </svg>
+              <span>Atualizar localização por GPS</span>
+            </div>
+            <div class="container-select-region">
+              <select class="select-region" (change)="changeRegion($event)">
+                <option value="Estados">Estados</option>
+                <option *ngFor="let state of states" [value]="state">
+                  {{ state }}
+                </option>
+              </select>
+              <select class="select-city" #valor>
+                <option value="Cidade">Cidade</option>
+                <option *ngFor="let city of cities" [value]="city">
+                  {{ city }}
+                </option>
+              </select>
+            </div>
+            <button
+              class="button-change-city"
+              (click)="changeCityClick(valor.value)"
+            >
+              Trocar Cidade
+            </button>
+          </div>
+          <div class="container-line-white"></div>
+          <div class="container-last-location">
+            <h1>Últimos Locais</h1>
+            <div class="container-all-last-location">
+              <div
+                class="last-location"
+                *ngFor="let cityLocalState of citiesLocalState"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 0 64 64"
+                >
+                  <g>
+                    <g
+                      transform="translate(-668.000000, -4508.000000)"
+                      fill="rgb(152 170 236)"
+                    >
+                      <g transform="translate(668.000000, 4508.000000)">
+                        <g>
+                          <path
+                            d="M54.9234692,25.4876308 L62.515364,33.6224722 C62.5251428,33.6329503 62.5347957,33.6435451 62.5443208,33.6542544 C63.2033478,34.3952133 63.1369289,35.5301262 62.3959699,36.1891532 C61.6326858,36.8680368 60.4665142,36.8113784 59.7726368,36.0616986 L59.7726368,36.0616986 L57.2750658,33.3626788 C56.4036914,46.1946037 45.7187555,56.3333333 32.6657924,56.3333333 C25.4344392,56.3333333 18.9298738,53.221585 14.4180774,48.2640696 L14.3945183,48.2877713 L13.6966084,47.6204018 C13.6705567,47.5954902 13.6451885,47.5698735 13.6205319,47.5435803 C12.8706968,46.7439711 12.9110465,45.4878984 13.7106556,44.7380632 C14.5572568,43.9441611 15.8854977,43.9808935 16.6869279,44.8203717 L16.6869279,44.8203717 L16.905,45.049 L16.9779938,45.0029517 C20.7584678,49.5463639 26.4555119,52.4385965 32.8280731,52.4385965 C43.7268622,52.4385965 52.649752,43.9787655 53.3882946,33.2675511 L50.6471221,36.6882218 C50.0067045,37.4873238 48.8474346,37.6334122 48.0287858,37.0181782 C48.0137997,37.0069158 47.9989924,36.9954174 47.9843694,36.9836874 C47.2172927,36.368365 47.0942716,35.2477091 47.709594,34.4806324 L47.709594,34.4806324 L54.9234692,25.4876308 Z M32.75,19.0671243 C33.8545695,19.0671243 34.75,19.9625548 34.75,21.0671243 L34.75,31.5099988 L42.023526,38.5986848 C42.8010573,39.3832349 42.7953674,40.649552 42.0108173,41.4270833 C41.2262672,42.2046146 39.95995,42.1989248 39.1824187,41.4143747 L30.75,33.1563346 L30.75,21.0671243 C30.75,19.9625548 31.6454305,19.0671243 32.75,19.0671243 Z M32.6657924,7 C41.0531214,7 48.4627274,11.1861297 52.9192808,17.5830594 L52.8766168,17.6087953 C53.3731464,18.4866648 53.1951295,19.6181454 52.4043333,20.2972075 C52.3743465,20.3229574 52.3435952,20.3478036 52.3121209,20.3717126 C51.4414229,21.0331254 50.1994016,20.8634662 49.5379888,19.9927681 L49.5379888,19.9927681 L48.6657924,18.8445899 L48.7592176,18.7529787 C44.979383,14.1531765 39.24635,11.2192982 32.8280731,11.2192982 C21.6408183,11.2192982 12.5354421,20.1328798 12.2265245,31.2454628 L14.3474063,28.4089667 C14.9591197,27.5908638 16.1129804,27.4126176 16.9430459,28.0079973 C17.7488329,28.5859628 17.9335187,29.7077158 17.3555532,30.5135028 C17.3471997,30.5251491 17.3387071,30.5366949 17.3300771,30.5481377 L10.630094,39.4319847 L2.51571257,31.242303 C1.82357962,30.5437472 1.8287864,29.4163711 2.52734224,28.7242382 C2.54065899,28.7110439 2.55418327,28.6980607 2.56791004,28.6852935 C3.31776476,27.9878577 4.48595437,28.0119691 5.20639262,28.7397517 L8,31.561 L8.00243033,31.2587582 C8.22025649,17.8238743 19.1789988,7 32.6657924,7 Z M56.7545432,26.3341492 C56.7387784,26.2626125 56.7227031,26.1911924 56.7063188,26.1198902 Z"
+                            id="Recent-15"
+                          ></path>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+                <span>{{ cityLocalState }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-loupe-login-register-question-mark">
+      <div
+        class="container-svg-loupe"
+        (click)="clickedLoupe()"
+        (mouseenter)="onMouseEnterRandom()"
+        (mouseleave)="onMouseLeaveRandom()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          class="mr-3 h-6 w-6 cursor-pointer md:h-9 md:w-9 md:hover:opacity-80 fill-ing-blue-200"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M9.75 2.75a6.625 6.625 0 0 1 4.99 10.983q.059.041.113.095l5.569 5.57c.341.341.36.875.043 1.192-.317.318-.851.298-1.193-.043l-5.569-5.57a1 1 0 0 1-.142-.182A6.625 6.625 0 1 1 9.75 2.75m0 1.625a5 5 0 1 0 0 10 5 5 0 0 0 0-10m-3.417 3.74c.206.019.36.2.341.406-.184 2.152.69 3.352 2.703 3.727a.375.375 0 0 1-.138.737c-2.398-.447-3.529-1.998-3.312-4.528a.375.375 0 0 1 .406-.341z"
+          ></path>
+        </svg>
+      </div>
+      <div class="container-svg-arrow-loupe" *ngIf="isClickedLoop">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+          <path
+            d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"
+          />
+        </svg>
+      </div>
+      <div
+        class="container-loupe-floating"
+        *ngIf="isClickedLoop"
+        (mouseenter)="onMouseEnterRandom()"
+        (mouseleave)="onMouseLeaveRandom()"
+      >
+        <h1>O que você procura?</h1>
+        <div class="container-input-and-svg-loupe">
+          <input
+            type="text"
+            placeholder="O que você procura?"
+            class="input-loupe"
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            data-src="/images/search.svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            role="img"
+          >
+            <path
+              fill=""
+              fill-rule="evenodd"
+              d="M9.75 2.75a6.625 6.625 0 0 1 4.99 10.983c.039.027.077.06.113.095l5.569 5.57c.341.341.36.875.043 1.192-.317.318-.851.298-1.193-.043l-5.569-5.57a.939.939 0 0 1-.142-.182A6.625 6.625 0 1 1 9.75 2.75zm0 1.625a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm-3.417 3.74c.206.019.36.2.341.406-.184 2.152.69 3.352 2.703 3.727a.375.375 0 0 1-.138.737c-2.398-.447-3.529-1.998-3.312-4.528.018-.206.2-.359.406-.341z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div class="container-user-svg">
+        <div
+          class="svg-user"
+          (click)="clickLoginOrRegister()"
+          (mouseenter)="onMouseEnterRandom()"
+          (mouseleave)="onMouseLeaveRandom()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 64 64"
+            class="mr-3 h-6 w-6 cursor-pointer md:h-9 md:w-9 md:hover:opacity-80 fill-ing-blue-200"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M32 6.667c13.991 0 25.333 11.342 25.333 25.333S45.991 57.333 32 57.333 6.667 45.991 6.667 32 18.009 6.667 32 6.667m0 14.75c-4.631 0-5.948 2.607-5.058 8.026.04.24.034.486-.014.724-.362 1.768.122 3.687 1.238 5.742.32.588 1.623 2.583 1.75 3.008a2 2 0 0 1-1.298 2.476c-5.486 1.784-10.476 3.566-12.52 4.555 3.883 4.52 9.642 7.385 16.069 7.385 6.318 0 11.99-2.768 15.868-7.158l-12.26-4.819a2 2 0 0 1-.986-2.907c1.344-2.202 2.24-4.029 2.688-5.451.367-1.164.395-1.915.238-2.246a2 2 0 0 1-.19-.966c.373-6.9-.518-8.37-5.525-8.37zM32.167 11C20.477 11 11 20.477 11 32.167c0 3.817 1.01 7.398 2.778 10.49 2.005-1.05 6.496-2.693 11.192-4.272q-.16-.274-.318-.566c-1.458-2.683-2.165-5.351-1.713-8.079-.47-3.134-.282-5.824.804-7.973 1.428-2.83 4.245-4.35 8.257-4.35 4.048 0 6.728 1.094 8.228 3.568 1.199 1.976 1.506 4.493 1.313 8.581.724 2.175-.053 5.075-2.141 8.902l11.056 4.36a21.05 21.05 0 0 0 2.877-10.661C53.333 20.477 43.857 11 32.167 11"
+            ></path>
+          </svg>
+        </div>
+        <span
+          (click)="clickLoginOrRegister()"
+          class="span-login-or-register"
+          (mouseenter)="onMouseEnterRandom()"
+          (mouseleave)="onMouseLeaveRandom()"
+          *ngIf="!userLogin"
+          >Entre ou Cadastre-se</span
+        >
+        <span *ngIf="userLogin && userLogin.name">{{ userLogin.name }}</span>
+      </div>
+      <div
+        class="container-svg-arrow-login-register"
+        *ngIf="isClickedLoginRegister"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+          <path
+            d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"
+          />
+        </svg>
+      </div>
+      <div
+        class="container-login-register-floating"
+        *ngIf="isClickedLoginRegister"
+        (mouseenter)="onMouseEnterRandom()"
+        (mouseleave)="onMouseLeaveRandom()"
+      >
+        <div class="container-register-account">
+          <h1>Ainda não é cliente Ingresso.com?</h1>
+          <p>
+            Compre ingressos e combos de pipoca para ir ao cinema com segurança
+            e mais comodidade!
+          </p>
+          <button>Criar uma nova conta</button>
+        </div>
+        <div class="container-line-white"></div>
+        <div class="container-login-user">
+          <h1>Cliente Ingresso.com</h1>
+          <a [routerLink]="['/my-account/login']">Entrar na minha Conta</a>
+        </div>
+      </div>
+      <div class="container-svg-question-mark">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 64 64"
+          class="mr-3 h-6 w-6 cursor-pointer md:h-9 md:w-9 md:hover:opacity-80 fill-ing-blue-200"
+        >
+          <path
+            d="M32 6.667c13.991 0 25.333 11.342 25.333 25.333S45.991 57.333 32 57.333 6.667 45.991 6.667 32 18.009 6.667 32 6.667M32.167 11C20.477 11 11 20.477 11 32.167s9.477 21.166 21.167 21.166 21.166-9.476 21.166-21.166S43.857 11 32.167 11m0 31.667A2.853 2.853 0 0 1 35 45.5c0 1.519-1.298 2.833-2.833 2.833s-2.834-1.314-2.834-2.833a2.854 2.854 0 0 1 2.834-2.833M32 17.333c5.46 0 9.332 3.812 9.332 9.417 0 2.767-1.396 5.623-4.24 7.56a22.6 22.6 0 0 1-2.84 1.631l-.049.024v2.702a2 2 0 0 1-4 0v-4a2 2 0 0 1 1.278-1.865q.057-.022.257-.107.347-.148.768-.352a19 19 0 0 0 2.334-1.34c.691-.466 2.492-1.29 2.492-4.253s-1.559-5.416-5.25-5.416c-3.972 0-5.416 2.323-5.416 5.5 0 1.104-1.23 2-2.334 2s-2-.896-2-2c0-5.47 4.079-9.5 9.668-9.5z"
+          ></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
