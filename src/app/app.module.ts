@@ -5,16 +5,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { NavigationVariedComponent } from './navigation-varied/navigation-varied.component';
+import { AllSvgAppModule } from './all-svg-app/all-svg-app.module';
+import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    NavigationVariedComponent
+    NavigationVariedComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AllSvgAppModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()

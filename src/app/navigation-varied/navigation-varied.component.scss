@@ -8,14 +8,20 @@
 
 .ul-all-routes {
   display: flex;
-  gap: 10px;
+  gap: 40px;
   list-style-type: none;
   margin-bottom: 0px;
   padding-left: 0px;
-  margin: 0px 35px;
+  margin: 0px 19px;
   width: 1400px;
 
   li {
     color: rgb(132 182 255);
+    font-weight: 600;
+  }
+
+  li:hover {
+    color: rgb(90, 154, 250);
+    cursor: pointer;
   }
 }

@@ -1,0 +1,6 @@
+export interface UserLogin {
+  email: string;
+  id: string;
+  name: string;
+  toke: string;
+}
