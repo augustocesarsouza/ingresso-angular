@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginUserService } from '../login-user.service';
 import { DataService } from '../data.service';
+import { combineLatest } from 'rxjs';
+import { jwtDecode } from "jwt-decode";
 
 @Component({
   selector: 'app-login-user',
@@ -17,8 +19,10 @@ export class LoginUserComponent implements OnInit {
   containerMainSvgPassword!: HTMLElement;
   containerPasswordInput!: HTMLElement;
   spanPassword!: HTMLElement;
+  currentPath: string | undefined;
+  registrationConfirmed = true;
 
-  constructor(private router: Router, private loginUserService: LoginUserService, private dataService: DataService){
+  constructor(private router: Router, private route: ActivatedRoute, private loginUserService: LoginUserService, private dataService: DataService){
   }
 
   ngOnInit(): void {
@@ -31,7 +35,56 @@ export class LoginUserComponent implements OnInit {
       this.containerPasswordInput = document.querySelector('.container-password-input') as HTMLElement;
       this.spanPassword = this.containerPasswordInput?.firstChild as HTMLElement;
     }
+
+    let result = combineLatest([
+      this.route.queryParams,
+      this.route.url
+    ]).subscribe(([ params, urlSegments ]) => {
+      let currentPath = urlSegments.map(segment => segment.path).join('/');
+
+      if(currentPath === "confirmation-of-email"){
+        let token = params['token'];
+
+        this.verifyToken(token);
+      }
+    });
   }
+
+  verifyToken(token: string){
+    if(token !== null && token.length > 20){
+      const tokenExp = jwtDecode(token).exp;
+      
+      if(tokenExp === undefined)
+        return;
+
+      // const currentTime = Date.now() / 1000;
+
+      // const expirationDate = new Date(tokenExp * 1000).toISOString();
+      // const expirationDateData = new Date(expirationDate);
+
+      // const hourCurrentUtc = new Date(currentTime * 1000).toISOString();
+      // const dateObject = new Date(hourCurrentUtc);
+
+      this.confirmTokenUser(token);
+      
+      // if (expirationDateData > dateObject) {
+      //   this.confirmTokenUser(token);
+      // }
+    }
+  }
+
+  confirmTokenUser = async (token: string) => {
+    const res = await fetch(`/api/v1/public/user/confirm-token/${token}`);
+    
+    if (res.status === 200) {
+      const json = await res.json();
+      console.log(json);
+      
+      console.log("true");
+      this.registrationConfirmed = true;
+      
+    }
+  };
 
   onClickInputCpfOrEmail(){
     if(this.spanCpfOrEmail){
@@ -67,10 +120,6 @@ export class LoginUserComponent implements OnInit {
     }
   }
 
-  onClickRedirectHome(){
-    this.router.navigate(['/home']);
-  }
-
   onClickLogin(inputCpfOrEmail: HTMLInputElement, inputPassword: HTMLInputElement){
     let valueCpfOrEmail = inputCpfOrEmail.value;
     let valuePassword = inputPassword.value;
@@ -85,5 +134,9 @@ export class LoginUserComponent implements OnInit {
         console.error("error get login");
       }
     });
+  }
+
+  onClickCreateNewAccount(){
+    this.router.navigate(['/my-account/register']);
   }
 }

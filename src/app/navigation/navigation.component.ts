@@ -23,6 +23,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
   isMouseEnterRandom = false;
   private subscription!: Subscription;
   userLogin!: UserLogin;
+  private timeoutId: any;
+
 
   constructor(private statesAndCitysService: StatesAndCitysService, private route: ActivatedRoute, private router: Router, private dataService: DataService){
   }
@@ -59,6 +61,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
         this.userLogin = userJSON;
       }
     }
+
+    this.timeoutId = setTimeout(() => {
+      localStorage.removeItem("userLogin");
+    }, 100000);
   }
 
   onClickChoseRegion(){
@@ -137,6 +143,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if(this.subscription){
       this.subscription.unsubscribe();
+    }
+
+    if(this.timeoutId){
+      clearTimeout(this.timeoutId);
     }
   }
 }

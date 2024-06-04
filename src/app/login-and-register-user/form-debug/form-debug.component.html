@@ -1,0 +1,13 @@
+<div class="mt-2" *ngIf="form">
+  <div>Detalhe Form</div>
+
+  <code>Form válido: {{ form.valid }}</code>
+  <br />
+  <code>Form submitted: {{ form.submitted }}</code>
+  <br />
+  <br />
+  <code class="code-json-obj"
+    >Valores:
+    <pre>{{ form.value | json }}</pre>
+  </code>
+</div>

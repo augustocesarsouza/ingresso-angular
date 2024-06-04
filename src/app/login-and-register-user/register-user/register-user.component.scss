@@ -1,0 +1,122 @@
+.container-register-main {
+  // position: relative;
+}
+
+.container-main-form {
+  display: flex;
+  justify-content: center;
+}
+
+.form-main {
+  width: 50rem;
+}
+
+.container-password-requirement {
+
+}
+
+.container-password-requirement > p {
+  font-size: 13px;
+  margin-bottom: 0px;
+}
+
+.para-2,
+.para-3,
+.para-4,
+.para-5 {
+  color: rgb(155, 155, 155);
+}
+
+.color-sucess {
+  color: rgb(56 195 105);
+}
+
+.container-modal-register-success {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(59, 59, 59, 0.363);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.container-modal-central {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  gap: 15px;
+  width: 18rem;
+  height: 20rem;
+  padding: 10px 28px;
+  background-color: #fff;
+}
+
+.container-icon-x {
+  position: absolute;
+  right: 15px;
+  top: 5px;
+  cursor: pointer;
+}
+
+.container-icon-x > svg {
+  width: 25px;
+  fill: #1188be;
+}
+
+.container-img-i {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-img-i > h1 {
+  font-size: 20px;
+  color: rgb(102, 102, 102);
+  margin-bottom: 0px;
+}
+
+.container-img-i > img {
+  width: 65%;
+  object-fit: cover;
+}
+
+.container-two-span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.span-1 {
+  font-size: 13px;
+}
+
+.span-2 {
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.container-button-continue {
+  display: flex;
+}
+
+.container-button-continue > button {
+  font-size: 16px;
+  font-weight: 400;
+  padding: 10px 20px;
+  background-color: rgb(52, 120, 193);
+  color: #fff;
+  border: none;
+  margin-top: 15px;
+}
+
+.container-button-continue > button:hover {
+  background-color: rgb(41, 97, 156);
+
+}
