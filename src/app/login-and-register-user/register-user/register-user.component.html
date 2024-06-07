@@ -94,7 +94,6 @@
             [ngClass]="aplicaCssErro('senha')"
             formControlName="senha"
             placeholder="*Senha"
-            name="senha"
             #password
             (input)="onPasswordInput(password.value)"
           />
@@ -325,12 +324,12 @@
         </div>
       </div>
 
-      <!-- <button #submitButton type="submit" class="btn btn-primary">
-        Submit
-      </button> -->
-      <button type="submit" class="btn btn-primary" (click)="onClickSubmit()">
+      <button #submitButton type="submit" class="btn btn-primary">
         Submit
       </button>
+      <!-- <button type="submit" class="btn btn-primary" (click)="onClickSubmit()">
+        Submit
+      </button> -->
       <button class="btn btn-danger ms-1" (click)="resetar()">Cancelar</button>
       <app-form-debug [form]="formulario"></app-form-debug>
     </form>

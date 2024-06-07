@@ -35,8 +35,8 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
   days!: number[];
   years!: string[];
   gender!: string[];
-  cepInvalid: boolean = false;
   passwordValue!: string;
+  cepInvalid: boolean = false;
   minimumOneLowercaseLetter = false;
   minimumOneUppercaseLetter = false;
   minimumOneNumber = false;
@@ -248,6 +248,8 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
     
     if(this.formulario.valid){
       let valueForm = valueSubmit;
+      console.log(objCreate);
+      
 
       await fetch("/api/v1/public/user/create", {
         method: "POST",
@@ -257,9 +259,13 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
         body: JSON.stringify(objCreate)
       })
       .then((res) => {
+        console.log(res);
+        
         this.confirmEmailRegister = true;
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.log(error)
+      });
     }
   }
 

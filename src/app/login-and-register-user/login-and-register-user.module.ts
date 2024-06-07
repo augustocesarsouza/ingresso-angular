@@ -11,6 +11,7 @@ import { InputFieldComponent } from './input-field/input-field.component';
 import { ErrorMsgComponent } from './error-msg/error-msg.component';
 import { CampoControlErroComponent } from './campo-control-erro/campo-control-erro.component';
 import { FormDebugComponent } from './form-debug/form-debug.component';
+import { AllSvgAppModule } from '../all-svg-app/all-svg-app.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FormDebugComponent } from './form-debug/form-debug.component';
     CommonModule,
     LoginAndRegisterUserRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AllSvgAppModule
   ]
 })
 export class LoginAndRegisterUserModule { }

@@ -21,12 +21,14 @@ export class NavigationComponent implements OnInit, OnDestroy {
   selectedState = "Estado";
   isMouseEnter = false;
   isMouseEnterRandom = false;
+  existeLogin = true;
+  moreInformationLaterModalLogin = false;
   private subscription!: Subscription;
-  userLogin!: UserLogin;
+  userLogin: UserLogin | null = null;
   private timeoutId: any;
 
-
   constructor(private statesAndCitysService: StatesAndCitysService, private route: ActivatedRoute, private router: Router, private dataService: DataService){
+
   }
 
   ngOnInit(): void {
@@ -46,11 +48,11 @@ export class NavigationComponent implements OnInit, OnDestroy {
     });
 
     let userLocalStorage = localStorage.getItem('userLogin');
-    // Colocar um tempo para tirar do localStorage que está armazenado e fazer o usuario fazer login de pois tipo 10 MINUTE
 
     if(userLocalStorage === "null" || userLocalStorage === null){
       this.subscription = this.dataService.data$.subscribe((data: UserLogin) => {
         const userJSON = JSON.stringify(data);
+
         localStorage.setItem('userLogin', userJSON);
 
         this.userLogin = data;
@@ -62,9 +64,31 @@ export class NavigationComponent implements OnInit, OnDestroy {
       }
     }
 
+    if(this.userLogin?.email){
+      this.existeLogin = true;
+    }else {
+      this.existeLogin = false;
+    }
+
     this.timeoutId = setTimeout(() => {
       localStorage.removeItem("userLogin");
     }, 100000);
+
+    this.userLogin = {
+      email: "augusto@gmail.com",
+      id: "0c7b3838-a021-4965-a0d9-d7c29ef23d73",
+      name: "augusto cesar",
+      toke: "scascascas"
+    }
+
+    this.formatNameOfTheUser();
+  }
+
+  formatNameOfTheUser(){
+    if(this.userLogin){
+      let name = this.userLogin.name.split(" ")[0];
+      this.userLogin.name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+    }
   }
 
   onClickChoseRegion(){
@@ -119,9 +143,14 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   clickLoginOrRegister(){
-    this.isClickedLoop = false;
-    this.isClickedRegion = false;
-    this.isClickedLoginRegister = !this.isClickedLoginRegister;
+    if(!this.existeLogin){
+      this.isClickedLoop = false;
+      this.isClickedRegion = false;
+      this.isClickedLoginRegister = !this.isClickedLoginRegister;
+
+    }else {
+      this.moreInformationLaterModalLogin = !this.moreInformationLaterModalLogin;
+    }
   }
 
   onMouseEnter(){
@@ -138,6 +167,17 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   onMouseLeaveRandom(){
     this.isMouseEnterRandom = false;
+  }
+
+  onClickCreateNewAccount(){
+    this.router.navigate(['/my-account/register']);
+  }
+
+  onClickLogOutOfTheAccount(){
+    localStorage.removeItem('userLogin');
+    this.userLogin = null;
+    this.dataService.setData(null);
+    this.router.navigate(['/my-account/login']);
   }
 
   ngOnDestroy(): void {
