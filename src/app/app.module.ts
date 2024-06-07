@@ -15,14 +15,14 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     NavigationComponent,
     NavigationVariedComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AllSvgAppModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     provideClientHydration()

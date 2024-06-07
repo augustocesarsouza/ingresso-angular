@@ -1,1 +1,369 @@
-<p>register-user works!</p>
+<div class="container-register-main">
+  <app-ingresso-top></app-ingresso-top>
+  <div class="container-main-form">
+    <form
+      class="mt-3 form-main"
+      [formGroup]="formulario"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <app-input-field
+            formControlName="nome"
+            [classeCss]="aplicaCssErro('nome')"
+            id="nome"
+            label="Nome"
+            placeholder="*Como quer ser chamado"
+            type="text"
+            #name
+            [control]="getAnyNameFieldForm('nome')"
+          ></app-input-field>
+        </div>
+        <div class="col-md-6">
+          <app-input-field
+            formControlName="cpf"
+            [classeCss]="aplicaCssErro('cpf')"
+            id="cpf"
+            label="Cpf"
+            placeholder="*CPF"
+            type="text"
+            [control]="getAnyNameFieldForm('cpf')"
+          ></app-input-field>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <label for="email" class="form-label mb-0">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="aplicaCssErro('email')"
+            formControlName="email"
+            id="email"
+            placeholder="email@gmail.com"
+            name="email"
+          />
+          <app-campo-control-erro
+            [mostrarError]="verificaValidTouched('email')"
+            nomeError="Email invalido."
+          >
+          </app-campo-control-erro>
+          <app-campo-control-erro
+            [mostrarError]="formulario.get('email')?.status === 'PENDING'"
+            nomeError="Validando email..."
+          >
+          </app-campo-control-erro>
+          <app-campo-control-erro
+            [mostrarError]="formulario.get('email')?.status === 'VALID'"
+            nomeError="Email Válido."
+          >
+          </app-campo-control-erro>
+          <app-campo-control-erro
+            [mostrarError]="emailJaExiste('email')"
+            nomeError="Email Já cadastrato."
+          >
+          </app-campo-control-erro>
+        </div>
+        <div class="col-md-6">
+          <label for="confirmarEmail" class="form-label mb-0"
+            >Confirmar Email</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="aplicaCssErro('confirmarEmail')"
+            formControlName="confirmarEmail"
+            placeholder="email@gmail.com"
+            name="email"
+          />
+          <app-campo-control-erro
+            [mostrarError]="verificarConfirmarEmailValid('confirmarEmail')"
+            nomeError="confirmarEmail é invalido."
+          >
+          </app-campo-control-erro>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <label for="senha" class="form-label mb-0">Senha</label>
+          <input
+            type="password"
+            class="form-control"
+            [ngClass]="aplicaCssErro('senha')"
+            formControlName="senha"
+            placeholder="*Senha"
+            #password
+            (input)="onPasswordInput(password.value)"
+          />
+          <app-campo-control-erro
+            [mostrarError]="verificaValidTouched('senha')"
+            nomeError="A senha não atende aos critérios necessários."
+          >
+          </app-campo-control-erro>
+          <div class="container-password-requirement mt-3">
+            <p class="para-1">
+              Sua senha precisa atender aos seguintes critérios:
+            </p>
+            <p
+              [ngClass]="{ 'color-sucess': minimumOneLowercaseLetter }"
+              class="para-2"
+            >
+              Mínimo uma letra minúscula *
+            </p>
+            <p
+              [ngClass]="{ 'color-sucess': minimumOneUppercaseLetter }"
+              class="para-3"
+            >
+              Mínimo uma letra maiúscula *
+            </p>
+            <p [ngClass]="{ 'color-sucess': minimumOneNumber }" class="para-4">
+              Mínimo um número *
+            </p>
+            <p
+              [ngClass]="{ 'color-sucess': minimumEightNumber }"
+              class="para-5"
+            >
+              Mínimo de 8 caracteres *
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div formGroupName="endereco">
+        <div class="row mb-2">
+          <div class="col-3">
+            <select
+              class="form-select form-control"
+              id="birthdayMonth"
+              formControlName="birthdayMonth"
+              (change)="onMonthChange($event)"
+            >
+              <option value="" selected>Mês de aniversário</option>
+              <option [value]="el" *ngFor="let el of this.birthdayMonth">
+                {{ el }}
+              </option>
+            </select>
+          </div>
+          <div class="col-3">
+            <select
+              class="form-select form-control"
+              id="birthday"
+              formControlName="birthday"
+              (change)="onMonthChange($event)"
+            >
+              <option value="" selected>Dia do aniversário</option>
+              <option [value]="day" *ngFor="let day of this.days">
+                {{ day }}
+              </option>
+            </select>
+          </div>
+          <div class="col-3">
+            <select
+              class="form-select form-control"
+              id="yearOfBirth"
+              formControlName="yearOfBirth"
+              (change)="onMonthChange($event)"
+            >
+              <option value="" selected>Ano do aniversário</option>
+              <option [value]="year" *ngFor="let year of this.years">
+                {{ year }}
+              </option>
+            </select>
+          </div>
+          <div class="col-3">
+            <select
+              class="form-select form-control"
+              id="gender"
+              formControlName="gender"
+            >
+              <option value="" selected>Prefiro não informar</option>
+              <option [value]="gen" *ngFor="let gen of this.gender">
+                {{ gen }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3 mb-2">
+            <label for="cep" class="form-label mb-1">CEP</label>
+            <input
+              type="text"
+              class="form-control"
+              [class.is-invalid]="cepInvalid"
+              (keydown)="keyPressCepInput()"
+              id="input-cep-home"
+              placeholder="CEP"
+              formControlName="cep"
+              #cep
+            />
+            <div class="invalid-feedback" *ngIf="cepInvalid">CEP Invalido.</div>
+            <!-- <div
+              class="invalid-feedback"
+              *ngIf="formulario.get('endereco.cep')?.hasError('cepInvalido')"
+            >
+              CEP InvalidoOO.
+            </div> -->
+          </div>
+          <div class="col-4 mb-2">
+            <label for="numberCellphone" class="form-label mb-1"
+              >Número Celular</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="input-number-cellphone"
+              placeholder="Número telefone"
+              formControlName="numberCellphone"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 mb-2">
+            <label for="complement" class="form-label mb-1">Logradouro</label>
+            <input
+              type="text"
+              class="form-control"
+              id="rua"
+              placeholder="Logradouro"
+              formControlName="rua"
+            />
+          </div>
+          <div class="col-2">
+            <label for="number" class="form-label mb-1">Numero</label>
+            <input
+              type="text"
+              class="form-control"
+              id="input-number-home"
+              placeholder="NUMERO"
+              formControlName="numero"
+            />
+          </div>
+          <div class="col-3">
+            <label for="complement" class="form-label mb-1">Complemento</label>
+            <input
+              type="text"
+              class="form-control"
+              id="complement"
+              placeholder="Complemento"
+              formControlName="complemento"
+            />
+          </div>
+          <div class="col-3">
+            <label for="complement" class="form-label mb-1">Referência</label>
+            <input
+              type="text"
+              class="form-control"
+              id="referencia"
+              placeholder="Referência"
+              formControlName="referencia"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-5 mb-2">
+            <label for="bairro" class="form-label mb-1">Bairro</label>
+            <input
+              type="text"
+              class="form-control"
+              id="input-bairro-home"
+              placeholder="Bairro"
+              formControlName="bairro"
+            />
+          </div>
+
+          <div class="col-3 mb-2">
+            <label for="estado" class="form-label mb-1">Estado</label>
+            <select
+              class="form-select form-control"
+              id="estado"
+              formControlName="estado"
+            >
+              <option value="" selected>Selecione um Estado</option>
+              <option
+                [value]="estado.sigla"
+                *ngFor="let estado of this.estados"
+              >
+                {{ estado.nome }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-3 mb-2">
+            <label for="cidade" class="form-label mb-1">Cidades</label>
+            <select
+              class="form-select form-control"
+              id="cidade"
+              formControlName="cidade"
+            >
+              <option value="" selected>Selecione um Cidade</option>
+              <option [value]="cidade.nome" *ngFor="let cidade of this.cidades">
+                {{ cidade.nome }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4 mt-3">
+        <div class="col-12">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+              formControlName="termos"
+            />
+            <label class="form-check-label" for="flexCheckDefault"
+              >Quero receber novidades e mensagens da Ingresso.com.</label
+            >
+          </div>
+        </div>
+      </div>
+
+      <button #submitButton type="submit" class="btn btn-primary">
+        Submit
+      </button>
+      <!-- <button type="submit" class="btn btn-primary" (click)="onClickSubmit()">
+        Submit
+      </button> -->
+      <button class="btn btn-danger ms-1" (click)="resetar()">Cancelar</button>
+      <app-form-debug [form]="formulario"></app-form-debug>
+    </form>
+
+    <div class="container-modal-register-success" *ngIf="confirmEmailRegister">
+      <div class="container-modal-central">
+        <div class="container-icon-x" (click)="onContinueRegister()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+            <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+            <path
+              d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+            />
+          </svg>
+        </div>
+        <div class="container-img-i">
+          <img
+            src="https://res.cloudinary.com/dyqsqg7pk/image/upload/v1714490807/ingresso-icon_nn8qoy.jpg"
+            alt="icon-i"
+          />
+          <h1>Falta Pouco!</h1>
+        </div>
+        <div class="container-two-span">
+          <span class="span-1">Olá, {{ name.value }}!</span>
+          <span class="span-2"
+            >Confirme seu cadastro clicando no link que acabamos de enviar para
+            o seu e-mail.</span
+          >
+        </div>
+        <div class="container-button-continue">
+          <button (click)="onContinueRegister()">CONTINUAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer-ingresso></app-footer-ingresso>
+</div>

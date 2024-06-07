@@ -185,14 +185,22 @@
           </svg>
         </div>
         <span
+          *ngIf="!existeLogin && userLogin === null"
           (click)="clickLoginOrRegister()"
           class="span-login-or-register"
           (mouseenter)="onMouseEnterRandom()"
           (mouseleave)="onMouseLeaveRandom()"
-          *ngIf="!userLogin"
           >Entre ou Cadastre-se</span
         >
-        <span *ngIf="userLogin && userLogin.name">{{ userLogin.name }}</span>
+        <div
+          class="container-span-user-logged"
+          *ngIf="userLogin && userLogin.name"
+        >
+          <span (click)="clickLoginOrRegister()"
+            >Olá, {{ userLogin.name }}</span
+          >
+          <span>Meus Pedidos</span>
+        </div>
       </div>
       <div
         class="container-svg-arrow-login-register"
@@ -216,13 +224,36 @@
             Compre ingressos e combos de pipoca para ir ao cinema com segurança
             e mais comodidade!
           </p>
-          <button>Criar uma nova conta</button>
+          <button (click)="onClickCreateNewAccount()">
+            Criar uma nova conta
+          </button>
         </div>
         <div class="container-line-white"></div>
         <div class="container-login-user">
           <h1>Cliente Ingresso.com</h1>
           <a [routerLink]="['/my-account/login']">Entrar na minha Conta</a>
         </div>
+      </div>
+      <div
+        class="container-svg-arrow-login-register"
+        *ngIf="moreInformationLaterModalLogin"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+          <path
+            d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"
+          />
+        </svg>
+      </div>
+      <div
+        class="container-already-logged-in"
+        *ngIf="moreInformationLaterModalLogin"
+      >
+        <h1>Olá, {{ userLogin?.name }}</h1>
+        <h2>Meus Pedidos</h2>
+        <h2>Dados Pessoais</h2>
+        <h2>Formas de Pagamento</h2>
+        <div class="container-line-white-for-user-login"></div>
+        <h2 (click)="onClickLogOutOfTheAccount()">Sair da Conta</h2>
       </div>
       <div class="container-svg-question-mark">
         <svg

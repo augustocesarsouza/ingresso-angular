@@ -1,16 +1,3 @@
-.container-svg-ingresso {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(48, 48, 48);
-  padding: 65px;
-  cursor: pointer;
-}
-
-.container-svg-ingresso > svg {
-  width: 350px;
-}
-
 .container-login-user-or-create-account {
   display: flex;
   justify-content: center;
@@ -68,11 +55,6 @@
   padding: 6px;
   gap: 8px;
   padding-right: 0px;
-}
-
-.container-svg-user > svg {
-  width: 15px;
-  fill: rgb(217 217 217);
 }
 
 .container-svg-user > svg {
@@ -195,6 +177,19 @@
   color: rgb(52, 120, 193);
 }
 
+.container-invalid-username-password-or-code {
+  display: flex;
+  justify-content: center;
+}
+
+.container-invalid-username-password-or-code > span {
+  font-size: 12px;
+  padding: 2px 5px;
+  background-color: rgb(250, 196, 196);
+  color: rgb(163, 0, 1);
+  margin-bottom: 20px;
+}
+
 .container-create-account {
   display: flex;
   justify-content: center;
@@ -252,3 +247,267 @@
 .container-create-account > p {
   font-size: 13px;
 }
+
+.container-modal-registration-confirmed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(59, 59, 59, 0.363);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.container-modal-register-success {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(59, 59, 59, 0.363);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.container-modal-central {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  gap: 15px;
+  width: 18rem;
+  height: 20rem;
+  padding: 10px 28px;
+  background-color: #fff;
+}
+
+.container-central-register-confirmed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  gap: 10px;
+  width: 13rem;
+  height: 16rem;
+  padding: 30px 17px;
+  background-color: #fff;
+}
+
+.container-central-register-confirmed > img {
+  width: 115px;
+}
+
+.container-central-register-confirmed > h1 {
+  font-size: 20px;
+}
+
+.container-icon-x {
+  position: absolute;
+  right: 15px;
+  top: 5px;
+  cursor: pointer;
+}
+
+.container-icon-x > svg {
+  width: 25px;
+  fill: #1188be;
+}
+
+.container-img-i {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-img-i > h1 {
+  font-size: 20px;
+  color: rgb(102, 102, 102);
+  margin-bottom: 0px;
+}
+
+.container-img-i > img {
+  width: 65%;
+  object-fit: cover;
+}
+
+.container-two-span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.span-1 {
+  font-size: 13px;
+}
+
+.span-2 {
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.container-button-continue {
+  display: flex;
+}
+
+.container-button-continue > button {
+  font-size: 16px;
+  font-weight: 400;
+  padding: 10px 20px;
+  background-color: rgb(52, 120, 193);
+  color: #fff;
+  border: none;
+  margin-top: 15px;
+}
+
+.container-button-continue > button:hover {
+  background-color: rgb(41, 97, 156);
+}
+
+.container-modal-confirmed-code-send-email {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(59, 59, 59, 0.363);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.container-modal-central-send-code-email {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  gap: 15px;
+  width: 19rem;
+  height: 27rem;
+  padding: 10px 19px;
+  background-color: #fff;
+
+  // gap: 18px; quando codigo chegar
+  //   width: 19rem;
+  //   height: 25rem;
+}
+
+.container-modal-central-send-code-email > h1 {
+  font-size: 22px;
+  color: rgb(109, 109, 109);
+}
+
+.span-code-confirmed-1 {
+  font-size: 14px;
+  line-height: 1.3;
+  text-align: center;
+  color: rgb(118 118 118);
+}
+
+.container-resend-email-code {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.container-resend-email-code > span {
+  font-size: 14px;
+  color: rgb(65, 129, 197);
+  cursor: pointer;
+}
+
+.container-code-resend-successfully {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.container-code-resend-successfully > svg {
+  fill: rgb(15, 190, 40);
+}
+
+.container-code-resend-successfully > span {
+  font-size: 14px;
+  color: rgb(15, 190, 40);
+}
+
+.container-svg-lock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-input-cod-and-svg-lock {
+  display: flex;
+}
+
+.container-input-cod-and-svg-lock > svg {
+  width: 35px;
+  border-right: 1px solid rgb(224, 224, 224);
+  fill: rgb(224, 224, 224);
+  padding-right: 10px;
+  margin-right: 10px;
+}
+
+.container-input-cod-and-svg-lock {
+  border: 1px solid rgb(197, 197, 197);
+  border-left: 4px solid rgb(197, 197, 197);
+  width: 100%;
+  font-size: 12px;
+  padding: 9px 5px;
+}
+
+.container-input-cod-and-svg-lock > input {
+  border: none;
+  width: 100%;
+}
+
+.container-input-cod-and-svg-lock:focus {
+  border: 1px solid red;
+  border-left: 4px solid red;
+}
+
+.container-input-cod-and-svg-lock > input[type=number]::-webkit-inner-spin-button,
+.container-input-cod-and-svg-lock > input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.container-input-cod-and-svg-lock > input:focus {
+  outline: none; 
+}
+
+.container-button-cancel-entry {
+  display: flex;
+  gap: 5px;
+}
+
+.button-cancel {
+  font-size: 15px;
+  padding: 10px 20px;
+  color: #2196f3;
+  border: 1px solid #2196f3;
+}
+
+.button-cancel:hover {
+  color: #fff;
+  background-color: #0778ce;
+}
+
+.button-enter {
+  font-size: 15px;
+  color: #fff;
+  background-color: #2196f3;
+  padding: 10px 15px;
+  border: none;
+}
+
+.button-enter:hover {
+  background-color: #0778ce;
+}
+

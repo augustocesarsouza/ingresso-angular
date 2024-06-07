@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SvgLocationComponent } from './svg-location/svg-location.component';
 import { SvgLoupeComponent } from './svg-loupe/svg-loupe.component';
 import { SvgUserComponent } from './svg-user/svg-user.component';
+import { SvgLockComponent } from './svg-lock/svg-lock.component';
 
 @NgModule({
   imports: [
@@ -13,11 +14,14 @@ import { SvgUserComponent } from './svg-user/svg-user.component';
     SvgLocationComponent,
     SvgLoupeComponent,
     SvgUserComponent,
+    SvgLockComponent,
+
   ],
   exports: [
     SvgLocationComponent,
     SvgLoupeComponent,
-    SvgUserComponent
+    SvgUserComponent,
+    SvgLockComponent
   ]
 })
 export class AllSvgAppModule { }

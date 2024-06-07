@@ -1,0 +1,12 @@
+.container-svg-ingresso {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(48, 48, 48);
+  padding: 65px;
+  cursor: pointer;
+}
+
+.container-svg-ingresso > svg {
+  width: 350px;
+}
