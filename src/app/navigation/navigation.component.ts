@@ -74,13 +74,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
       localStorage.removeItem("userLogin");
     }, 100000);
 
-    this.userLogin = {
-      email: "augusto@gmail.com",
-      id: "0c7b3838-a021-4965-a0d9-d7c29ef23d73",
-      name: "augusto cesar",
-      toke: "scascascas"
-    }
-
     this.formatNameOfTheUser();
   }
 

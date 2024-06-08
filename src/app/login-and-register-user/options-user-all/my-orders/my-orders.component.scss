@@ -1,0 +1,48 @@
+.container-main-my-orders {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-img-ingresso-info-user {
+  display: flex;
+  gap: 170px;
+  padding: 10px 0px;
+  justify-content: space-around;
+  background-color: rgb(48, 48, 48);
+}
+
+.container-img-ingresso {
+  >img {
+    cursor: pointer;
+  }
+}
+
+.container-info-user-service {
+  display: flex;
+  gap: 15px;
+}
+
+.container-info-user,
+.container-service-customer {
+  display: flex;
+  align-items: center;
+}
+
+.container-info-user > span {
+  color: #fff;
+  font-size: 14px;
+}
+
+.container-service-customer > span {
+  color: #fff;
+  font-size: 14px;
+}
+
+.container-service-customer > svg {
+  fill: rgb(37, 184, 255);
+}
+
+.container-all-option-and-yours-orders {
+  display: flex;
+  justify-content: space-around;
+}

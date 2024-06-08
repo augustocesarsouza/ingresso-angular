@@ -12,6 +12,8 @@ import { ErrorMsgComponent } from './error-msg/error-msg.component';
 import { CampoControlErroComponent } from './campo-control-erro/campo-control-erro.component';
 import { FormDebugComponent } from './form-debug/form-debug.component';
 import { AllSvgAppModule } from '../all-svg-app/all-svg-app.module';
+import { MyOrdersComponent } from './options-user-all/my-orders/my-orders.component';
+import { AllOptionsUserComponent } from './options-user-all/all-options-user/all-options-user.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AllSvgAppModule } from '../all-svg-app/all-svg-app.module';
     InputFieldComponent,
     ErrorMsgComponent,
     CampoControlErroComponent,
-    FormDebugComponent
+    FormDebugComponent,
+    MyOrdersComponent,
+    AllOptionsUserComponent
   ],
   imports: [
     CommonModule,
