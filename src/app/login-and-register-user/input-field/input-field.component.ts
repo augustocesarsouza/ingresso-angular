@@ -25,7 +25,7 @@ export class InputFieldComponent implements OnInit, ControlValueAccessor {
   private innerValue: any;
 
   ngOnInit(): void {
-    console.log(this.classeCss);
+    // console.log(this.classeCss);
   }
 
   get value(){

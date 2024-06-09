@@ -11,7 +11,7 @@
     >
   </div>
   <div class="container-all-option-navigation">
-    <div class="container-svg-config">
+    <div class="container-svg-config" (click)="onClickSetColor($event, 1)">
       <app-svg-tickets
         width="30px"
         height="30px"
@@ -19,7 +19,7 @@
       ></app-svg-tickets>
       <span>Meus pedidos: Cinema</span>
     </div>
-    <div class="container-svg-config">
+    <div class="container-svg-config" (click)="onClickSetColor($event, 2)">
       <app-svg-tickets-two
         width="30px"
         height="30px"
@@ -27,7 +27,7 @@
       ></app-svg-tickets-two>
       <span>Meus Pedidos: Shows, Teatro e mais</span>
     </div>
-    <div class="container-svg-config">
+    <div class="container-svg-config" (click)="onClickSetColor($event, 3)">
       <app-svg-personal-data
         width="30px"
         height="30px"
@@ -35,7 +35,7 @@
       ></app-svg-personal-data>
       <span>Dados Pessoais</span>
     </div>
-    <div class="container-svg-config">
+    <div class="container-svg-config" (click)="onClickSetColor($event, 4)">
       <app-svg-payment-methods
         width="30px"
         height="30px"

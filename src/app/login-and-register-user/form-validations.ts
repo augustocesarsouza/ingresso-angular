@@ -35,7 +35,6 @@ export class FormValidations {
 
     if(cep === null || cep === undefined) return;
 
-
     cep = cep.replace(/\D/g, '');
 
     if(cep && cep !== ''){

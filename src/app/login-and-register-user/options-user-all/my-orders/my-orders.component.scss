@@ -3,17 +3,34 @@
   flex-direction: column;
 }
 
+.container-ingresso-title {
+  display: flex;
+  justify-content: center;
+}
+
 .container-img-ingresso-info-user {
   display: flex;
-  gap: 170px;
-  padding: 10px 0px;
-  justify-content: space-around;
+  gap: 700px;
+  width: 100%;
+  padding: 14px 0px;
+  justify-content: center;
   background-color: rgb(48, 48, 48);
+
+  @media (max-width: 1160px) {
+    position: relative;
+    justify-content: flex-end;
+  }
 }
 
 .container-img-ingresso {
   >img {
     cursor: pointer;
+  }
+
+  @media (max-width: 1160px) {
+    position: absolute;
+    left: 10px;
+    top: 10px;
   }
 }
 
@@ -42,7 +59,83 @@
   fill: rgb(37, 184, 255);
 }
 
+.container-adjust-screen {
+  display: flex;
+  justify-content: center;
+}
+
 .container-all-option-and-yours-orders {
   display: flex;
   justify-content: space-around;
+  padding-top: 15px;
+  // padding-left: 20px;
+  // padding-right: 20px;
+}
+
+.container-main-form {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+}
+
+.container-user-info-email-change-password {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.container-email {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+}
+
+.container-email > svg {
+  width: 20px;
+  fill: rgb(97, 97, 97);
+}
+
+.container-email > span {
+  font-size: 14px;
+  color: rgb(97, 97, 97);
+  padding-bottom: 1px;
+}
+
+.container-password {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.container-password > svg {
+  width: 20px;
+  fill: rgb(97, 97, 97);
+}
+
+.container-password > span {
+  font-size: 14px;
+  color: rgb(52, 120, 193);
+  padding-bottom: 1px;
+}
+
+.container-label-all {
+  padding: 0px 5px;
+}
+
+.container-label-all > label {
+  font-size: 15px;
+}
+
+.container-label-all > input {
+  font-size: 15px;
+}
+
+.container-label-all > select {
+  font-size: 15px;
+}
+
+.container-label-all > option {
+  font-size: 15px;
 }

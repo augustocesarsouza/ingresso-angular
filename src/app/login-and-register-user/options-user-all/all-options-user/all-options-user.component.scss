@@ -18,7 +18,7 @@
 .container-all-option-navigation {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 3px;
 }
 
 .container-svg-config {
@@ -30,6 +30,7 @@
   padding-left: 14px;
   padding-right: 42px;
   padding-top: 10.15px;
+  cursor: pointer;
 }
 
 .container-svg-config > span {
