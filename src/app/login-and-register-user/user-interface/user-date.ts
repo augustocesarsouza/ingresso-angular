@@ -1,7 +1,7 @@
 export interface User {
-  codeSentSuccessfullyEmail: true;
-  email: string;
-  id: string;
-  name: string
-  token: string;
+  codeSentSuccessfullyEmail: true | null;
+  email: string | null;
+  id: string | null;
+  name: string | null;
+  token: string | null;
 }

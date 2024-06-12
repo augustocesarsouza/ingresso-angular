@@ -25,7 +25,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
   moreInformationLaterModalLogin = false;
   private subscription!: Subscription;
   userLogin: UserLogin | null = null;
-  private timeoutId: any;
 
   constructor(private statesAndCitysService: StatesAndCitysService, private route: ActivatedRoute, private router: Router, private dataService: DataService){
 
@@ -33,27 +32,36 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.states = this.statesAndCitysService.getStates();
+    if(typeof window !== "undefined"){
+      localStorage.removeItem("cities");
+    }
 
-    localStorage.removeItem("cities");
     this.citiesLocalState = ["Campinas"];
 
-    document.body.addEventListener('click', () => {
+    if(typeof document !== "undefined"){
+      document.body.addEventListener('click', () => {
 
-      if(!this.isMouseEnterRandom){
-        this.isClickedRegion = false;
-        this.isClickedLoop = false;
-        this.isClickedLoginRegister = false;
-        this.isMouseEnter = false;
-      }
-    });
+        if(!this.isMouseEnterRandom){
+          this.isClickedRegion = false;
+          this.isClickedLoop = false;
+          this.isClickedLoginRegister = false;
+          this.isMouseEnter = false;
+        }
+      });
+    }
+    let userLocalStorage = null;
 
-    let userLocalStorage = localStorage.getItem('userLogin');
+    if(typeof window !== "undefined"){
+      userLocalStorage = localStorage.getItem('userLogin');
+    }
 
     if(userLocalStorage === "null" || userLocalStorage === null){
       this.subscription = this.dataService.data$.subscribe((data: UserLogin) => {
         const userJSON = JSON.stringify(data);
 
-        localStorage.setItem('userLogin', userJSON);
+        if(typeof window !== "undefined"){
+          localStorage.setItem('userLogin', userJSON);
+        }
 
         this.userLogin = data;
       });
@@ -69,10 +77,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
     }else {
       this.existeLogin = false;
     }
-
-    this.timeoutId = setTimeout(() => {
-      localStorage.removeItem("userLogin");
-    }, 100000);
 
     this.formatNameOfTheUser();
   }
@@ -109,8 +113,12 @@ export class NavigationComponent implements OnInit, OnDestroy {
       return;
 
     let citiesLocalStage: string[] = [];
+    let allCitiesLocalStage = null;
 
-    let allCitiesLocalStage = localStorage.getItem('cities');
+    if(typeof window !== "undefined"){
+      allCitiesLocalStage = localStorage.getItem('cities');
+    }
+
 
     if(allCitiesLocalStage){
       const citiesLocalStageInner: string[] = JSON.parse(allCitiesLocalStage);
@@ -121,7 +129,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
       citiesLocalStage.push(city);
 
       const statesJSON = JSON.stringify(citiesLocalStage);
-      localStorage.setItem('cities', statesJSON);
+
+      if(typeof window !== "undefined"){
+        localStorage.setItem('cities', statesJSON);
+      }
 
       citiesLocalStage = ["Campinas", ...citiesLocalStage];
 
@@ -167,19 +178,21 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   onClickLogOutOfTheAccount(){
-    localStorage.removeItem('userLogin');
+    if(typeof window !== "undefined"){
+      localStorage.removeItem('userLogin');
+    }
     this.userLogin = null;
     this.dataService.setData(null);
     this.router.navigate(['/my-account/login']);
   }
 
+  onClickDatePersonal(){
+    this.router.navigate(['/my-account/my-orders']);
+  }
+
   ngOnDestroy(): void {
     if(this.subscription){
       this.subscription.unsubscribe();
-    }
-
-    if(this.timeoutId){
-      clearTimeout(this.timeoutId);
     }
   }
 }

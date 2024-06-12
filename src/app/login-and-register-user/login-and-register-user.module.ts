@@ -14,6 +14,9 @@ import { FormDebugComponent } from './form-debug/form-debug.component';
 import { AllSvgAppModule } from '../all-svg-app/all-svg-app.module';
 import { MyOrdersComponent } from './options-user-all/my-orders/my-orders.component';
 import { AllOptionsUserComponent } from './options-user-all/all-options-user/all-options-user.component';
+import { InputGenericComponent } from './options-user-all/input-generic/input-generic.component';
+import { RecaptchaModule } from 'ng-recaptcha';
+import { ChangePasswordComponent } from './options-user-all/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -26,14 +29,17 @@ import { AllOptionsUserComponent } from './options-user-all/all-options-user/all
     CampoControlErroComponent,
     FormDebugComponent,
     MyOrdersComponent,
-    AllOptionsUserComponent
+    AllOptionsUserComponent,
+    ChangePasswordComponent,
+    InputGenericComponent,
   ],
   imports: [
     CommonModule,
     LoginAndRegisterUserRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    AllSvgAppModule
+    AllSvgAppModule,
+    RecaptchaModule
   ]
 })
 export class LoginAndRegisterUserModule { }

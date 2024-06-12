@@ -1,12 +1,12 @@
 <div class="container-main-my-orders">
   <div class="container-ingresso-title">
     <div class="container-img-ingresso-info-user">
-      <div class="container-img-ingresso">
+      <div class="container-img-ingresso" (click)="onClickSvgIngresso()">
         <app-svg-ingresso width="158px" height="40px"></app-svg-ingresso>
       </div>
       <div class="container-info-user-service">
         <div class="container-info-user">
-          <span>Olá, Augusto Tetse</span>
+          <span>Olá, {{ userDateStorage?.name }}</span>
           <app-svg-user-body fillColor="rgb(37, 184, 255)"></app-svg-user-body>
         </div>
         <div class="container-service-customer">
@@ -23,6 +23,7 @@
     <div class="container-all-option-and-yours-orders">
       <app-all-options-user
         [onClickWhichDivWasClicked]="onClickWhichDivWasClicked"
+        [userDateStorage]="userDateStorage"
       ></app-all-options-user>
       <div *ngIf="numberDiv === 1">
         <p>Você ainda não tem pedidos :(</p>
@@ -64,7 +65,7 @@
                   d="M9.42 12.892c0-.18.002-.337.003-.53l.003-.52c.004-.705.006-1.252.006-1.579 0-2.287 2.223-4.43 6.377-4.43 4.134 0 6.348 2.184 6.348 4.435v2.07l.001.554h.899c1.506 0 2.72 1.196 2.72 2.65v8.819c0 1.46-1.214 2.649-2.72 2.649H8.499c-1.506 0-2.721-1.196-2.721-2.65v-8.819c0-1.46 1.215-2.649 2.721-2.649h.92zm1.818 0h9.102v-1.01l-.001-1.614c0-.376-.254-.987-.754-1.48-.751-.741-1.971-1.19-3.776-1.19-1.815 0-3.044.44-3.799 1.166-.507.489-.76 1.095-.76 1.5 0 .33-.002.88-.006 1.588l-.003.52-.003.52zm-3.642 2.65v8.819c0 .482.404.884.903.884h14.558a.894.894 0 0 0 .903-.884v-8.82a.898.898 0 0 0-.903-.884H8.499a.894.894 0 0 0-.903.884zm9.112 5.043v2.145a.75.75 0 0 1-.75.75h-.34a.75.75 0 0 1-.75-.75v-2.133a1.755 1.755 0 0 1-.908-1.528c0-.975.814-1.765 1.818-1.765s1.818.79 1.818 1.765c0 .644-.356 1.208-.888 1.516z"
                 ></path>
               </svg>
-              <span>Alterar senha</span>
+              <span (click)="changePassword()">Alterar senha</span>
             </div>
           </div>
 
@@ -255,7 +256,7 @@
             </div>
           </div>
 
-          <div class="row mb-4 mt-3">
+          <div class="row mb-4 mt-2">
             <div class="col-12">
               <div
                 class="form-check d-flex align-items-center gap-2 container-label-all"
@@ -274,14 +275,74 @@
             </div>
           </div>
 
+          <div class="container-confirm-your-password">
+            <h1>CONFIRME SUA SENHA</h1>
+            <span
+              >Por questões de segurança, você precisa digitar sua senha para
+              confirmar as alterações feitas no seu cadastro.</span
+            >
+            <div class="container-input-password">
+              <span>*Senha</span>
+              <input
+                type="password"
+                (click)="onClickInputPassword()"
+                (blur)="onBlurPassword()"
+                (input)="onInput($event)"
+                class="input-password"
+              />
+            </div>
+            <div
+              class="container-warning-password-required"
+              *ngIf="!valueContainerIsValid"
+            >
+              <span>A senha é obrigatória</span>
+            </div>
+            <div
+              class="container-warning-password-required"
+              *ngIf="passwordwrong"
+            >
+              <span>senha inválida</span>
+            </div>
+          </div>
+
+          <div
+            class="container-modal-account-updated"
+            *ngIf="accountUpdatedSucessfully"
+          >
+            <div class="container-modal-central">
+              <div class="container-icon-x" (click)="onClickCloseModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                  <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                  <path
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+                  />
+                </svg>
+              </div>
+              <div class="container-i-svg">
+                <app-svg-i></app-svg-i>
+              </div>
+              <div class="container-h1-span-info">
+                <h1>Conta Atualizada!</h1>
+                <span
+                  >Os dados da sua conta foram alterados e a conta já está
+                  atualizada.</span
+                >
+              </div>
+              <div class="container-button-homepage">
+                <button (click)="onClickCloseModal()">OK</button>
+                <span (click)="onClickHomePage()"
+                  >Ir para a página inicial</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <app-change-password
+            [changePassword]="changePasswordUser"
+          ></app-change-password>
+
           <button #submitButton type="submit" class="btn btn-primary">
             Submit
-          </button>
-          <!-- <button type="submit" class="btn btn-primary" (click)="onClickSubmit()">
-            Submit
-          </button> -->
-          <button class="btn btn-danger ms-1" (click)="resetar()">
-            Cancelar
           </button>
           <!-- <app-form-debug [form]="formulario"></app-form-debug> -->
         </form>

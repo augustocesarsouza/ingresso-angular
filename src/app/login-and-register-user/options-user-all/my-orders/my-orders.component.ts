@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Estados } from '../../models/estados-br.model';
 import { Cidade } from '../../models/cidade';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -12,12 +12,28 @@ import { GetUserInformationService } from '../../services/get-user-information.s
 import { User } from '../../user-interface/user-date';
 import { Router } from '@angular/router';
 
+interface EnderecoForm {
+  bairro: string;
+  birthday: string;
+  birthdayMonth: string;
+  cep: string;
+  cidade:string;
+  complemento: string;
+  estado: string;
+  gender: string;
+  numberCellphone: string;
+  numero: string;
+  referencia: string;
+  rua: string;
+  yearOfBirth: string;
+}
+
 @Component({
   selector: 'app-my-orders',
   templateUrl: './my-orders.component.html',
   styleUrl: './my-orders.component.scss'
 })
-export class MyOrdersComponent extends BaseFormComponent implements OnInit {
+export class MyOrdersComponent extends BaseFormComponent implements OnInit, OnDestroy {
   numberDiv: number = 2;
 
   estados!: Estados[];
@@ -27,12 +43,24 @@ export class MyOrdersComponent extends BaseFormComponent implements OnInit {
   years!: string[];
   gender!: string[];
   cepInvalid: boolean = false;
-  userDateStorage!:User;
+  accountUpdatedSucessfully = false;
+  userDateStorage: User | null = null;
+  valueContainerIsValid = false;
+  passwordwrong = false;
+  firstRenderOrders = 0;
+  containerInputPassword!: HTMLElement;
+  private timeoutIdContainerAndSvgRed: any;
+  changePasswordUser = false;
 
   constructor(private formBuilder: FormBuilder, private dropdownService: DropdownService, private cepService: ConsultaCepService,
     private getUserInformationService: GetUserInformationService, private router: Router
   ){
     super();
+  }
+  ngOnDestroy(): void {
+    if(this.timeoutIdContainerAndSvgRed){
+      clearTimeout(this.timeoutIdContainerAndSvgRed);
+    }
   }
 
   ngOnInit(): void {
@@ -67,7 +95,10 @@ export class MyOrdersComponent extends BaseFormComponent implements OnInit {
     )
     .subscribe(status => {
       if(status === 'VALID'){
-        this.consultaCEP();
+        if(this.firstRenderOrders > 0){
+          this.consultaCEP();
+        }
+        this.firstRenderOrders++;
       }
     });
 
@@ -115,9 +146,13 @@ export class MyOrdersComponent extends BaseFormComponent implements OnInit {
       })
     }
 
-    let userDateStorage: any = localStorage.getItem("userLogin");
+    let userDateStorage = null;
 
-    if(userDateStorage){
+    if(typeof window !== "undefined"){
+      userDateStorage = localStorage.getItem("userLogin");
+    }
+
+    if(userDateStorage && typeof userDateStorage === "string"){
       userDateStorage = JSON.parse(userDateStorage);
       this.userDateStorage = userDateStorage;
     }
@@ -142,7 +177,9 @@ export class MyOrdersComponent extends BaseFormComponent implements OnInit {
 
         this.formulario.get("endereco.cep")?.setValue(userDate.cep);
         this.formulario.get("endereco.birthdayMonth")?.setValue(monthNameFull);
+
         this.colocarValorDiasApartirDoMesAniversario(monthNameFull);
+
         this.formulario.get("endereco.birthday")?.setValue(dayBirthday.replace("0", ""));
         this.formulario.get("endereco.yearOfBirth")?.setValue(yearBirthday);
         this.formulario.get("endereco.gender")?.setValue(userDate.gender);
@@ -155,30 +192,115 @@ export class MyOrdersComponent extends BaseFormComponent implements OnInit {
         this.formulario.get("endereco.estado")?.setValue(userDate.estado);
       },
       error: error => {
-        if(error.status === 403){
-          localStorage.removeItem("userLogin");
-          this.router.navigate(['/my-account/login']);
-        }
+        this.throwError403Forbidden(error);
       }
     });
+
+    this.timeoutIdContainerAndSvgRed = setTimeout(() => {
+      if(typeof document !== "undefined"){
+        this.containerInputPassword = document.querySelector(".container-input-password") as HTMLElement;
+      }
+      if(this.containerInputPassword){
+        this.containerInputPassword.style.borderColor = "rgb(218, 71, 66)";
+
+      }
+    }, 10);
   }
 
   override submit() {
-    throw new Error('Method not implemented.');
+    let valueName = this.formulario.get("nome");
+    let nameUser = this.userDateStorage?.name;
+    let inputPassword!: HTMLInputElement;
+    if(typeof document !== "undefined"){
+      inputPassword = document.querySelector(".input-password") as HTMLInputElement;
+    }
+    let senhaAtual = inputPassword.value;
+
+    let endereco: EnderecoForm = this.formulario.value.endereco;
+
+    let dayBirthday = endereco.birthday;
+    let numberMonth = this.birthdayMonth.indexOf(endereco.birthdayMonth) + 1;
+
+    if(dayBirthday.length <= 1){
+      dayBirthday = `0${dayBirthday}`;
+    }
+
+    let birthDateFull = `${dayBirthday}/${numberMonth}/${endereco.yearOfBirth}`;
+
+    let additionalInfoUserToUpdate = {
+      userId: this.userDateStorage?.id,
+      cpfOrEmail: this.userDateStorage?.email,
+      birthDateString: birthDateFull,
+      gender: endereco.gender,
+      phone: endereco.numberCellphone,
+      cep: endereco.cep,
+      logradouro: endereco.rua,
+      numero: endereco.numero,
+      complemento: endereco.complemento,
+      referencia: endereco.referencia,
+      bairro: endereco.bairro,
+      estado: endereco.estado,
+      cidade: endereco.cidade,
+    }
+
+    if(valueName && valueName.value === nameUser){
+      this.getUserInformationService.updateInfoAdditionalInfoUser(additionalInfoUserToUpdate, senhaAtual)
+      .subscribe({
+        next: (data: any) => {
+          console.log(data);
+
+        },
+        error: (error: any) => {
+          if(error.status === 401){
+            this.passwordwrong = true;
+            this.containerInputPassword.style.borderColor = "rgb(218, 71, 66)";
+          }
+
+          this.throwError403Forbidden(error);
+        }
+      });
+    }else if (valueName && valueName.value !== nameUser) {
+      let userUpdate = {
+        id: this.userDateStorage?.id,
+        name: valueName.value
+      }
+
+      this.getUserInformationService.updateNameUser(userUpdate, senhaAtual)
+      .subscribe({
+        next: (res: any) => {
+          if(this.userDateStorage){
+            this.userDateStorage.name = res.data.name;
+          }
+
+          this.formulario.get("nome")?.setValue(this.userDateStorage?.name);
+
+          if(typeof window !== "undefined"){
+            localStorage.removeItem("userLogin");
+            localStorage.setItem("userLogin", JSON.stringify(this.userDateStorage));
+          }
+
+          this.accountUpdatedSucessfully = true;
+        },
+        error: (error: any) => {
+          if(error.status === 401){
+            this.passwordwrong = true;
+          }
+
+          this.throwError403Forbidden(error);
+        }
+      });
+    }
   }
 
   async consultaCEP () {
     let cepName: string = this.formulario.get('endereco.cep')?.value;
+
     if(cepName.length <= 0)
       return;
 
     this.resetaDadosForm();
 
-    console.log(cepName);
-
     let json = await this.cepService.consultaCEP(cepName);
-    console.log(json);
-
 
     if(json){
       if(json.erro){
@@ -256,5 +378,86 @@ export class MyOrdersComponent extends BaseFormComponent implements OnInit {
 
   onClickWhichDivWasClicked(numberDiv: number){
     this.numberDiv = numberDiv;
+  }
+
+  onClickCloseModal(){
+    this.accountUpdatedSucessfully = false;
+  }
+
+  onClickHomePage(){
+    this.router.navigate(['/']);
+  }
+
+  onClickSvgIngresso(){
+    this.router.navigate(['/']);
+  }
+
+  onClickInputPassword(){
+    this.passwordwrong = false;
+
+    if(typeof document !== "undefined" && this.containerInputPassword !== null){
+      let span = this.containerInputPassword?.firstChild as HTMLElement;
+      let input = this.containerInputPassword?.lastChild as HTMLInputElement;
+
+      span.style.left = "11px";
+      span.style.top = "3px";
+      span.style.fontSize = "12px";
+
+      if(input.value.length > 0){
+        this.containerInputPassword.style.borderColor = "rgb(22 135 225)";
+      }
+      this.containerInputPassword.style.padding = "4px 10px";
+      input.style.paddingTop = "15px";
+    }
+  }
+
+  onBlurPassword(){
+    if(typeof document !== "undefined" && this.containerInputPassword !== null){
+      let span = this.containerInputPassword?.firstChild as HTMLElement;
+      let input = this.containerInputPassword?.lastChild as HTMLInputElement;
+
+      if(input.value.length <= 0){
+        span.style.left = "12px";
+        span.style.top = "7px";
+        span.style.fontSize = "14px";
+
+        this.containerInputPassword.style.padding = "11px 10px";
+        input.style.paddingTop = "0px";
+
+        this.containerInputPassword.style.borderColor = "rgb(218, 71, 66)";
+      }else {
+        if(this.valueContainerIsValid){
+          this.containerInputPassword.style.borderColor = "rgb(197, 197, 197)";
+        }
+      }
+    }
+  }
+
+  onInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if(input.value.length <= 0){
+      // const containerInputPassword = document.querySelector(".container-input-password") as HTMLElement;
+      if(this.containerInputPassword){
+        this.containerInputPassword.style.borderColor = "rgb(218, 71, 66)";
+      }
+      this.valueContainerIsValid = false;
+    }else {
+      this.valueContainerIsValid = true;
+      this.containerInputPassword.style.borderColor = "rgb(22, 135, 225)";
+    }
+  }
+
+  throwError403Forbidden(status: any){
+    if(status.status === 403){
+      if(typeof window !== "undefined"){
+        localStorage.removeItem("userLogin");
+      }
+      this.router.navigate(['/my-account/login']);
+    }
+  }
+
+  changePassword(){
+    this.changePasswordUser = true;
   }
 }

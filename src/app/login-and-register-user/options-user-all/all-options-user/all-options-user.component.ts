@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { User } from '../../user-interface/user-date';
 
 @Component({
   selector: 'app-all-options-user',
@@ -7,18 +8,21 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class AllOptionsUserComponent implements OnInit {
   @Input() onClickWhichDivWasClicked!: (numberDiv: number) => void;
+  @Input() userDateStorage!: User | null;
   allContainerSvgConfig!: NodeListOf<HTMLElement>;
 
   constructor(){
   }
 
   ngOnInit(): void {
-    this.allContainerSvgConfig = document.querySelectorAll(".container-svg-config");
+    if(typeof window !== "undefined"){
+      this.allContainerSvgConfig = document.querySelectorAll(".container-svg-config");
+    }
   }
 
   onClickSetColor(event: MouseEvent, numberDiv: number){
     this.onClickWhichDivWasClicked(numberDiv);
-    
+
     this.allContainerSvgConfig.forEach((el) => {
       el.style.backgroundColor = "#fff";
       el.style.borderLeft = "4px solid rgb(52, 120, 193)";
@@ -35,7 +39,7 @@ export class AllOptionsUserComponent implements OnInit {
     const targetDiv = event.currentTarget as HTMLElement;
     targetDiv.style.backgroundColor = "rgb(255, 115, 0)";
     targetDiv.style.borderLeft = "none";
-    
+
     if(targetDiv.firstChild){
       let svg = targetDiv.firstChild.firstChild as HTMLElement;
       svg.style.fill = "#fff";

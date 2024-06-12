@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseFormComponent } from '../base-form/base-form.component';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { FormValidations } from '../form-validations';
 import { distinctUntilChanged, map, switchMap } from 'rxjs';
 import { Estados } from '../models/estados-br.model';
@@ -42,6 +42,7 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
   minimumOneNumber = false;
   minimumEightNumber = false;
   confirmEmailRegister = false;
+  formSenha!: AbstractControl<any, any> | null;
 
   constructor(private formBuilder: FormBuilder, private dropdownService: DropdownService, private cepService: ConsultaCepService, private verificaEmailService: VerificaEmailService,
     private router: Router
@@ -139,6 +140,8 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
     if(document){
       document.body.style.position = 'relative';
     }
+
+    this.formSenha = this.formulario.get('senha');
   }
 
   // onClickSubmit(){
@@ -247,9 +250,6 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
     }
 
     if(this.formulario.valid){
-      let valueForm = valueSubmit;
-
-
       await fetch("/api/v1/public/user/create", {
         method: "POST",
         headers: {
