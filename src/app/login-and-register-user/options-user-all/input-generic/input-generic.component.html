@@ -1,0 +1,16 @@
+<div
+  class="container-input-and-svg-main"
+  [style.border]="border"
+  [style.border-left]="borderLeft"
+>
+  <div class="container-input-and-svg">
+    <ng-content></ng-content>
+  </div>
+  <span *ngIf="clickInput">{{ placeholder }}</span>
+  <input
+    type="password"
+    [placeholder]="placeholder"
+    (click)="onClickInput($event)"
+    (blur)="onBlurInput($event)"
+  />
+</div>

@@ -22,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     AllSvgAppModule,
     FormsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()

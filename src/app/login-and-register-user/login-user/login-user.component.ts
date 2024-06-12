@@ -14,7 +14,7 @@ interface ErrorObj {
 export interface Data {
   id: string;
   name: string;
-} 
+}
 
 @Component({
   selector: 'app-login-user',
@@ -47,7 +47,7 @@ export class LoginUserComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private route: ActivatedRoute, private loginUserService: LoginUserService, private dataService: DataService){
   }
-  
+
   ngOnInit(): void {
     if (typeof document !== 'undefined') {
       this.containerMainSvgInput = document.querySelector('.container-cpf-or-email') as HTMLElement;
@@ -96,18 +96,18 @@ export class LoginUserComponent implements OnInit, OnDestroy {
       if(this.containerMainSvgInput){
         this.containerMainSvgInput.style.borderColor = 'rgb(217 217 217)';
       }
-  
+
       if(this.containerMainSvgPassword){
         this.containerMainSvgPassword.style.borderColor = 'rgb(217 217 217)';
       }
-  
+
       if(this.containerSvgUser){
         this.containerSvgUser.forEach((el) => {
           let svg1 = el.firstChild as SVGElement;
           svg1.style.fill = 'rgb(217 217 217)';
         });
       }
-      
+
       statusObject.value = !statusObject.value;
     }, 1000);
   }
@@ -115,7 +115,7 @@ export class LoginUserComponent implements OnInit, OnDestroy {
   verifyToken(token: string){
     if(token !== null && token.length > 20){
       const tokenExp = jwtDecode(token).exp;
-      
+
       if(tokenExp === undefined)
         return;
 
@@ -125,10 +125,10 @@ export class LoginUserComponent implements OnInit, OnDestroy {
 
   confirmTokenUser = async (token: string) => {
     const res = await fetch(`/api/v1/public/user/confirm-token/${token}`);
-    
+
     if (res.status === 200) {
       const json = await res.json();
-      
+
       this.registrationConfirmed = true;
       document.body.style.overflowY = 'hidden';
     }
@@ -145,7 +145,7 @@ export class LoginUserComponent implements OnInit, OnDestroy {
 
         if(user.codeSentSuccessfullyEmail){
           this.userLogin = user;
-          
+
           this.dataService.setData(user);
           this.codeSendFormEmailConfirmedLogin = true;
 
@@ -160,7 +160,7 @@ export class LoginUserComponent implements OnInit, OnDestroy {
 
           this.applyCssRedContainerAndSvgLogin(this.invalidUsernamePasswordOrCode);
         }
-        
+
         const errorObj: ErrorObj = error.error;
 
         if(errorObj.typeMessage === "email"){
@@ -174,7 +174,7 @@ export class LoginUserComponent implements OnInit, OnDestroy {
   async onClickEntryCode(input: HTMLInputElement){
     let valueInput = input.value;
     let idUser = this.userLogin.id;
-    
+
     const res = await fetch(`/api/v1/public/user/verific/${valueInput}/${idUser}`);
 
     if(res.status === 200){
@@ -204,7 +204,7 @@ export class LoginUserComponent implements OnInit, OnDestroy {
         }
       },
       error: error => {
-        console.log(error);
+        // console.log(error);
       }
     });
   }

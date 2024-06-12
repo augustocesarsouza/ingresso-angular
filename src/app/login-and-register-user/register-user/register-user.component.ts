@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseFormComponent } from '../base-form/base-form.component';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { FormValidations } from '../form-validations';
 import { distinctUntilChanged, map, switchMap } from 'rxjs';
 import { Estados } from '../models/estados-br.model';
@@ -10,7 +10,7 @@ import { Cidade } from '../models/cidade';
 import { VerificaEmailService } from '../services/verifica-email.service';
 import { Router } from '@angular/router';
 
-interface CEP {
+export interface CEP {
   bairro: string,
   cep: string,
   complemento: string,
@@ -42,6 +42,7 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
   minimumOneNumber = false;
   minimumEightNumber = false;
   confirmEmailRegister = false;
+  formSenha!: AbstractControl<any, any> | null;
 
   constructor(private formBuilder: FormBuilder, private dropdownService: DropdownService, private cepService: ConsultaCepService, private verificaEmailService: VerificaEmailService,
     private router: Router
@@ -97,7 +98,7 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
     )
     .subscribe(cidades => this.cidades = cidades);
 
-    this.birthdayMonth = ["Janeiro", "Feveiro", "Março", "Abril", 
+    this.birthdayMonth = ["Janeiro", "Feveiro", "Março", "Abril",
     "Maio", "Junho", "julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
     this.gender = ["Feminino", "Masculino"];
@@ -139,6 +140,8 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
     if(document){
       document.body.style.position = 'relative';
     }
+
+    this.formSenha = this.formulario.get('senha');
   }
 
   // onClickSubmit(){
@@ -194,7 +197,7 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
       let numberMonth = this.birthdayMonth.indexOf(valueSubmit.endereco.birthdayMonth) + 1;
 
       let dataFull = "";
-      
+
       if(valueSubmit.endereco.birthday.length < 2){
         dataFull += `0${valueSubmit.endereco.birthday}`;
       }else {
@@ -213,7 +216,7 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
         name: valueSubmit.nome,
         email: valueSubmit.email,
         cpf: valueSubmit.cpf,
-        password: valueSubmit.senha, 
+        password: valueSubmit.senha,
         birthDateString: dataFull,
         gender: valueSubmit.endereco.gender,
         phone: valueSubmit.endereco.numero,
@@ -231,7 +234,7 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
         name: valueSubmit.nome,
         email: valueSubmit.email,
         cpf: valueSubmit.cpf,
-        password: valueSubmit.senha, 
+        password: valueSubmit.senha,
         birthDateString: "",
         gender: valueSubmit.endereco.gender,
         phone: valueSubmit.endereco.numero,
@@ -245,12 +248,8 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
         cidade: valueSubmit.endereco.cidade
       }
     }
-    
-    if(this.formulario.valid){
-      let valueForm = valueSubmit;
-      console.log(objCreate);
-      
 
+    if(this.formulario.valid){
       await fetch("/api/v1/public/user/create", {
         method: "POST",
         headers: {
@@ -259,12 +258,12 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
         body: JSON.stringify(objCreate)
       })
       .then((res) => {
-        console.log(res);
-        
+        // console.log(res);
+
         this.confirmEmailRegister = true;
       })
       .catch((error) => {
-        console.log(error)
+        // console.log(error)
       });
     }
   }
@@ -331,12 +330,12 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
   onMonthChange(event: Event){
     const selectElement = event.target as HTMLSelectElement;
     const selectedValue = selectElement.value;
-    
+
     if(selectedValue.length > 0){
       let monthIndex = this.birthdayMonth.indexOf(selectedValue) + 1;
       let year = new Date().getFullYear();
       let daysInMonth = new Date(year, monthIndex, 0).getDate();
-      
+
       this.days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
     }else {
       this.days = [];
@@ -345,29 +344,29 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
 
   onPasswordInput(password: string): void {
     let formSenha = this.formulario.get('senha');
-    
+
     let hasUppercase = false;
     let hasLowercase = false;
     let hasNumber = false;
     let hasEightNumber = false;
 
     if(password.length > 0){
-    
+
       for (let i = 0; i < password.length; i++) {
         const caracter = password[i];
-    
+
         if (/[A-Z]/.test(caracter)) {
           hasUppercase = true;
         }
-    
+
         if (/[a-z]/.test(caracter)) {
           hasLowercase = true;
         }
-    
+
         if (/[0-9]/.test(caracter)) {
           hasNumber = true;
         }
-    
+
         if (hasUppercase && hasLowercase && hasNumber) {
           break;
         }
@@ -386,14 +385,14 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
     if(!hasUppercase || !hasLowercase || !hasNumber || !hasEightNumber){
       if(formSenha){
         formSenha.setErrors({ invalid: true });
-  
+
         // Marcar o controle como tocado e sujo para que os erros sejam exibidos na interface do usuário
         formSenha.markAsTouched();
         formSenha.markAsDirty();
       }
     }
   }
-  
+
   onContinueRegister(){
     this.formulario.reset();
     this.router.navigate(['/my-account/login']);
