@@ -17,6 +17,7 @@ import { AllOptionsUserComponent } from './options-user-all/all-options-user/all
 import { InputGenericComponent } from './options-user-all/input-generic/input-generic.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { ChangePasswordComponent } from './options-user-all/change-password/change-password.component';
+import { PersonalDataComponent } from './options-user-all/personal-data/personal-data.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ChangePasswordComponent } from './options-user-all/change-password/chan
     AllOptionsUserComponent,
     ChangePasswordComponent,
     InputGenericComponent,
+    PersonalDataComponent,
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,7 @@ import { ChangePasswordComponent } from './options-user-all/change-password/chan
     ReactiveFormsModule,
     FormsModule,
     AllSvgAppModule,
-    RecaptchaModule
+    RecaptchaModule,
   ]
 })
 export class LoginAndRegisterUserModule { }
