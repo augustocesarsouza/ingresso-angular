@@ -119,6 +119,7 @@
   font-size: 14px;
   color: rgb(52, 120, 193);
   padding-bottom: 1px;
+  cursor: pointer;
 }
 
 .container-label-all {
@@ -288,4 +289,16 @@
 .container-button-homepage > span {
   font-size: 13px;
   color: rgb(52, 120, 193);
+}
+
+.container-save-changes {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.container-save-changes > button {
+  opacity: 1;
+  background: rgb(221, 221, 221);
+  border: 1px solid rgb(221, 221, 221);
+  pointer-events: none;
 }

@@ -14,6 +14,7 @@ import { SvgPersonalDataComponent } from './svg-personal-data/svg-personal-data.
 import { SvgPaymentMethodsComponent } from './svg-payment-methods/svg-payment-methods.component';
 import { SvgIComponent } from './svg-i/svg-i.component';
 import { SvgLockPasswordComponent } from './svg-lock-password/svg-lock-password.component';
+import { SvgLock2Component } from './svg-lock-2/svg-lock-2.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { SvgLockPasswordComponent } from './svg-lock-password/svg-lock-password.
     SvgPaymentMethodsComponent,
     SvgIComponent,
     SvgLockPasswordComponent,
+    SvgLock2Component,
   ],
   exports: [
     SvgLocationComponent,
@@ -48,6 +50,7 @@ import { SvgLockPasswordComponent } from './svg-lock-password/svg-lock-password.
     SvgPaymentMethodsComponent,
     SvgIComponent,
     SvgLockPasswordComponent,
+    SvgLock2Component
   ]
 })
 export class AllSvgAppModule { }

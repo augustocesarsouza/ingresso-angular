@@ -10,6 +10,7 @@ export class InputGenericComponent {
   @Input() borderLeft: string = '4px solid rgb(197, 197, 197)';
   @Input() placeholder: string = '';
   clickInput: boolean = false;
+  @Input() onPasswordInput: ((value: string) => void) | undefined;
 
   constructor(){
   }

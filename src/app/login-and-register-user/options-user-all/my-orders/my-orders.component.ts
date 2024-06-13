@@ -49,7 +49,9 @@ export class MyOrdersComponent extends BaseFormComponent implements OnInit, OnDe
   passwordwrong = false;
   firstRenderOrders = 0;
   containerInputPassword!: HTMLElement;
+  buttonSave!: HTMLButtonElement;
   private timeoutIdContainerAndSvgRed: any;
+  private timeoutIdButtonSave: any;
   changePasswordUser = false;
 
   constructor(private formBuilder: FormBuilder, private dropdownService: DropdownService, private cepService: ConsultaCepService,
@@ -57,13 +59,10 @@ export class MyOrdersComponent extends BaseFormComponent implements OnInit, OnDe
   ){
     super();
   }
-  ngOnDestroy(): void {
-    if(this.timeoutIdContainerAndSvgRed){
-      clearTimeout(this.timeoutIdContainerAndSvgRed);
-    }
-  }
 
   ngOnInit(): void {
+    this.changePassword = this.changePassword.bind(this);
+
     this.formulario = this.formBuilder.group({
       nome: ["", [Validators.required, Validators.minLength(3), Validators.minLength(5)]],
 
@@ -205,6 +204,12 @@ export class MyOrdersComponent extends BaseFormComponent implements OnInit, OnDe
 
       }
     }, 10);
+
+    if(typeof document !== "undefined"){
+      this.timeoutIdButtonSave = setTimeout(() => {
+        this.buttonSave = document.querySelector(".button-save") as HTMLButtonElement;
+      }, 10);
+    }
   }
 
   override submit() {
@@ -441,8 +446,16 @@ export class MyOrdersComponent extends BaseFormComponent implements OnInit, OnDe
       if(this.containerInputPassword){
         this.containerInputPassword.style.borderColor = "rgb(218, 71, 66)";
       }
+      this.buttonSave.style.backgroundColor = "rgb(221, 221, 221)";
+      this.buttonSave.style.border = "1px solid rgb(221, 221, 221)";
+      this.buttonSave.style.pointerEvents = "none";
+
       this.valueContainerIsValid = false;
     }else {
+      this.buttonSave.style.backgroundColor = "rgb(52, 120, 193)";
+      this.buttonSave.style.border = "1px solid rgb(52, 120, 193)";
+      this.buttonSave.style.pointerEvents = "painted";
+
       this.valueContainerIsValid = true;
       this.containerInputPassword.style.borderColor = "rgb(22, 135, 225)";
     }
@@ -457,7 +470,17 @@ export class MyOrdersComponent extends BaseFormComponent implements OnInit, OnDe
     }
   }
 
-  changePassword(){
-    this.changePasswordUser = true;
+  changePassword(value: boolean){
+    this.changePasswordUser = value;
+  }
+
+  ngOnDestroy(): void {
+    if(this.timeoutIdContainerAndSvgRed){
+      clearTimeout(this.timeoutIdContainerAndSvgRed);
+    }
+
+    if(this.timeoutIdButtonSave){
+      clearTimeout(this.timeoutIdButtonSave);
+    }
   }
 }
