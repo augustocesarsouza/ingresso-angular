@@ -1,8 +1,11 @@
 .container-payment-methods {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.container-payment-methods > h1 {
+.container-credit-debit-digital-wallets > h1 {
   font-size: 15px;
   color: rgb(102, 102, 102);
   margin-bottom: 20px;
@@ -50,4 +53,55 @@
   margin: 0;
   font-size: 15px;
   color: rgb(102, 102, 102);
+}
+
+.container-caixa-img {
+  display: flex;
+  padding-bottom: 30px;
+}
+
+.container-caixa-img > img {
+  width: 75px;
+  object-fit: cover;
+}
+
+.container-description-about-caixa {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-bottom: 1px solid rgb(138, 138, 138);
+  padding-bottom: 20px;
+}
+
+.container-description-about-caixa > span {
+  font-size: 14px;
+  color: rgb(102, 102, 102);
+}
+
+.span-highlight {
+  color: rgb(102, 102, 102);
+  font-weight: 700;
+}
+
+// .container-paypal {
+//   display: flex;
+// }
+
+.container-paypal-img {
+  display: flex;
+  padding-bottom: 30px;
+}
+
+.container-paypal-img > img {
+  width: 75px;
+  object-fit: cover;
+}
+
+.container-paypal-img-description {
+  display: flex;
+}
+
+.container-paypal-img-description > img {
+  width: 325px;
+  object-fit: cover;
 }

@@ -18,15 +18,24 @@
       </div>
     </div>
   </div>
-
-  <div class="container-all-option-and-yours-orders">
-    <app-all-options-user
-      class="app-all-options-user"
-      [onClickWhichDivWasClicked]="onClickWhichDivWasClicked"
-      [userDateStorage]="userDateStorage"
-    ></app-all-options-user>
-    <div class="router-outlet-container">
-      <router-outlet></router-outlet>
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100vh;
+    "
+  >
+    <div class="container-all-option-and-yours-orders">
+      <app-all-options-user
+        class="app-all-options-user"
+        [onClickWhichDivWasClicked]="onClickWhichDivWasClicked"
+        [userDateStorage]="userDateStorage"
+      ></app-all-options-user>
+      <div class="router-outlet-container">
+        <router-outlet></router-outlet>
+      </div>
     </div>
+    <app-footer-ingresso></app-footer-ingresso>
   </div>
 </div>

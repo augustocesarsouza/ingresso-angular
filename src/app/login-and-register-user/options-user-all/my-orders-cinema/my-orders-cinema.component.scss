@@ -1,3 +1,11 @@
 .container-my-orders {
   width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.container-my-orders > h1 {
+  font-size: 24px;
+  font-weight: 500;
+  color: rgb(102, 102, 102);
 }
