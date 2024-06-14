@@ -19,20 +19,11 @@
     </div>
   </div>
 
-  <div class="container-adjust-screen">
-    <div class="container-all-option-and-yours-orders">
-      <app-all-options-user
-        [onClickWhichDivWasClicked]="onClickWhichDivWasClicked"
-        [userDateStorage]="userDateStorage"
-      ></app-all-options-user>
-      <div class="container-personal-data" *ngIf="numberDiv === 1">
-        <p>Você ainda não tem pedidos :(</p>
-      </div>
-      <app-personal-data *ngIf="numberDiv === 3"></app-personal-data>
-
-      <div class="container-payment-methods" *ngIf="numberDiv === 4">
-        <h1>Você pode pagar com os seus cartões de crédito ou via Paypal</h1>
-      </div>
-    </div>
+  <div class="container-all-option-and-yours-orders">
+    <app-all-options-user
+      [onClickWhichDivWasClicked]="onClickWhichDivWasClicked"
+      [userDateStorage]="userDateStorage"
+    ></app-all-options-user>
+    <router-outlet></router-outlet>
   </div>
 </div>

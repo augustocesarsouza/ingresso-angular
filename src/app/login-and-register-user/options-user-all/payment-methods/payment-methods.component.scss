@@ -1,0 +1,40 @@
+.container-payment-methods {
+  width: 100%;
+}
+
+.container-payment-methods > h1 {
+  font-size: 15px;
+}
+
+.container-credit-all {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-credit-all > p {
+  margin: 0;
+  font-size: 15px;
+  color: rgb(102, 102, 102);
+}
+
+.container-debit-all {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-debit-all > p {
+  margin: 0;
+  font-size: 15px;
+  color: rgb(102, 102, 102);
+}
+
+.container-digital-wallets-all  {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-digital-wallets-all  > p {
+  margin: 0;
+  font-size: 15px;
+  color: rgb(102, 102, 102);
+}

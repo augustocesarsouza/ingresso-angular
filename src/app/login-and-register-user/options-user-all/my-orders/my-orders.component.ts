@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class MyOrdersComponent implements OnInit {
   userDateStorage: User | null = null;
   numberDiv: number = 1;
+  containerAllOptionAndYoursOrders!: HTMLElement;
 
   constructor(private router: Router){
   }
@@ -26,12 +27,25 @@ export class MyOrdersComponent implements OnInit {
       this.userDateStorage = userDateStorage;
     }
 
+    if(typeof document !== "undefined"){
+      this.containerAllOptionAndYoursOrders = document.querySelector(".container-all-option-and-yours-orders") as HTMLElement;
+    }
+
     this.onClickWhichDivWasClicked = this.onClickWhichDivWasClicked.bind(this);
   }
 
 
   onClickWhichDivWasClicked(numberDiv: number){
     this.numberDiv = numberDiv;
+
+    if (numberDiv === 1) {
+      this.router.navigate(['/my-account/my-orders-2']);
+    } else if (numberDiv === 3) {
+      this.router.navigate(['/my-account/personal-data']);
+    } else if (numberDiv === 4) {
+      this.router.navigate(['/my-account/payment-methods']);
+      this.containerAllOptionAndYoursOrders.style.width = "90%";
+    }
   }
 
   onClickSvgIngresso(){

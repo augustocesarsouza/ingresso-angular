@@ -18,6 +18,11 @@ import { InputGenericComponent } from './options-user-all/input-generic/input-ge
 import { RecaptchaModule } from 'ng-recaptcha';
 import { ChangePasswordComponent } from './options-user-all/change-password/change-password.component';
 import { PersonalDataComponent } from './options-user-all/personal-data/personal-data.component';
+import { MyOrdersCinemaComponent } from './options-user-all/my-orders-cinema/my-orders-cinema.component';
+import { PaymentMethodsComponent } from './options-user-all/payment-methods/payment-methods.component';
+import { CardCreditAllComponent } from './options-user-all/card-credit-all/card-credit-all.component';
+import { CardDebitAllComponent } from './options-user-all/card-debit-all/card-debit-all.component';
+import { DigitalWalletsAllComponent } from './options-user-all/digital-wallets-all/digital-wallets-all.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +39,11 @@ import { PersonalDataComponent } from './options-user-all/personal-data/personal
     ChangePasswordComponent,
     InputGenericComponent,
     PersonalDataComponent,
+    MyOrdersCinemaComponent,
+    PaymentMethodsComponent,
+    CardCreditAllComponent,
+    CardDebitAllComponent,
+    DigitalWalletsAllComponent,
   ],
   imports: [
     CommonModule,
