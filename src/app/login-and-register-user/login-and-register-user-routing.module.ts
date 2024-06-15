@@ -13,11 +13,11 @@ const routes: Routes = [
   { path: 'confirmation-of-email', component: LoginUserComponent },
   { path: '', component: MyOrdersComponent,
     children: [
-      { path: 'my-orders-2', component: MyOrdersCinemaComponent },
+      { path: 'my-orders', component: MyOrdersCinemaComponent },
       { path: 'personal-data', component: PersonalDataComponent },
       { path: 'payment-methods', component: PaymentMethodsComponent },
-      { path: '', redirectTo: 'my-orders-2', pathMatch: 'full' },
-      { path: '**', redirectTo: 'my-orders-2' }
+      { path: '', redirectTo: 'my-orders', pathMatch: 'full' },
+      { path: '**', redirectTo: 'my-orders' }
     ]
    },
 

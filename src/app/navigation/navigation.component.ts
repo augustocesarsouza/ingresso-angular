@@ -186,8 +186,25 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.router.navigate(['/my-account/login']);
   }
 
+  onClickMyOrders(){
+    const url = this.router.serializeUrl(this.router.createUrlTree(['/my-account/my-orders']));
+    if(typeof window !== "undefined"){
+      window.open(url, '_blank');
+    }
+  }
+
   onClickDatePersonal(){
-    this.router.navigate(['/my-account/my-orders']);
+    const url = this.router.serializeUrl(this.router.createUrlTree(['/my-account/personal-data']));
+    if(typeof window !== "undefined"){
+      window.open(url, '_blank');
+    }
+  }
+
+  onClickPaymentForms(){
+    const url = this.router.serializeUrl(this.router.createUrlTree(['/my-account/payment-methods']));
+    if(typeof window!== "undefined"){
+      window.open(url, '_blank');
+    }
   }
 
   ngOnDestroy(): void {
