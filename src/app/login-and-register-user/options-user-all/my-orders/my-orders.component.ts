@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '../../user-interface/user-date';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './my-orders.component.html',
   styleUrl: './my-orders.component.scss'
 })
-export class MyOrdersComponent implements OnInit {
+export class MyOrdersComponent implements OnInit, OnDestroy {
   userDateStorage: User | null = null;
   numberDiv: number = 1;
   containerAllOptionAndYoursOrders!: HTMLElement;
@@ -49,6 +49,14 @@ export class MyOrdersComponent implements OnInit {
   }
 
   onClickSvgIngresso(){
+    this.sendHomePage();
+  }
+
+  sendHomePage(){
     this.router.navigate(['/']);
+  }
+
+  ngOnDestroy(): void {
+    this.userDateStorage = null;
   }
 }

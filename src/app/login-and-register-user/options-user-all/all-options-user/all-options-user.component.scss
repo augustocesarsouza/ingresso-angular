@@ -46,10 +46,15 @@
   font-size: 13px;
 }
 
+.container-span-logout-page-initial p {
+  margin-bottom: 5px;
+}
+
 .span-2 {
   color: rgb(102, 102, 102);
 }
 
-.span-3{
+.span-link {
   color: rgb(52, 120, 193);
+  cursor: pointer;
 }

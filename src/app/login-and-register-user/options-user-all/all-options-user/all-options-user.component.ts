@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../user-interface/user-date';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-options-user',
@@ -11,7 +12,7 @@ export class AllOptionsUserComponent implements OnInit {
   @Input() userDateStorage!: User | null;
   allContainerSvgConfig!: NodeListOf<HTMLElement>;
 
-  constructor(){
+  constructor(private router: Router){
   }
 
   ngOnInit(): void {
@@ -48,4 +49,30 @@ export class AllOptionsUserComponent implements OnInit {
     let span = targetDiv.lastChild as HTMLElement;
     span.style.color = "#fff";
   }
+
+  onClickSendHomePage(){
+    this.sendHomePage();
+  }
+
+  sendHomePage(){
+    this.router.navigate(['/']);
+  }
+
+  // onClickLogOutOfTheAccount(){
+  //   if(typeof window !== "undefined"){
+  //     localStorage.removeItem('userLogin');
+  //   }
+  //   this.userLogin = null;
+  //   this.dataService.setData(null);
+  //   this.router.navigate(['/my-account/login']);
+  // }
+
+  onLoggingOut(){
+    if(typeof window !== "undefined"){
+      localStorage.removeItem('userLogin');
+      this.userDateStorage = null;
+      this.router.navigate(['/my-account/login']);
+    }
+  }
 }
+
