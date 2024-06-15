@@ -12,5 +12,7 @@
     [placeholder]="placeholder"
     (click)="onClickInput($event)"
     (blur)="onBlurInput($event)"
+    #password
+    (input)="onPasswordInput ? onPasswordInput(password.value) : null"
   />
 </div>

@@ -10,8 +10,6 @@ export class GetUserInformationService {
   constructor(private _http: HttpClient) { }
 
   getInfoUser (){
-    console.log("aqui");
-
     let userLogin = null;
 
     if(typeof window !== "undefined"){
@@ -99,6 +97,37 @@ export class GetUserInformationService {
     };
 
     let response = this._http.put(`/api/v1/user/update-user/${senha}`, userUpdate, options).pipe(take(1));
+
+    return response;
+  }
+
+  changePasswordUser(userPasswordChange: any){
+    let userLogin = null;
+
+    if(typeof window !== "undefined"){
+      userLogin = localStorage.getItem("userLogin");
+    }
+
+    let token = "";
+    let id = "";
+
+    if(userLogin){
+      let userLoginObj: any = JSON.parse(userLogin);
+      token = userLoginObj.token;
+      id = userLoginObj.id;
+    }
+
+    const headers = new HttpHeaders({
+      'uid': id,
+      'Authorization': token
+    });
+
+    const options = {
+      "Content-Type": "application/json",
+      headers: headers,
+    };
+
+    let response = this._http.put(`/api/v1/user/update-user-password`, userPasswordChange, options).pipe(take(1));
 
     return response;
   }

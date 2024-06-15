@@ -42,7 +42,6 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
   minimumOneNumber = false;
   minimumEightNumber = false;
   confirmEmailRegister = false;
-  formSenha!: AbstractControl<any, any> | null;
 
   constructor(private formBuilder: FormBuilder, private dropdownService: DropdownService, private cepService: ConsultaCepService, private verificaEmailService: VerificaEmailService,
     private router: Router
@@ -140,8 +139,6 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
     if(document){
       document.body.style.position = 'relative';
     }
-
-    this.formSenha = this.formulario.get('senha');
   }
 
   // onClickSubmit(){

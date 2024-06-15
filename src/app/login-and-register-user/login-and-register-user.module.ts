@@ -17,6 +17,12 @@ import { AllOptionsUserComponent } from './options-user-all/all-options-user/all
 import { InputGenericComponent } from './options-user-all/input-generic/input-generic.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { ChangePasswordComponent } from './options-user-all/change-password/change-password.component';
+import { PersonalDataComponent } from './options-user-all/personal-data/personal-data.component';
+import { MyOrdersCinemaComponent } from './options-user-all/my-orders-cinema/my-orders-cinema.component';
+import { PaymentMethodsComponent } from './options-user-all/payment-methods/payment-methods.component';
+import { CardCreditAllComponent } from './options-user-all/card-credit-all/card-credit-all.component';
+import { CardDebitAllComponent } from './options-user-all/card-debit-all/card-debit-all.component';
+import { DigitalWalletsAllComponent } from './options-user-all/digital-wallets-all/digital-wallets-all.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +38,12 @@ import { ChangePasswordComponent } from './options-user-all/change-password/chan
     AllOptionsUserComponent,
     ChangePasswordComponent,
     InputGenericComponent,
+    PersonalDataComponent,
+    MyOrdersCinemaComponent,
+    PaymentMethodsComponent,
+    CardCreditAllComponent,
+    CardDebitAllComponent,
+    DigitalWalletsAllComponent,
   ],
   imports: [
     CommonModule,
@@ -39,7 +51,7 @@ import { ChangePasswordComponent } from './options-user-all/change-password/chan
     ReactiveFormsModule,
     FormsModule,
     AllSvgAppModule,
-    RecaptchaModule
+    RecaptchaModule,
   ]
 })
 export class LoginAndRegisterUserModule { }

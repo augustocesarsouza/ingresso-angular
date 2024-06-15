@@ -1,0 +1,16 @@
+.container-card-credit-all {
+  display: flex;
+  gap: 10px;
+}
+
+.card-credit {
+  display: flex;
+}
+
+.card-credit > svg {
+  width: 36px;
+}
+
+.card-credit > img {
+  width: 38px;
+}
