@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { StatesAndCitysService } from '../shared/states-and-citys.service';
+import { StatesAndCitysService } from '../../shared/states-and-citys.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from '../login-and-register-user/data.service';
+import { DataService } from '../../login-and-register-user/data.service';
 import { Subscription } from 'rxjs';
-import { UserLogin } from '../login-and-register-user/data-user-interface/user-login';
+import { UserLogin } from '../../login-and-register-user/data-user-interface/user-login';
 
 @Component({
   selector: 'app-navigation',
