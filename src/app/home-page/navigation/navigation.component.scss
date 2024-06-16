@@ -77,6 +77,7 @@ $color-hover-element: #d3d3d3;
   position: absolute;
   left: 47px;
   top: 46px;
+  z-index: 1;
 
   >svg {
     fill: rgb(22 27 34);
@@ -93,6 +94,7 @@ $color-hover-element: #d3d3d3;
   height: 18rem;
   display: flex;
   padding: 20px;
+  z-index: 1;
 }
 
 .container-where-you-is {
@@ -248,6 +250,7 @@ $color-hover-element: #d3d3d3;
   position: absolute;
   right: 264px;
   top: 46px;
+  z-index: 1;
 
   >svg {
     fill: rgb(22 27 34);
@@ -258,6 +261,7 @@ $color-hover-element: #d3d3d3;
   position: absolute;
   right: 199px;
   top: 46px;
+  z-index: 1;
 
   >svg {
     fill: rgb(22 27 34);
@@ -275,6 +279,7 @@ $color-hover-element: #d3d3d3;
   display: flex;
   gap: 20px;
   user-select: none;
+  z-index: 1;
 }
 
 .container-register-account {
@@ -334,6 +339,7 @@ $color-hover-element: #d3d3d3;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  z-index: 1;
 
   >h1 {
     font-size: 20px;
@@ -349,6 +355,7 @@ $color-hover-element: #d3d3d3;
   >svg {
     width: 20px;
     position: absolute;
+    z-index: 1;
     right: 7px;
     top: 8px;
     fill: rgba(59,130,246,.5);
@@ -372,7 +379,6 @@ $color-hover-element: #d3d3d3;
   display: flex;
   flex-direction: column;
   gap: 20px;
-
   position: absolute;
   right: 0px;
   top: 64px;
@@ -381,6 +387,7 @@ $color-hover-element: #d3d3d3;
   width: 31rem;
   padding: 25px 23px 45px 23px;
   user-select: none;
+  z-index: 1;
 }
 
 .container-already-logged-in > h1 {
