@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  background-color: rgb(22 27 34);
+  // background-color: rgb(22 27 34);
 }
 
 .container-all-about-highlight {
@@ -160,7 +160,7 @@
   // position: relative;
   overflow: hidden;
   cursor: pointer;
-  width: 10rem !important;
+  width: 9rem;
   background-color: rgb(4 18 24) !important;
 }
 
@@ -199,7 +199,7 @@
 }
 
 .carousel-item {
-  position: relative !important;
+  // position: relative;
 }
 
 .h1-custom {
@@ -211,6 +211,7 @@
 
 .container-carosel-trending {
   display: flex;
+  position: relative;
   // justify-content: center;
   // width: 80rem;
   // position: fixed;
@@ -247,35 +248,35 @@
   // margin-right: 15px;
 
   @media (max-width: 1100px) and (min-width: 992px) {
-    margin-right: 75px;
+    margin-right: 57px;
   }
 
   @media (max-width: 1200px) and (min-width: 1100px) {
-    margin-right: 65px;
+    margin-right: 47px;
   }
 
   @media (max-width: 1300px) and (min-width: 1200px) {
-    margin-right: 55px;
+    margin-right: 37px;
   }
 
   @media (max-width: 1400px) and (min-width: 1300px) {
-    margin-right: 45px;
+    margin-right: 27px;
   }
 
   @media (max-width: 1500px) and (min-width: 1400px) {
-    margin-right: 35px;
+    margin-right: 17px;
   }
 
   @media (max-width: 1600px) and (min-width: 1500px) {
-    margin-right: 20px;
+    margin-right: 7px;
   }
 
-  @media (max-width: 1700px) and (min-width: 1600px) {
-    margin-right: 10px;
-  }
+  // @media (max-width: 1700px) and (min-width: 1600px) {
+  //   margin-right: 10px;
+  // }
 
   @media (min-width: 1700px) {
-    margin-right: 10px;
+    margin-right: 5px;
   }
 }
 
@@ -299,20 +300,19 @@
 }
 
 .container-arrow-left {
-  // cursor: auto !important;
+  // cursor: auto;
   position: absolute;
-  left: 0px !important;
-  top: 446px !important;
-  width: 88px !important;
-  height: 285px !important;
-  // justify-content: flex-end !important;
-  color: #00b0ff !important;
+  left: 0px;
+  top: -10px;
+  width: 88px;
+  height: 288px;
+  // justify-content: flex-end;
+  color: #00b0ff;
   display: none;
   align-items: center;
   justify-content: center;
-  // background-color: rgb(4 18 24 / 51%);
-  // background-image: linear-gradient(to right, rgb(5, 18, 24), rgb(5 18 24 / 29%), rgb(5 18 24 / 48%), rgb(5 18 24 / 0%));
-  background-image: linear-gradient(to right, #041218c4, rgb(4 18 24 / 0%));
+  z-index: 1;
+  background-image: linear-gradient(to right, rgb(4 18 24), rgb(4 18 24 / 0%));
 
   // @media (min-width: 1451px) {
   //   width: 120px !important;
@@ -327,17 +327,17 @@
 }
 
 .container-arrow-right {
-  cursor: auto !important;
+  cursor: auto;
   position: absolute;
-  right: 0px !important;
-  top: 446px !important;
-  width: 88px !important;
-  height: 292px !important;
+  right: 0px;
+  top: -10px;
+  width: 88px;
+  height: 305px;
   display: flex;
   align-items: center;
   justify-content: center;
-  // background-image: linear-gradient(to left, rgb(5, 18, 24), rgb(5 18 24 / 29%), rgb(5 18 24 / 48%), rgb(5 18 24 / 0%));
-  background-image: linear-gradient(to left, #041218c4, rgb(4 18 24 / 0%));
+  z-index: 1;
+  background-image: linear-gradient(to left, rgb(4 18 24), rgb(4 18 24 / 0%));
 
   // @media (min-width: 1451px) {
   //   right: 20px !important;
