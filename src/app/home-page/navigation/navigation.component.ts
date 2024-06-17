@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { StatesAndCitysService } from '../shared/states-and-citys.service';
+import { StatesAndCitysService } from '../../shared/states-and-citys.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from '../login-and-register-user/data.service';
+import { DataService } from '../../login-and-register-user/data.service';
 import { Subscription } from 'rxjs';
-import { UserLogin } from '../login-and-register-user/data-user-interface/user-login';
+import { UserLogin } from '../../login-and-register-user/data-user-interface/user-login';
 
 @Component({
   selector: 'app-navigation',
@@ -186,8 +186,25 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.router.navigate(['/my-account/login']);
   }
 
+  onClickMyOrders(){
+    const url = this.router.serializeUrl(this.router.createUrlTree(['/my-account/my-orders']));
+    if(typeof window !== "undefined"){
+      window.open(url, '_blank');
+    }
+  }
+
   onClickDatePersonal(){
-    this.router.navigate(['/my-account/my-orders']);
+    const url = this.router.serializeUrl(this.router.createUrlTree(['/my-account/personal-data']));
+    if(typeof window !== "undefined"){
+      window.open(url, '_blank');
+    }
+  }
+
+  onClickPaymentForms(){
+    const url = this.router.serializeUrl(this.router.createUrlTree(['/my-account/payment-methods']));
+    if(typeof window!== "undefined"){
+      window.open(url, '_blank');
+    }
   }
 
   ngOnDestroy(): void {

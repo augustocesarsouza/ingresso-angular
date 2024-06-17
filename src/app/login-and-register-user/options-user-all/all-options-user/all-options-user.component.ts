@@ -55,7 +55,10 @@ export class AllOptionsUserComponent implements OnInit {
   }
 
   sendHomePage(){
-    this.router.navigate(['/']);
+    const url = this.router.serializeUrl(this.router.createUrlTree(['/']));
+    if(typeof window !== "undefined"){
+      window.open(url, '_blank');
+    }
   }
 
   // onClickLogOutOfTheAccount(){
