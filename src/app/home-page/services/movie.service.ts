@@ -44,5 +44,4 @@ export class MovieService {
 
     return response;
   }
-
 }
