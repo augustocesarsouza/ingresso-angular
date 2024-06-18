@@ -520,7 +520,7 @@
 .container-user-help {
   display: flex;
   justify-content: space-between;
-  margin: 30px 12px;
+  margin: 40px 12px;
   padding-bottom: 40px;
   // margin-top: 30px;
   width: 1420px;
@@ -592,5 +592,107 @@
 
 .container-sale-tickets-online > button:hover {
   background-image: linear-gradient(to right, #b49000, #b85c00);
+}
 
+.container-payment-methods {
+  display: flex;
+  flex-direction: column;
+  width: 1420px;
+  padding-bottom: 50px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(161, 161, 161, 0.123);
+}
+
+.container-payment-methods > h2 {
+  font-size: 15px;
+  color: #fff;
+}
+
+.container-type-payment-methods-main {
+  display: flex;
+  justify-content: center;
+}
+
+.container-type-payment-methods {
+  display: flex;
+  justify-content: space-between;
+  // justify-content: center;
+}
+
+.container-credit {
+  display: flex;
+  flex-direction: column;
+  width: 18%;
+}
+
+.container-credit > h1 {
+  font-size: 17px;
+  color: #fff;
+}
+
+.container-svg-credit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.container-debit {
+  display: flex;
+  flex-direction: column;
+  width: 18%;
+}
+
+.container-debit > h1 {
+  font-size: 17px;
+  color: #fff;
+}
+
+.container-svg-debit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.container-other-payments {
+  display: flex;
+  flex-direction: column;
+  width: 18%;
+}
+
+.container-other-payments > h1 {
+  font-size: 17px;
+  color: #fff;
+}
+
+.container-svg-other-payments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.container-exchange-your-points {
+  display: flex;
+  flex-direction: column;
+  width: 18%;
+}
+
+.container-exchange-your-points > h1 {
+  font-size: 17px;
+  color: #fff;
+}
+
+.container-svg-exchange-your-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.container-exchange-your-points-img {
+  display: flex;
+}
+
+.container-exchange-your-points-img > img {
+  object-fit: cover;
+  width: 40px;
+  height: 32px;
 }
