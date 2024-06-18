@@ -484,8 +484,8 @@
   display: flex;
   align-items: center;
   padding-left: 0px;
-  margin: 0px 19px;
-  width: 1400px;
+  margin: 0px 12px;
+  width: 1420px;
   z-index: 1;
 }
 
@@ -512,9 +512,19 @@
   object-fit: contain;
 }
 
+.container-main-footer-help {
+  display: flex;
+  justify-content: center;
+}
+
 .container-user-help {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+  margin: 30px 12px;
+  padding-bottom: 40px;
+  // margin-top: 30px;
+  width: 1420px;
+  border-bottom: 1px solid rgba(161, 161, 161, 0.123);
 }
 
 .container-menu {
@@ -542,4 +552,45 @@
 .container-svg-social-media > span {
   color: rgb(152 170 236);
   font-size: 15px;
+}
+
+.svg-container {
+  display: flex;
+}
+
+.container-sale-tickets-online {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(33, 38, 45);
+  width: 208px;
+  height: 162px;
+  padding: 16px;
+  border-radius: 20px;
+}
+
+.container-sale-tickets-online > h2 {
+  font-size: 17px;
+  text-align: center;
+  color: #fff;
+}
+
+.container-sale-tickets-online > span {
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.3;
+  color: rgb(204, 204, 204);
+  margin-bottom: 10px;
+}
+
+.container-sale-tickets-online > button {
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  background-image: linear-gradient(to right, #ffce00, #ff8000);
+}
+
+.container-sale-tickets-online > button:hover {
+  background-image: linear-gradient(to right, #b49000, #b85c00);
+
 }
