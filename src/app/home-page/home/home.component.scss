@@ -166,7 +166,7 @@
 
 .carousel-custom {
   display: flex;
-  overflow-x: auto;
+  overflow-x: hidden;
   white-space: nowrap;
   scroll-behavior: smooth;
   width: 96vw;
