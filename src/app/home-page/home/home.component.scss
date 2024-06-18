@@ -511,3 +511,35 @@
   height: 45px;
   object-fit: contain;
 }
+
+.container-user-help {
+  display: flex;
+  gap: 10px;
+}
+
+.container-menu {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+}
+
+.container-menu > h2 {
+  font-size: 16px;
+  color: #fff;
+}
+
+.container-menu > span {
+  color: rgb(152 170 236);
+  font-size: 15px;
+}
+
+.container-svg-social-media {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.container-svg-social-media > span {
+  color: rgb(152 170 236);
+  font-size: 15px;
+}

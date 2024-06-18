@@ -15,6 +15,10 @@ import { SvgPaymentMethodsComponent } from './svg-payment-methods/svg-payment-me
 import { SvgIComponent } from './svg-i/svg-i.component';
 import { SvgLockPasswordComponent } from './svg-lock-password/svg-lock-password.component';
 import { SvgLock2Component } from './svg-lock-2/svg-lock-2.component';
+import { SvgFacebookComponent } from './social-media-svg/svg-facebook/svg-facebook.component';
+import { SvgYoutubeComponent } from './social-media-svg/svg-youtube/svg-youtube.component';
+import { SvgInstagramComponent } from './social-media-svg/svg-instagram/svg-instagram.component';
+import { SvgLinckedinComponent } from './social-media-svg/svg-linckedin/svg-linckedin.component';
 
 @NgModule({
   imports: [
@@ -35,6 +39,10 @@ import { SvgLock2Component } from './svg-lock-2/svg-lock-2.component';
     SvgIComponent,
     SvgLockPasswordComponent,
     SvgLock2Component,
+    SvgFacebookComponent,
+    SvgYoutubeComponent,
+    SvgInstagramComponent,
+    SvgLinckedinComponent,
   ],
   exports: [
     SvgLocationComponent,
@@ -50,7 +58,11 @@ import { SvgLock2Component } from './svg-lock-2/svg-lock-2.component';
     SvgPaymentMethodsComponent,
     SvgIComponent,
     SvgLockPasswordComponent,
-    SvgLock2Component
+    SvgLock2Component,
+    SvgFacebookComponent,
+    SvgYoutubeComponent,
+    SvgInstagramComponent,
+    SvgLinckedinComponent
   ]
 })
 export class AllSvgAppModule { }
