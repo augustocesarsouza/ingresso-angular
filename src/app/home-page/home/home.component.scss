@@ -540,7 +540,7 @@
 
 .container-menu > span {
   color: rgb(152 170 236);
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .container-svg-social-media {
@@ -551,7 +551,7 @@
 
 .container-svg-social-media > span {
   color: rgb(152 170 236);
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .svg-container {
@@ -598,6 +598,7 @@
   display: flex;
   flex-direction: column;
   width: 1420px;
+  margin: 0px 12px;
   padding-bottom: 50px;
   margin-bottom: 40px;
   border-bottom: 1px solid rgba(161, 161, 161, 0.123);
@@ -606,6 +607,7 @@
 .container-payment-methods > h2 {
   font-size: 15px;
   color: #fff;
+  margin-bottom: 20px;
 }
 
 .container-type-payment-methods-main {
@@ -622,7 +624,8 @@
 .container-credit {
   display: flex;
   flex-direction: column;
-  width: 18%;
+  width: 14rem;
+  gap: 15px;
 }
 
 .container-credit > h1 {
@@ -639,7 +642,8 @@
 .container-debit {
   display: flex;
   flex-direction: column;
-  width: 18%;
+  width: 14rem;
+  gap: 15px;
 }
 
 .container-debit > h1 {
@@ -656,7 +660,8 @@
 .container-other-payments {
   display: flex;
   flex-direction: column;
-  width: 18%;
+  width: 11rem;
+  gap: 15px;
 }
 
 .container-other-payments > h1 {
@@ -673,7 +678,8 @@
 .container-exchange-your-points {
   display: flex;
   flex-direction: column;
-  width: 18%;
+  width: 11rem;
+  gap: 15px;
 }
 
 .container-exchange-your-points > h1 {
