@@ -15,6 +15,30 @@ import { SvgPaymentMethodsComponent } from './svg-payment-methods/svg-payment-me
 import { SvgIComponent } from './svg-i/svg-i.component';
 import { SvgLockPasswordComponent } from './svg-lock-password/svg-lock-password.component';
 import { SvgLock2Component } from './svg-lock-2/svg-lock-2.component';
+import { SvgFacebookComponent } from './social-media-svg/svg-facebook/svg-facebook.component';
+import { SvgYoutubeComponent } from './social-media-svg/svg-youtube/svg-youtube.component';
+import { SvgInstagramComponent } from './social-media-svg/svg-instagram/svg-instagram.component';
+import { SvgLinckedinComponent } from './social-media-svg/svg-linckedin/svg-linckedin.component';
+import { SvgVisaComponent } from './credit-all-svg/svg-visa/svg-visa.component';
+import { SvgMastercardComponent } from './credit-all-svg/svg-mastercard/svg-mastercard.component';
+import { SvgEloComponent } from './credit-all-svg/svg-elo/svg-elo.component';
+import { SvgAuraComponent } from './credit-all-svg/svg-aura/svg-aura.component';
+import { SvgAmericanExpressComponent } from './credit-all-svg/svg-american-express/svg-american-express.component';
+import { SvgHipercardComponent } from './credit-all-svg/svg-hipercard/svg-hipercard.component';
+import { SvgPagbankComponent } from './credit-all-svg/svg-pagbank/svg-pagbank.component';
+import { SvgC9Component } from './debit-all-svg/svg-c9/svg-c9.component';
+import { SvgNubankComponent } from './debit-all-svg/svg-nubank/svg-nubank.component';
+import { SvgItauComponent } from './debit-all-svg/svg-itau/svg-itau.component';
+import { SvgBradescoComponent } from './debit-all-svg/svg-bradesco/svg-bradesco.component';
+import { SvgNextComponent } from './debit-all-svg/svg-next/svg-next.component';
+import { SvgSantanderComponent } from './debit-all-svg/svg-santander/svg-santander.component';
+import { SvgCaixaComponent } from './debit-all-svg/svg-caixa/svg-caixa.component';
+import { SvgInterComponent } from './debit-all-svg/svg-inter/svg-inter.component';
+import { SvgBancoDoBrasilComponent } from './debit-all-svg/svg-banco-do-brasil/svg-banco-do-brasil.component';
+import { SvgPaypalComponent } from './other-payments-all-svg/svg-paypal/svg-paypal.component';
+import { SvgPayComponent } from './other-payments-all-svg/svg-pay/svg-pay.component';
+import { SvgPayGoogleComponent } from './other-payments-all-svg/svg-pay-google/svg-pay-google.component';
+import { SvgPixComponent } from './other-payments-all-svg/svg-pix/svg-pix.component';
 
 @NgModule({
   imports: [
@@ -35,6 +59,30 @@ import { SvgLock2Component } from './svg-lock-2/svg-lock-2.component';
     SvgIComponent,
     SvgLockPasswordComponent,
     SvgLock2Component,
+    SvgFacebookComponent,
+    SvgYoutubeComponent,
+    SvgInstagramComponent,
+    SvgLinckedinComponent,
+    SvgVisaComponent,
+    SvgMastercardComponent,
+    SvgEloComponent,
+    SvgAuraComponent,
+    SvgAmericanExpressComponent,
+    SvgHipercardComponent,
+    SvgPagbankComponent,
+    SvgC9Component,
+    SvgNubankComponent,
+    SvgItauComponent,
+    SvgBradescoComponent,
+    SvgNextComponent,
+    SvgSantanderComponent,
+    SvgCaixaComponent,
+    SvgInterComponent,
+    SvgBancoDoBrasilComponent,
+    SvgPaypalComponent,
+    SvgPayComponent,
+    SvgPayGoogleComponent,
+    SvgPixComponent,
   ],
   exports: [
     SvgLocationComponent,
@@ -50,7 +98,32 @@ import { SvgLock2Component } from './svg-lock-2/svg-lock-2.component';
     SvgPaymentMethodsComponent,
     SvgIComponent,
     SvgLockPasswordComponent,
-    SvgLock2Component
+    SvgLock2Component,
+    SvgFacebookComponent,
+    SvgYoutubeComponent,
+    SvgInstagramComponent,
+    SvgLinckedinComponent,
+    SvgVisaComponent,
+    SvgMastercardComponent,
+    SvgEloComponent,
+    SvgAuraComponent,
+    SvgAmericanExpressComponent,
+    SvgHipercardComponent,
+    SvgPagbankComponent,
+    SvgC9Component,
+    SvgNubankComponent,
+    SvgItauComponent,
+    SvgBradescoComponent,
+    SvgNextComponent,
+    SvgSantanderComponent,
+    SvgCaixaComponent,
+    SvgInterComponent,
+    SvgBancoDoBrasilComponent,
+    SvgPaypalComponent,
+    SvgPayComponent,
+    SvgPayGoogleComponent,
+    SvgPixComponent,
+
   ]
 })
 export class AllSvgAppModule { }

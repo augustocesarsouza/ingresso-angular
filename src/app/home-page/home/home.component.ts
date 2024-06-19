@@ -68,8 +68,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     const updateArrowsVisibility = () => {
       if (scrollElement) {
+        const maxScrollLeft = scrollElement.scrollWidth - scrollElement.clientWidth;
+
         containerLeft!.style.display = scrollElement.scrollLeft > 0 ? 'flex' : 'none';
-        containerRight!.style.display = (scrollElement.scrollLeft + scrollElement.clientWidth) >= scrollElement.scrollWidth ? 'none' : 'flex';
+        containerRight!.style.display = scrollElement.scrollLeft >= maxScrollLeft ? 'none' : 'flex';
       }
     };
 
@@ -91,8 +93,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     const updateArrowsVisibility = () => {
       if (scrollElement) {
+        const maxScrollLeft = scrollElement.scrollWidth - scrollElement.clientWidth;
+
         containerLeft!.style.display = scrollElement.scrollLeft > 0 ? 'flex' : 'none';
-        containerRight!.style.display = (scrollElement.scrollLeft + scrollElement.clientWidth) >= scrollElement.scrollWidth ? 'none' : 'flex';
+        containerRight!.style.display = scrollElement.scrollLeft >= maxScrollLeft ? 'none' : 'flex';
       }
     };
 

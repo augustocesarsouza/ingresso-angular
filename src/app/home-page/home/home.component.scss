@@ -166,7 +166,7 @@
 
 .carousel-custom {
   display: flex;
-  overflow-x: auto;
+  overflow-x: hidden;
   white-space: nowrap;
   scroll-behavior: smooth;
   width: 96vw;
@@ -452,4 +452,328 @@
   fill: #00b0ff;
   width: 25px;
   cursor: pointer;
+}
+
+.container-footer {
+  width: 100%;
+}
+
+.container-download-appstore-googleplay {
+  position: relative;
+  height: 120px;
+  background-image: url(https://res.cloudinary.com/dyqsqg7pk/image/upload/v1718636648/highlight-footer_fpvnzl.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(25 25 25 / 50%);
+    opacity: 1;
+  }
+}
+
+.container-info-download {
+  display: flex;
+  align-items: center;
+  padding-left: 0px;
+  margin: 0px 12px;
+  width: 1420px;
+  z-index: 1;
+}
+
+.container-info-download > p {
+  font-size: 34px;
+  color: #fff;
+  margin-bottom: 0px;
+}
+
+.container-devices {
+  display: flex;
+  align-items: center;
+}
+
+.img-app-store {
+  width: 154px;
+  height: 55px;
+  object-fit: cover;
+}
+
+.img-google-play {
+  width: 172px;
+  height: 45px;
+  object-fit: contain;
+}
+
+.container-main-footer-help {
+  display: flex;
+  justify-content: center;
+}
+
+.container-user-help {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 12px;
+  padding-bottom: 40px;
+  // margin-top: 30px;
+  width: 1420px;
+  border-bottom: 1px solid rgba(161, 161, 161, 0.123);
+}
+
+.container-menu {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+}
+
+.container-menu > h2 {
+  font-size: 16px;
+  color: #fff;
+}
+
+.container-menu > span {
+  color: rgb(152 170 236);
+  font-size: 14px;
+}
+
+.container-svg-social-media {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.container-svg-social-media > span {
+  color: rgb(152 170 236);
+  font-size: 14px;
+}
+
+.svg-container {
+  display: flex;
+}
+
+.container-sale-tickets-online {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(33, 38, 45);
+  width: 208px;
+  height: 162px;
+  padding: 16px;
+  border-radius: 20px;
+}
+
+.container-sale-tickets-online > h2 {
+  font-size: 17px;
+  text-align: center;
+  color: #fff;
+}
+
+.container-sale-tickets-online > span {
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.3;
+  color: rgb(204, 204, 204);
+  margin-bottom: 10px;
+}
+
+.container-sale-tickets-online > button {
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  background-image: linear-gradient(to right, #ffce00, #ff8000);
+}
+
+.container-sale-tickets-online > button:hover {
+  background-image: linear-gradient(to right, #b49000, #b85c00);
+}
+
+.container-payment-methods {
+  display: flex;
+  flex-direction: column;
+  width: 1420px;
+  margin: 0px 12px;
+  padding-bottom: 50px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(161, 161, 161, 0.123);
+}
+
+.container-payment-methods > h2 {
+  font-size: 15px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.container-type-payment-methods-main {
+  display: flex;
+  justify-content: center;
+}
+
+.container-type-payment-methods {
+  display: flex;
+  justify-content: space-between;
+  // justify-content: center;
+}
+
+.container-credit {
+  display: flex;
+  flex-direction: column;
+  width: 14rem;
+  gap: 15px;
+}
+
+.container-credit > h1 {
+  font-size: 17px;
+  color: #fff;
+}
+
+.container-svg-credit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.container-debit {
+  display: flex;
+  flex-direction: column;
+  width: 14rem;
+  gap: 15px;
+}
+
+.container-debit > h1 {
+  font-size: 17px;
+  color: #fff;
+}
+
+.container-svg-debit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.container-other-payments {
+  display: flex;
+  flex-direction: column;
+  width: 11rem;
+  gap: 15px;
+}
+
+.container-other-payments > h1 {
+  font-size: 17px;
+  color: #fff;
+}
+
+.container-svg-other-payments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.container-exchange-your-points {
+  display: flex;
+  flex-direction: column;
+  width: 11rem;
+  gap: 15px;
+}
+
+.container-exchange-your-points > h1 {
+  font-size: 17px;
+  color: #fff;
+}
+
+.container-svg-exchange-your-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.container-exchange-your-points-img {
+  display: flex;
+}
+
+.container-exchange-your-points-img > img {
+  object-fit: cover;
+  width: 40px;
+  height: 32px;
+}
+
+.container-things-of-the-site-main {
+  display: flex;
+  justify-content: center;
+}
+
+.container-things-of-the-site {
+  display: flex;
+  gap: 60px;
+  width: 1420px;
+  margin: 0px 12px;
+  padding-bottom: 50px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(161, 161, 161, 0.123);
+}
+
+.container-information-from-the-site {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.container-information-from-the-site > h2 {
+  font-size: 16px;
+  color: #fff;
+}
+
+.container-information-from-the-site > img {
+  object-fit: cover;
+  width: 185px;
+}
+
+.container-the-best-app-for-admission {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.container-the-best-app-for-admission > h2 {
+  font-size: 16px;
+  color: #fff;
+}
+
+.container-the-best-app-for-admission > img {
+  object-fit: cover;
+  width: 123px;
+}
+
+.container-footer-ingresso {
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+  padding-bottom: 40px;
+}
+
+.container-span {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container-span {
+  line-height: 1.2;
+  font-size: 11px;
+  color: rgb(153, 153, 153);
+}
+
+.span-customer-service {
+  cursor: pointer;
+  color: rgb(152, 170, 236);
+}
+
+.span-customer-service:hover {
+  color: rgb(109, 135, 230);
 }
