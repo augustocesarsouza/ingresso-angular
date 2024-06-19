@@ -702,3 +702,78 @@
   width: 40px;
   height: 32px;
 }
+
+.container-things-of-the-site-main {
+  display: flex;
+  justify-content: center;
+}
+
+.container-things-of-the-site {
+  display: flex;
+  gap: 60px;
+  width: 1420px;
+  margin: 0px 12px;
+  padding-bottom: 50px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(161, 161, 161, 0.123);
+}
+
+.container-information-from-the-site {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.container-information-from-the-site > h2 {
+  font-size: 16px;
+  color: #fff;
+}
+
+.container-information-from-the-site > img {
+  object-fit: cover;
+  width: 185px;
+}
+
+.container-the-best-app-for-admission {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.container-the-best-app-for-admission > h2 {
+  font-size: 16px;
+  color: #fff;
+}
+
+.container-the-best-app-for-admission > img {
+  object-fit: cover;
+  width: 123px;
+}
+
+.container-footer-ingresso {
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+  padding-bottom: 40px;
+}
+
+.container-span {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container-span {
+  line-height: 1.2;
+  font-size: 11px;
+  color: rgb(153, 153, 153);
+}
+
+.span-customer-service {
+  cursor: pointer;
+  color: rgb(152, 170, 236);
+}
+
+.span-customer-service:hover {
+  color: rgb(109, 135, 230);
+}
