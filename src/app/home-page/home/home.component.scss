@@ -182,7 +182,10 @@
 .col-custom {
   // width: 12% !important;
   // height: 300px !important;
+  display: flex;
+  flex-direction: column;
   margin-right: 5px;
+
 }
 
 .card-movie {
@@ -229,6 +232,7 @@
   white-space: pre-line;
   margin-bottom: 0px;
   width: 9rem;
+  cursor: pointer;
 }
 
 .h5-custom {

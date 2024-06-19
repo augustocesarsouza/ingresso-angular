@@ -49,14 +49,14 @@
             *ngFor="let movie of moviesTrending; let i = index"
             class="col-custom col-custom{{ i + 1 }}"
           >
-            <div class="card card-movie">
+            <div class="card card-movie" (click)="onClickCardMovie(movie)">
               <span class="span-movie-rating-trending">{{
                 movie.movieRating
               }}</span>
               <img [src]="movie.imgUrl" [alt]="movie.title" />
             </div>
             <div class="custom-card-body">
-              <h2>{{ movie.title }}</h2>
+              <h2 (click)="onClickCardMovie(movie)">{{ movie.title }}</h2>
             </div>
           </div>
         </div>
@@ -184,7 +184,6 @@
       </div>
     </div>
     <div class="container-type-payment-methods-main">
-      <!-- Terminar svg a width dos container svg os main -->
       <div class="container-payment-methods">
         <h2>Formas de Pagamento</h2>
         <div class="container-type-payment-methods">

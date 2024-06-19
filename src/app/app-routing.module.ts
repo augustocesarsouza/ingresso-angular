@@ -8,6 +8,9 @@ const routes: Routes = [
   { path: 'my-account',
     loadChildren: () => import('./login-and-register-user/login-and-register-user.module').then(m => m.LoginAndRegisterUserModule)
   },
+  { path: 'movie',
+    loadChildren: () => import('./movie-info/movie-info.module').then(m => m.MovieInfoModule)
+  },
 ];
 
 @NgModule({

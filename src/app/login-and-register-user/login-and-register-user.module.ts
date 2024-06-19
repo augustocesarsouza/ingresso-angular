@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginAndRegisterUserRoutingModule } from './login-and-register-user-routing.module';
 import { LoginUserComponent } from './login-user/login-user.component';
 import { RegisterUserComponent } from './register-user/register-user.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterIngressoComponent } from './footer-ingresso/footer-ingresso.component';
 import { IngressoTopComponent } from './ingresso-top/ingresso-top.component';
 import { InputFieldComponent } from './input-field/input-field.component';
