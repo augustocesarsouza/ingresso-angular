@@ -50,6 +50,7 @@ export class LoginUserComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (typeof document !== 'undefined') {
+      document.body.style.backgroundColor = "#fff";
       this.containerMainSvgInput = document.querySelector('.container-cpf-or-email') as HTMLElement;
       this.containerSpanAndInput = document.querySelector('.container-span-cpf-email-input') as HTMLElement;
       this.spanCpfOrEmail = this.containerSpanAndInput?.firstChild as HTMLElement;

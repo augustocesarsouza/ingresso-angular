@@ -39,6 +39,7 @@ import { SvgPaypalComponent } from './other-payments-all-svg/svg-paypal/svg-payp
 import { SvgPayComponent } from './other-payments-all-svg/svg-pay/svg-pay.component';
 import { SvgPayGoogleComponent } from './other-payments-all-svg/svg-pay-google/svg-pay-google.component';
 import { SvgPixComponent } from './other-payments-all-svg/svg-pix/svg-pix.component';
+import { SvgShareComponent } from './svg-share/svg-share.component';
 
 @NgModule({
   imports: [
@@ -83,6 +84,7 @@ import { SvgPixComponent } from './other-payments-all-svg/svg-pix/svg-pix.compon
     SvgPayComponent,
     SvgPayGoogleComponent,
     SvgPixComponent,
+    SvgShareComponent,
   ],
   exports: [
     SvgLocationComponent,
@@ -123,6 +125,7 @@ import { SvgPixComponent } from './other-payments-all-svg/svg-pix/svg-pix.compon
     SvgPayComponent,
     SvgPayGoogleComponent,
     SvgPixComponent,
+    SvgShareComponent,
 
   ]
 })

@@ -136,8 +136,12 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
     this.dropdownService.getEstadosBr()
     .subscribe(dados => this.estados = dados);
 
-    if(document){
+    if(typeof document !== "undefined"){
       document.body.style.position = 'relative';
+    }
+
+    if(typeof document !== "undefined"){
+      document.body.style.backgroundColor = "#fff";
     }
   }
 

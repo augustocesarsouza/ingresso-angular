@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     if (typeof document !== 'undefined') {
+      document.body.style.backgroundColor = "rgb(4, 18, 24)";
       document.body.style.overflowX = 'hidden';
     }
 

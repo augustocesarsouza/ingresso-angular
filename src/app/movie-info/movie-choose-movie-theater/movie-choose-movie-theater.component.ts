@@ -15,6 +15,28 @@ export class MovieChooseMovieTheaterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(typeof document !== "undefined"){
+      document.body.style.backgroundColor = "rgb(4, 18, 24)";
+
+      let spanSessions = document.querySelector(".span-sessions") as HTMLSpanElement;
+      let spanAboutTheMovie = document.querySelector(".span-about-the-movie") as HTMLSpanElement;
+
+
+      spanSessions?.addEventListener("click", () => {
+        spanSessions.style.borderBottom = "4px solid rgb(50, 85, 226)";
+        spanSessions.style.fontWeight = '600';
+        spanAboutTheMovie.style.border = "none";
+        spanAboutTheMovie.style.fontWeight = '100';
+      });
+
+      spanAboutTheMovie?.addEventListener("click", () => {
+        spanSessions.style.border = "none";
+        spanSessions.style.fontWeight = '100';
+        spanAboutTheMovie.style.borderBottom = "4px solid rgb(50, 85, 226)";
+        spanAboutTheMovie.style.fontWeight = '600';
+
+      });
+    }
     // this.movieService.currentMovie.subscribe((data) => {
     //   // console.log(data);
     // });
@@ -26,5 +48,10 @@ export class MovieChooseMovieTheaterComponent implements OnInit {
       });
     });
 
+
+  }
+
+  descriptionMovieAbout(description: string): string {
+    return description.substring(0, 105) + "...";
   }
 }
