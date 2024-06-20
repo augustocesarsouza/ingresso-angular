@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../home-page/services/movie.service';
 import { ActivatedRoute } from '@angular/router';
 import { movieChooseMovieTheater } from '../../interface-movie-and-theater/movie-interface/movie-choose-movie-theater';
+import { addDays, format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+
+export interface next7DaysProps {
+  dayYear: string;
+  weekDay: string;
+}
 
 @Component({
   selector: 'app-movie-choose-movie-theater',
@@ -10,6 +17,7 @@ import { movieChooseMovieTheater } from '../../interface-movie-and-theater/movie
 })
 export class MovieChooseMovieTheaterComponent implements OnInit {
   movieChooseMovieTheater!: movieChooseMovieTheater;
+  next7Days!: next7DaysProps[]
 
   constructor(private route: ActivatedRoute, private movieService: MovieService){
   }
@@ -37,9 +45,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit {
 
       });
     }
-    // this.movieService.currentMovie.subscribe((data) => {
-    //   // console.log(data);
-    // });
 
     this.route.params.subscribe((movieData: any) => {
       let movieId = movieData.movieId;
@@ -48,7 +53,43 @@ export class MovieChooseMovieTheaterComponent implements OnInit {
       });
     });
 
+    // let next7Days: next7DaysProps[] = []; isso é userState
+    // let weekDay = ''; isso é userState
 
+    // if (next7Days.length > 0) return;
+
+    const today = new Date();
+    const dayToday = today.getDate();
+
+    const next7DaysEffect: next7DaysProps[] = [];
+
+    for (let i = 0; i < 7; i++) {
+      const day = addDays(today, i);
+
+      const weekDay = format(day, 'E', { locale: ptBR });
+      const formattedDay = format(day, 'dd', { locale: ptBR });
+      const formattedMonth = format(day, 'MM', { locale: ptBR });
+
+      if (dayToday === Number(formattedDay)) {
+        // setWeekDay(weekDay)
+
+        const objData = {
+          dayYear: `${formattedDay}/${formattedMonth}`,
+          weekDay: 'Hoje',
+        };
+        next7DaysEffect.push(objData);
+      } else {
+        const objData = {
+          dayYear: `${formattedDay}/${formattedMonth}`,
+          weekDay: weekDay.slice(0, 3),
+        };
+        next7DaysEffect.push(objData);
+      }
+    }
+
+    this.next7Days = next7DaysEffect;
+
+    // setNext7Days(next7DaysEffect);
   }
 
   descriptionMovieAbout(description: string): string {
