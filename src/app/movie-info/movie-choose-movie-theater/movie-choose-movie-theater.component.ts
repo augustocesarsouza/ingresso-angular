@@ -17,7 +17,10 @@ export interface next7DaysProps {
 })
 export class MovieChooseMovieTheaterComponent implements OnInit {
   movieChooseMovieTheater!: movieChooseMovieTheater;
-  next7Days!: next7DaysProps[]
+  next7Days!: next7DaysProps[];
+  typesThatAlreadyClicked: string[] = [];
+  containerTypeAll!: NodeListOf<HTMLElement>;
+  typesMovieTheater: string[] = ["Normal", "Dublado", "Legendado", "Vip", "3D", "XD", "D-Box", "Macro XE", "IMAX", "CINEPIC", "Extreme", "4DX", "XPLUS"];
 
   constructor(private route: ActivatedRoute, private movieService: MovieService){
   }
@@ -42,8 +45,9 @@ export class MovieChooseMovieTheaterComponent implements OnInit {
         spanSessions.style.fontWeight = '100';
         spanAboutTheMovie.style.borderBottom = "4px solid rgb(50, 85, 226)";
         spanAboutTheMovie.style.fontWeight = '600';
-
       });
+
+      this.containerTypeAll = document.querySelectorAll(".container-type");
     }
 
     this.route.params.subscribe((movieData: any) => {
@@ -88,11 +92,31 @@ export class MovieChooseMovieTheaterComponent implements OnInit {
     }
 
     this.next7Days = next7DaysEffect;
-
-    // setNext7Days(next7DaysEffect);
   }
 
   descriptionMovieAbout(description: string): string {
     return description.substring(0, 105) + "...";
+  }
+
+  onClickContainerType(item: string){
+    if(this.typesThatAlreadyClicked.some((el) => el === item)){
+      this.typesThatAlreadyClicked = this.typesThatAlreadyClicked.filter((el) => el !== item);
+    }else {
+      this.typesThatAlreadyClicked.push(item);
+    }
+
+    this.containerTypeAll.forEach((elHtml: HTMLElement) => {
+      let textContent = elHtml.textContent?.trim() || '';
+
+      if(this.typesThatAlreadyClicked.some((el) => el === textContent)){
+        elHtml.style.borderColor = "rgb(152 170 236 / 0%)";
+        elHtml.style.color = "#fff";
+        elHtml.style.background = "rgb(50 85 226)";
+      }else {
+        elHtml.style.borderColor = "rgb(152, 170, 236)";
+        elHtml.style.color = "rgb(152, 170, 236)";
+        elHtml.style.background = "transparent";
+      }
+    })
   }
 }

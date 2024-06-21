@@ -45,6 +45,9 @@
   </div>
   <div class="container-sessions-about-the-movie-main-main">
     <div class="container-sessions-about-the-movie-main">
+      <!-- <div>
+
+      </div> -->
       <div class="container-sessions-about-the-movie">
         <div class="container-span-session-about">
           <span class="span-sessions">Sessões</span>
@@ -52,29 +55,32 @@
         </div>
       </div>
       <div class="container-date-movie-theater">
-        <div class="container-date-1">
-          <span>20/06</span>
-          <span>Hoje</span>
+        <div
+          class="{{ i === 0 ? 'container-date-1' : 'container-date' }}"
+          *ngFor="let item of next7Days; let i = index"
+        >
+          <span>{{ item.dayYear }}</span>
+          <span>{{ item.weekDay }}</span>
         </div>
-        <div class="container-date">
-          <span>20/06</span>
-          <span>Hoje</span>
+      </div>
+      <div class="container-movie-theater-types-and-svg-loupe">
+        <div class="container-loupe-svg">
+          <app-svg-loupe-movie-theater
+            width="28px"
+            height="28px"
+            fill="rgb(152, 170, 236)"
+          ></app-svg-loupe-movie-theater>
         </div>
-        <div class="container-date">
-          <span>20/06</span>
-          <span>Hoje</span>
-        </div>
-        <div class="container-date">
-          <span>20/06</span>
-          <span>Hoje</span>
-        </div>
-        <div class="container-date">
-          <span>20/06</span>
-          <span>Hoje</span>
-        </div>
-        <div class="container-date">
-          <span>20/06</span>
-          <span>Hoje</span>
+        <div class="container-test">
+          <div class="container-movie-theater-types">
+            <div
+              class="container-type"
+              *ngFor="let item of typesMovieTheater"
+              (click)="onClickContainerType(item)"
+            >
+              {{ item }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
