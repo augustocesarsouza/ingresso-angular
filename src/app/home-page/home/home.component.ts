@@ -1,9 +1,9 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MovieService } from '../services/movie.service';
-import { MovieHighlight } from '../../interface-movie-and-theater/movie-interface/movie-highlight';
-import { MovieTrending } from '../../interface-movie-and-theater/movie-interface/movie-trending';
+import { MovieHighlight } from '../../interface-models/movie-interface/movie-highlight';
+import { MovieTrending } from '../../interface-models/movie-interface/movie-trending';
 import { TheaterService } from '../services/theater.service';
-import { Theater } from '../../interface-movie-and-theater/theater-interface/theater';
+import { Theater } from '../../interface-models/theater-interface/theater';
 import { Router } from '@angular/router';
 
 @Component({

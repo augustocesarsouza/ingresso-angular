@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, take } from 'rxjs';
-import { MovieTrending } from '../../interface-movie-and-theater/movie-interface/movie-trending';
+import { MovieTrending } from '../../interface-models/movie-interface/movie-trending';
 
 @Injectable({
   providedIn: 'root'

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../home-page/services/movie.service';
 import { ActivatedRoute } from '@angular/router';
-import { movieChooseMovieTheater } from '../../interface-movie-and-theater/movie-interface/movie-choose-movie-theater';
+import { movieChooseMovieTheater } from '../../interface-models/movie-interface/movie-choose-movie-theater';
 import { addDays, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { CinemaMovieService } from '../../home-page/services/cinema-movie.service';
+import { CinemaMovieGetAll } from '../../interface-models/cinema-movie-interface/cinema-movie-get-all';
 
 export interface next7DaysProps {
   dayYear: string;
@@ -17,12 +19,13 @@ export interface next7DaysProps {
 })
 export class MovieChooseMovieTheaterComponent implements OnInit {
   movieChooseMovieTheater!: movieChooseMovieTheater;
+  cinemaMovieGetAll!: CinemaMovieGetAll[];
   next7Days!: next7DaysProps[];
   typesThatAlreadyClicked: string[] = [];
   containerTypeAll!: NodeListOf<HTMLElement>;
   typesMovieTheater: string[] = ["Normal", "Dublado", "Legendado", "Vip", "3D", "XD", "D-Box", "Macro XE", "IMAX", "CINEPIC", "Extreme", "4DX", "XPLUS"];
 
-  constructor(private route: ActivatedRoute, private movieService: MovieService){
+  constructor(private route: ActivatedRoute, private movieService: MovieService, private cinemaMovieService: CinemaMovieService){
   }
 
   ngOnInit(): void {
@@ -52,9 +55,16 @@ export class MovieChooseMovieTheaterComponent implements OnInit {
 
     this.route.params.subscribe((movieData: any) => {
       let movieId = movieData.movieId;
+
       this.movieService.getInfoForChooseMovieTheater(movieId).subscribe((data: any) => {
         this.movieChooseMovieTheater = data.data;
       });
+
+      this.cinemaMovieService.getMoviesAllTrending(movieId).subscribe((data: any) => {
+        console.log(data.data);
+
+        this.cinemaMovieGetAll = data.data;
+      });;
     });
 
     // let next7Days: next7DaysProps[] = []; isso é userState
