@@ -12,6 +12,11 @@ export interface next7DaysProps {
   weekDay: string;
 }
 
+export interface ObjHoursCinemaMovie {
+  type: string;
+  arryHours: string[];
+}
+
 @Component({
   selector: 'app-movie-choose-movie-theater',
   templateUrl: './movie-choose-movie-theater.component.html',
@@ -20,10 +25,12 @@ export interface next7DaysProps {
 export class MovieChooseMovieTheaterComponent implements OnInit {
   movieChooseMovieTheater!: movieChooseMovieTheater;
   cinemaMovieGetAll!: CinemaMovieGetAll[];
+  cinemaMovieSchedule: { [key: string]: ObjHoursCinemaMovie[] } = {};
   next7Days!: next7DaysProps[];
   typesThatAlreadyClicked: string[] = [];
   containerTypeAll!: NodeListOf<HTMLElement>;
   typesMovieTheater: string[] = ["Normal", "Dublado", "Legendado", "Vip", "3D", "XD", "D-Box", "Macro XE", "IMAX", "CINEPIC", "Extreme", "4DX", "XPLUS"];
+schedule: any;
 
   constructor(private route: ActivatedRoute, private movieService: MovieService, private cinemaMovieService: CinemaMovieService){
   }
@@ -61,16 +68,70 @@ export class MovieChooseMovieTheaterComponent implements OnInit {
       });
 
       this.cinemaMovieService.getMoviesAllTrending(movieId).subscribe((data: any) => {
-        console.log(data.data);
-
         this.cinemaMovieGetAll = data.data;
-      });;
+
+        let objHour: { [key: string]: ObjHoursCinemaMovie[] } = {};
+        let objHourAll: ObjHoursCinemaMovie[] = [];
+
+        data.data.forEach((el: CinemaMovieGetAll) => {
+          let array = el.screeningSchedule.split(',');
+
+          let arrayOnlyDublado: string[] = [];
+          let arrayOnlyLegendado: string[] = [];
+          let arrayOnlyLegendadoVip: string[] = [];
+
+          array.forEach((elInner: string) => {
+            if(elInner.includes("D")){
+              arrayOnlyDublado.push(elInner);
+            }
+
+            if(elInner.includes("L") && !elInner.includes("V")){
+              arrayOnlyLegendado.push(elInner);
+            }
+
+            if(elInner.includes("LV")){
+              arrayOnlyLegendadoVip.push(elInner);
+            }
+          });
+
+          let objHoursDublado: ObjHoursCinemaMovie = {
+            type: "DUBLADO",
+            arryHours: arrayOnlyDublado
+          }
+
+          let objHoursLegendado: ObjHoursCinemaMovie = {
+            type: "LEGENDADO",
+            arryHours: arrayOnlyLegendado
+          }
+
+          let objHoursLegendadoVip: ObjHoursCinemaMovie = {
+            type: "LV",
+            arryHours: arrayOnlyLegendadoVip
+          }
+
+          if(objHoursDublado.arryHours.length > 0){
+            objHourAll.push(objHoursDublado);
+          }
+
+          if(objHoursLegendado.arryHours.length > 0){
+            objHourAll.push(objHoursLegendado);
+          }
+
+          if(objHoursLegendadoVip.arryHours.length > 0){
+            objHourAll.push(objHoursLegendadoVip);
+          }
+
+          objHour[el.cinemaDTO.id] = objHourAll;
+          arrayOnlyDublado = [];
+          arrayOnlyLegendado = [];
+          arrayOnlyLegendadoVip = [];
+          objHourAll = [];
+        });
+
+        this.cinemaMovieSchedule = objHour;
+        console.log(objHour);
+      });
     });
-
-    // let next7Days: next7DaysProps[] = []; isso é userState
-    // let weekDay = ''; isso é userState
-
-    // if (next7Days.length > 0) return;
 
     const today = new Date();
     const dayToday = today.getDate();
@@ -102,6 +163,17 @@ export class MovieChooseMovieTheaterComponent implements OnInit {
     }
 
     this.next7Days = next7DaysEffect;
+  }
+
+  getCinemaArray() {
+    return Object.keys(this.cinemaMovieSchedule).map(key => ({
+      key: key,
+      value: this.cinemaMovieSchedule[key]
+    }));
+  }
+
+  replaceStringHours(hour: string){
+    return hour.replace(/[^0-9:]/g, '');
   }
 
   descriptionMovieAbout(description: string): string {

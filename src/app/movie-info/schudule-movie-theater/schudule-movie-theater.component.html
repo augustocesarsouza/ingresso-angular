@@ -1,0 +1,13 @@
+<div class="container-schedule-dublado" *ngIf="itemSchedule.type === type">
+  <div class="container-span-type-view">
+    <span>{{ typeView }}</span>
+  </div>
+  <div class="container-hours">
+    <div
+      class="container-schedule-hour"
+      *ngFor="let itemHour of itemSchedule.arryHours"
+    >
+      {{ replaceStringHours(itemHour) }}
+    </div>
+  </div>
+</div>

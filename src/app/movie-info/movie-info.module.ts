@@ -6,10 +6,12 @@ import { MovieChooseMovieTheaterComponent } from './movie-choose-movie-theater/m
 import { MovieInfoRoutingModule } from './movie-info-routing.module';
 import { SharedModuleModule } from '../shared-module/shared-module.module';
 import { AllSvgAppModule } from "../all-svg-app/all-svg-app.module";
+import { SchuduleMovieTheaterComponent } from './schudule-movie-theater/schudule-movie-theater.component';
 
 @NgModule({
     declarations: [
         MovieChooseMovieTheaterComponent,
+        SchuduleMovieTheaterComponent,
     ],
     imports: [
         CommonModule,

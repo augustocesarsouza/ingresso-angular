@@ -41,6 +41,10 @@ import { SvgPayGoogleComponent } from './other-payments-all-svg/svg-pay-google/s
 import { SvgPixComponent } from './other-payments-all-svg/svg-pix/svg-pix.component';
 import { SvgShareComponent } from './svg-share/svg-share.component';
 import { SvgLoupeMovieTheaterComponent } from './svg-loupe-movie-theater/svg-loupe-movie-theater.component';
+import { SvgHeartComponent } from './svg-heart/svg-heart.component';
+import { SvgSeatsComponent } from './svg-seats/svg-seats.component';
+import { SvgPriceComponent } from './svg-price/svg-price.component';
+import { SvgDetailsComponent } from './svg-details/svg-details.component';
 
 @NgModule({
   imports: [
@@ -87,6 +91,10 @@ import { SvgLoupeMovieTheaterComponent } from './svg-loupe-movie-theater/svg-lou
     SvgPixComponent,
     SvgShareComponent,
     SvgLoupeMovieTheaterComponent,
+    SvgHeartComponent,
+    SvgSeatsComponent,
+    SvgPriceComponent,
+    SvgDetailsComponent,
   ],
   exports: [
     SvgLocationComponent,
@@ -129,6 +137,11 @@ import { SvgLoupeMovieTheaterComponent } from './svg-loupe-movie-theater/svg-lou
     SvgPixComponent,
     SvgShareComponent,
     SvgLoupeMovieTheaterComponent,
+    SvgHeartComponent,
+    SvgSeatsComponent,
+    SvgPriceComponent,
+    SvgDetailsComponent,
+
   ]
 })
 export class AllSvgAppModule { }

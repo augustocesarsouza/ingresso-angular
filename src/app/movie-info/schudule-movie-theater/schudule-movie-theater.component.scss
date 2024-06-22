@@ -1,0 +1,47 @@
+.container-schedule-dublado {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+
+.container-span-type-view > span {
+  color: #fff;
+  line-height: 1;
+  background-color: rgb(50, 85, 226);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 17px;
+  border-radius: 5px;
+}
+
+.container-span-type-more-than-one {
+  display: flex;
+  gap: 10px;
+}
+
+.container-hours{
+  display: flex;
+  flex-wrap: wrap;
+  // grid-template-columns: auto auto auto auto auto auto;
+  gap: 10px;
+}
+
+.container-schedule-hour {
+  border: 2px solid rgb(152, 170, 236);
+  color: rgb(152, 170, 236);
+  padding: 0 50px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.container-schedule-hour:hover {
+  color: rgb(120, 145, 235);
+  border-color: rgb(120, 145, 235);
+}
