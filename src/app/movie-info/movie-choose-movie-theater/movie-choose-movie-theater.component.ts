@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MovieService } from '../../home-page/services/movie.service';
 import { ActivatedRoute } from '@angular/router';
 import { movieChooseMovieTheater } from '../../interface-models/movie-interface/movie-choose-movie-theater';
@@ -23,7 +23,7 @@ export interface ObjHoursCinemaMovie {
   templateUrl: './movie-choose-movie-theater.component.html',
   styleUrl: './movie-choose-movie-theater.component.scss'
 })
-export class MovieChooseMovieTheaterComponent implements OnInit {
+export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
   movieChooseMovieTheater!: movieChooseMovieTheater;
   cinemaMovieGetAll: CinemaMovieGetAll[] = [];
   cinemaMovieGetAllFiltered: CinemaMovieGetAll[] = [];
@@ -32,10 +32,12 @@ export class MovieChooseMovieTheaterComponent implements OnInit {
   next7Days!: next7DaysProps[];
   typesThatAlreadyClicked: string[] = [];
   containerTypeAll!: NodeListOf<HTMLElement>;
+  containerDateAll!: NodeListOf<HTMLElement>;
+  containerDateFirst!: HTMLElement;
   typesMovieTheater: string[] = ["Normal", "Dublado", "Legendado", "Vip", "3D", "XD", "D-Box", "Macro XE", "IMAX", "CINEPIC", "Extreme", "4DX", "XPLUS"];
   allIdCinemaMovie: string[] = [];
-  arrayItemClicked: string[] = [];
   mostrarCinemaMovieGetAllFiltered = true;
+  private timeoutId: any;
 
   constructor(private route: ActivatedRoute, private movieService: MovieService, private cinemaMovieService: CinemaMovieService){
   }
@@ -63,6 +65,15 @@ export class MovieChooseMovieTheaterComponent implements OnInit {
       });
 
       this.containerTypeAll = document.querySelectorAll(".container-type");
+
+      this.timeoutId = setTimeout(() => {
+        this.containerDateAll = document.querySelectorAll(".container-date");
+        this.containerDateAll[0].className = "container-date-1";
+
+        this.containerDateAll.forEach((el) => {
+          el.addEventListener("click", () => this.onClickContainerDate(el));
+        });
+      }, 1);
     }
 
     this.route.params.subscribe((movieData: any) => {
@@ -174,10 +185,20 @@ export class MovieChooseMovieTheaterComponent implements OnInit {
     }
 
     this.next7Days = next7DaysEffect;
+  }
 
-    let containerDateAll = document.querySelectorAll(".container-date");
-    console.log(containerDateAll);
+  onClickContainerDate(el: HTMLElement){
+    this.containerDateAll.forEach((elFor) => {
+      elFor.className = "container-date";
+    });
 
+    el.className = "container-date-1";
+  }
+
+  onClickContainerDateFirst(){
+    this.containerDateAll.forEach((elFor) => {
+      elFor.className = "container-date";
+    });
   }
 
   getCinemaArray() {
@@ -291,5 +312,11 @@ export class MovieChooseMovieTheaterComponent implements OnInit {
         elHtml.style.background = "transparent";
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    if(this.timeoutId){
+      clearTimeout(this.timeoutId);
+    }
   }
 }

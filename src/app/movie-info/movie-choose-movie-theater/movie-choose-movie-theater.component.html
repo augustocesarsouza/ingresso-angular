@@ -53,7 +53,7 @@
       </div>
       <div class="container-date-movie-theater">
         <div
-          class="{{ i === 0 ? 'container-date-1' : 'container-date' }}"
+          class="container-date"
           *ngFor="let item of next7Days; let i = index"
         >
           <span>{{ item.dayYear }}</span>
@@ -252,3 +252,4 @@
     </div>
   </div>
 </div>
+<app-footer class="container-footer"></app-footer>
