@@ -14,6 +14,16 @@ export class SchuduleMovieTheaterComponent {
   constructor(){
   }
 
+  ngOnInit(): void {
+  }
+
+  // onMouseLeave(event: MouseEvent){
+  //   let elemento = event.target as HTMLElement;
+  //   elemento.firstChild?.remove();
+  //   console.log(elemento);
+
+  // }
+
   replaceStringHours(hour: string){
     return hour.replace(/[^0-9:]/g, '');
   }

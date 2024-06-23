@@ -14,6 +14,7 @@ export interface next7DaysProps {
 
 export interface ObjHoursCinemaMovie {
   type: string;
+  typeResumido: string;
   arryHours: string[];
 }
 
@@ -24,13 +25,17 @@ export interface ObjHoursCinemaMovie {
 })
 export class MovieChooseMovieTheaterComponent implements OnInit {
   movieChooseMovieTheater!: movieChooseMovieTheater;
-  cinemaMovieGetAll!: CinemaMovieGetAll[];
+  cinemaMovieGetAll: CinemaMovieGetAll[] = [];
+  cinemaMovieGetAllFiltered: CinemaMovieGetAll[] = [];
   cinemaMovieSchedule: { [key: string]: ObjHoursCinemaMovie[] } = {};
+  cinemaMovieScheduleFiltered: { [key: string]: ObjHoursCinemaMovie[] } = {};
   next7Days!: next7DaysProps[];
   typesThatAlreadyClicked: string[] = [];
   containerTypeAll!: NodeListOf<HTMLElement>;
   typesMovieTheater: string[] = ["Normal", "Dublado", "Legendado", "Vip", "3D", "XD", "D-Box", "Macro XE", "IMAX", "CINEPIC", "Extreme", "4DX", "XPLUS"];
-schedule: any;
+  allIdCinemaMovie: string[] = [];
+  arrayItemClicked: string[] = [];
+  mostrarCinemaMovieGetAllFiltered = true;
 
   constructor(private route: ActivatedRoute, private movieService: MovieService, private cinemaMovieService: CinemaMovieService){
   }
@@ -96,16 +101,19 @@ schedule: any;
 
           let objHoursDublado: ObjHoursCinemaMovie = {
             type: "DUBLADO",
+            typeResumido: "D",
             arryHours: arrayOnlyDublado
           }
 
           let objHoursLegendado: ObjHoursCinemaMovie = {
             type: "LEGENDADO",
+            typeResumido: "L",
             arryHours: arrayOnlyLegendado
           }
 
           let objHoursLegendadoVip: ObjHoursCinemaMovie = {
             type: "LV",
+            typeResumido: "LV",
             arryHours: arrayOnlyLegendadoVip
           }
 
@@ -122,6 +130,7 @@ schedule: any;
           }
 
           objHour[el.cinemaDTO.id] = objHourAll;
+          this.allIdCinemaMovie.push(el.cinemaDTO.id);
           arrayOnlyDublado = [];
           arrayOnlyLegendado = [];
           arrayOnlyLegendadoVip = [];
@@ -129,9 +138,11 @@ schedule: any;
         });
 
         this.cinemaMovieSchedule = objHour;
-        console.log(objHour);
+        // console.log(objHour);
       });
     });
+
+    // Amanh fazer passar o mouse aparecer "COMPRAR" e filtro
 
     const today = new Date();
     const dayToday = today.getDate();
@@ -163,12 +174,23 @@ schedule: any;
     }
 
     this.next7Days = next7DaysEffect;
+
+    let containerDateAll = document.querySelectorAll(".container-date");
+    console.log(containerDateAll);
+
   }
 
   getCinemaArray() {
     return Object.keys(this.cinemaMovieSchedule).map(key => ({
       key: key,
       value: this.cinemaMovieSchedule[key]
+    }));
+  }
+
+  getCinemaArrayFiltered() {
+    return Object.keys(this.cinemaMovieScheduleFiltered).map(key => ({
+      key: key,
+      value: this.cinemaMovieScheduleFiltered[key]
     }));
   }
 
@@ -183,8 +205,77 @@ schedule: any;
   onClickContainerType(item: string){
     if(this.typesThatAlreadyClicked.some((el) => el === item)){
       this.typesThatAlreadyClicked = this.typesThatAlreadyClicked.filter((el) => el !== item);
+
+      if(this.typesThatAlreadyClicked.length <= 0){
+        this.cinemaMovieScheduleFiltered = {};
+        this.cinemaMovieGetAllFiltered = [];
+        this.mostrarCinemaMovieGetAllFiltered = true;
+      }else {
+        let comparacaoDasStringPrimeiroCaractere = "";
+
+        this.typesThatAlreadyClicked.forEach((el) => {
+          comparacaoDasStringPrimeiroCaractere += el[0];
+        });
+
+        let idFilter: string[] = [];
+        this.cinemaMovieGetAllFiltered = [];
+
+        this.allIdCinemaMovie.forEach((id) => {
+          let objHourAll: ObjHoursCinemaMovie[] = [];
+
+          this.cinemaMovieSchedule[id].forEach((elSchedule) => {
+            if(elSchedule.typeResumido.includes(comparacaoDasStringPrimeiroCaractere)){
+              objHourAll.push(elSchedule);
+
+              this.cinemaMovieScheduleFiltered[id] = objHourAll;
+
+              if(!idFilter.includes(id)){
+                idFilter.push(id);
+              }
+            }
+          });
+        });
+
+        idFilter.forEach((eachId) => {
+          this.cinemaMovieGetAllFiltered.push(this.cinemaMovieGetAll.filter((el) => el.cinemaDTO.id == eachId)[0]);
+        });
+
+        this.mostrarCinemaMovieGetAllFiltered = false;
+      }
     }else {
       this.typesThatAlreadyClicked.push(item);
+
+      let comparacaoDasStringPrimeiroCaractere = "";
+
+      this.typesThatAlreadyClicked.forEach((el) => {
+        comparacaoDasStringPrimeiroCaractere += el[0];
+      });
+
+      let idFilter: string[] = [];
+      this.cinemaMovieGetAllFiltered = [];
+
+      this.allIdCinemaMovie.forEach((id) => {
+        let objHourAll: ObjHoursCinemaMovie[] = [];
+
+        this.cinemaMovieSchedule[id].forEach((elSchedule) => {
+
+          if(elSchedule.typeResumido.includes(comparacaoDasStringPrimeiroCaractere) || elSchedule.typeResumido.includes(comparacaoDasStringPrimeiroCaractere.split('').reverse().join('')) ){
+            objHourAll.push(elSchedule);
+
+            this.cinemaMovieScheduleFiltered[id] = objHourAll;
+
+            if(!idFilter.includes(id)){
+              idFilter.push(id);
+            }
+          }
+        });
+      });
+
+      idFilter.forEach((eachId) => {
+        this.cinemaMovieGetAllFiltered.push(this.cinemaMovieGetAll.filter((el) => el.cinemaDTO.id == eachId)[0]);
+      });
+
+      this.mostrarCinemaMovieGetAllFiltered = false;
     }
 
     this.containerTypeAll.forEach((elHtml: HTMLElement) => {
