@@ -207,6 +207,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
     }
   }
 
+  onClickIngressoImg(){
+    this.router.navigate(['/']);
+  }
+
   ngOnDestroy(): void {
     if(this.subscription){
       this.subscription.unsubscribe();

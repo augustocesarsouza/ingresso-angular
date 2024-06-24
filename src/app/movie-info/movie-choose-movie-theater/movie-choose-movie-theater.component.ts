@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MovieService } from '../../home-page/services/movie.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { movieChooseMovieTheater } from '../../interface-models/movie-interface/movie-choose-movie-theater';
 import { addDays, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -39,7 +39,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
   mostrarCinemaMovieGetAllFiltered = true;
   private timeoutId: any;
 
-  constructor(private route: ActivatedRoute, private movieService: MovieService, private cinemaMovieService: CinemaMovieService){
+  constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService, private cinemaMovieService: CinemaMovieService){
   }
 
   ngOnInit(): void {
