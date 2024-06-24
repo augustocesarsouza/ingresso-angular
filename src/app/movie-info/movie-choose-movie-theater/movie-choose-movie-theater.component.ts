@@ -73,7 +73,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
         this.containerDateAll.forEach((el) => {
           el.addEventListener("click", () => this.onClickContainerDate(el));
         });
-      }, 10);
+      }, 30);
     }
 
     this.route.params.subscribe((movieData: any) => {
@@ -164,8 +164,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
           arrayOnlyLegendadoVip = [];
           objHourAll = [];
         });
-
-        console.log(this.arrayWhichTypeOfMovieTheaterHave);
 
         this.cinemaMovieSchedule = objHour;
       });
