@@ -34,7 +34,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
   containerTypeAll!: NodeListOf<HTMLElement>;
   containerDateAll!: NodeListOf<HTMLElement>;
   containerDateFirst!: HTMLElement;
-  typesMovieTheater: string[] = ["Normal", "Dublado", "Legendado", "Vip", "3D", "XD", "D-Box", "Macro XE", "IMAX", "CINEPIC", "Extreme", "4DX", "XPLUS"];
+  arrayWhichTypeOfMovieTheaterHave: string[] = [];
   allIdCinemaMovie: string[] = [];
   mostrarCinemaMovieGetAllFiltered = true;
   private timeoutId: any;
@@ -73,7 +73,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
         this.containerDateAll.forEach((el) => {
           el.addEventListener("click", () => this.onClickContainerDate(el));
         });
-      }, 1);
+      }, 10);
     }
 
     this.route.params.subscribe((movieData: any) => {
@@ -96,17 +96,34 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
           let arrayOnlyLegendado: string[] = [];
           let arrayOnlyLegendadoVip: string[] = [];
 
+
           array.forEach((elInner: string) => {
             if(elInner.includes("D")){
               arrayOnlyDublado.push(elInner);
+
+              if(!this.arrayWhichTypeOfMovieTheaterHave.some((el) => el === "Dublado")){
+                this.arrayWhichTypeOfMovieTheaterHave.push("Dublado");
+              }
             }
 
             if(elInner.includes("L") && !elInner.includes("V")){
               arrayOnlyLegendado.push(elInner);
+
+              if(!this.arrayWhichTypeOfMovieTheaterHave.some((el) => el === "Legendado")){
+                this.arrayWhichTypeOfMovieTheaterHave.push("Legendado");
+              }
             }
 
             if(elInner.includes("LV")){
               arrayOnlyLegendadoVip.push(elInner);
+
+              if(!this.arrayWhichTypeOfMovieTheaterHave.some((el) => el === "Legendado")){
+                this.arrayWhichTypeOfMovieTheaterHave.push("Legendado");
+              }
+
+              if(!this.arrayWhichTypeOfMovieTheaterHave.some((el) => el === "Vip")){
+                this.arrayWhichTypeOfMovieTheaterHave.push("Vip");
+              }
             }
           });
 
@@ -148,12 +165,11 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
           objHourAll = [];
         });
 
+        console.log(this.arrayWhichTypeOfMovieTheaterHave);
+
         this.cinemaMovieSchedule = objHour;
-        // console.log(objHour);
       });
     });
-
-    // Amanh fazer passar o mouse aparecer "COMPRAR" e filtro
 
     const today = new Date();
     const dayToday = today.getDate();
