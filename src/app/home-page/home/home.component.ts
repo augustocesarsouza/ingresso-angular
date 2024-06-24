@@ -1,9 +1,10 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MovieService } from '../services/movie.service';
-import { MovieHighlight } from '../movie-interface/movie-highlight';
-import { MovieTrending } from '../movie-interface/movie-trending';
+import { MovieHighlight } from '../../interface-models/movie-interface/movie-highlight';
+import { MovieTrending } from '../../interface-models/movie-interface/movie-trending';
 import { TheaterService } from '../services/theater.service';
-import { Theater } from '../theater-interface/theater';
+import { Theater } from '../../interface-models/theater-interface/theater';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,10 +16,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
   moviesTrending!: Array<MovieTrending>;
   theaters!: Array<Theater>;
 
-  constructor(private movieService: MovieService, private theaterService: TheaterService) { }
+  constructor(private movieService: MovieService, private theaterService: TheaterService, private router: Router) { }
 
   ngOnInit(): void {
     if (typeof document !== 'undefined') {
+      document.body.style.backgroundColor = "rgb(4, 18, 24)";
       document.body.style.overflowX = 'hidden';
     }
 
@@ -110,5 +112,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   editDescription(description: string): string {
     return description.substring(0, 120) + '...';
+  }
+
+  onClickCardMovie(movie: MovieTrending){
+    this.movieService.changeMovie(movie);
+    this.router.navigate(['/movie', movie.id]);
   }
 }

@@ -1,0 +1,453 @@
+.container-main-choose-movie-theater {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-here {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.container-here::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 100%;
+  background-image: linear-gradient(to right, rgb(22, 27, 34), rgb(22 27 34), rgb(22 27 34 / 32%), rgba(22, 27, 34, 0));
+  opacity: 1;
+  z-index: 3;
+}
+
+.container-here::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  background-image: linear-gradient(to left, rgb(22, 27, 34), rgb(22 27 34), rgba(22, 27, 34, 0.42), rgba(22, 27, 34, 0));
+  opacity: 1;
+  z-index: 3;
+}
+
+
+.container-banner-movie-main {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  background-image: url("https://res.cloudinary.com/dyqsqg7pk/image/upload/v1711363238/4gutf5mkwcuw0xf79ilfv4pcyafb.webp");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgb(22 27 34);
+  width: 100%;
+}
+
+.container-banner-movie-main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 55%);
+  z-index: 1;
+}
+
+.container-banner-movie-main > * {
+  position: relative;
+  z-index: 5; /* Garantir que o conteúdo fique acima da sobreposição */
+}
+
+.container-banner-movie-description {
+  display: flex;
+  gap: 40px;
+  width: 1420px;
+  margin: 15px 30px;
+}
+
+.container-banner-movie {
+  display: flex;
+  width: 184px;
+}
+
+.container-banner-movie > img {
+  width: 100%;
+  height: 100%;
+}
+
+.container-description-movie {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.container-description-movie > h1 {
+  font-size: 28px;
+  color: #fff;
+}
+
+.container-movie-ration-duration-gender {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: #fff;
+}
+
+.container-movie-ration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+  border-radius: 5px;
+  padding: 0 5px;
+  height: 100%;
+}
+
+.container-movie-ration > span {
+  font-size: 14px;
+  line-height: 1.1;
+}
+
+.container-duration {
+  display: flex;
+}
+
+.container-line-white {
+  border-right: 1px solid #ffffff8a;
+  height: 60%;
+}
+
+.container-description-about-movie {
+  display: flex;
+  align-items: flex-end;
+  max-width: 500px;
+}
+
+.container-description-about-movie > span {
+  font-size: 14px;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.container-description-about-movie > a {
+  background-color: #00000000;
+  border: none;
+  color: rgb(152 170 236);
+  font-size: 14px;
+  line-height: 1;
+  width: 62%;
+}
+
+.container-share {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 35px;
+}
+
+.container-svg-share {
+  background-color: rgb(52 60 70);
+  border-radius: 50%;
+  // width: 6%;
+  // height: 50%;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-svg-share > svg {
+  width: 15px;
+  height: 15px;
+  fill: rgb(152 170 236);
+}
+
+.container-share > span {
+  font-size: 14px;
+  color: rgb(152 170 236);
+}
+
+.svg-share {
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-sessions-about-the-movie-main-main {
+  display: flex;
+  justify-content: center;
+}
+
+.container-sessions-about-the-movie-main {
+  display: flex;
+  flex-direction: column;
+  width: 1420px;
+  // width: 900px;
+  margin: 15px 30px;
+  gap: 20px;
+}
+
+.container-sessions-about-the-movie {
+  display: flex;
+  border-bottom: 2px  solid rgba(92, 92, 92, 0.671);
+  width: 74%;
+}
+
+.container-span-session-about {
+  color: #fff;
+  // border-bottom: 3px solid rgb(92, 92, 92);
+  display: flex;
+}
+
+.container-span-session-about > span {
+  padding: 10px 20px;
+}
+
+.span-sessions {
+  border-bottom: 4px solid rgb(50, 85, 226);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.span-about-the-movie {
+  // border-bottom: 4px solid rgba(92, 92, 92, 0.671);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-date-movie-theater {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 40px;
+  width: 74%;
+  background-color: rgb(52 60 70);
+  border-radius: 5px;
+}
+
+.container-date-1 {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.container-date {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  color: rgb(173 182 194);
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.container-movie-theater-types-and-svg-loupe {
+  display: flex;
+  gap: 10px;
+  width: 74%;
+}
+
+.container-test {
+  display: flex;
+  width: 1049px;
+  overflow-x: scroll;
+
+  @media (max-width: 1155px) {
+    width: 775px;
+  }
+}
+
+.container-test::-webkit-scrollbar {
+  width: 10px;
+  height: 9px;
+}
+
+.container-test::-webkit-scrollbar-track {
+  background: rgba(52, 60, 70, 0.158);
+}
+
+.container-test::-webkit-scrollbar-thumb {
+  background-color: rgb(52 60 70);
+  border-radius: 10px;
+  border: none;
+}
+
+.container-loupe-svg {
+  display: flex;
+}
+
+.container-loupe-svg > svg {
+  width: 28px;
+  height: 28px;
+  fill: red;
+}
+
+.container-movie-theater-types {
+  display: flex;
+  gap: 15px;
+  flex: 1 1 0%;
+  padding-bottom: 5px;
+}
+
+.container-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 0;
+  width: 100px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  border: 2px solid rgb(152, 170, 236);
+  color: rgb(152, 170, 236);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.container-type:hover {
+  border-color: rgb(114, 140, 235);
+  color: rgb(114, 140, 235);
+}
+
+.container-location-hours-movie-theater-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 74%;
+}
+
+.container-location-hours-movie-theater {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(33 38 45);
+  border-radius: 15px;
+  // padding: 15px;
+  padding-bottom: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 16px;
+}
+
+.container-location-movie-theater {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(129, 129, 129, 0.329);
+  padding-bottom: 25px;
+}
+
+.container-location-svg {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.container-location-h1-span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.container-location-h1-span > h1 {
+  font-size: 16px;
+  color: #fff;
+}
+
+.container-location-h1-span > span {
+  font-size: 14px;
+  color: rgb(153, 153, 153);
+}
+
+.container-seats-price-details {
+  display: flex;
+  gap: 12px;
+  height: 25px;
+}
+
+.container-svg-location {
+  display: flex;
+}
+
+.container-seats {
+  display: flex;
+  align-items: center;
+}
+
+.container-seats > span {
+  font-size: 15px;
+  color: rgb(240, 240, 240);
+  line-height: 1;
+}
+
+.container-schedule-and-type-movie {
+  padding-top: 10px;
+}
+
+.container-schedule-dublado {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: #fff;
+  padding-top: 15px;
+}
+
+.container-span-type-more-than-one {
+  display: flex;
+  gap: 10px;
+}
+
+.container-span-type-more-than-one > span {
+  color: #fff;
+  line-height: 1;
+  background-color: rgb(50, 85, 226);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 17px;
+  border-radius: 5px;
+}
+
+.container-hours{
+  display: flex;
+  gap: 10px;
+}
+
+.container-schedule-hour {
+  border: 2px solid rgb(152, 170, 236);
+  color: rgb(152, 170, 236);
+  padding: 0 50px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.container-schedule-hour:hover {
+  color: rgb(120, 145, 235);
+  border-color: rgb(120, 145, 235);
+}
+
+.container-footer {
+  width: 100%;
+}
