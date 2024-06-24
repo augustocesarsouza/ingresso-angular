@@ -37,6 +37,8 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
   arrayWhichTypeOfMovieTheaterHave: string[] = [];
   allIdCinemaMovie: string[] = [];
   mostrarCinemaMovieGetAllFiltered = true;
+  clickedDetails = true;
+  itemCinemaMovieClickedDetails!: CinemaMovieGetAll;
   private timeoutId: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService, private cinemaMovieService: CinemaMovieService){
@@ -326,6 +328,62 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
         elHtml.style.background = "transparent";
       }
     })
+  }
+
+  onClickSeats(item: CinemaMovieGetAll){
+    this.itemCinemaMovieClickedDetails = item;
+    this.clickedDetails = !this.clickedDetails;
+
+    if(typeof document !== "undefined"){
+      document.body.style.overflow = "hidden";
+
+      setTimeout(() => {
+        let containerWidthadjust = document.querySelector(".container-width-adjust") as HTMLElement;
+        let clickeContainerAdjust = false;
+
+        let lastMouseX = 0;
+        let valueForLeftRight = 0;
+
+        containerWidthadjust?.addEventListener("mousedown", (e) => {
+          clickeContainerAdjust = true;
+          lastMouseX = e.clientX;
+        });
+
+        containerWidthadjust?.addEventListener("mouseup", (e) => {
+          clickeContainerAdjust = false;
+        });
+
+        containerWidthadjust?.addEventListener("mousemove", (e: any) => {
+          if(clickeContainerAdjust){
+            let direction = e.clientX > lastMouseX ? "DIREITA" : "ESQUERDA";
+            // console.log(`Movendo para: ${direction}`);
+
+            if(direction === "ESQUERDA"){
+              valueForLeftRight = valueForLeftRight - 1;
+            }
+
+            if(direction === "DIREITA"){
+              valueForLeftRight = valueForLeftRight + 1;
+            }
+
+            lastMouseX = e.clientX;
+            console.log(valueForLeftRight);
+            containerWidthadjust.style.transform = `translateX(${valueForLeftRight}px)`;
+          }
+        });
+      }, 30);
+    }
+  }
+
+  // transform: translateX(-530px);
+
+  onClickExitSvg(){
+    if(typeof document !== "undefined"){
+      document.body.style.overflow = "auto";
+    }
+
+    this.clickedDetails = !this.clickedDetails;
+
   }
 
   ngOnDestroy(): void {
