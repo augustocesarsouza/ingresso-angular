@@ -37,7 +37,13 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
   arrayWhichTypeOfMovieTheaterHave: string[] = [];
   allIdCinemaMovie: string[] = [];
   mostrarCinemaMovieGetAllFiltered = true;
+  clickedDetails = false;
+  itemCinemaMovieClickedDetails!: CinemaMovieGetAll;
   private timeoutId: any;
+  private timeoutIdSlide: any;
+  isClickedSpanAbountTheMovie = true;
+  spanSessions!: HTMLSpanElement;
+  spanAboutTheMovie!: HTMLSpanElement;
 
   constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService, private cinemaMovieService: CinemaMovieService){
   }
@@ -46,34 +52,37 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
     if(typeof document !== "undefined"){
       document.body.style.backgroundColor = "rgb(4, 18, 24)";
 
-      let spanSessions = document.querySelector(".span-sessions") as HTMLSpanElement;
-      let spanAboutTheMovie = document.querySelector(".span-about-the-movie") as HTMLSpanElement;
+      this.spanSessions = document.querySelector(".span-sessions") as HTMLSpanElement;
+      this.spanAboutTheMovie = document.querySelector(".span-about-the-movie") as HTMLSpanElement;
 
+      this.spanSessions?.addEventListener("click", () => {
+        this.putValueSpanSessions();
 
-      spanSessions?.addEventListener("click", () => {
-        spanSessions.style.borderBottom = "4px solid rgb(50, 85, 226)";
-        spanSessions.style.fontWeight = '600';
-        spanAboutTheMovie.style.border = "none";
-        spanAboutTheMovie.style.fontWeight = '100';
+        this.isClickedSpanAbountTheMovie = false;
       });
 
-      spanAboutTheMovie?.addEventListener("click", () => {
-        spanSessions.style.border = "none";
-        spanSessions.style.fontWeight = '100';
-        spanAboutTheMovie.style.borderBottom = "4px solid rgb(50, 85, 226)";
-        spanAboutTheMovie.style.fontWeight = '600';
+      this.spanAboutTheMovie?.addEventListener("click", () => {
+        this.spanSessions.style.border = "none";
+        this.spanSessions.style.fontWeight = '100';
+        this.spanAboutTheMovie.style.borderBottom = "4px solid rgb(50, 85, 226)";
+        this.spanAboutTheMovie.style.fontWeight = '600';
+
+        this.isClickedSpanAbountTheMovie = true;
       });
 
       this.containerTypeAll = document.querySelectorAll(".container-type");
 
       this.timeoutId = setTimeout(() => {
         this.containerDateAll = document.querySelectorAll(".container-date");
-        this.containerDateAll[0].className = "container-date-1";
+        if(this.containerDateAll[0]){
+          this.containerDateAll[0].className = "container-date-1";
+        }
 
         this.containerDateAll.forEach((el) => {
           el.addEventListener("click", () => this.onClickContainerDate(el));
         });
       }, 30);
+
     }
 
     this.route.params.subscribe((movieData: any) => {
@@ -201,18 +210,19 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
     this.next7Days = next7DaysEffect;
   }
 
+  putValueSpanSessions(){
+    this.spanSessions.style.borderBottom = "4px solid rgb(50, 85, 226)";
+    this.spanSessions.style.fontWeight = '600';
+    this.spanAboutTheMovie.style.border = "none";
+    this.spanAboutTheMovie.style.fontWeight = '100';
+  }
+
   onClickContainerDate(el: HTMLElement){
     this.containerDateAll.forEach((elFor) => {
       elFor.className = "container-date";
     });
 
     el.className = "container-date-1";
-  }
-
-  onClickContainerDateFirst(){
-    this.containerDateAll.forEach((elFor) => {
-      elFor.className = "container-date";
-    });
   }
 
   getCinemaArray() {
@@ -326,6 +336,59 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
         elHtml.style.background = "transparent";
       }
     })
+  }
+
+  onClickSeats(item: CinemaMovieGetAll){
+    clearTimeout(this.timeoutIdSlide);
+
+    this.itemCinemaMovieClickedDetails = item;
+    this.clickedDetails = !this.clickedDetails;
+
+    if(typeof document !== "undefined"){
+      document.body.style.overflow = "hidden";
+
+      this.timeoutIdSlide = setTimeout(() => {
+        let containerWidthadjust = document.querySelector(".container-width-adjust") as HTMLElement;
+        let containerTypesOfTheWithdrawal = document.querySelector(".container-types-of-the-withdrawal") as HTMLElement;
+
+        let clickeContainerAdjust = false;
+        let startX: any;
+        let scrollLeft: any;
+
+        containerTypesOfTheWithdrawal?.addEventListener("mousedown", (e) => {
+          clickeContainerAdjust = true;
+          startX = e.pageX - containerTypesOfTheWithdrawal.offsetLeft;
+          scrollLeft = containerTypesOfTheWithdrawal.scrollLeft;
+        });
+
+        containerTypesOfTheWithdrawal?.addEventListener("mouseup", (e) => {
+          clickeContainerAdjust = false;
+        });
+
+        containerTypesOfTheWithdrawal?.addEventListener("mousemove", (e: any) => {
+          if(!clickeContainerAdjust) return;
+          e.preventDefault();
+
+          const x = e.pageX - containerTypesOfTheWithdrawal.offsetLeft;
+          const walk = (x - startX);
+          containerTypesOfTheWithdrawal.scrollLeft = scrollLeft - walk;
+        });
+      }, 1);
+    }
+  }
+
+  onClickExitSvg(){
+    if(typeof document !== "undefined"){
+      document.body.style.overflow = "auto";
+    }
+
+    this.clickedDetails = !this.clickedDetails;
+  }
+
+  onSeeSessions(){
+    this.putValueSpanSessions();
+
+    this.isClickedSpanAbountTheMovie = false;
   }
 
   ngOnDestroy(): void {

@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-svg-location',
-  templateUrl: './svg-location.component.html',
-  styleUrl: '../svg-global-style.component.scss'
+  selector: 'app-svg-exit',
+  templateUrl: './svg-exit.component.html',
+  styleUrl: './svg-exit.component.scss'
 })
-export class SvgLocationComponent {
+export class SvgExitComponent {
   @Input() width: string = '25px';
   @Input() height: string = '25px';
   @Input() fill: string = '#fff';

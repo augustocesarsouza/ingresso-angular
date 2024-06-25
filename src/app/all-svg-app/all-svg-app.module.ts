@@ -45,6 +45,9 @@ import { SvgHeartComponent } from './svg-heart/svg-heart.component';
 import { SvgSeatsComponent } from './svg-seats/svg-seats.component';
 import { SvgPriceComponent } from './svg-price/svg-price.component';
 import { SvgDetailsComponent } from './svg-details/svg-details.component';
+import { SvgExitComponent } from './svg-exit/svg-exit.component';
+import { SvgTicketCabinComponent } from './svg-ticket-cabin/svg-ticket-cabin.component';
+import { SvgEuaComponent } from './svg-eua/svg-eua.component';
 
 @NgModule({
   imports: [
@@ -95,6 +98,9 @@ import { SvgDetailsComponent } from './svg-details/svg-details.component';
     SvgSeatsComponent,
     SvgPriceComponent,
     SvgDetailsComponent,
+    SvgExitComponent,
+    SvgTicketCabinComponent,
+    SvgEuaComponent,
   ],
   exports: [
     SvgLocationComponent,
@@ -141,7 +147,9 @@ import { SvgDetailsComponent } from './svg-details/svg-details.component';
     SvgSeatsComponent,
     SvgPriceComponent,
     SvgDetailsComponent,
-
+    SvgExitComponent,
+    SvgTicketCabinComponent,
+    SvgEuaComponent,
   ]
 })
 export class AllSvgAppModule { }

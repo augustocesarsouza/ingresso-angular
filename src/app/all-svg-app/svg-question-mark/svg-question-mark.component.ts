@@ -6,5 +6,10 @@ import { Component, Input } from '@angular/core';
   styleUrl: './svg-question-mark.component.scss'
 })
 export class SvgQuestionMarkComponent {
-  @Input() fillColor: string = 'currentColor';
+  @Input() width: string = '32px';
+  @Input() height: string = '32px';
+  @Input() fill: string = '#fff';
+
+  constructor(){
+  }
 }
