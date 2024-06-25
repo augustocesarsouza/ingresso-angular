@@ -511,6 +511,7 @@
 .container-location-movie {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   position: relative;
   margin-bottom: 50px;
@@ -532,7 +533,7 @@
   align-items: center;
   background-color: rgb(33, 38, 45);
   position: absolute;
-  left: 85px;
+  // left: 85px;
   bottom: -27px;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
@@ -553,7 +554,7 @@
 .container-types-of-the-withdrawal {
   display: flex;
   align-items: flex-end;
-  overflow-x: scroll;
+  overflow-x: hidden;
   overflow-y: hidden;
   width: 100%;
   height: 100%;
@@ -564,7 +565,8 @@
   width: 1130px;
   user-select: none;
 
-  transform: translateX(0px);
+  // transform: translateX(0%);
+  // transition: transform 0.1s ease;
 }
 
 .container-forms-withdrawal {

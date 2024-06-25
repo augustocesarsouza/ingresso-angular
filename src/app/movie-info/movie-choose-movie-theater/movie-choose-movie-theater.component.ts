@@ -37,9 +37,10 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
   arrayWhichTypeOfMovieTheaterHave: string[] = [];
   allIdCinemaMovie: string[] = [];
   mostrarCinemaMovieGetAllFiltered = true;
-  clickedDetails = true;
+  clickedDetails = false;
   itemCinemaMovieClickedDetails!: CinemaMovieGetAll;
   private timeoutId: any;
+  private timeoutIdSlide: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService, private cinemaMovieService: CinemaMovieService){
   }
@@ -70,7 +71,9 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
 
       this.timeoutId = setTimeout(() => {
         this.containerDateAll = document.querySelectorAll(".container-date");
-        this.containerDateAll[0].className = "container-date-1";
+        if(this.containerDateAll[0].className){
+          this.containerDateAll[0].className = "container-date-1";
+        }
 
         this.containerDateAll.forEach((el) => {
           el.addEventListener("click", () => this.onClickContainerDate(el));
@@ -211,12 +214,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
     el.className = "container-date-1";
   }
 
-  onClickContainerDateFirst(){
-    this.containerDateAll.forEach((elFor) => {
-      elFor.className = "container-date";
-    });
-  }
-
   getCinemaArray() {
     return Object.keys(this.cinemaMovieSchedule).map(key => ({
       key: key,
@@ -331,51 +328,43 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
   }
 
   onClickSeats(item: CinemaMovieGetAll){
+    clearTimeout(this.timeoutIdSlide);
+
     this.itemCinemaMovieClickedDetails = item;
     this.clickedDetails = !this.clickedDetails;
 
     if(typeof document !== "undefined"){
       document.body.style.overflow = "hidden";
 
-      setTimeout(() => {
+      this.timeoutIdSlide = setTimeout(() => {
         let containerWidthadjust = document.querySelector(".container-width-adjust") as HTMLElement;
+        let containerTypesOfTheWithdrawal = document.querySelector(".container-types-of-the-withdrawal") as HTMLElement;
+
         let clickeContainerAdjust = false;
+        let startX: any;
+        let scrollLeft: any;
 
-        let lastMouseX = 0;
-        let valueForLeftRight = 0;
-
-        containerWidthadjust?.addEventListener("mousedown", (e) => {
+        containerTypesOfTheWithdrawal?.addEventListener("mousedown", (e) => {
           clickeContainerAdjust = true;
-          lastMouseX = e.clientX;
+          startX = e.pageX - containerTypesOfTheWithdrawal.offsetLeft;
+          scrollLeft = containerTypesOfTheWithdrawal.scrollLeft;
         });
 
-        containerWidthadjust?.addEventListener("mouseup", (e) => {
+        containerTypesOfTheWithdrawal?.addEventListener("mouseup", (e) => {
           clickeContainerAdjust = false;
         });
 
-        containerWidthadjust?.addEventListener("mousemove", (e: any) => {
-          if(clickeContainerAdjust){
-            let direction = e.clientX > lastMouseX ? "DIREITA" : "ESQUERDA";
-            // console.log(`Movendo para: ${direction}`);
+        containerTypesOfTheWithdrawal?.addEventListener("mousemove", (e: any) => {
+          if(!clickeContainerAdjust) return;
+          e.preventDefault();
 
-            if(direction === "ESQUERDA"){
-              valueForLeftRight = valueForLeftRight - 1;
-            }
-
-            if(direction === "DIREITA"){
-              valueForLeftRight = valueForLeftRight + 1;
-            }
-
-            lastMouseX = e.clientX;
-            console.log(valueForLeftRight);
-            containerWidthadjust.style.transform = `translateX(${valueForLeftRight}px)`;
-          }
+          const x = e.pageX - containerTypesOfTheWithdrawal.offsetLeft;
+          const walk = (x - startX);
+          containerTypesOfTheWithdrawal.scrollLeft = scrollLeft - walk;
         });
-      }, 30);
+      }, 1);
     }
   }
-
-  // transform: translateX(-530px);
 
   onClickExitSvg(){
     if(typeof document !== "undefined"){
