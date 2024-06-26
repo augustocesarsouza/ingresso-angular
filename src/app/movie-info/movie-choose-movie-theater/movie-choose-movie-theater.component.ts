@@ -41,7 +41,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
   itemCinemaMovieClickedDetails!: CinemaMovieGetAll;
   private timeoutId: any;
   private timeoutIdSlide: any;
-  isClickedSpanAbountTheMovie = true;
+  isClickedSpanAbountTheMovie = false;
   spanSessions!: HTMLSpanElement;
   spanAboutTheMovie!: HTMLSpanElement;
 
@@ -375,6 +375,13 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
         });
       }, 1);
     }
+  }
+
+  onClickChooseSeatsForThisHour(movieChooseMovieTheater: movieChooseMovieTheater, item: CinemaMovieGetAll, itemHour: string){
+    // container-date -> pegar esse 'querySelector'
+    let containerDate = document.querySelector(".container-date");
+    console.log(containerDate);
+
   }
 
   onClickExitSvg(){

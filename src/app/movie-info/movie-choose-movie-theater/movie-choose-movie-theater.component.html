@@ -161,6 +161,13 @@
                         <div
                           class="container-schedule-hour"
                           *ngFor="let itemHour of itemSchedule.arryHours"
+                          (click)="
+                            onClickChooseSeatsForThisHour(
+                              movieChooseMovieTheater,
+                              item,
+                              itemHour
+                            )
+                          "
                         >
                           {{ replaceStringHours(itemHour) }}
                         </div>
