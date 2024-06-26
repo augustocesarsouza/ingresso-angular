@@ -10,6 +10,7 @@ import { HomeComponent } from './home-page/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { SharedModuleModule } from './shared-module/shared-module.module';
+import { ChooseSeatsModule } from './choose-seats/choose-seats.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SharedModuleModule } from './shared-module/shared-module.module';
     AllSvgAppModule,
     FormsModule,
     HttpClientModule,
-    SharedModuleModule
+    SharedModuleModule,
+    ChooseSeatsModule
 
   ],
   providers: [

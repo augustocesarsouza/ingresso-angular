@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { ObjHoursCinemaMovie } from '../movie-choose-movie-theater/movie-choose-movie-theater.component';
+import { movieChooseMovieTheater } from '../../interface-models/movie-interface/movie-choose-movie-theater';
+import { CinemaMovieGetAll } from '../../interface-models/cinema-movie-interface/cinema-movie-get-all';
 
 @Component({
   selector: 'app-schudule-movie-theater',
@@ -10,6 +12,10 @@ export class SchuduleMovieTheaterComponent {
   @Input() itemSchedule!: ObjHoursCinemaMovie;
   @Input() type!: string;
   @Input() typeView!: string;
+  @Input() movieChooseMovieTheater!: movieChooseMovieTheater;
+  @Input() item!: CinemaMovieGetAll;
+  @Input() onClickChooseSeatsForThisHour!: (movieChooseMovieTheater: movieChooseMovieTheater, item: CinemaMovieGetAll, itemHour: string, containerScheduleDublado: ElementRef<HTMLDivElement>) => void;
+  @ViewChild('containerScheduleDublado') containerScheduleDublado!: ElementRef<HTMLDivElement>;
 
   constructor(){
   }
@@ -17,12 +23,13 @@ export class SchuduleMovieTheaterComponent {
   ngOnInit(): void {
   }
 
-  // onMouseLeave(event: MouseEvent){
-  //   let elemento = event.target as HTMLElement;
-  //   elemento.firstChild?.remove();
-  //   console.log(elemento);
-
-  // }
+  onClickHour(itemHour: string, typeView: string){
+    if (this.onClickChooseSeatsForThisHour) {
+      this.onClickChooseSeatsForThisHour(this.movieChooseMovieTheater, this.item, itemHour, this.containerScheduleDublado);
+    } else {
+      console.error('onClickChooseSeatsForThisHour is not defined');
+    }
+  }
 
   replaceStringHours(hour: string){
     return hour.replace(/[^0-9:]/g, '');

@@ -6,5 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrl: './svg-user-body.component.scss'
 })
 export class SvgUserBodyComponent {
-  @Input() fillColor: string = 'currentColor';
+  @Input() width: string = '35px';
+  @Input() height: string = '35px';
+  @Input() fillColor: string = '#fff';
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MovieService } from '../../home-page/services/movie.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { movieChooseMovieTheater } from '../../interface-models/movie-interface/movie-choose-movie-theater';
@@ -16,6 +16,15 @@ export interface ObjHoursCinemaMovie {
   type: string;
   typeResumido: string;
   arryHours: string[];
+}
+
+export interface ObjectForOrderSummary {
+  title: string;
+  movieRating: number;
+  dayMonthAndDayWeek: string;
+  typeMovieTheater: string;
+  locationMovieTheater: string;
+  spanRegion: string | null | undefined;
 }
 
 @Component({
@@ -44,6 +53,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
   isClickedSpanAbountTheMovie = false;
   spanSessions!: HTMLSpanElement;
   spanAboutTheMovie!: HTMLSpanElement;
+  @ViewChild('containerScheduleDublado') containerScheduleDublado!: ElementRef<HTMLDivElement>;
 
   constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService, private cinemaMovieService: CinemaMovieService){
   }
@@ -208,6 +218,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
     }
 
     this.next7Days = next7DaysEffect;
+    this.onClickChooseSeatsForThisHour = this.onClickChooseSeatsForThisHour.bind(this);
   }
 
   putValueSpanSessions(){
@@ -377,11 +388,62 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
     }
   }
 
-  onClickChooseSeatsForThisHour(movieChooseMovieTheater: movieChooseMovieTheater, item: CinemaMovieGetAll, itemHour: string){
+  onClickChooseSeatsForThisHour(movieChooseMovieTheater: movieChooseMovieTheater, item: CinemaMovieGetAll, itemHour: string, containerScheduleDublado: ElementRef<HTMLDivElement> | null): void{
     // container-date -> pegar esse 'querySelector'
-    let containerDate = document.querySelector(".container-date");
-    console.log(containerDate);
+    if(typeof document !== 'undefined'){
+      const diasDaSemana = [
+        'domingo',
+        'segunda-feira',
+        'terça-feira',
+        'quarta-feira',
+        'quinta-feira',
+        'sexta-feira',
+        'sábado'
+      ];
 
+      let containerDate = document.querySelector(".container-date-1");
+      let spanDayMonth = containerDate?.firstChild?.textContent;
+      let indiceDia = new Date().getDay();
+
+      const nomeDia = diasDaSemana[indiceDia];
+      let nameDaySplit = nomeDia.slice(0, 3).toUpperCase();
+
+      let dayMonthAndDayWeek = `${nameDaySplit} ${spanDayMonth} ${itemHour.slice(0, 5)}`;
+      let typeMovieTheater = "";
+
+      if(containerScheduleDublado){
+        let containerSpanTypeMoreThanOne = containerScheduleDublado.nativeElement.querySelector(".container-span-type-view");
+        let spans = containerSpanTypeMoreThanOne?.childNodes;
+        if(spans && spans[0] && spans[0].textContent){
+          typeMovieTheater = spans[0].textContent;
+        }
+      }else {
+        let containerSpanTypeMoreThanOne = this.containerScheduleDublado.nativeElement.querySelector(".container-span-type-more-than-one");
+        let spans = containerSpanTypeMoreThanOne?.childNodes;
+
+        spans?.forEach((span: ChildNode, index: number) => {
+          typeMovieTheater += span.textContent;
+
+          if(spans.length > index + 1){
+            typeMovieTheater += ",";
+          }
+        });
+      }
+
+      let containerRegion = document.querySelector(".container-region");
+      let spanRegion = containerRegion?.lastChild?.textContent;
+
+      let objectForOrderSummary: ObjectForOrderSummary = {
+        title: movieChooseMovieTheater.title,
+        movieRating: movieChooseMovieTheater.movieRating,
+        dayMonthAndDayWeek: dayMonthAndDayWeek,
+        typeMovieTheater: typeMovieTheater,
+        locationMovieTheater: item.cinemaDTO.nameCinema,
+        spanRegion: spanRegion
+      }
+
+      this.router.navigate(['/seats'], { state: { objectForOrderSummary } });
+    }
   }
 
   onClickExitSvg(){
