@@ -48,6 +48,10 @@ import { SvgDetailsComponent } from './svg-details/svg-details.component';
 import { SvgExitComponent } from './svg-exit/svg-exit.component';
 import { SvgTicketCabinComponent } from './svg-ticket-cabin/svg-ticket-cabin.component';
 import { SvgEuaComponent } from './svg-eua/svg-eua.component';
+import { SvgChooseSeatsComponent } from './all-svg-choose-seats/svg-choose-seats/svg-choose-seats.component';
+import { SvgTicketsForSeatsComponent } from './all-svg-choose-seats/svg-tickets-for-seats/svg-tickets-for-seats.component';
+import { SvgPopcornComponent } from './all-svg-choose-seats/svg-popcorn/svg-popcorn.component';
+import { SvgCardForSeatsComponent } from './all-svg-choose-seats/svg-card-for-seats/svg-card-for-seats.component';
 
 @NgModule({
   imports: [
@@ -101,6 +105,10 @@ import { SvgEuaComponent } from './svg-eua/svg-eua.component';
     SvgExitComponent,
     SvgTicketCabinComponent,
     SvgEuaComponent,
+    SvgChooseSeatsComponent,
+    SvgTicketsForSeatsComponent,
+    SvgPopcornComponent,
+    SvgCardForSeatsComponent,
   ],
   exports: [
     SvgLocationComponent,
@@ -150,6 +158,11 @@ import { SvgEuaComponent } from './svg-eua/svg-eua.component';
     SvgExitComponent,
     SvgTicketCabinComponent,
     SvgEuaComponent,
+    SvgChooseSeatsComponent,
+    SvgTicketsForSeatsComponent,
+    SvgPopcornComponent,
+    SvgCardForSeatsComponent,
+
   ]
 })
 export class AllSvgAppModule { }

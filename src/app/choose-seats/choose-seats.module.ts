@@ -6,12 +6,14 @@ import { SeatsComponent } from './seats/seats.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderSeatsComponent } from './header-seats/header-seats.component';
 import { AllSvgAppModule } from '../all-svg-app/all-svg-app.module';
+import { BodyChooseSeatsComponent } from './body-choose-seats/body-choose-seats.component';
 
 
 @NgModule({
   declarations: [
     SeatsComponent,
     HeaderSeatsComponent,
+    BodyChooseSeatsComponent,
   ],
   imports: [
     CommonModule,
