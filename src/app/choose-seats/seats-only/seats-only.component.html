@@ -1,0 +1,12 @@
+<div class="seats">
+  <span>{{ nameForSeats }}</span>
+  <div
+    class="container-only-number-seats"
+    [ngClass]="'container-only-number-seats-' + nameForSeats"
+  >
+    <div class="container-seat" *ngFor="let seat of seats">
+      <span>{{ seat }}</span>
+    </div>
+  </div>
+  <span>{{ nameForSeats }}</span>
+</div>

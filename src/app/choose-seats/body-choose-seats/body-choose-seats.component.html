@@ -6,22 +6,98 @@
         height="24px"
         fill="#fff"
         class="container-svg-choose-seats"
+        border="none"
+        borderRadius="none"
+        padding="none"
       ></app-svg-choose-seats>
+      <div class="container-line-white"></div>
       <app-svg-tickets-for-seats
-        width="20px"
-        height="20px"
+        width="27px"
+        height="27px"
         fill="rgb(52 60 70)"
+        class="container-svg-tickets"
+        border="1px solid rgb(52, 60, 70)"
+        borderRadius="50%"
+        padding="4px"
       ></app-svg-tickets-for-seats>
+      <div class="container-line-white"></div>
       <app-svg-popcorn
-        width="20px"
-        height="20px"
+        width="27px"
+        height="27px"
         fill="rgb(52 60 70)"
+        class="container-svg-popcorn"
+        border="1px solid rgb(52, 60, 70)"
+        borderRadius="50%"
+        padding="4px"
       ></app-svg-popcorn>
+      <div class="container-line-white"></div>
       <app-svg-card-for-seats
-        width="20px"
-        height="20px"
+        width="27px"
+        height="27px"
         fill="rgb(52 60 70)"
+        class="container-svg-card"
+        border="1px solid rgb(52, 60, 70)"
+        borderRadius="50%"
+        padding="4px"
       ></app-svg-card-for-seats>
+    </div>
+  </div>
+  <div class="container-choose-seats-and-order-summary">
+    <div class="container-choose-seats">
+      <div class="container-location-movie-data">
+        <div class="container-location-svg">
+          <app-svg-location
+            width="21px"
+            height="21px"
+            fill="#fff"
+            class="container-svg-location"
+          ></app-svg-location>
+          <span>{{ objectForOrderSummary.locationMovieTheater }}</span>
+        </div>
+        <div class="container-date-svg">
+          <app-svg-calendar
+            width="21px"
+            height="21px"
+            fill="#fff"
+            class="container-svg-date"
+          ></app-svg-calendar>
+          <span>{{ stringFullOnlyDate }}</span>
+        </div>
+        <div class="container-hour-svg">
+          <app-svg-clock
+            width="21px"
+            height="21px"
+            fill="#fff"
+            class="container-svg-clock"
+          ></app-svg-clock>
+          <span>{{ stringOnlyHour }}</span>
+        </div>
+      </div>
+      <div class="container-seats-available">
+        <div class="container-seats-and-loop-more-less">
+          <div class="container-seats-only">
+            <app-seats-only nameForSeats="A"></app-seats-only>
+            <app-seats-only nameForSeats="B"></app-seats-only>
+            <app-seats-only nameForSeats="C"></app-seats-only>
+            <app-seats-only nameForSeats="D"></app-seats-only>
+            <app-seats-only nameForSeats="E"></app-seats-only>
+            <app-seats-only nameForSeats="F"></app-seats-only>
+            <app-seats-only nameForSeats="G"></app-seats-only>
+            <app-seats-only nameForSeats="H"></app-seats-only>
+            <app-seats-only nameForSeats="I"></app-seats-only>
+            <div></div>
+            <div></div>
+            <app-seats-only nameForSeats="J"></app-seats-only>
+            <app-seats-only nameForSeats="K"></app-seats-only>
+            <app-seats-only nameForSeats="L"></app-seats-only>
+            <app-seats-only nameForSeats="M"></app-seats-only>
+            <app-seats-only nameForSeats="N"></app-seats-only>
+            <app-seats-only nameForSeats="O"></app-seats-only>
+            <app-seats-only nameForSeats="P"></app-seats-only>
+            <app-seats-only nameForSeats="Q"></app-seats-only>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

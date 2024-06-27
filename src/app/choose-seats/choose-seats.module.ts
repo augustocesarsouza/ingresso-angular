@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { HeaderSeatsComponent } from './header-seats/header-seats.component';
 import { AllSvgAppModule } from '../all-svg-app/all-svg-app.module';
 import { BodyChooseSeatsComponent } from './body-choose-seats/body-choose-seats.component';
+import { SeatsOnlyComponent } from './seats-only/seats-only.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { BodyChooseSeatsComponent } from './body-choose-seats/body-choose-seats.
     SeatsComponent,
     HeaderSeatsComponent,
     BodyChooseSeatsComponent,
+    SeatsOnlyComponent,
   ],
   imports: [
     CommonModule,

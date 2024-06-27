@@ -52,6 +52,8 @@ import { SvgChooseSeatsComponent } from './all-svg-choose-seats/svg-choose-seats
 import { SvgTicketsForSeatsComponent } from './all-svg-choose-seats/svg-tickets-for-seats/svg-tickets-for-seats.component';
 import { SvgPopcornComponent } from './all-svg-choose-seats/svg-popcorn/svg-popcorn.component';
 import { SvgCardForSeatsComponent } from './all-svg-choose-seats/svg-card-for-seats/svg-card-for-seats.component';
+import { SvgCalendarComponent } from './all-svg-choose-seats/svg-calendar/svg-calendar.component';
+import { SvgClockComponent } from './all-svg-choose-seats/svg-clock/svg-clock.component';
 
 @NgModule({
   imports: [
@@ -109,6 +111,8 @@ import { SvgCardForSeatsComponent } from './all-svg-choose-seats/svg-card-for-se
     SvgTicketsForSeatsComponent,
     SvgPopcornComponent,
     SvgCardForSeatsComponent,
+    SvgCalendarComponent,
+    SvgClockComponent,
   ],
   exports: [
     SvgLocationComponent,
@@ -162,6 +166,8 @@ import { SvgCardForSeatsComponent } from './all-svg-choose-seats/svg-card-for-se
     SvgTicketsForSeatsComponent,
     SvgPopcornComponent,
     SvgCardForSeatsComponent,
+    SvgCalendarComponent,
+    SvgClockComponent,
 
   ]
 })

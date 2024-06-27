@@ -24,7 +24,7 @@ export interface ObjectForOrderSummary {
   dayMonthAndDayWeek: string;
   typeMovieTheater: string;
   locationMovieTheater: string;
-  spanRegion: string | null | undefined;
+  spanRegion: string;
 }
 
 @Component({
@@ -433,16 +433,18 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
       let containerRegion = document.querySelector(".container-region");
       let spanRegion = containerRegion?.lastChild?.textContent;
 
-      let objectForOrderSummary: ObjectForOrderSummary = {
-        title: movieChooseMovieTheater.title,
-        movieRating: movieChooseMovieTheater.movieRating,
-        dayMonthAndDayWeek: dayMonthAndDayWeek,
-        typeMovieTheater: typeMovieTheater,
-        locationMovieTheater: item.cinemaDTO.nameCinema,
-        spanRegion: spanRegion
-      }
+      if(spanRegion){
+        let objectForOrderSummary: ObjectForOrderSummary = {
+          title: movieChooseMovieTheater.title,
+          movieRating: movieChooseMovieTheater.movieRating,
+          dayMonthAndDayWeek: dayMonthAndDayWeek,
+          typeMovieTheater: typeMovieTheater,
+          locationMovieTheater: item.cinemaDTO.nameCinema,
+          spanRegion: spanRegion
+        }
 
-      this.router.navigate(['/seats'], { state: { objectForOrderSummary } });
+        this.router.navigate(['/seats'], { state: { objectForOrderSummary } });
+      }
     }
   }
 

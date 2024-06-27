@@ -4,6 +4,11 @@
   [attr.width]="width"
   [attr.height]="height"
   [attr.fill]="fill"
+  [ngStyle]="{
+    border: border,
+    'border-radius': borderRadius,
+    padding: padding
+  }"
   class="injected-svg"
   data-src="/static/images/icons/card.svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"

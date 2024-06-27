@@ -19,6 +19,6 @@ export class SeatsComponent implements OnInit  {
   }
 
   ngOnInit(): void {
-    console.log(this.objectForOrderSummary);
+    // console.log(this.objectForOrderSummary);
   }
 }
