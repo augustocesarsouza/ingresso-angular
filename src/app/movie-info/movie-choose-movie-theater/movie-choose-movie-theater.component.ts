@@ -60,30 +60,30 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if(typeof document !== "undefined"){
-      document.body.style.backgroundColor = "rgb(4, 18, 24)";
+        this.timeoutId = setTimeout(() => {
+        document.body.style.backgroundColor = "rgb(4, 18, 24)";
 
-      this.spanSessions = document.querySelector(".span-sessions") as HTMLSpanElement;
-      this.spanAboutTheMovie = document.querySelector(".span-about-the-movie") as HTMLSpanElement;
+        this.spanSessions = document.querySelector(".span-sessions") as HTMLSpanElement;
+        this.spanAboutTheMovie = document.querySelector(".span-about-the-movie") as HTMLSpanElement;
 
-      this.spanSessions?.addEventListener("click", () => {
-        this.putValueSpanSessions();
+        this.spanSessions?.addEventListener("click", () => {
+          this.putValueSpanSessions();
 
-        this.isClickedSpanAbountTheMovie = false;
-      });
+          this.isClickedSpanAbountTheMovie = false;
+        });
 
-      this.spanAboutTheMovie?.addEventListener("click", () => {
-        this.spanSessions.style.border = "none";
-        this.spanSessions.style.fontWeight = '100';
-        this.spanAboutTheMovie.style.borderBottom = "4px solid rgb(50, 85, 226)";
-        this.spanAboutTheMovie.style.fontWeight = '600';
+        this.spanAboutTheMovie?.addEventListener("click", () => {
+          this.spanSessions.style.border = "none";
+          this.spanSessions.style.fontWeight = '100';
+          this.spanAboutTheMovie.style.borderBottom = "4px solid rgb(50, 85, 226)";
+          this.spanAboutTheMovie.style.fontWeight = '600';
 
-        this.isClickedSpanAbountTheMovie = true;
-      });
+          this.isClickedSpanAbountTheMovie = true;
+        });
 
-      this.containerTypeAll = document.querySelectorAll(".container-type");
-
-      this.timeoutId = setTimeout(() => {
+        this.containerTypeAll = document.querySelectorAll(".container-type");
         this.containerDateAll = document.querySelectorAll(".container-date");
+
         if(this.containerDateAll[0]){
           this.containerDateAll[0].className = "container-date-1";
         }
@@ -92,7 +92,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
           el.addEventListener("click", () => this.onClickContainerDate(el));
         });
       }, 30);
-
     }
 
     this.route.params.subscribe((movieData: any) => {
@@ -359,7 +358,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
       document.body.style.overflow = "hidden";
 
       this.timeoutIdSlide = setTimeout(() => {
-        let containerWidthadjust = document.querySelector(".container-width-adjust") as HTMLElement;
         let containerTypesOfTheWithdrawal = document.querySelector(".container-types-of-the-withdrawal") as HTMLElement;
 
         let clickeContainerAdjust = false;

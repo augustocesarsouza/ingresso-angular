@@ -5,7 +5,7 @@
     [ngClass]="'container-only-number-seats-' + nameForSeats"
   >
     <div class="container-seat" *ngFor="let seat of seats">
-      <span>{{ seat }}</span>
+      {{ seat }}
     </div>
   </div>
   <span>{{ nameForSeats }}</span>

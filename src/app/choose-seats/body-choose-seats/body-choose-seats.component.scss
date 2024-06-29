@@ -7,6 +7,7 @@
 .container-in-which-position-im-in-choosing-seats-main {
   display: flex;
   justify-content: center;
+  margin-bottom: 30px;
 }
 
 .container-in-which-position-im-in-choosing-seats {
@@ -26,6 +27,16 @@
 .container-line-white {
   border-top: 1px solid rgb(52, 60, 70);
   width: 100%;
+}
+
+.container-choose-seats-and-order-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-choose-seats {
+  width: 1169px;
 }
 
 .container-location-movie-data {
@@ -83,12 +94,103 @@
 }
 
 .container-seats-available {
+  display: flex;
   background-color: rgb(33 38 45);
-  padding: 40px 40px 10px 40px;
+  padding: 40px 23px 10px 73px;
+  position: relative;
+  user-select: none;
+}
+
+.container-seats-and-loop-more-less {
+  width: 940px;
+  user-select: none;
+  overflow: hidden;
 }
 
 .container-seats-only {
   display: flex;
   flex-direction: column;
   gap: 15px;
+
+  transform: translate(0px, 0px) scale(1); // 2.6 -> max
+  // transform-origin: 0% 0%;
+}
+
+.container-screen {
+  position: relative;
+  width: 100%;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  place-content: center;
+  color: rgb(33, 38, 50);
+  background: rgb(173, 182, 194);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.9px;
+  text-align: center;
+  text-transform: uppercase;
+  height: 18px;
+  border-bottom: 2px solid rgb(240, 240, 240);
+  order: 1;
+  margin: 16px 0px 0px;
+}
+
+.container-screen::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  width: 0px;
+  height: 0px;
+  border-top: 18px solid rgb(33, 38, 45);
+  left: 0px;
+    border-right: 0.7em solid transparent;
+}
+
+.container-screen::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  width: 0px;
+  height: 0px;
+  border-top: 18px solid rgb(33, 38, 45);
+  right: 0px;
+  border-left: 0.7em solid transparent;
+}
+
+.container-loupa {
+  color: #fff;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-svg-more{
+  display: flex;
+}
+
+.container-line-progress {
+  border-left: 3px solid #fff;
+  height: 99px;
+  position: relative;
+}
+
+.container-ball {
+  width: 19px;
+  height: 19px;
+  background-color: #98aaec;
+  border-radius: 50%;
+  position: absolute;
+  left: -11px;
+  bottom: 0px;
+  cursor: pointer;
+
+  // bottom: 71px; max
+}
+
+.container-svg-loss{
+  display: flex;
 }

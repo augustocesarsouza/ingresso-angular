@@ -52,7 +52,9 @@
             fill="#fff"
             class="container-svg-location"
           ></app-svg-location>
-          <span>{{ objectForOrderSummary.locationMovieTheater }}</span>
+          <span *ngIf="objectForOrderSummary">{{
+            objectForOrderSummary.locationMovieTheater
+          }}</span>
         </div>
         <div class="container-date-svg">
           <app-svg-calendar
@@ -76,26 +78,97 @@
       <div class="container-seats-available">
         <div class="container-seats-and-loop-more-less">
           <div class="container-seats-only">
-            <app-seats-only nameForSeats="A"></app-seats-only>
-            <app-seats-only nameForSeats="B"></app-seats-only>
-            <app-seats-only nameForSeats="C"></app-seats-only>
-            <app-seats-only nameForSeats="D"></app-seats-only>
-            <app-seats-only nameForSeats="E"></app-seats-only>
-            <app-seats-only nameForSeats="F"></app-seats-only>
-            <app-seats-only nameForSeats="G"></app-seats-only>
-            <app-seats-only nameForSeats="H"></app-seats-only>
-            <app-seats-only nameForSeats="I"></app-seats-only>
+            <app-seats-only
+              nameForSeats="A"
+              [seatsThatWillStandOutside]="3"
+            ></app-seats-only>
+            <app-seats-only
+              nameForSeats="B"
+              [seatsThatWillStandOutside]="5"
+            ></app-seats-only>
+            <app-seats-only
+              nameForSeats="C"
+              [seatsThatWillStandOutside]="5"
+            ></app-seats-only>
+            <app-seats-only
+              nameForSeats="D"
+              [seatsThatWillStandOutside]="5"
+            ></app-seats-only>
+            <app-seats-only
+              nameForSeats="E"
+              [seatsThatWillStandOutside]="5"
+            ></app-seats-only>
+            <app-seats-only
+              nameForSeats="F"
+              [seatsThatWillStandOutside]="5"
+            ></app-seats-only>
+            <app-seats-only
+              nameForSeats="G"
+              [seatsThatWillStandOutside]="5"
+            ></app-seats-only>
+            <app-seats-only
+              nameForSeats="H"
+              [seatsThatWillStandOutside]="5"
+            ></app-seats-only>
+            <app-seats-only
+              nameForSeats="I"
+              [seatsThatWillStandOutside]="5"
+            ></app-seats-only>
             <div></div>
             <div></div>
-            <app-seats-only nameForSeats="J"></app-seats-only>
-            <app-seats-only nameForSeats="K"></app-seats-only>
-            <app-seats-only nameForSeats="L"></app-seats-only>
-            <app-seats-only nameForSeats="M"></app-seats-only>
-            <app-seats-only nameForSeats="N"></app-seats-only>
-            <app-seats-only nameForSeats="O"></app-seats-only>
-            <app-seats-only nameForSeats="P"></app-seats-only>
-            <app-seats-only nameForSeats="Q"></app-seats-only>
+            <app-seats-only
+              nameForSeats="J"
+              [seatsThatWillStandOutside]="7"
+            ></app-seats-only>
+            <app-seats-only
+              nameForSeats="K"
+              [seatsThatWillStandOutside]="7"
+            ></app-seats-only>
+            <app-seats-only
+              nameForSeats="L"
+              [seatsThatWillStandOutside]="7"
+            ></app-seats-only>
+            <app-seats-only
+              nameForSeats="M"
+              [seatsThatWillStandOutside]="7"
+            ></app-seats-only>
+            <app-seats-only
+              nameForSeats="N"
+              [seatsThatWillStandOutside]="7"
+            ></app-seats-only>
+            <app-seats-only
+              nameForSeats="O"
+              [seatsThatWillStandOutside]="8"
+            ></app-seats-only>
+            <app-seats-only
+              nameForSeats="P"
+              [seatsThatWillStandOutside]="8"
+            ></app-seats-only>
+            <app-seats-only
+              nameForSeats="Q"
+              [seatsThatWillStandOutside]="8"
+            ></app-seats-only>
           </div>
+          <div class="container-screen">
+            <span>TELA</span>
+          </div>
+        </div>
+        <div class="container-loupa">
+          <app-svg-more
+            width="24px"
+            height="24px"
+            fill="rgb(152, 170, 236)"
+            class="container-svg-more"
+          ></app-svg-more>
+          <div class="container-line-progress">
+            <div class="container-ball"></div>
+          </div>
+          <app-svg-less
+            width="24px"
+            height="24px"
+            fill="rgb(204, 204, 204)"
+            class="container-svg-less"
+          ></app-svg-less>
         </div>
       </div>
     </div>
