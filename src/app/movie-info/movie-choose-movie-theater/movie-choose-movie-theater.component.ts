@@ -25,6 +25,8 @@ export interface ObjectForOrderSummary {
   typeMovieTheater: string;
   locationMovieTheater: string;
   spanRegion: string;
+  imgMovie: string;
+  room: number;
 }
 
 @Component({
@@ -54,6 +56,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
   spanSessions!: HTMLSpanElement;
   spanAboutTheMovie!: HTMLSpanElement;
   @ViewChild('containerScheduleDublado') containerScheduleDublado!: ElementRef<HTMLDivElement>;
+  room = 0;
 
   constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService, private cinemaMovieService: CinemaMovieService){
   }
@@ -432,13 +435,16 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
       let spanRegion = containerRegion?.lastChild?.textContent;
 
       if(spanRegion){
+        this.room += 1;
         let objectForOrderSummary: ObjectForOrderSummary = {
           title: movieChooseMovieTheater.title,
           movieRating: movieChooseMovieTheater.movieRating,
           dayMonthAndDayWeek: dayMonthAndDayWeek,
           typeMovieTheater: typeMovieTheater,
           locationMovieTheater: item.cinemaDTO.nameCinema,
-          spanRegion: spanRegion
+          spanRegion: spanRegion,
+          imgMovie: movieChooseMovieTheater.imgUrl,
+          room: this.room
         }
 
         this.router.navigate(['/seats'], { state: { objectForOrderSummary } });

@@ -207,4 +207,8 @@ export class BodyChooseSeatsComponent implements OnInit {
       }
     }
   }
+
+  titleMovie(title: string): string {
+    return title.substring(0, 18) + "...";
+  }
 }
