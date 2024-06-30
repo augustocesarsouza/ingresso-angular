@@ -56,6 +56,7 @@ import { SvgCalendarComponent } from './all-svg-choose-seats/svg-calendar/svg-ca
 import { SvgClockComponent } from './all-svg-choose-seats/svg-clock/svg-clock.component';
 import { SvgMoreComponent } from './choose-seats-svg/svg-more/svg-more.component';
 import { SvgLessComponent } from './choose-seats-svg/svg-less/svg-less.component';
+import { SvgTrashcanComponent } from './all-svg-choose-seats/svg-trashcan/svg-trashcan.component';
 
 @NgModule({
   imports: [
@@ -117,6 +118,7 @@ import { SvgLessComponent } from './choose-seats-svg/svg-less/svg-less.component
     SvgClockComponent,
     SvgMoreComponent,
     SvgLessComponent,
+    SvgTrashcanComponent,
   ],
   exports: [
     SvgLocationComponent,
@@ -174,7 +176,7 @@ import { SvgLessComponent } from './choose-seats-svg/svg-less/svg-less.component
     SvgClockComponent,
     SvgMoreComponent,
     SvgLessComponent,
-
+    SvgTrashcanComponent,
   ]
 })
 export class AllSvgAppModule { }

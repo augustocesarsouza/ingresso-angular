@@ -111,6 +111,25 @@ export class BodyChooseSeatsComponent implements OnInit {
       let originY = 0;
 
       if(containerSeatsAndLoopMoreLess){
+        let containerSeatsAndLoopMoreLessEnter = false;
+        containerSeatsAndLoopMoreLess.addEventListener("mouseenter", () => {
+          containerSeatsAndLoopMoreLessEnter = true;
+        });
+
+        containerSeatsAndLoopMoreLess.addEventListener("mouseleave", () => {
+          containerSeatsAndLoopMoreLessEnter = false;
+        });
+
+        function preventScroll(event: any) {
+          if (containerSeatsAndLoopMoreLessEnter) {
+            event.preventDefault();
+          }
+        }
+
+        window.addEventListener("scroll", preventScroll, { passive: false });
+        window.addEventListener("wheel", preventScroll, { passive: false });
+        window.addEventListener("touchmove", preventScroll, { passive: false });
+
         containerSeatsAndLoopMoreLess.addEventListener("wheel", (e: WheelEvent) => {
           if(containerSeatsOnly){
             const rect = containerSeatsOnly.getBoundingClientRect();
@@ -118,27 +137,36 @@ export class BodyChooseSeatsComponent implements OnInit {
             const mouseY = e.clientY - rect.top;
 
             const scaleAmount = 0.2;
+            let newScale = valueScale;
 
             if(containerBall){
               let currentBottom = parseFloat(containerBall.style.bottom);
 
               if (e.deltaY > 0) {
-                // console.log("Rolando para baixo");
+                // Rolando para baixo
                 if(currentBottom > 0){
                   currentBottom = currentBottom - 10;
                   containerBall.style.bottom = `${currentBottom}px`;
-                  // originX -= (mouseX / rect.width) * 100;
-                  // originY -= (mouseY / rect.height) * 100;
-                  valueScale = Math.max(1, valueScale - scaleAmount);
+                  newScale = Math.max(1, valueScale - scaleAmount);
+
+                  const scaleChange = newScale / valueScale;
+                  originX = ((mouseX - originX) * scaleChange) / scaleChange;
+                  originY = ((mouseY - originY) * scaleChange) / scaleChange;
+
+                  valueScale = newScale;
                 }
               } else if (e.deltaY < 0) {
-                // console.log("Rolando para cima");
+                // Rolando para cima
                 if(currentBottom <= 70){ //80px
                   currentBottom = currentBottom + 10;
                   containerBall.style.bottom = `${currentBottom}px`;
-                  // originX += (mouseX / rect.width) * 100;
-                  // originY += (mouseY / rect.height) * 100;
-                  valueScale = Math.min(3, valueScale + scaleAmount);
+                  newScale = Math.min(3, valueScale + scaleAmount);
+
+                  const scaleChange = newScale / valueScale;
+                  originX = ((mouseX - originX) * scaleChange) / scaleChange;
+                  originY = ((mouseY - originY) * scaleChange) / scaleChange;
+
+                  valueScale = newScale;
                 }
               }
 
@@ -168,20 +196,15 @@ export class BodyChooseSeatsComponent implements OnInit {
                 valueScale = 2.6;
               }
 
-              const newOriginX = mouseX / rect.width * 100;
-              const newOriginY = mouseY / rect.height * 100;
-
-              originX = (newOriginX - (newOriginX - originX) / valueScale) * (valueScale - 1);
-              originY = (newOriginY - (newOriginY - originY) / valueScale) * (valueScale - 1);
-
               if(containerSeatsOnly){
-                containerSeatsOnly.style.transform = `translate(-${originX}px, -${originY}px) scale(${valueScale})`;
+                // containerSeatsOnly.style.transform = `translate(-${originX}px, -${originY}px) scale(${valueScale})`;
+                containerSeatsOnly.style.transformOrigin = `${originX}px ${originY}px`;
+                containerSeatsOnly.style.transform = `scale(${valueScale})`;
               }
             }
           }
-        });
+        }, { passive: true });
       }
-
     }
   }
 }
