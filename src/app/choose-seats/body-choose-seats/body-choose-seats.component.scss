@@ -43,9 +43,45 @@
 
 .container-subtitle {
   display: flex;
+  flex-direction: column;
   color: #fff;
-
 }
+
+.container-type-subtitle {
+  display: flex;
+  gap: 15px;
+}
+
+.container-ball-available,
+.container-ball-selected,
+.container-ball-busy {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #fff;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.container-ball-available > div {
+  background-color: #98aaec;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+}
+
+.container-ball-selected > div {
+  background-color: rgb(255 214 51);
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+}
+
+.container-svg-user-body {
+  display: flex;
+  // background-color: #98aaec;
+}
+
 
 .container-choose-seats {
   width: 1169px;

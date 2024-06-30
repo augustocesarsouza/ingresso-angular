@@ -58,6 +58,10 @@ import { SvgMoreComponent } from './choose-seats-svg/svg-more/svg-more.component
 import { SvgLessComponent } from './choose-seats-svg/svg-less/svg-less.component';
 import { SvgTrashcanComponent } from './all-svg-choose-seats/svg-trashcan/svg-trashcan.component';
 import { SvgExclamationMarkComponent } from './svg-exclamation-mark/svg-exclamation-mark.component';
+import { SvgBodySeatsComponent } from './all-svg-choose-seats/svg-body-seats/svg-body-seats.component';
+import { SvgBlockedComponent } from './all-svg-choose-seats/svg-blocked/svg-blocked.component';
+import { SvgWheelchairComponent } from './all-svg-choose-seats/svg-wheelchair/svg-wheelchair.component';
+import { SvgObeseComponent } from './all-svg-choose-seats/svg-obese/svg-obese.component';
 
 @NgModule({
   imports: [
@@ -121,6 +125,10 @@ import { SvgExclamationMarkComponent } from './svg-exclamation-mark/svg-exclamat
     SvgLessComponent,
     SvgTrashcanComponent,
     SvgExclamationMarkComponent,
+    SvgBodySeatsComponent,
+    SvgBlockedComponent,
+    SvgWheelchairComponent,
+    SvgObeseComponent,
   ],
   exports: [
     SvgLocationComponent,
@@ -180,6 +188,10 @@ import { SvgExclamationMarkComponent } from './svg-exclamation-mark/svg-exclamat
     SvgLessComponent,
     SvgTrashcanComponent,
     SvgExclamationMarkComponent,
+    SvgBodySeatsComponent,
+    SvgBlockedComponent,
+    SvgWheelchairComponent,
+    SvgObeseComponent,
 
   ]
 })
