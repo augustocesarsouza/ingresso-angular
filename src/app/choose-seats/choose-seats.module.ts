@@ -10,6 +10,7 @@ import { BodyChooseSeatsComponent } from './body-choose-seats/body-choose-seats.
 import { SeatsOnlyComponent } from './seats-only/seats-only.component';
 import { SubtitleComponent } from './subtitle/subtitle.component';
 import { WarningAboutMovieTheaterComponent } from './warning-about-movie-theater/warning-about-movie-theater.component';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { WarningAboutMovieTheaterComponent } from './warning-about-movie-theater
     SeatsOnlyComponent,
     SubtitleComponent,
     WarningAboutMovieTheaterComponent,
+    OrderSummaryComponent,
   ],
   imports: [
     CommonModule,

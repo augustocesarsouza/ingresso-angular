@@ -1,0 +1,63 @@
+<div class="container-order-summary-and-total-order">
+  <div class="container-order-summary" *ngIf="objectForOrderSummary">
+    <div class="container-summary-svg-trashcan">
+      <h1>Resumo do pedido</h1>
+      <app-svg-trashcan
+        width="18px"
+        height="18px"
+        fill="rgb(152, 170, 236)"
+        class="container-svg-order"
+      ></app-svg-trashcan>
+    </div>
+    <div class="container-info-about-movie">
+      <div class="container-img-movie">
+        <img
+          [src]="objectForOrderSummary.imgMovie"
+          [alt]="objectForOrderSummary.title"
+        />
+      </div>
+      <div class="container-info-movie">
+        <div class="container-title">
+          <span>{{ titleMovie(objectForOrderSummary.title) }}</span>
+        </div>
+        <div class="container-movie-rating-type">
+          <span class="span-movie-rating">{{
+            objectForOrderSummary.movieRating
+          }}</span>
+          <span class="span-type-movie-theater">{{
+            objectForOrderSummary.typeMovieTheater
+          }}</span>
+        </div>
+        <div class="container-location-region">
+          <span class="span-location-movie-theater">{{
+            objectForOrderSummary.locationMovieTheater
+          }}</span>
+          <span class="span-region">{{
+            objectForOrderSummary.spanRegion
+          }}</span>
+        </div>
+        <div class="container-see-details">
+          <app-svg-exclamation-mark
+            width="10px"
+            height="10px"
+            fill="rgb(152, 170, 236)"
+            class="container-svg-order"
+          ></app-svg-exclamation-mark>
+          <span class="span-see-details">Ver detalhes</span>
+        </div>
+      </div>
+    </div>
+    <div class="container-room-date-movie">
+      <span>SALA {{ objectForOrderSummary.room.toString() }}</span>
+      <div class="container-date-time">
+        <span>{{ stringFullOnlyDate }}</span>
+        <span class="span-hour">{{ stringOnlyHour }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="container-total-order">
+    <span>Itens</span>
+    <span>Total taxa</span>
+    <span>Total</span>
+  </div>
+</div>

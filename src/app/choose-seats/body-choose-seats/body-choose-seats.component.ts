@@ -18,9 +18,7 @@ export class BodyChooseSeatsComponent implements OnInit {
   ngOnInit(): void {
     if(this.objectForOrderSummary){
       let stringDayMonth = this.objectForOrderSummary.dayMonthAndDayWeek.split(" ");
-      console.log(this.objectForOrderSummary);
       this.stringFullOnlyDate = `${stringDayMonth[0]} ${stringDayMonth[1]}`;
-
       this.stringOnlyHour = stringDayMonth[2];
     }
 
@@ -208,7 +206,7 @@ export class BodyChooseSeatsComponent implements OnInit {
     }
   }
 
-  titleMovie(title: string): string {
-    return title.substring(0, 18) + "...";
-  }
+  // titleMovie(title: string): string {
+  //   return title.substring(0, 18) + "...";
+  // }
 }
