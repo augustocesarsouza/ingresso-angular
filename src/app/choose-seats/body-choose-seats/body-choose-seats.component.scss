@@ -34,6 +34,7 @@
   // align-items: center;
   justify-content: center;
   height: 1051px;
+  margin-bottom: 70px;
 }
 
 .container-seats-and-subtitle {
@@ -51,45 +52,8 @@
   }
 }
 
-.container-warning-main {
-  display: flex;
-  flex-direction: column;
-  padding: 16px 8px;
-}
-
-.container-warning {
-  display: flex;
-  gap: 7px;
-  border-top: 1px solid rgb(173, 182, 194);
-  padding-top: 10px;
-}
-
-.container-description-warning {
-  display: flex;
-}
-
-.container-description-warning > p {
-  font-size: 12px;
-  font-weight: normal;
-  line-height: 1.5;
-  letter-spacing: 0.4px;
-  color: rgb(136, 153, 170);
-  margin-bottom: 10px;
-}
-
 .container-choose-seats {
   margin-right: 15px;
-  // width: 1169px;
-
-  // @media (max-width: 1500px) {
-  //   width: 1050px;
-  // }
-
-  // @media (max-width: 1380px) {
-  //   width: 985px;
-  // }
-
-  // width: 985px;
 }
 
 .container-location-movie-data {

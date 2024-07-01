@@ -9,6 +9,7 @@ import { AllSvgAppModule } from '../all-svg-app/all-svg-app.module';
 import { BodyChooseSeatsComponent } from './body-choose-seats/body-choose-seats.component';
 import { SeatsOnlyComponent } from './seats-only/seats-only.component';
 import { SubtitleComponent } from './subtitle/subtitle.component';
+import { WarningAboutMovieTheaterComponent } from './warning-about-movie-theater/warning-about-movie-theater.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { SubtitleComponent } from './subtitle/subtitle.component';
     BodyChooseSeatsComponent,
     SeatsOnlyComponent,
     SubtitleComponent,
+    WarningAboutMovieTheaterComponent,
   ],
   imports: [
     CommonModule,
