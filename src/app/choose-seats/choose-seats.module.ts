@@ -12,6 +12,7 @@ import { SubtitleComponent } from './subtitle/subtitle.component';
 import { WarningAboutMovieTheaterComponent } from './warning-about-movie-theater/warning-about-movie-theater.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { ChooseSeatsInnerComponent } from './choose-seats-inner/choose-seats-inner.component';
+import { WhichPositionChooseComponent } from './which-position-choose/which-position-choose.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ChooseSeatsInnerComponent } from './choose-seats-inner/choose-seats-inn
     WarningAboutMovieTheaterComponent,
     OrderSummaryComponent,
     ChooseSeatsInnerComponent,
+    WhichPositionChooseComponent,
   ],
   imports: [
     CommonModule,
