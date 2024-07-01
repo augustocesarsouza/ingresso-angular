@@ -54,6 +54,17 @@
         <span class="span-hour">{{ stringOnlyHour }}</span>
       </div>
     </div>
+    <div
+      class="container-seats-choose-for-the-user"
+      *ngIf="seatsClickedForTheUser.length > 0"
+    >
+      <span>Assentos</span>
+      <div class="container-seats">
+        <span class="span-seats" *ngFor="let seat of seatsClickedForTheUser">
+          {{ seat }}
+        </span>
+      </div>
+    </div>
   </div>
   <div class="container-total-order">
     <span>Itens</span>

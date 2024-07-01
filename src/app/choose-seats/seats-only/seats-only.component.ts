@@ -1,4 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { SeatsService } from '../service/seats.service';
 
 @Component({
   selector: 'app-seats-only',
@@ -8,6 +9,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 export class SeatsOnlyComponent implements OnInit, OnDestroy {
   @Input() nameForSeats: string = '';
   @Input() seatsThatWillStandOutside = 0;
+  arraySeats: string[] = [];
   colorForNumberSeats = "rgb(152, 170, 236)";
   colorForBackgroundNumberSeats = "rgb(152, 170, 236)";
   ColorNumberIfWasClickedSeats = "black";
@@ -16,7 +18,7 @@ export class SeatsOnlyComponent implements OnInit, OnDestroy {
   private timeoutId: any;
   private timeoutIdContainerSeat: any;
 
-  constructor(){
+  constructor(private seats_service: SeatsService){
   }
 
   ngOnInit(): void {
@@ -65,6 +67,18 @@ export class SeatsOnlyComponent implements OnInit, OnDestroy {
     if(this.timeoutIdContainerSeat){
       clearTimeout(this.timeoutIdContainerSeat);
     }
+
+    let nameForSeatsClean = this.nameForSeats?.replace(/\s+/g, '');
+    let textContentClean = el.textContent?.replace(/\s+/g, '');
+    let seatsJoin = `${nameForSeatsClean} ${textContentClean}`;
+
+    if(this.arraySeats.some((el) => el === seatsJoin)){
+      this.arraySeats = this.arraySeats.filter((el) => el !== seatsJoin);
+    }else {
+      this.arraySeats.push(seatsJoin);
+    }
+
+    this.seats_service.updateSeats(this.arraySeats);
 
     if(el.style.color === this.colorForNumberSeats){
       el.style.color = this.ColorNumberIfWasClickedSeats;
