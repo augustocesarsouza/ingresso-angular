@@ -5,16 +5,16 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SeatsService {
-  private arraySeatsSubject = new BehaviorSubject<string[]>([]);
+  private arraySeatsSubject = new BehaviorSubject<string>("");
   arraySeats$ = this.arraySeatsSubject.asObservable();
 
   constructor() { }
 
-  updateSeats(seats: string[]) {
+  updateSeats(seats: string) {
     this.arraySeatsSubject.next(seats);
   }
 
-  get currentSeats(): string[] {
+  get currentSeats(): string {
     return this.arraySeatsSubject.getValue();
   }
 }

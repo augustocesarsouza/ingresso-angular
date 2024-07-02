@@ -126,6 +126,7 @@
   color: #fff;
   font-size: 16px;
   font-weight: 600;
+  padding: 3px 0px;
 }
 
 .container-date-time {
@@ -149,4 +150,16 @@
   display: flex;
   justify-content: space-between;
   color: #fff;
+  font-size: 14px;
+  border-top: 1px solid rgb(102, 102, 102);
+  padding: 3px 0px;
+  font-weight: 700;
+}
+
+.container-seats {
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: flex-end;
+  text-align: right;
+  width: 131px;
 }
