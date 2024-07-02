@@ -1,0 +1,47 @@
+.header-seats-main {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(33 38 45);
+}
+
+.header-seats {
+  display: flex;
+  justify-content: space-between;
+  width: 1443px;
+}
+
+.container-name-user-service {
+  display: flex;
+  gap: 50px;
+  margin-right: 10px;
+}
+
+.container-name-user {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  gap: 6px;
+}
+
+.container-name-user > span {
+  font-size: 15px;
+}
+
+.container-svg-user-body {
+  display: flex;
+}
+
+.container-service {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  gap: 6px;
+}
+
+.container-service > span {
+  font-size: 15px;
+}
+
+.container-svg {
+  display: flex;
+}

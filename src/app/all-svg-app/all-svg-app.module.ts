@@ -48,6 +48,20 @@ import { SvgDetailsComponent } from './svg-details/svg-details.component';
 import { SvgExitComponent } from './svg-exit/svg-exit.component';
 import { SvgTicketCabinComponent } from './svg-ticket-cabin/svg-ticket-cabin.component';
 import { SvgEuaComponent } from './svg-eua/svg-eua.component';
+import { SvgChooseSeatsComponent } from './all-svg-choose-seats/svg-choose-seats/svg-choose-seats.component';
+import { SvgTicketsForSeatsComponent } from './all-svg-choose-seats/svg-tickets-for-seats/svg-tickets-for-seats.component';
+import { SvgPopcornComponent } from './all-svg-choose-seats/svg-popcorn/svg-popcorn.component';
+import { SvgCardForSeatsComponent } from './all-svg-choose-seats/svg-card-for-seats/svg-card-for-seats.component';
+import { SvgCalendarComponent } from './all-svg-choose-seats/svg-calendar/svg-calendar.component';
+import { SvgClockComponent } from './all-svg-choose-seats/svg-clock/svg-clock.component';
+import { SvgMoreComponent } from './choose-seats-svg/svg-more/svg-more.component';
+import { SvgLessComponent } from './choose-seats-svg/svg-less/svg-less.component';
+import { SvgTrashcanComponent } from './all-svg-choose-seats/svg-trashcan/svg-trashcan.component';
+import { SvgExclamationMarkComponent } from './svg-exclamation-mark/svg-exclamation-mark.component';
+import { SvgBodySeatsComponent } from './all-svg-choose-seats/svg-body-seats/svg-body-seats.component';
+import { SvgBlockedComponent } from './all-svg-choose-seats/svg-blocked/svg-blocked.component';
+import { SvgWheelchairComponent } from './all-svg-choose-seats/svg-wheelchair/svg-wheelchair.component';
+import { SvgObeseComponent } from './all-svg-choose-seats/svg-obese/svg-obese.component';
 
 @NgModule({
   imports: [
@@ -101,6 +115,20 @@ import { SvgEuaComponent } from './svg-eua/svg-eua.component';
     SvgExitComponent,
     SvgTicketCabinComponent,
     SvgEuaComponent,
+    SvgChooseSeatsComponent,
+    SvgTicketsForSeatsComponent,
+    SvgPopcornComponent,
+    SvgCardForSeatsComponent,
+    SvgCalendarComponent,
+    SvgClockComponent,
+    SvgMoreComponent,
+    SvgLessComponent,
+    SvgTrashcanComponent,
+    SvgExclamationMarkComponent,
+    SvgBodySeatsComponent,
+    SvgBlockedComponent,
+    SvgWheelchairComponent,
+    SvgObeseComponent,
   ],
   exports: [
     SvgLocationComponent,
@@ -150,6 +178,21 @@ import { SvgEuaComponent } from './svg-eua/svg-eua.component';
     SvgExitComponent,
     SvgTicketCabinComponent,
     SvgEuaComponent,
+    SvgChooseSeatsComponent,
+    SvgTicketsForSeatsComponent,
+    SvgPopcornComponent,
+    SvgCardForSeatsComponent,
+    SvgCalendarComponent,
+    SvgClockComponent,
+    SvgMoreComponent,
+    SvgLessComponent,
+    SvgTrashcanComponent,
+    SvgExclamationMarkComponent,
+    SvgBodySeatsComponent,
+    SvgBlockedComponent,
+    SvgWheelchairComponent,
+    SvgObeseComponent,
+
   ]
 })
 export class AllSvgAppModule { }

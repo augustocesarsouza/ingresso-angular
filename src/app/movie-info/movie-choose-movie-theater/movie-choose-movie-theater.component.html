@@ -142,16 +142,27 @@
                       [itemSchedule]="itemSchedule"
                       type="DUBLADO"
                       typeView="DUBLADO"
+                      [movieChooseMovieTheater]="movieChooseMovieTheater"
+                      [item]="item"
+                      [onClickChooseSeatsForThisHour]="
+                        onClickChooseSeatsForThisHour
+                      "
                     ></app-schudule-movie-theater>
                     <app-schudule-movie-theater
                       *ngIf="itemSchedule.type === 'LEGENDADO'"
                       [itemSchedule]="itemSchedule"
                       type="LEGENDADO"
                       typeView="LEGENDADO"
+                      [movieChooseMovieTheater]="movieChooseMovieTheater"
+                      [item]="item"
+                      [onClickChooseSeatsForThisHour]="
+                        onClickChooseSeatsForThisHour
+                      "
                     ></app-schudule-movie-theater>
                     <div
                       class="container-schedule-dublado"
                       *ngIf="itemSchedule.type === 'LV'"
+                      #containerScheduleDublado
                     >
                       <div class="container-span-type-more-than-one">
                         <span>VIP</span>
@@ -161,6 +172,14 @@
                         <div
                           class="container-schedule-hour"
                           *ngFor="let itemHour of itemSchedule.arryHours"
+                          (click)="
+                            onClickChooseSeatsForThisHour(
+                              movieChooseMovieTheater,
+                              item,
+                              itemHour,
+                              null
+                            )
+                          "
                         >
                           {{ replaceStringHours(itemHour) }}
                         </div>
@@ -225,16 +244,27 @@
                       [itemSchedule]="itemSchedule"
                       type="DUBLADO"
                       typeView="DUBLADO"
+                      [movieChooseMovieTheater]="movieChooseMovieTheater"
+                      [item]="item"
+                      [onClickChooseSeatsForThisHour]="
+                        onClickChooseSeatsForThisHour
+                      "
                     ></app-schudule-movie-theater>
                     <app-schudule-movie-theater
                       *ngIf="itemSchedule.type === 'LEGENDADO'"
                       [itemSchedule]="itemSchedule"
                       type="LEGENDADO"
                       typeView="LEGENDADO"
+                      [movieChooseMovieTheater]="movieChooseMovieTheater"
+                      [item]="item"
+                      [onClickChooseSeatsForThisHour]="
+                        onClickChooseSeatsForThisHour
+                      "
                     ></app-schudule-movie-theater>
                     <div
                       class="container-schedule-dublado"
                       *ngIf="itemSchedule.type === 'LV'"
+                      #containerScheduleDublado
                     >
                       <div class="container-span-type-more-than-one">
                         <span>VIP</span>
@@ -244,6 +274,14 @@
                         <div
                           class="container-schedule-hour"
                           *ngFor="let itemHour of itemSchedule.arryHours"
+                          (click)="
+                            onClickChooseSeatsForThisHour(
+                              movieChooseMovieTheater,
+                              item,
+                              itemHour,
+                              null
+                            )
+                          "
                         >
                           {{ replaceStringHours(itemHour) }}
                         </div>

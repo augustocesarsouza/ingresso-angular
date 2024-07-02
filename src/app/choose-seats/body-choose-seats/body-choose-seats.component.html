@@ -1,0 +1,21 @@
+<div class="container-choose-seats-main">
+  <app-which-position-choose></app-which-position-choose>
+  <div class="container-choose-seats-and-order-summary">
+    <div class="container-seats-and-subtitle">
+      <app-choose-seats-inner
+        [objectForOrderSummary]="objectForOrderSummary"
+      ></app-choose-seats-inner>
+      <app-subtitle></app-subtitle>
+      <app-warning-about-movie-theater></app-warning-about-movie-theater>
+    </div>
+    <app-order-summary
+      [objectForOrderSummary]="objectForOrderSummary"
+    ></app-order-summary>
+  </div>
+</div>
+<div class="container-back-or-progress-main">
+  <div class="container-back-or-progress">
+    <button class="button-back">VOLTAR</button>
+    <button class="button-progress">AVANÇAR</button>
+  </div>
+</div>

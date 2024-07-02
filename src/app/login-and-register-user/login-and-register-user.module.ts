@@ -52,7 +52,6 @@ import { DigitalWalletsAllComponent } from './options-user-all/digital-wallets-a
     FormsModule,
     AllSvgAppModule,
     RecaptchaModule,
-
   ]
 })
 export class LoginAndRegisterUserModule { }

@@ -11,6 +11,9 @@ const routes: Routes = [
   { path: 'movie',
     loadChildren: () => import('./movie-info/movie-info.module').then(m => m.MovieInfoModule)
   },
+  { path: 'seats',
+    loadChildren: () => import('./choose-seats/choose-seats-routing.module').then(m => m.ChooseSeatsRoutingModule)
+  },
 ];
 
 @NgModule({
