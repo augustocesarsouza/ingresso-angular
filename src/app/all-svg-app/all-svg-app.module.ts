@@ -62,6 +62,7 @@ import { SvgBodySeatsComponent } from './all-svg-choose-seats/svg-body-seats/svg
 import { SvgBlockedComponent } from './all-svg-choose-seats/svg-blocked/svg-blocked.component';
 import { SvgWheelchairComponent } from './all-svg-choose-seats/svg-wheelchair/svg-wheelchair.component';
 import { SvgObeseComponent } from './all-svg-choose-seats/svg-obese/svg-obese.component';
+import { SvgTicketComponent } from './all-svg-choose-seats/svg-ticket/svg-ticket.component';
 
 @NgModule({
   imports: [
@@ -129,6 +130,7 @@ import { SvgObeseComponent } from './all-svg-choose-seats/svg-obese/svg-obese.co
     SvgBlockedComponent,
     SvgWheelchairComponent,
     SvgObeseComponent,
+    SvgTicketComponent,
   ],
   exports: [
     SvgLocationComponent,
@@ -192,6 +194,7 @@ import { SvgObeseComponent } from './all-svg-choose-seats/svg-obese/svg-obese.co
     SvgBlockedComponent,
     SvgWheelchairComponent,
     SvgObeseComponent,
+    SvgTicketComponent,
 
   ]
 })

@@ -56,12 +56,12 @@
     </div>
     <div
       class="container-seats-choose-for-the-user"
-      *ngIf="seatsClickedForTheUser.length > 0"
+      *ngIf="stringSeats.length > 0"
     >
       <span>Assentos</span>
       <div class="container-seats">
-        <span class="span-seats" *ngFor="let seat of seatsClickedForTheUser">
-          {{ seat }}
+        <span class="span-seats">
+          {{ stringSeats }}
         </span>
       </div>
     </div>

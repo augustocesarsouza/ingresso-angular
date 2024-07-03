@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { SeatsService } from '../service/seats.service';
+import { NumberOfTheSeatsClickedService } from '../service/number-of-the-seats-clicked.service';
 
 @Component({
   selector: 'app-seats-only',
@@ -13,12 +14,13 @@ export class SeatsOnlyComponent implements OnInit, OnDestroy {
   colorForNumberSeats = "rgb(152, 170, 236)";
   colorForBackgroundNumberSeats = "rgb(152, 170, 236)";
   ColorNumberIfWasClickedSeats = "black";
-  ColorForBackgroundIfWasClickedSeats = "#ffd633";
+  ColorForBackgroundIfWasClickedSeats = "rgb(255, 214, 51)";
   seats: number[] = Array.from({ length: 34 }, (_, i) => i + 1);
   private timeoutId: any;
   private timeoutIdContainerSeat: any;
+  numberOfTheClickSeats = 0;
 
-  constructor(private seats_service: SeatsService){
+  constructor(private seats_service: SeatsService, private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService){
   }
 
   ngOnInit(): void {
@@ -68,19 +70,18 @@ export class SeatsOnlyComponent implements OnInit, OnDestroy {
       clearTimeout(this.timeoutIdContainerSeat);
     }
 
+    this.numberOfTheClickSeats = this.number_of_the_seats_clicked_service.currentSeats;
+
     let nameForSeatsClean = this.nameForSeats?.replace(/\s+/g, '');
     let textContentClean = el.textContent?.replace(/\s+/g, '');
     let seatsJoin = `${nameForSeatsClean} ${textContentClean}`;
 
-    if(this.arraySeats.some((el) => el === seatsJoin)){
-      this.arraySeats = this.arraySeats.filter((el) => el !== seatsJoin);
-    }else {
-      this.arraySeats.push(seatsJoin);
-    }
 
-    this.seats_service.updateSeats(this.arraySeats);
+    if(this.numberOfTheClickSeats < 8 && el.style.color === this.colorForNumberSeats){
+      this.numberOfTheClickSeats += 1;
 
-    if(el.style.color === this.colorForNumberSeats){
+      this.seats_service.updateSeats(seatsJoin);
+
       el.style.color = this.ColorNumberIfWasClickedSeats;
       el.style.backgroundColor = this.ColorForBackgroundIfWasClickedSeats;
       el.style.transform = "scale(1.6)";
@@ -97,11 +98,19 @@ export class SeatsOnlyComponent implements OnInit, OnDestroy {
       }, 100);
 
     }else {
+      if(this.numberOfTheClickSeats > 0 && el.style.backgroundColor === this.ColorForBackgroundIfWasClickedSeats){
+        this.numberOfTheClickSeats -= 1;
+
+        this.seats_service.updateSeats(seatsJoin);
+      }
+
       el.style.color = this.colorForNumberSeats;
       el.style.backgroundColor = this.colorForBackgroundNumberSeats;
 
       clearTimeout(this.timeoutIdContainerSeat);
     }
+
+    this.number_of_the_seats_clicked_service.updateNumberOfTheClickSeats(this.numberOfTheClickSeats);
   }
 
   ngOnDestroy(): void {

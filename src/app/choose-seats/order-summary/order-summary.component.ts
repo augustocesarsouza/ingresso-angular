@@ -13,7 +13,8 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
   stringFullOnlyDate = "";
   stringOnlyHour = "";
   private seatsSubscription!: Subscription;
-  seatsClickedForTheUser: string[] = [];
+  arraySeats: string[] = [];
+  stringSeats = "";
 
   ngOnInit(): void {
     if(this.objectForOrderSummary){
@@ -22,8 +23,35 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
       this.stringOnlyHour = stringDayMonth[2];
     }
 
-    this.seatsSubscription = this.seats_service.arraySeats$.subscribe((seats) => {
-      this.seatsClickedForTheUser = seats;
+    this.seatsSubscription = this.seats_service.arraySeats$.subscribe((seatsElClicked) => {
+      if(this.arraySeats[0] === ""){
+        this.arraySeats.shift();
+      }
+
+      if(this.arraySeats.some((el) => el === seatsElClicked)){
+        this.arraySeats = this.arraySeats.filter((el) => el !== seatsElClicked);
+      }else {
+        if(this.arraySeats.length <= 8){
+          this.arraySeats.push(seatsElClicked);
+        }
+      }
+
+      if(this.arraySeats.length <= 1){
+        this.stringSeats = this.arraySeats[0];
+      }else {
+        this.stringSeats = "";
+        for (let i = 0; i < this.arraySeats.length; i++) {
+          this.stringSeats += this.arraySeats[i];
+
+          if(this.arraySeats.length > i + 1){
+            this.stringSeats += ", "
+          }
+        }
+      }
+
+      if(this.arraySeats.length === 0){
+        this.stringSeats = "";
+      }
     });
   }
 
