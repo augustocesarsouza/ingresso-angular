@@ -96,3 +96,9 @@
 .button-progress:hover {
   background-image: linear-gradient(to right, rgb(206, 165, 0), rgb(206, 110, 0));
 }
+
+.container-tickets-about-seats {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

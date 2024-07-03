@@ -34,10 +34,10 @@ export class WhichPositionChooseComponent implements OnInit, OnDestroy {
       let jaClicouTickets = false;
       let alreadyClickedOnceTickets = false;
 
-      this.seatsNumberSubscription = this.number_of_the_seats_clicked_service.numberOfTheClickSeats$.subscribe((value) => {
-        numberSeatsClicked = value;
+      this.seatsNumberSubscription = this.number_of_the_seats_clicked_service.numberOfTheClickSeats$.subscribe((amountSeats) => {
+        numberSeatsClicked = amountSeats;
 
-        if(value > 0 && !alreadyClickedOnceTickets){
+        if(amountSeats > 0 && !alreadyClickedOnceTickets){
           this.fillTickets = "rgb(152, 170, 236)";
           this.borderTickets = "1px solid rgb(152, 170, 236)";
         }else {
