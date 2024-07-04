@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NumberOfTheSeatsClickedService } from '../service/number-of-the-seats-clicked.service';
 import { Subscription } from 'rxjs';
+import { WitchFunctionWasClickedService } from '../service/witch-function-was-clicked.service';
 
 @Component({
   selector: 'app-which-position-choose',
@@ -21,7 +22,7 @@ export class WhichPositionChooseComponent implements OnInit, OnDestroy {
   widthHeightSeats = "24px";
   borderRadiusSeats = "none";
 
-  constructor(private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService){
+  constructor(private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService, private witch_function_was_clicked_service: WitchFunctionWasClickedService){
   }
 
   ngOnInit(): void {
@@ -53,6 +54,7 @@ export class WhichPositionChooseComponent implements OnInit, OnDestroy {
         if(numberSeatsClicked > 0){
           jaClicouTickets = true;
           alreadyClickedOnceTickets = true;
+          this.witch_function_was_clicked_service.updateWhatWasClicked("tickets");
 
           containerLineWhite.style.borderColor = "rgb(152, 170, 236)";
 
@@ -84,6 +86,7 @@ export class WhichPositionChooseComponent implements OnInit, OnDestroy {
         if(jaClicouTickets){
           jaClicouTickets = false;
           alreadyClickedOnceTickets = false;
+          this.witch_function_was_clicked_service.updateWhatWasClicked("seats");
 
           containerLineWhite.style.borderColor = "rgb(52, 60, 70)";
 

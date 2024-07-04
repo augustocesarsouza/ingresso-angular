@@ -19,6 +19,7 @@ export interface ObjHoursCinemaMovie {
 }
 
 export interface ObjectForOrderSummary {
+  movieId: string;
   title: string;
   movieRating: number;
   dayMonthAndDayWeek: string;
@@ -36,6 +37,7 @@ export interface ObjectForOrderSummary {
 })
 export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
   movieChooseMovieTheater!: movieChooseMovieTheater;
+  movieId: string = "";
   cinemaMovieGetAll: CinemaMovieGetAll[] = [];
   cinemaMovieGetAllFiltered: CinemaMovieGetAll[] = [];
   cinemaMovieSchedule: { [key: string]: ObjHoursCinemaMovie[] } = {};
@@ -99,6 +101,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
 
     this.route.params.subscribe((movieData: any) => {
       let movieId = movieData.movieId;
+      this.movieId = movieId;
 
       this.movieService.getInfoForChooseMovieTheater(movieId).subscribe((data: any) => {
         this.movieChooseMovieTheater = data.data;
@@ -409,6 +412,10 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
       const nomeDia = diasDaSemana[indiceDia];
       let nameDaySplit = nomeDia.slice(0, 3).toUpperCase();
 
+      itemHour = itemHour.trim();
+      spanDayMonth = spanDayMonth?.trim();
+      nameDaySplit = nameDaySplit.trim();
+
       let dayMonthAndDayWeek = `${nameDaySplit} ${spanDayMonth} ${itemHour.slice(0, 5)}`;
       let typeMovieTheater = "";
 
@@ -437,6 +444,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
       if(spanRegion){
         this.room += 1;
         let objectForOrderSummary: ObjectForOrderSummary = {
+          movieId: this.movieId,
           title: movieChooseMovieTheater.title,
           movieRating: movieChooseMovieTheater.movieRating,
           dayMonthAndDayWeek: dayMonthAndDayWeek,
@@ -445,7 +453,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
           spanRegion: spanRegion,
           imgMovie: movieChooseMovieTheater.imgUrl,
           room: this.room
-        }
+        };
 
         this.router.navigate(['/seats'], { state: { objectForOrderSummary } });
       }

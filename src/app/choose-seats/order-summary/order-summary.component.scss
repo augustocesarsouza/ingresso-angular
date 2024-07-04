@@ -6,7 +6,7 @@
   padding: 16px 16px 8px;
   border-radius: 4px;
   width: 273px;
-  max-width: 300px;
+  // max-width: 300px;
   height: 100%;
 }
 
@@ -144,6 +144,25 @@
   color: #fff;
   font-size: 15px;
   border-top: 1px solid rgb(102, 102, 102);
+}
+
+.container-itens,
+.container-total-fee,
+.container-total{
+  display: flex;
+  justify-content: space-between;
+  color: rgb(153, 153, 153);
+}
+
+.span-total-order{
+  font-weight: 700;
+  color: #fff;
+}
+
+.span-price-toal {
+  font-weight: 700;
+  color: rgb(255, 206, 0);
+
 }
 
 .container-seats-choose-for-the-user {

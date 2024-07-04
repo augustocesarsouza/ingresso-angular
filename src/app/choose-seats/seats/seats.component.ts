@@ -13,7 +13,7 @@ export class SeatsComponent implements OnInit  {
   constructor(private router: Router){
     const navigation = this.router.getCurrentNavigation();
     if(navigation?.extras?.state){
-      let state: any = navigation.extras.state
+      let state: any = navigation.extras.state;
       this.objectForOrderSummary = state.objectForOrderSummary;
     }
   }

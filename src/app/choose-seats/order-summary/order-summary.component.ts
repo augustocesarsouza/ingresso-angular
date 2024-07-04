@@ -52,6 +52,9 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
       if(this.arraySeats.length === 0){
         this.stringSeats = "";
       }
+
+      console.log(this.arraySeats.length);
+
     });
   }
 
