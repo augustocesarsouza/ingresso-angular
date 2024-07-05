@@ -182,6 +182,7 @@
   gap: 5px;
   color: #fff;
   width: 82px;
+  user-select: none;
 }
 
 .container-less-and-more > span {
@@ -198,6 +199,10 @@
   border-radius: 50%;
 }
 
+// .container-less-for-payment-method:hover {
+//   background-color: rgb(114, 130, 182);
+// }
+
 .container-more-for-payment-method{
   display: flex;
   align-items: center;
@@ -209,7 +214,7 @@
   cursor: pointer;
 }
 
-.container-more-for-payment-method:hover {
-  background-color: rgb(114, 130, 182);
+// .container-more-for-payment-method:hover {
+//   background-color: rgb(114, 130, 182);
 
-}
+// }
