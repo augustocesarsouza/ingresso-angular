@@ -10,6 +10,7 @@ import { WitchFunctionWasClickedService } from '../service/witch-function-was-cl
 })
 export class WhichPositionChooseComponent implements OnInit, OnDestroy {
   private seatsNumberSubscription!: Subscription;
+  whatFunctionWasClickedByUser = "seats";
   fillTickets = "rgb(52 60 70)";
   borderTickets = "1px solid rgb(52, 60, 70)";
   paddingTickets = "4px";
@@ -55,6 +56,7 @@ export class WhichPositionChooseComponent implements OnInit, OnDestroy {
           jaClicouTickets = true;
           alreadyClickedOnceTickets = true;
           this.witch_function_was_clicked_service.updateWhatWasClicked("tickets");
+          this.whatFunctionWasClickedByUser = "tickets";
 
           containerLineWhite.style.borderColor = "rgb(152, 170, 236)";
 
@@ -87,6 +89,7 @@ export class WhichPositionChooseComponent implements OnInit, OnDestroy {
           jaClicouTickets = false;
           alreadyClickedOnceTickets = false;
           this.witch_function_was_clicked_service.updateWhatWasClicked("seats");
+          this.whatFunctionWasClickedByUser = "seats";
 
           containerLineWhite.style.borderColor = "rgb(52, 60, 70)";
 

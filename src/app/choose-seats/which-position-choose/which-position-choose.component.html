@@ -9,6 +9,9 @@
       [borderRadius]="borderRadiusSeats"
       [padding]="paddingSeats"
     ></app-svg-choose-seats>
+    <span class="span-seats" *ngIf="whatFunctionWasClickedByUser === 'seats'"
+      >ESCOLHA DE ASSENTOS</span
+    >
     <div class="container-line-white"></div>
     <app-svg-tickets-for-seats
       [width]="widthHeightTickets"
@@ -19,6 +22,11 @@
       [borderRadius]="borderRadiusTickets"
       [padding]="paddingTickets"
     ></app-svg-tickets-for-seats>
+    <span
+      class="span-tickets"
+      *ngIf="whatFunctionWasClickedByUser === 'tickets'"
+      >TIPOS DE INGRESSOS</span
+    >
     <div class="container-line-white"></div>
     <app-svg-popcorn
       width="27px"

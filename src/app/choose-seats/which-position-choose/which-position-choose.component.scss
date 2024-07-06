@@ -1,7 +1,7 @@
 .container-in-which-position-im-in-choosing-seats-main {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .container-in-which-position-im-in-choosing-seats {
@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: space-between;
   width: 490px;
+  position: relative;
 }
 
 .container-svg-choose-seats {
@@ -17,7 +18,26 @@
   padding: 5px;
   border-radius: 50%;
   cursor: pointer;
+}
 
+.span-seats {
+  position: absolute;
+  left: -52px;
+  top: 38px;
+  min-width: 140px;
+  font-size: 12px;
+  text-align: center;
+  color: rgb(173, 182, 194);
+}
+
+.span-tickets {
+  position: absolute;
+  left: 100px;
+  top: 38px;
+  min-width: 140px;
+  font-size: 12px;
+  text-align: center;
+  color: rgb(173, 182, 194);
 }
 
 .container-line-white {
