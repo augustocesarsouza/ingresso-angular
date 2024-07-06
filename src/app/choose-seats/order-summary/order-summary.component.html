@@ -65,10 +65,39 @@
         </span>
       </div>
     </div>
+    <div
+      class="container-tickets-choose-for-the-user"
+      *ngIf="listOfFormPaymentClicked.length > 0"
+    >
+      <span>Ingressos</span>
+      <div
+        class="container-tickets"
+        *ngFor="let formPayment of listOfFormPaymentClicked"
+      >
+        <div class="container-quanity-tickets-and-name">
+          <span class="span-quantity-tickets"
+            >{{ formPayment.quantityClicked }}x</span
+          >
+          <span class="span-name-ticket">{{ formPayment.formName }}</span>
+        </div>
+        <div class="container-price-tickets">
+          <span class="span-price-ticket">R$ {{ formPayment.priceTotal }}</span>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="container-total-order">
-    <span>Itens</span>
-    <span>Total taxa</span>
-    <span>Total</span>
+    <div class="container-itens">
+      <span>Itens</span>
+      <span>{{ this.arraySeats.length }}</span>
+    </div>
+    <div class="container-total-fee">
+      <span>Total taxa</span>
+      <span>R$ 0,00</span>
+    </div>
+    <div class="container-total">
+      <span class="span-total-order">Total</span>
+      <span class="span-price-toal">R$ {{ totalPriceTickets }}</span>
+    </div>
   </div>
 </div>

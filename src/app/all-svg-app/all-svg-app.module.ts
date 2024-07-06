@@ -63,6 +63,9 @@ import { SvgBlockedComponent } from './all-svg-choose-seats/svg-blocked/svg-bloc
 import { SvgWheelchairComponent } from './all-svg-choose-seats/svg-wheelchair/svg-wheelchair.component';
 import { SvgObeseComponent } from './all-svg-choose-seats/svg-obese/svg-obese.component';
 import { SvgTicketComponent } from './all-svg-choose-seats/svg-ticket/svg-ticket.component';
+import { SvgTicketFullComponent } from './all-svg-payment-methods/svg-ticket-full/svg-ticket-full.component';
+import { SvgLessForPaymentMethodComponent } from './all-svg-payment-methods/svg-less/svg-less.component';
+import { SvgMoreForPaymentMethodComponent } from './all-svg-payment-methods/svg-more-for-payment-method/svg-more-for-payment-method.component';
 
 @NgModule({
   imports: [
@@ -131,6 +134,9 @@ import { SvgTicketComponent } from './all-svg-choose-seats/svg-ticket/svg-ticket
     SvgWheelchairComponent,
     SvgObeseComponent,
     SvgTicketComponent,
+    SvgTicketFullComponent,
+    SvgLessForPaymentMethodComponent,
+    SvgMoreForPaymentMethodComponent
   ],
   exports: [
     SvgLocationComponent,
@@ -195,6 +201,10 @@ import { SvgTicketComponent } from './all-svg-choose-seats/svg-ticket/svg-ticket
     SvgWheelchairComponent,
     SvgObeseComponent,
     SvgTicketComponent,
+    SvgTicketFullComponent,
+    SvgTicketFullComponent,
+    SvgLessForPaymentMethodComponent,
+    SvgMoreForPaymentMethodComponent
 
   ]
 })
