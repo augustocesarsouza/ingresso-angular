@@ -183,3 +183,41 @@
   width: 131px;
   line-height: 1.2;
 }
+
+.container-tickets-choose-for-the-user {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-size: 14px;
+  border-top: 1px solid rgb(102, 102, 102);
+  padding: 3px 0px;
+  font-weight: 700;
+}
+
+.container-tickets {
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  text-align: right;
+  width: 100%;
+  line-height: 1.2;
+  padding-bottom: 7px;
+
+}
+
+.container-quanity-tickets-and-name {
+  display: flex;
+  gap: 5px;
+}
+
+.span-quantity-tickets {
+  font-weight: 400;
+}
+
+.span-name-ticket {
+  font-weight: 600;
+}
+
+.span-price-ticket {
+  font-weight: 400;
+}

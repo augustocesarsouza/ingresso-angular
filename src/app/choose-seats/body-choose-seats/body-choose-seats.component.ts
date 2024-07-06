@@ -4,15 +4,17 @@ import { NumberOfTheSeatsClickedService } from '../service/number-of-the-seats-c
 import { Subscription } from 'rxjs';
 import { WitchFunctionWasClickedService } from '../service/witch-function-was-clicked.service';
 import { FormOfPaymentService } from '../service/form-of-payment.service';
+import { TicketsClickedForTheUserPaymentMethodService } from '../service/tickets-clicked-for-the-user-payment-method.service';
 
 interface FormsOfPayment {
   formName: string;
   price: string;
 }
 
-interface FormsOfPaymentClicked {
+export interface FormsOfPaymentClicked {
   formName: string;
-  price: string;
+  price: number;
+  priceTotal: string;
   quantityClicked: number;
 }
 
@@ -23,8 +25,7 @@ interface FormsOfPaymentClicked {
 })
 export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
   @Input() objectForOrderSummary!: ObjectForOrderSummary;
-  private seatsNumberSubscription!: Subscription;
-  private witchFunctionWasClickedSubscription!: Subscription;
+  private subscription: Subscription[] = [];
   private timeoutIdContainerLessAndMore: any;
   arraySeats: string[] = [];
   items: number[] = [];
@@ -34,7 +35,7 @@ export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
   quantityAlreadyBeenClickedLessMore = 0;
   listOfFormPaymentClicked: FormsOfPaymentClicked[] = [];
 
-  constructor(private form_of_payment_service: FormOfPaymentService ,private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService, private witch_function_was_clicked_service: WitchFunctionWasClickedService){
+  constructor(private form_of_payment_service: FormOfPaymentService ,private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService, private witch_function_was_clicked_service: WitchFunctionWasClickedService, private tickets_clicked_for_the_user_payment_method_service: TicketsClickedForTheUserPaymentMethodService){
   }
 
   ngOnInit(): void {
@@ -42,11 +43,11 @@ export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
       let containerChooseSeatsAndOrderSummary = document.querySelector(".container-choose-seats-and-order-summary") as HTMLElement;
       let containerSeatsAndSubtitle = document.querySelector(".container-seats-and-subtitle");
 
-      this.seatsNumberSubscription = this.number_of_the_seats_clicked_service.numberOfTheClickSeats$.subscribe((amountSeats) => {
+      this.subscription.push(this.number_of_the_seats_clicked_service.numberOfTheClickSeats$.subscribe((amountSeats) => {
         this.items = Array.from({ length: amountSeats }, (_, i) => i);
-      });
+      }));
 
-      this.witchFunctionWasClickedSubscription = this.witch_function_was_clicked_service.arrayWhatWasClicked$.subscribe((whatFunctionClicked) => {
+      this.subscription.push(this.witch_function_was_clicked_service.arrayWhatWasClicked$.subscribe((whatFunctionClicked) => {
         this.whatFunctionClicked = whatFunctionClicked;
 
         if(whatFunctionClicked === "tickets"){
@@ -69,15 +70,13 @@ export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
 
           containerChooseSeatsAndOrderSummary.style.height = "1051px";
         }
-      });
+      }));
     }
 
     if(this.objectForOrderSummary && this.objectForOrderSummary.movieId !== undefined){
       this.form_of_payment_service.getMovieIdInfo(this.objectForOrderSummary.movieId).subscribe({
         next: (data: any) => {
           this.formsOfPayment = data.data;
-          console.log(this.formsOfPayment);
-
         },
         error: (error: any) => {
           console.log(error);
@@ -98,17 +97,20 @@ export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
         this.listOfFormPaymentClicked.map((el) => {
           if(el.formName === form.formName){
             el.quantityClicked += 1;
+            let priceNumber = el.price * el.quantityClicked;
+            let priceString = priceNumber.toString().replace(".", ",");
+            el.priceTotal = priceString;
           }
+
+          return el;
         });
       }else {
-        this.listOfFormPaymentClicked.push({formName: form.formName, price: form.price, quantityClicked: 1});
-        //FAZER O REMOVER E TIRAR DO []listOfFormPaymentClicked
+        this.listOfFormPaymentClicked.push({formName: form.formName, price: Number(form.price.replace(',', '.')), priceTotal: form.price, quantityClicked: 1});
       }
 
-      console.log(this.listOfFormPaymentClicked);
+      this.tickets_clicked_for_the_user_payment_method_service.updateNumberOfTheClickSeats(this.listOfFormPaymentClicked);
 
-
-      if(Number(spanQuantityMore.textContent) > 0){
+      if(spanQuantityMore && Number(spanQuantityMore.textContent) > 0){
         let containerLess = containerLessAndMore.firstChild as HTMLElement;
         containerLess.style.backgroundColor = "rgb(152, 170, 236)";
         containerLess.style.cursor = "pointer";
@@ -132,6 +134,21 @@ export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
       spanQuantityMore.textContent = value.toString();
       this.quantityAlreadyBeenClickedLessMore -= 1;
 
+      this.listOfFormPaymentClicked.map((el) => {
+        if(el.formName === form.formName && el.quantityClicked > 0){
+          el.quantityClicked -= 1;
+          let priceNumber = el.price * el.quantityClicked;
+          let priceString = priceNumber.toString().replace(".", ",");
+          el.priceTotal = priceString;
+        }
+
+        return el;
+      });
+
+      this.listOfFormPaymentClicked = this.listOfFormPaymentClicked.filter((el) => el.quantityClicked > 0);
+
+      this.tickets_clicked_for_the_user_payment_method_service.updateNumberOfTheClickSeats(this.listOfFormPaymentClicked);
+
       if(this.quantityAlreadyBeenClickedLessMore < this.items.length){
         this.containerLessAndMore.forEach((el) => {
 
@@ -139,7 +156,7 @@ export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
           containerMore.style.backgroundColor = "rgb(152, 170, 236";
           containerMore.style.cursor = "pointer";
 
-          if(Number(el.textContent) <= 0 ){
+          if(spanQuantityMore && Number(el.textContent) <= 0 ){
             let containerLess = el.firstChild as HTMLElement;
             containerLess.style.backgroundColor = "rgb(63, 71, 93)";
             containerLess.style.cursor = "auto";
@@ -154,7 +171,7 @@ export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
     let element = $event.target as HTMLElement;
     if(elementMain)
 
-    if(Number(elementMain.textContent) > 0 ){
+    if(elementMain && Number(elementMain.textContent) > 0 ){
       element.style.backgroundColor = "rgb(152, 170, 236)";
     }
   }
@@ -163,7 +180,7 @@ export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
     let elementMain = $event.relatedTarget as HTMLElement;
     let element = $event.target as HTMLElement;
 
-    if(Number(elementMain.textContent) > 0){
+    if(elementMain && Number(elementMain.textContent) > 0){
       element.style.backgroundColor = "rgb(114, 130, 182)";
     }
   }
@@ -172,7 +189,7 @@ export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
     let elementMain = $event.relatedTarget as HTMLElement;
     let element = $event.target as HTMLElement;
 
-    if(Number(elementMain.textContent) >= 0 && this.quantityAlreadyBeenClickedLessMore < this.items.length){
+    if(elementMain && Number(elementMain.textContent) >= 0 && this.quantityAlreadyBeenClickedLessMore < this.items.length){
       element.style.backgroundColor = "rgb(114, 130, 182)";
     }
   }
@@ -181,18 +198,16 @@ export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
     let elementMain = $event.relatedTarget as HTMLElement;
     let element = $event.target as HTMLElement;
 
-    if(Number(elementMain.textContent) >= 0 && this.quantityAlreadyBeenClickedLessMore < this.items.length){
+    if(elementMain && Number(elementMain.textContent) >= 0 && this.quantityAlreadyBeenClickedLessMore < this.items.length){
       element.style.backgroundColor = "rgb(152, 170, 236)";
     }
   }
 
   ngOnDestroy() {
-    if (this.seatsNumberSubscription) {
-      this.seatsNumberSubscription.unsubscribe();
-    }
-
-    if (this.witchFunctionWasClickedSubscription) {
-      this.witchFunctionWasClickedSubscription.unsubscribe();
+    if(this.subscription.length > 0){
+      this.subscription.forEach((el) => {
+        el.unsubscribe();
+      })
     }
 
     if(this.timeoutIdContainerLessAndMore){
