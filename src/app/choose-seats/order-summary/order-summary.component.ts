@@ -25,6 +25,12 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.seatsSubscription.push(this.tickets_clicked_for_the_user_payment_method_service.numberOfTheTicketsClicked$.subscribe((list) => {
+      if(list.length <= 0){
+        this.listOfFormPaymentClicked = list;
+        this.totalPriceTickets = "0,00";
+        return;
+      }
+
       this.listOfFormPaymentClicked = list;
 
       let priceTotal = 0.00;

@@ -103,6 +103,12 @@
   gap: 5px;
 }
 
+.container-tickets-about-tickets {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .container-types-of-tickets {
   display: flex;
   flex-direction: column;
@@ -214,7 +220,3 @@
   cursor: pointer;
 }
 
-// .container-more-for-payment-method:hover {
-//   background-color: rgb(114, 130, 182);
-
-// }

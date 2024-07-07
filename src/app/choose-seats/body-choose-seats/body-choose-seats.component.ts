@@ -29,13 +29,15 @@ export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
   private timeoutIdContainerLessAndMore: any;
   arraySeats: string[] = [];
   items: number[] = [];
+  itemsPaymentClicked: number[] = [];
   formsOfPayment: FormsOfPayment[] = [];
-  whatFunctionClicked = 'tickets';
+  whatFunctionClicked = 'seats';
   containerLessAndMore!: NodeListOf<HTMLElement>;
   quantityAlreadyBeenClickedLessMore = 0;
   listOfFormPaymentClicked: FormsOfPaymentClicked[] = [];
 
   constructor(private form_of_payment_service: FormOfPaymentService ,private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService, private witch_function_was_clicked_service: WitchFunctionWasClickedService, private tickets_clicked_for_the_user_payment_method_service: TicketsClickedForTheUserPaymentMethodService){
+    this.whatFunctionClicked = 'seats';
   }
 
   ngOnInit(): void {
@@ -48,6 +50,8 @@ export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
       }));
 
       this.subscription.push(this.witch_function_was_clicked_service.arrayWhatWasClicked$.subscribe((whatFunctionClicked) => {
+        if(whatFunctionClicked.length <= 0) return;
+
         this.whatFunctionClicked = whatFunctionClicked;
 
         if(whatFunctionClicked === "tickets"){
@@ -64,6 +68,11 @@ export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
         }
 
         if(whatFunctionClicked === "seats"){
+          this.itemsPaymentClicked = [];
+          this.quantityAlreadyBeenClickedLessMore = 0;
+          this.listOfFormPaymentClicked = [];
+          this.tickets_clicked_for_the_user_payment_method_service.updateNumberOfTheClickSeats([]);
+
           if(containerSeatsAndSubtitle && containerChooseSeatsAndOrderSummary){
             containerChooseSeatsAndOrderSummary.insertBefore(containerSeatsAndSubtitle, containerChooseSeatsAndOrderSummary.firstChild);
           }
@@ -92,6 +101,8 @@ export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
       let value = Number(spanQuantityMore.textContent) + 1;
       spanQuantityMore.textContent = value.toString();
       this.quantityAlreadyBeenClickedLessMore += 1;
+
+      this.itemsPaymentClicked = Array.from({ length: this.quantityAlreadyBeenClickedLessMore }, (_, i) => i);
 
       if(this.listOfFormPaymentClicked.some((paymenet) => paymenet.formName === form.formName)){
         this.listOfFormPaymentClicked.map((el) => {
@@ -133,6 +144,8 @@ export class BodyChooseSeatsComponent implements OnInit, OnDestroy {
       let value = Number(spanQuantityMore.textContent) - 1;
       spanQuantityMore.textContent = value.toString();
       this.quantityAlreadyBeenClickedLessMore -= 1;
+
+      this.itemsPaymentClicked = Array.from({ length: this.quantityAlreadyBeenClickedLessMore }, (_, i) => i);
 
       this.listOfFormPaymentClicked.map((el) => {
         if(el.formName === form.formName && el.quantityClicked > 0){
