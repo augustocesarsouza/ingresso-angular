@@ -13,6 +13,8 @@ import { WarningAboutMovieTheaterComponent } from './warning-about-movie-theater
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { ChooseSeatsInnerComponent } from './choose-seats-inner/choose-seats-inner.component';
 import { WhichPositionChooseComponent } from './which-position-choose/which-position-choose.component';
+import { TypeOfThePaymentComponent } from './type-of-the-payment/type-of-the-payment.component';
+import { BackOrProgressFooterComponent } from './back-or-progress-footer/back-or-progress-footer.component';
 
 
 @NgModule({
@@ -26,6 +28,8 @@ import { WhichPositionChooseComponent } from './which-position-choose/which-posi
     OrderSummaryComponent,
     ChooseSeatsInnerComponent,
     WhichPositionChooseComponent,
+    TypeOfThePaymentComponent,
+    BackOrProgressFooterComponent,
   ],
   imports: [
     CommonModule,

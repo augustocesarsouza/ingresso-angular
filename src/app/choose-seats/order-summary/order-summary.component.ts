@@ -2,8 +2,8 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ObjectForOrderSummary } from '../../movie-info/movie-choose-movie-theater/movie-choose-movie-theater.component';
 import { SeatsService } from '../service/seats.service';
 import { Subscription } from 'rxjs';
-import { FormsOfPaymentClicked } from '../body-choose-seats/body-choose-seats.component';
 import { TicketsClickedForTheUserPaymentMethodService } from '../service/tickets-clicked-for-the-user-payment-method.service';
+import { FormsOfPaymentClicked } from '../body-choose-seats/body-choose-seats.component';
 
 @Component({
   selector: 'app-order-summary',
