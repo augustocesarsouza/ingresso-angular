@@ -69,7 +69,7 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
     }
   }
 
-  onClickMoreButton(form: FormsOfPayment, containerLessAndMore: HTMLDivElement){
+  onClickMoreButton(form: FormsOfPayment, containerLessAndMore: HTMLDivElement){// FAZER O CLICK QUANDO CLICAR EM UM TYPEPAYMENT COLOCAR A COR NA 'PIPOCA'
     let spanQuantityMore = containerLessAndMore.querySelector(".span-quantity-more");
 
     if(spanQuantityMore && Number(spanQuantityMore.textContent) >= 0 && Number(spanQuantityMore.textContent) < this.items.length && this.quantityAlreadyBeenClickedLessMore < this.items.length){

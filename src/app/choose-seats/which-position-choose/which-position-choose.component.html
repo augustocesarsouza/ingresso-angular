@@ -1,10 +1,10 @@
 <div class="container-in-which-position-im-in-choosing-seats-main">
   <div class="container-in-which-position-im-in-choosing-seats">
     <app-svg-choose-seats
+      class="container-svg-choose-seats"
       [width]="widthHeightSeats"
       [height]="widthHeightSeats"
       [fill]="fillSeats"
-      class="container-svg-choose-seats"
       [border]="borderSeats"
       [borderRadius]="borderRadiusSeats"
       [padding]="paddingSeats"
@@ -14,10 +14,10 @@
     >
     <div class="container-line-white"></div>
     <app-svg-tickets-for-seats
+      class="container-svg-tickets"
       [width]="widthHeightTickets"
       [height]="widthHeightTickets"
       [fill]="fillTickets"
-      class="container-svg-tickets"
       [border]="borderTickets"
       [borderRadius]="borderRadiusTickets"
       [padding]="paddingTickets"
@@ -29,13 +29,13 @@
     >
     <div class="container-line-white"></div>
     <app-svg-popcorn
-      width="27px"
-      height="27px"
-      fill="rgb(52 60 70)"
       class="container-svg-popcorn"
-      border="1px solid rgb(52, 60, 70)"
-      borderRadius="50%"
-      padding="4px"
+      [width]="widthHeightBomboniere"
+      [height]="widthHeightBomboniere"
+      [fill]="fillBomboniere"
+      [border]="borderBomboniere"
+      [borderRadius]="borderRadiusBomboniere"
+      [padding]="paddingBomboniere"
     ></app-svg-popcorn>
     <div class="container-line-white"></div>
     <app-svg-card-for-seats
