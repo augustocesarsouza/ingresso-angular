@@ -455,7 +455,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
           room: this.room
         };
 
-        this.router.navigate(['/seats'], { state: { objectForOrderSummary } });
+        this.router.navigate(['/itens-about-movie'], { state: { objectForOrderSummary } });
       }
     }
   }

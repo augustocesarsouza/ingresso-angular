@@ -1,17 +1,8 @@
+<app-header-seats></app-header-seats>
 <div class="container-choose-seats-main">
   <app-which-position-choose></app-which-position-choose>
   <div class="container-choose-seats-and-order-summary">
-    <div class="container-seats-and-subtitle">
-      <app-choose-seats-inner
-        [objectForOrderSummary]="objectForOrderSummary"
-      ></app-choose-seats-inner>
-      <app-subtitle></app-subtitle>
-      <app-warning-about-movie-theater></app-warning-about-movie-theater>
-    </div>
-    <app-type-of-the-payment
-      [objectForOrderSummary]="objectForOrderSummary"
-      *ngIf="whatFunctionClicked === 'tickets'"
-    ></app-type-of-the-payment>
+    <router-outlet></router-outlet>
     <app-order-summary
       [objectForOrderSummary]="objectForOrderSummary"
     ></app-order-summary>

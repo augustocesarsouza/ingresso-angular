@@ -1,9 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SeatsComponent } from './seats/seats.component';
+import { TypeOfThePaymentComponent } from './type-of-the-payment/type-of-the-payment.component';
+import { OnlySeatsComponent } from './only-seats/only-seats.component';
+import { BodyChooseSeatsComponent } from './body-choose-seats/body-choose-seats.component';
 
 const routes: Routes = [
-  { path: '', component: SeatsComponent },
+
+  { path: '', component: BodyChooseSeatsComponent,
+    children: [
+      { path: 'seats', component: OnlySeatsComponent },
+      { path: 'tickets', component: TypeOfThePaymentComponent },
+      { path: 'bomboniere', component: OnlySeatsComponent },
+      { path: '', redirectTo: 'seats', pathMatch: 'full' },
+      { path: '**', redirectTo: 'seats' }
+    ]
+   },
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '**', redirectTo: '' }
 ];

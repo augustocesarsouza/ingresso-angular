@@ -7,6 +7,7 @@ import { TicketsClickedForTheUserPaymentMethodService } from '../service/tickets
 import { ObjectForOrderSummary } from '../../movie-info/movie-choose-movie-theater/movie-choose-movie-theater.component';
 import { FormsOfPaymentClicked } from '../body-choose-seats/body-choose-seats.component';
 import { NumberOfTheTicketsClickedService } from '../service/number-of-the-tickets-clicked.service';
+import { OrderSummaryService } from '../service/order-summary.service';
 
 interface FormsOfPayment {
   formName: string;
@@ -19,7 +20,7 @@ interface FormsOfPayment {
   styleUrl: './type-of-the-payment.component.scss'
 })
 export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
-  @Input() objectForOrderSummary!: ObjectForOrderSummary;
+  objectForOrderSummary!: ObjectForOrderSummary;
   private subscription: Subscription[] = [];
   private timeoutIdContainerLessAndMore: any;
   items: number[] = [];
@@ -32,8 +33,13 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
 
   constructor(private form_of_payment_service: FormOfPaymentService, private tickets_clicked_for_the_user_payment_method_service: TicketsClickedForTheUserPaymentMethodService,
     private witch_function_was_clicked_service: WitchFunctionWasClickedService, private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService,
-    private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService
+    private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService, order_summary_service: OrderSummaryService
   ){
+    this.subscription.push(order_summary_service.currentOrderSummary$.subscribe((orderSummary) => {
+      if(orderSummary){
+        this.objectForOrderSummary = orderSummary;
+      }
+    }));
   }
 
   ngOnInit(): void {

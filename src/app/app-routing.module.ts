@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'movie',
     loadChildren: () => import('./movie-info/movie-info.module').then(m => m.MovieInfoModule)
   },
-  { path: 'seats',
+  { path: 'itens-about-movie',
     loadChildren: () => import('./choose-seats/choose-seats-routing.module').then(m => m.ChooseSeatsRoutingModule)
   },
 ];

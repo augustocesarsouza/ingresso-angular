@@ -2,7 +2,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ChooseSeatsRoutingModule } from './choose-seats-routing.module';
-import { SeatsComponent } from './seats/seats.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderSeatsComponent } from './header-seats/header-seats.component';
 import { AllSvgAppModule } from '../all-svg-app/all-svg-app.module';
@@ -15,11 +14,11 @@ import { ChooseSeatsInnerComponent } from './choose-seats-inner/choose-seats-inn
 import { WhichPositionChooseComponent } from './which-position-choose/which-position-choose.component';
 import { TypeOfThePaymentComponent } from './type-of-the-payment/type-of-the-payment.component';
 import { BackOrProgressFooterComponent } from './back-or-progress-footer/back-or-progress-footer.component';
+import { OnlySeatsComponent } from './only-seats/only-seats.component';
 
 
 @NgModule({
   declarations: [
-    SeatsComponent,
     HeaderSeatsComponent,
     BodyChooseSeatsComponent,
     SeatsOnlyComponent,
@@ -30,6 +29,7 @@ import { BackOrProgressFooterComponent } from './back-or-progress-footer/back-or
     WhichPositionChooseComponent,
     TypeOfThePaymentComponent,
     BackOrProgressFooterComponent,
+    OnlySeatsComponent,
   ],
   imports: [
     CommonModule,
