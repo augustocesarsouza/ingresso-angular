@@ -3,6 +3,7 @@ import { ObjectForOrderSummary } from '../../movie-info/movie-choose-movie-theat
 import { Router } from '@angular/router';
 import { OrderSummaryService } from '../service/order-summary.service';
 import { Subscription } from 'rxjs';
+import { SeatsService } from '../service/seats.service';
 
 @Component({
   selector: 'app-only-seats',
@@ -13,12 +14,17 @@ export class OnlySeatsComponent implements OnInit, OnDestroy {
   objectForOrderSummary!: ObjectForOrderSummary;
   private subscription: Subscription[] = [];
 
-  constructor(order_summary_service: OrderSummaryService){
+  constructor(order_summary_service: OrderSummaryService, private SeatsClickedService: SeatsService){
     this.subscription.push(order_summary_service.currentOrderSummary$.subscribe((orderSummary) => {
       if(orderSummary){
         this.objectForOrderSummary = orderSummary;
       }
     }));
+
+    this.SeatsClickedService.arraySeats$.subscribe((seats) => {
+      // console.log(seats);
+
+    })
   }
 
   ngOnInit(): void {

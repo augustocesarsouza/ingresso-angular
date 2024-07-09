@@ -19,6 +19,7 @@ export class SeatsOnlyComponent implements OnInit, OnDestroy {
   private timeoutId: any;
   private timeoutIdContainerSeat: any;
   numberOfTheClickSeats = 0;
+  seatsClicked: string[] = [];
 
   constructor(private seats_service: SeatsService, private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService){
   }
@@ -37,7 +38,6 @@ export class SeatsOnlyComponent implements OnInit, OnDestroy {
               el.style.color = this.colorForNumberSeats;
               el.style.backgroundColor = this.colorForBackgroundNumberSeats;
               el.style.marginRight = "3px";
-
             }
           })
 
@@ -60,6 +60,11 @@ export class SeatsOnlyComponent implements OnInit, OnDestroy {
             element.style.cursor = "auto";
             // element.style.marginRight = "0px";
           }
+
+          // this.SeatsClickedService.currentSeatsClicked$.subscribe((seats) => {
+          //   console.log(seats);
+
+          // })
         }
       }
     }, 10);
@@ -75,7 +80,6 @@ export class SeatsOnlyComponent implements OnInit, OnDestroy {
     let nameForSeatsClean = this.nameForSeats?.replace(/\s+/g, '');
     let textContentClean = el.textContent?.replace(/\s+/g, '');
     let seatsJoin = `${nameForSeatsClean} ${textContentClean}`;
-
 
     if(this.numberOfTheClickSeats < 8 && el.style.color === this.colorForNumberSeats){
       this.numberOfTheClickSeats += 1;
@@ -97,6 +101,7 @@ export class SeatsOnlyComponent implements OnInit, OnDestroy {
         el.style.paddingLeft = "0px";
       }, 100);
 
+      // this.seatsClicked.push(seatsJoin.replace(" ", ""));
     }else {
       if(this.numberOfTheClickSeats > 0 && el.style.backgroundColor === this.ColorForBackgroundIfWasClickedSeats){
         this.numberOfTheClickSeats -= 1;
@@ -108,7 +113,12 @@ export class SeatsOnlyComponent implements OnInit, OnDestroy {
       el.style.backgroundColor = this.colorForBackgroundNumberSeats;
 
       clearTimeout(this.timeoutIdContainerSeat);
+
+      this.seatsClicked = this.seatsClicked.filter((el) => el !== seatsJoin.replace(" ", ""));
     }
+
+    // this.SeatsClickedService.setArraySeats(this.seatsClicked); // rever isso está sendo varias instancia tem que ser so uma para todos os assentos
+    // talvez tenha que colocar  aqui 'ChooseSeatsInnerComponent'
 
     this.number_of_the_seats_clicked_service.updateNumberOfTheClickSeats(this.numberOfTheClickSeats);
   }

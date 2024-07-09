@@ -1,20 +1,92 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { ObjectForOrderSummary } from '../../movie-info/movie-choose-movie-theater/movie-choose-movie-theater.component';
+import { SeatsService } from '../service/seats.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-choose-seats-inner',
   templateUrl: './choose-seats-inner.component.html',
   styleUrl: './choose-seats-inner.component.scss'
 })
-export class ChooseSeatsInnerComponent implements OnInit {
+export class ChooseSeatsInnerComponent implements OnInit, OnDestroy {
   @Input() objectForOrderSummary!: ObjectForOrderSummary;
   stringFullOnlyDate = "";
   stringOnlyHour = "";
+  arraySeatsClicked: string[] = [];
+  private subscription: Subscription[] = [];
+  private timeout1: any;
+  ColorNumberIfWasClickedSeats = "black";
+  ColorForBackgroundIfWasClickedSeats = "rgb(255, 214, 51)";
 
-  constructor(){
+  constructor(private SeatsClickedService: SeatsService){
+    if(typeof document === "undefined") return;
+
+    this.subscription.push(this.SeatsClickedService.arraySeats$.subscribe((seats) => {
+      this.arraySeatsClicked = seats;
+    }));
+
+    this.subscription.push(this.SeatsClickedService.seats$.subscribe((seats) => {
+      if(seats.length <= 0) return;
+      seats = seats.replace(" ", "");
+
+      if(this.arraySeatsClicked.some((el) => el === seats)){
+
+        this.arraySeatsClicked = this.arraySeatsClicked.filter((el) => el !== seats);
+      }else {
+        this.arraySeatsClicked.push(seats.replace(" ", ""));
+      }
+
+      this.SeatsClickedService.updateSeatsArray(this.arraySeatsClicked);
+    }));
+
+    clearTimeout(this.timeout1);
+
+    this.timeout1 = setTimeout(() => {
+      let allContainerSeat: NodeListOf<HTMLElement> = document.querySelectorAll(".seats");
+
+      allContainerSeat.forEach((seat) => {
+
+        if(!seat.firstChild) return;
+
+        let caracterPostion = seat.firstChild.textContent;
+
+        let containersOnlyNamber = seat.querySelector(`.container-only-number-seats`) as HTMLElement;
+        let containerSeat = containersOnlyNamber.querySelectorAll(".container-seat") as NodeListOf<HTMLElement>;
+
+        containerSeat.forEach((seatEach) => {
+          let joinCaracterAndNumber = `${caracterPostion}${seatEach.textContent}`.replace(" ", "").trim();
+
+          if(this.arraySeatsClicked.some((el) => el === joinCaracterAndNumber)){
+            seatEach.style.color = this.ColorNumberIfWasClickedSeats;
+            seatEach.style.backgroundColor = this.ColorForBackgroundIfWasClickedSeats;
+            seatEach.style.transform = "scale(1)";
+            seatEach.style.fontSize = "11px";
+            seatEach.style.fontWeight = "600";
+            seatEach.style.paddingLeft = "0px";
+          };
+        });
+      })
+    }, 20);
+
+    this.SeatsClickedService.updateSeatsArray(this.arraySeatsClicked);
+  }
+
+  ngOnDestroy(): void {
+    this.arraySeatsClicked = [];
+
+    if(this.subscription.length > 0){
+      this.subscription.forEach((sub) => {
+        sub.unsubscribe();
+      });
+    }
+
+    this.SeatsClickedService.updateSeats("");
+    clearTimeout(this.timeout1);
   }
 
   ngOnInit(): void {
+    if(typeof document === "undefined") return;
+
     if(this.objectForOrderSummary){
       let stringDayMonth = this.objectForOrderSummary.dayMonthAndDayWeek.split(" ");
       this.stringFullOnlyDate = `${stringDayMonth[0]} ${stringDayMonth[1]}`;

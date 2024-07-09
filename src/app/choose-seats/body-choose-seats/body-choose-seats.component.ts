@@ -35,43 +35,36 @@ export class BodyChooseSeatsComponent implements OnInit {
 
   ngOnInit(): void {
     if(typeof document !== 'undefined'){
-      let containerChooseSeatsAndOrderSummary = document.querySelector(".container-choose-seats-and-order-summary") as HTMLElement;
-      // let containerSeatsAndSubtitle = document.querySelector(".container-seats-and-subtitle");
+      // let containerChooseSeatsAndOrderSummary = document.querySelector(".container-choose-seats-and-order-summary") as HTMLElement;
 
       this.subscription.push(this.witch_function_was_clicked_service.arrayWhatWasClicked$.subscribe((whatFunctionClicked) => {
         if(whatFunctionClicked.length <= 0) return;
 
         this.whatFunctionClicked = whatFunctionClicked;
-
-        if(whatFunctionClicked === "tickets"){
-          // containerSeatsAndSubtitle?.remove();
-          containerChooseSeatsAndOrderSummary.style.height = "100%";
-          this.router.navigate(['/itens-about-movie/tickets'], { state: { objectForOrderSummary: this.objectForOrderSummary } });
-
-        }
-
-        if(whatFunctionClicked === "seats"){
-          if(containerChooseSeatsAndOrderSummary){
-            // containerChooseSeatsAndOrderSummary.insertBefore(containerSeatsAndSubtitle, containerChooseSeatsAndOrderSummary.firstChild);
-            this.router.navigate(['/itens-about-movie/seats'], { state: { objectForOrderSummary: this.objectForOrderSummary } });
-          }
-
-          containerChooseSeatsAndOrderSummary.style.height = "1051px";
-        }
+        this.redirectUser(whatFunctionClicked);
       }));
+
+      this.redirectUser(this.whatFunctionClicked);
     }
   }
 
-  // onClickWhichDivWasClicked(){
-  //   this.numberDiv = numberDiv;
+  redirectUser(whatFunctionClicked: string){
+    if(typeof document !== 'undefined'){
+      let containerChooseSeatsAndOrderSummary = document.querySelector(".container-choose-seats-and-order-summary") as HTMLElement;
 
-  //   if (numberDiv === 1) {
-  //     this.router.navigate(['/my-account/my-orders-2']);
-  //   } else if (numberDiv === 3) {
-  //     this.router.navigate(['/my-account/personal-data']);
-  //   } else if (numberDiv === 4) {
-  //     this.router.navigate(['/my-account/payment-methods']);
-  //     this.containerAllOptionAndYoursOrders.style.width = "90%";
-  //   }
-  // }
+      if(whatFunctionClicked === "tickets"){
+        containerChooseSeatsAndOrderSummary.style.height = "100%";
+        this.router.navigate(['/itens-about-movie/tickets'], { state: { objectForOrderSummary: this.objectForOrderSummary } });
+      }
+
+      if(whatFunctionClicked === "seats"){
+        if(containerChooseSeatsAndOrderSummary){
+          this.router.navigate(['/itens-about-movie/seats'], { state: { objectForOrderSummary: this.objectForOrderSummary } });
+        }
+
+        containerChooseSeatsAndOrderSummary.style.height = "1051px";
+      }
+    }
+
+  }
 }

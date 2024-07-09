@@ -50,7 +50,9 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
       this.stringOnlyHour = stringDayMonth[2];
     }
 
-    this.seatsSubscription.push(this.seats_service.arraySeats$.subscribe((seatsElClicked) => {
+    this.seatsSubscription.push(this.seats_service.seats$.subscribe((seatsElClicked) => {
+      if(seatsElClicked.length <= 0)return;
+
       if(this.arraySeats[0] === ""){
         this.arraySeats.shift();
       }
