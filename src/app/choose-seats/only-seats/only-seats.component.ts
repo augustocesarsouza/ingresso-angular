@@ -20,11 +20,6 @@ export class OnlySeatsComponent implements OnInit, OnDestroy {
         this.objectForOrderSummary = orderSummary;
       }
     }));
-
-    this.SeatsClickedService.arraySeats$.subscribe((seats) => {
-      // console.log(seats);
-
-    })
   }
 
   ngOnInit(): void {

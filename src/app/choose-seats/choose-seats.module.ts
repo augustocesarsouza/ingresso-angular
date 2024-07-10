@@ -15,6 +15,7 @@ import { WhichPositionChooseComponent } from './which-position-choose/which-posi
 import { TypeOfThePaymentComponent } from './type-of-the-payment/type-of-the-payment.component';
 import { BackOrProgressFooterComponent } from './back-or-progress-footer/back-or-progress-footer.component';
 import { OnlySeatsComponent } from './only-seats/only-seats.component';
+import { BomboniereComponent } from './bomboniere/bomboniere.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { OnlySeatsComponent } from './only-seats/only-seats.component';
     TypeOfThePaymentComponent,
     BackOrProgressFooterComponent,
     OnlySeatsComponent,
+    BomboniereComponent,
   ],
   imports: [
     CommonModule,

@@ -171,10 +171,12 @@ export class WhichPositionChooseComponent implements OnInit, OnDestroy {
         }
       });
 
-      containerSvgBomboniere.addEventListener("click", () => {//Amanha fazer quando redirecionar para POPCORN, mostrar as opçoes
+      containerSvgBomboniere.addEventListener("click", () => {
         if(this.ticketsClicked > 0){
           jaClicouTickets = true;
           alreadyClickedOnceTickets = true;
+          this.witch_function_was_clicked_service.updateWhatWasClicked("bomboniere");
+          this.whatFunctionWasClickedByUser = "bomboniere";
           this.witch_function_was_clicked_service.updateWhatWasClicked("pipoca");
           this.whatFunctionWasClickedByUser = "pipoca";
 

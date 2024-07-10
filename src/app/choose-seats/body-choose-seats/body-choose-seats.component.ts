@@ -20,7 +20,7 @@ export interface FormsOfPaymentClicked {
 export class BodyChooseSeatsComponent implements OnInit {
   objectForOrderSummary!: ObjectForOrderSummary;
   private subscription: Subscription[] = [];
-  whatFunctionClicked = 'seats';
+  whatFunctionClicked = 'bomboniere';
   containerLessAndMore!: NodeListOf<HTMLElement>;
   listOfFormPaymentClicked: FormsOfPaymentClicked[] = [];
 
@@ -63,6 +63,12 @@ export class BodyChooseSeatsComponent implements OnInit {
         }
 
         containerChooseSeatsAndOrderSummary.style.height = "1051px";
+      }
+
+      if(whatFunctionClicked === "bomboniere"){
+        if(containerChooseSeatsAndOrderSummary){
+          this.router.navigate(['/itens-about-movie/bomboniere'], { state: { objectForOrderSummary: this.objectForOrderSummary } });
+        }
       }
     }
 
