@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ChooseSeatsInnerComponent } from './choose-seats-inner.component';
+
 
 describe('ChooseSeatsInnerComponent', () => {
   let component: ChooseSeatsInnerComponent;
@@ -11,7 +11,7 @@ describe('ChooseSeatsInnerComponent', () => {
       declarations: [ChooseSeatsInnerComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ChooseSeatsInnerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

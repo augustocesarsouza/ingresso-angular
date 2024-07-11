@@ -38,7 +38,7 @@ export class WhichPositionChooseComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if(typeof document !== 'undefined'){
-      let containerSvgChooseSeats = document.querySelector(".container-svg-choose-seats") as HTMLElement;
+      let containerSvgChooseSeats = document.querySelector(".container-svg-itens-about-movie") as HTMLElement;
       let containerSvgTickets = document.querySelector(".container-svg-tickets") as HTMLElement;
       let containerLineWhiteAll = document.querySelectorAll(".container-line-white") as NodeListOf<HTMLElement>;
       let containerSvgBomboniere = document.querySelector(".container-svg-popcorn") as HTMLElement;

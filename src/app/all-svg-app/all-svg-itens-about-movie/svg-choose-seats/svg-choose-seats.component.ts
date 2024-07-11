@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-svg-choose-seats',
+  selector: 'app-svg-itens-about-movie',
   templateUrl: './svg-choose-seats.component.html',
   styleUrl: './svg-choose-seats.component.scss'
 })

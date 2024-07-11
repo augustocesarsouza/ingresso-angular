@@ -5,9 +5,9 @@ import { NumberOfTheSeatsClickedService } from '../service/number-of-the-seats-c
 import { WitchFunctionWasClickedService } from '../service/witch-function-was-clicked.service';
 import { TicketsClickedForTheUserPaymentMethodService } from '../service/tickets-clicked-for-the-user-payment-method.service';
 import { ObjectForOrderSummary } from '../../movie-info/movie-choose-movie-theater/movie-choose-movie-theater.component';
-import { FormsOfPaymentClicked } from '../body-choose-seats/body-choose-seats.component';
 import { NumberOfTheTicketsClickedService } from '../service/number-of-the-tickets-clicked.service';
 import { OrderSummaryService } from '../service/order-summary.service';
+import { FormsOfPaymentClicked } from '../body-choose-seats/body-choose-seats.component';
 
 interface FormsOfPayment {
   formName: string;

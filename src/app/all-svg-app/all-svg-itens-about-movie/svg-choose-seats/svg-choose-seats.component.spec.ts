@@ -11,7 +11,7 @@ describe('SvgChooseSeatsComponent', () => {
       declarations: [SvgChooseSeatsComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(SvgChooseSeatsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TypeOfThePaymentComponent } from './type-of-the-payment/type-of-the-payment.component';
 import { OnlySeatsComponent } from './only-seats/only-seats.component';
-import { BodyChooseSeatsComponent } from './body-choose-seats/body-choose-seats.component';
 import { BomboniereComponent } from './bomboniere/bomboniere.component';
+import { BodyChooseSeatsComponent } from './body-choose-seats/body-choose-seats.component';
 
 const routes: Routes = [
 
@@ -24,4 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ChooseSeatsRoutingModule { }
+export class ItensAboutMovieRoutingModule { }

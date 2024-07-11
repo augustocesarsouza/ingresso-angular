@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BodyChooseSeatsComponent } from './body-choose-seats.component';
 
 describe('BodyChooseSeatsComponent', () => {
@@ -11,7 +10,7 @@ describe('BodyChooseSeatsComponent', () => {
       declarations: [BodyChooseSeatsComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(BodyChooseSeatsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -35,7 +35,7 @@ export class BodyChooseSeatsComponent implements OnInit {
 
   ngOnInit(): void {
     if(typeof document !== 'undefined'){
-      // let containerChooseSeatsAndOrderSummary = document.querySelector(".container-choose-seats-and-order-summary") as HTMLElement;
+      // let containerChooseSeatsAndOrderSummary = document.querySelector(".container-itens-about-movie-and-order-summary") as HTMLElement;
 
       this.subscription.push(this.witch_function_was_clicked_service.arrayWhatWasClicked$.subscribe((whatFunctionClicked) => {
         if(whatFunctionClicked.length <= 0) return;
@@ -50,7 +50,7 @@ export class BodyChooseSeatsComponent implements OnInit {
 
   redirectUser(whatFunctionClicked: string){
     if(typeof document !== 'undefined'){
-      let containerChooseSeatsAndOrderSummary = document.querySelector(".container-choose-seats-and-order-summary") as HTMLElement;
+      let containerChooseSeatsAndOrderSummary = document.querySelector(".container-itens-about-movie-and-order-summary") as HTMLElement;
 
       if(whatFunctionClicked === "tickets"){
         containerChooseSeatsAndOrderSummary.style.height = "100%";

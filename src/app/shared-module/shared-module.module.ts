@@ -15,7 +15,7 @@ import { AllSvgAppModule } from '../all-svg-app/all-svg-app.module';
   imports: [
     CommonModule,
     RouterModule,
-    AllSvgAppModule
+    AllSvgAppModule,
   ],
   exports: [
     NavigationComponent,

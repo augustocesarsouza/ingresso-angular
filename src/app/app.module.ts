@@ -10,7 +10,7 @@ import { HomeComponent } from './home-page/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { SharedModuleModule } from './shared-module/shared-module.module';
-import { ChooseSeatsModule } from './choose-seats/choose-seats.module';
+import { ItensAboutMovieModule } from './itens-about-movie/itens-about-movie.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { ChooseSeatsModule } from './choose-seats/choose-seats.module';
     FormsModule,
     HttpClientModule,
     SharedModuleModule,
-    ChooseSeatsModule
+    ItensAboutMovieModule
 
   ],
   providers: [

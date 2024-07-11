@@ -1,10 +1,10 @@
-.container-choose-seats-main {
+.container-itens-about-movie-main {
   display: flex;
   flex-direction: column;
   margin: 15px 0px;
 }
 
-.container-choose-seats-and-order-summary {
+.container-itens-about-movie-and-order-summary {
   display: flex;
   // align-items: center;
   justify-content: center;
@@ -79,7 +79,11 @@
   -webkit-box-pack: center;
   justify-content: center;
   min-height: 40px;
-  background-image: linear-gradient(to right, rgb(255, 206, 0), rgb(255, 136, 0));
+  background-image: linear-gradient(
+    to right,
+    rgb(255, 206, 0),
+    rgb(255, 136, 0)
+  );
   background-color: rgb(152, 170, 236);
   color: rgb(33, 38, 45);
   width: auto;
@@ -94,7 +98,11 @@
 }
 
 .button-progress:hover {
-  background-image: linear-gradient(to right, rgb(206, 165, 0), rgb(206, 110, 0));
+  background-image: linear-gradient(
+    to right,
+    rgb(206, 165, 0),
+    rgb(206, 110, 0)
+  );
 }
 
 .container-tickets-about-seats {
@@ -176,12 +184,12 @@
   font-weight: 600;
 }
 
-.span-price{
+.span-price {
   font-size: 14px;
   font-weight: 400;
 }
 
-.container-less-and-more{
+.container-less-and-more {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -209,7 +217,7 @@
 //   background-color: rgb(114, 130, 182);
 // }
 
-.container-more-for-payment-method{
+.container-more-for-payment-method {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -219,4 +227,3 @@
   border-radius: 50%;
   cursor: pointer;
 }
-
