@@ -85,6 +85,23 @@
         </div>
       </div>
     </div>
+    <div
+      class="container-product-clicked-by-user"
+      *ngIf="listProduct.length > 0"
+    >
+      <span>Produtos</span>
+      <div class="container-product" *ngFor="let product of listProduct">
+        <div class="container-quantity-and-more">
+          <span class="span-quantity-product"
+            >{{ product.quanityClicked }}x</span
+          >
+          <span class="span-name-product">{{ product.title }}</span>
+        </div>
+        <div class="container-price-product">
+          <span class="span-price-product">R$ {{ product.priceTotal }}</span>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="container-total-order">
     <div class="container-itens">
@@ -93,7 +110,7 @@
     </div>
     <div class="container-total-fee">
       <span>Total taxa</span>
-      <span>R$ 0,00</span>
+      <span class="span-total-taxa-price">R$ 0,00</span>
     </div>
     <div class="container-total">
       <span class="span-total-order">Total</span>

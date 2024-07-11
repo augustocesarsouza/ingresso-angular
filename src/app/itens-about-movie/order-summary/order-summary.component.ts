@@ -4,6 +4,8 @@ import { SeatsService } from '../service/seats.service';
 import { Subscription } from 'rxjs';
 import { TicketsClickedForTheUserPaymentMethodService } from '../service/tickets-clicked-for-the-user-payment-method.service';
 import { FormsOfPaymentClicked } from '../body-choose-seats/body-choose-seats.component';
+import { BomboniereService } from '../service-bomboniere/bomboniere.service';
+import { ObjProductClicked } from '../bomboniere/bomboniere.component';
 
 @Component({
   selector: 'app-order-summary',
@@ -19,8 +21,10 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
   arraySeats: string[] = [];
   stringSeats = "";
   totalPriceTickets = "0,00";
+  listProduct: ObjProductClicked[] = [];
 
-  constructor(private seats_service: SeatsService, private tickets_clicked_for_the_user_payment_method_service: TicketsClickedForTheUserPaymentMethodService){
+  constructor(private seats_service: SeatsService, private bomboniere_service: BomboniereService,
+    private tickets_clicked_for_the_user_payment_method_service: TicketsClickedForTheUserPaymentMethodService){
   }
 
   ngOnInit(): void {
@@ -42,6 +46,12 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
         }
       });
       this.totalPriceTickets = priceTotal.toFixed(2).replace(".", ",");
+    }));
+
+    this.seatsSubscription.push(this.bomboniere_service.numberOfTheProductClicked$.subscribe((listProduct) => {
+      this.listProduct = listProduct;
+      // console.log(this.listProduct);
+
     }));
 
     if(this.objectForOrderSummary){

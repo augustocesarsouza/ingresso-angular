@@ -10,6 +10,14 @@ interface Product {
   fee: string;
 }
 
+export interface ObjProductClicked {
+  title: string;
+  quanityClicked: number;
+  priceTotal: string;
+  price: number;
+  fee: number;
+}
+
 @Component({
   selector: 'app-bomboniere',
   templateUrl: './bomboniere.component.html',
@@ -19,13 +27,18 @@ export class BomboniereComponent implements OnInit {
   listProductForChoose: Product[] = [];
   private subscription: Subscription[] = [];
   private timeoutIdContainerLessAndMore: any;
+  private settimeoutNumber: any;
   items: number[] = [];
   numberItemsMaxProduct = 8;
   itemsPaymentClicked: number[] = [];
   // formsOfPayment: FormsOfPayment[] = [];
   whatFunctionClicked = 'tickets';
   containerLessAndMore!: NodeListOf<HTMLElement>;
+  spanTotalTaxaPrice!: HTMLElement;
+  totalItem: number = 0;
+  totalFeeSum: number = 0;
   quantityAlreadyBeenClickedLessMore = 0;
+  listOfProductClicked: ObjProductClicked[] = [];
   // listOfFormPaymentClicked: FormsOfPaymentClicked[] = [];
 
   constructor(private bomboniere_service: BomboniereService, private order_summary_service: OrderSummaryService){
@@ -48,11 +61,41 @@ export class BomboniereComponent implements OnInit {
 
       this.timeoutIdContainerLessAndMore = setTimeout(() => {
         this.containerLessAndMore = document.querySelectorAll(".container-less-and-more-product");
+        let totalItem = document.querySelector(".span-price-toal") as HTMLElement;
+        this.spanTotalTaxaPrice = document.querySelector(".span-total-taxa-price") as HTMLElement;
+        let element = totalItem.textContent?.slice(2).trim().replace(",", ".");
+        this.totalItem = Number(element);
       }, 50);
     }
   }
 
-  onClickMoreButton(form: Product, containerLessAndMore: HTMLDivElement){// FAZER O CLICK QUANDO CLICAR EM UM TYPEPAYMENT COLOCAR A COR NA 'PIPOCA'
+  makeTheSumForPutTotalValue(){
+    let totalItemInner = document.querySelector(".span-price-toal");
+
+    clearTimeout(this.settimeoutNumber);
+
+    let sumAllValueSpan = 0;
+
+    this.settimeoutNumber = setTimeout(() => {
+      let spanPriceProduct = document.querySelectorAll(".span-price-product") as NodeListOf<HTMLElement>;
+      spanPriceProduct.forEach((el) => {
+        if(el.textContent === null) return;
+
+        let element = el.textContent.slice(2).trim().replace(",", ".");
+        sumAllValueSpan += Number(element);
+
+      });
+
+      if(totalItemInner === null) return;
+      if(totalItemInner.textContent === null) return;
+
+      sumAllValueSpan += this.totalItem;
+
+      totalItemInner.textContent = `R$ ${sumAllValueSpan.toFixed(2)}`;
+    }, 30);
+  }
+
+  onClickMoreButton(form: Product, containerLessAndMore: HTMLDivElement){
     let spanQuantityMore = containerLessAndMore.querySelector(".span-quantity-more");
 
     if(spanQuantityMore && Number(spanQuantityMore.textContent) >= 0 && Number(spanQuantityMore.textContent) < this.items.length && this.quantityAlreadyBeenClickedLessMore < this.items.length){
@@ -60,25 +103,31 @@ export class BomboniereComponent implements OnInit {
       spanQuantityMore.textContent = value.toString();
       this.quantityAlreadyBeenClickedLessMore += 1;
 
-      // this.itemsPaymentClicked = Array.from({ length: this.quantityAlreadyBeenClickedLessMore }, (_, i) => i);
-      // this.number_of_the_tickets_clicked_service.updateNumberOfTheClickTickets(this.itemsPaymentClicked);
+      if(this.listOfProductClicked.some((el) => el.title === form.title)){
+        this.listOfProductClicked.map((el) => {
+          if(el.title === form.title){
+            el.quanityClicked += 1;
+            let totalFee = el.fee * el.quanityClicked;
+            this.totalFeeSum += el.fee;
+            this.totalFeeSum = parseFloat(this.totalFeeSum.toFixed(1));
+            let priceTotalNumber = el.price * el.quanityClicked + totalFee;
+            el.priceTotal = String(priceTotalNumber.toFixed(2));
+          };
 
-      // if(this.listOfFormPaymentClicked.some((paymenet) => paymenet.formName === form.formName)){
-      //   this.listOfFormPaymentClicked.map((el) => {
-      //     if(el.formName === form.formName){
-      //       el.quantityClicked += 1;
-      //       let priceNumber = el.price * el.quantityClicked;
-      //       let priceString = priceNumber.toString().replace(".", ",");
-      //       el.priceTotal = priceString;
-      //     }
+          return el;
+        });
+      }else {
+        let price = Number(form.price) + Number(form.fee);
+        this.totalFeeSum += Number(form.fee);
+        this.totalFeeSum = parseFloat(this.totalFeeSum.toFixed(1));
+        this.listOfProductClicked.push({ title: form.title, quanityClicked: 1, priceTotal: String(price.toFixed(2)), price: Number(form.price), fee: Number(form.fee) });
+      };
 
-      //     return el;
-      //   });
-      // }else {
-      //   this.listOfFormPaymentClicked.push({formName: form.formName, price: Number(form.price.replace(',', '.')), priceTotal: form.price, quantityClicked: 1});
-      // }
+      this.makeTheSumForPutTotalValue();
 
-      // this.tickets_clicked_for_the_user_payment_method_service.updateNumberOfTheClickSeats(this.listOfFormPaymentClicked);
+      this.spanTotalTaxaPrice.textContent = `R$ ${this.totalFeeSum.toFixed(2)}`;
+
+      this.bomboniere_service.updateNumberOfTheClickProduct(this.listOfProductClicked);
 
       if(spanQuantityMore && Number(spanQuantityMore.textContent) > 0){
         let containerLess = containerLessAndMore.firstChild as HTMLElement;
@@ -105,27 +154,30 @@ export class BomboniereComponent implements OnInit {
       spanQuantityMore.textContent = value.toString();
       this.quantityAlreadyBeenClickedLessMore -= 1;
 
-      // this.itemsPaymentClicked = Array.from({ length: this.quantityAlreadyBeenClickedLessMore }, (_, i) => i);
-      // this.number_of_the_tickets_clicked_service.updateNumberOfTheClickTickets(this.itemsPaymentClicked);
+      if(this.listOfProductClicked.some((el) => el.title === form.title)){
+        this.listOfProductClicked.map((el) => {
+          if(el.title === form.title){
+            el.quanityClicked -= 1;
+            let totalFee = el.fee * el.quanityClicked;
+            this.totalFeeSum -= el.fee;
+            this.totalFeeSum = parseFloat(this.totalFeeSum.toFixed(1));
+            let priceTotalNumber = el.price * el.quanityClicked + totalFee;
+            el.priceTotal = String(priceTotalNumber.toFixed(2));
+          };
 
-      // this.listOfFormPaymentClicked.map((el) => {
-      //   if(el.formName === form.formName && el.quantityClicked > 0){
-      //     el.quantityClicked -= 1;
-      //     let priceNumber = el.price * el.quantityClicked;
-      //     let priceString = priceNumber.toString().replace(".", ",");
-      //     el.priceTotal = priceString;
-      //   }
+          return el;
+        });
+      };
 
-      //   return el;
-      // });
+      this.spanTotalTaxaPrice.textContent = `R$ ${this.totalFeeSum.toFixed(2)}`;
 
-      // this.listOfFormPaymentClicked = this.listOfFormPaymentClicked.filter((el) => el.quantityClicked > 0);
+      this.makeTheSumForPutTotalValue();
 
-      // this.tickets_clicked_for_the_user_payment_method_service.updateNumberOfTheClickSeats(this.listOfFormPaymentClicked);
+      this.listOfProductClicked = this.listOfProductClicked.filter((el) => el.quanityClicked > 0);
+
+      this.bomboniere_service.updateNumberOfTheClickProduct(this.listOfProductClicked);
 
       if(this.quantityAlreadyBeenClickedLessMore < this.items.length){
-        console.log(this.containerLessAndMore);
-
         this.containerLessAndMore.forEach((el) => {
 
           let containerMore = el.lastChild as HTMLElement;
@@ -199,5 +251,8 @@ export class BomboniereComponent implements OnInit {
     if(this.timeoutIdContainerLessAndMore){
       clearTimeout(this.timeoutIdContainerLessAndMore);
     }
+
+    clearTimeout(this.settimeoutNumber);
+
   }
 }
