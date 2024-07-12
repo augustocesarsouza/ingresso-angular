@@ -1,0 +1,63 @@
+.container-in-which-position-im-in-choosing-seats-main {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.container-in-which-position-im-in-choosing-seats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 490px;
+  position: relative;
+}
+
+.container-svg-itens-about-movie {
+  display: flex;
+  background-color: rgb(49 85 232);
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.span-seats,
+.span-tickets,
+.span-popcorn {
+  position: absolute;
+  left: -52px;
+  top: 38px;
+  min-width: 140px;
+  font-size: 12px;
+  text-align: center;
+  color: rgb(173, 182, 194);
+}
+
+.span-tickets {
+  left: 100px;
+}
+
+.span-popcorn {
+  left: 250px;
+}
+
+.container-line-white {
+  border-top: 1px solid rgb(52, 60, 70);
+  width: 100%;
+}
+
+.container-line-white-2 {
+  border-top: 1px solid rgb(52, 60, 70);
+  width: 100%;
+}
+
+.container-line-white-3 {
+  border-top: 1px solid rgb(52, 60, 70);
+  width: 100%;
+}
+
+.container-svg-itens-about-movie,
+.container-svg-tickets,
+.container-svg-popcorn,
+.container-svg-card {
+  cursor: pointer;
+}

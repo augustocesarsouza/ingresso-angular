@@ -1,0 +1,14 @@
+.container-seats-and-subtitle {
+  display: flex;
+  flex-direction: column;
+
+  width: 1169px;
+
+  @media (max-width: 1500px) {
+    width: 1050px;
+  }
+
+  @media (max-width: 1380px) {
+    width: 985px;
+  }
+}

@@ -1,0 +1,11 @@
+<app-header-seats></app-header-seats>
+<div class="container-itens-about-movie-main">
+  <app-which-position-choose></app-which-position-choose>
+  <div class="container-itens-about-movie-and-order-summary">
+    <router-outlet></router-outlet>
+    <app-order-summary
+      [objectForOrderSummary]="objectForOrderSummary"
+    ></app-order-summary>
+  </div>
+</div>
+<app-back-or-progress-footer></app-back-or-progress-footer>

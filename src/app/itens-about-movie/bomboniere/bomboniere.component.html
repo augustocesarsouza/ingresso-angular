@@ -1,0 +1,44 @@
+<div class="container-bomboniere-main">
+  <span>Que tal uma pipoca, bebida ou doce pra acompanhar o filme?</span>
+  <div class="container-product-for-choose">
+    <div class="container-product" *ngFor="let product of listProductForChoose">
+      <div class="container-img-product">
+        <img src="{{ product.imgUrl }}" alt="{{ product.title }}" />
+      </div>
+      <div class="container-info-about-the-product">
+        <h1>{{ product.title }}</h1>
+        <h3>{{ product.title }}</h3>
+        <div class="container-price-product-and-less-and-more">
+          <div class="container-price">
+            <h1>R$ {{ product.price }}</h1>
+            <h3>+ taxa R$ {{ product.fee }}</h3>
+          </div>
+          <div
+            class="container-less-and-more-product"
+            #containerLessAndMoreProduct
+          >
+            <app-svg-less-for-payment-method
+              width="19px"
+              height="19px"
+              fill="rgb(4, 18, 24)"
+              class="container-less-for-product"
+              (click)="onClickLessButton(product, containerLessAndMoreProduct)"
+              (mouseenter)="onMouseEnterLess($event, product)"
+              (mouseleave)="onMouseLeaveLess($event, product)"
+            ></app-svg-less-for-payment-method>
+            <span class="span-quantity-more">0</span>
+            <app-svg-more-for-payment-method
+              width="19px"
+              height="19px"
+              fill="rgb(4, 18, 24)"
+              class="container-more-for-product"
+              (click)="onClickMoreButton(product, containerLessAndMoreProduct)"
+              (mouseenter)="onMouseEnterMore($event, product)"
+              (mouseleave)="onMouseLeaveMore($event, product)"
+            ></app-svg-more-for-payment-method>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
