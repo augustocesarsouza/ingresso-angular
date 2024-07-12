@@ -9,7 +9,7 @@
       [borderRadius]="borderRadiusSeats"
       [padding]="paddingSeats"
     ></app-svg-itens-about-movie>
-    <span class="span-seats" *ngIf="whatFunctionWasClickedByUser === 'seats'"
+    <span class="span-seats" *ngIf="whatFunctionWasClickedByUser === seats"
       >ESCOLHA DE ASSENTOS</span
     >
     <div class="container-line-white"></div>
@@ -22,9 +22,7 @@
       [borderRadius]="borderRadiusTickets"
       [padding]="paddingTickets"
     ></app-svg-tickets-for-seats>
-    <span
-      class="span-tickets"
-      *ngIf="whatFunctionWasClickedByUser === 'tickets'"
+    <span class="span-tickets" *ngIf="whatFunctionWasClickedByUser === tickets"
       >TIPOS DE INGRESSOS</span
     >
     <div class="container-line-white"></div>
@@ -37,6 +35,11 @@
       [borderRadius]="borderRadiusBomboniere"
       [padding]="paddingBomboniere"
     ></app-svg-popcorn>
+    <span
+      class="span-popcorn"
+      *ngIf="whatFunctionWasClickedByUser === bomboniere"
+      >BOMBONIERE</span
+    >
     <div class="container-line-white"></div>
     <app-svg-card-for-seats
       width="27px"

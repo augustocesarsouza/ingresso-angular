@@ -3,6 +3,7 @@ import { NumberOfTheSeatsClickedService } from '../service/number-of-the-seats-c
 import { Subscription } from 'rxjs';
 import { WitchFunctionWasClickedService } from '../service/witch-function-was-clicked.service';
 import { NumberOfTheTicketsClickedService } from '../service/number-of-the-tickets-clicked.service';
+import { PositionType } from '../enum/app.enums-type-of-itens';
 
 @Component({
   selector: 'app-which-position-choose',
@@ -30,6 +31,10 @@ export class WhichPositionChooseComponent implements OnInit, OnDestroy {
   paddingBomboniere = "4px";
   widthHeightBomboniere = "27px";
   borderRadiusBomboniere = "50%";
+
+  seats = PositionType.Seats;
+  tickets = PositionType.Tickets;
+  bomboniere = PositionType.Popcorn;
 
   constructor(private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService, private witch_function_was_clicked_service: WitchFunctionWasClickedService,
     private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService
@@ -81,7 +86,8 @@ export class WhichPositionChooseComponent implements OnInit, OnDestroy {
           jaClicouTickets = false;
           alreadyClickedOnceTickets = false;
           this.witch_function_was_clicked_service.updateWhatWasClicked("seats");
-          this.whatFunctionWasClickedByUser = "seats";
+          // this.whatFunctionWasClickedByUser = "seats";
+          this.whatFunctionWasClickedByUser = PositionType.Seats;
 
           containerLineWhiteAll[0].style.borderColor = "rgb(52, 60, 70)";
 
@@ -128,7 +134,8 @@ export class WhichPositionChooseComponent implements OnInit, OnDestroy {
           jaClicouTickets = true;
           alreadyClickedOnceTickets = true;
           this.witch_function_was_clicked_service.updateWhatWasClicked("tickets");
-          this.whatFunctionWasClickedByUser = "tickets";
+          // this.whatFunctionWasClickedByUser = "tickets";
+          this.whatFunctionWasClickedByUser = PositionType.Tickets;
 
           containerLineWhiteAll[0].style.borderColor = "rgb(152, 170, 236)";
 
@@ -176,9 +183,10 @@ export class WhichPositionChooseComponent implements OnInit, OnDestroy {
           jaClicouTickets = true;
           alreadyClickedOnceTickets = true;
           this.witch_function_was_clicked_service.updateWhatWasClicked("bomboniere");
-          this.whatFunctionWasClickedByUser = "bomboniere";
+          // this.whatFunctionWasClickedByUser = "bomboniere";
           this.witch_function_was_clicked_service.updateWhatWasClicked("pipoca");
-          this.whatFunctionWasClickedByUser = "pipoca";
+          // this.whatFunctionWasClickedByUser = "pipoca";
+          this.whatFunctionWasClickedByUser = PositionType.Popcorn;
 
           containerLineWhiteAll[1].style.borderColor = "rgb(152, 170, 236)";
 

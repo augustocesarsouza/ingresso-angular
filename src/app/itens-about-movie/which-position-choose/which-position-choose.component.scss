@@ -20,7 +20,9 @@
   cursor: pointer;
 }
 
-.span-seats {
+.span-seats,
+.span-tickets,
+.span-popcorn {
   position: absolute;
   left: -52px;
   top: 38px;
@@ -31,13 +33,11 @@
 }
 
 .span-tickets {
-  position: absolute;
   left: 100px;
-  top: 38px;
-  min-width: 140px;
-  font-size: 12px;
-  text-align: center;
-  color: rgb(173, 182, 194);
+}
+
+.span-popcorn {
+  left: 250px;
 }
 
 .container-line-white {
