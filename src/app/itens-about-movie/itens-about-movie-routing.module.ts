@@ -4,6 +4,7 @@ import { TypeOfThePaymentComponent } from './type-of-the-payment/type-of-the-pay
 import { OnlySeatsComponent } from './only-seats/only-seats.component';
 import { BomboniereComponent } from './bomboniere/bomboniere.component';
 import { BodyChooseSeatsComponent } from './body-choose-seats/body-choose-seats.component';
+import { PaymentTypeComponent } from './payment/payment-type/payment-type.component';
 
 const routes: Routes = [
 
@@ -12,6 +13,7 @@ const routes: Routes = [
       { path: 'seats', component: OnlySeatsComponent },
       { path: 'tickets', component: TypeOfThePaymentComponent },
       { path: 'bomboniere', component: BomboniereComponent },
+      { path: 'payment', component: PaymentTypeComponent },
       { path: '', redirectTo: 'seats', pathMatch: 'full' },
       { path: '**', redirectTo: 'seats' }
     ]

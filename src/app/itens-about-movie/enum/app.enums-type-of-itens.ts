@@ -1,5 +1,6 @@
 export enum PositionType {
   Seats = 'seats',
   Tickets = 'tickets',
-  Popcorn = 'bomboniere'
+  Popcorn = 'bomboniere',
+  Payment = 'payment'
 }
