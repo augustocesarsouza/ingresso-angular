@@ -31,7 +31,6 @@ export class BomboniereComponent implements OnInit {
   items: number[] = [];
   numberItemsMaxProduct = 8;
   itemsPaymentClicked: number[] = [];
-  // formsOfPayment: FormsOfPayment[] = [];
   whatFunctionClicked = 'tickets';
   containerLessAndMore!: NodeListOf<HTMLElement>;
   spanTotalTaxaPrice!: HTMLElement;
@@ -39,6 +38,8 @@ export class BomboniereComponent implements OnInit {
   totalFeeSum: number = 0;
   quantityAlreadyBeenClickedLessMore = 0;
   listOfProductClicked: ObjProductClicked[] = [];
+  listOfProductClickedByUser = [];
+  // formsOfPayment: FormsOfPayment[] = [];
   // listOfFormPaymentClicked: FormsOfPaymentClicked[] = [];
 
   constructor(private bomboniere_service: BomboniereService, private order_summary_service: OrderSummaryService){
@@ -65,8 +66,87 @@ export class BomboniereComponent implements OnInit {
         this.spanTotalTaxaPrice = document.querySelector(".span-total-taxa-price") as HTMLElement;
         let element = totalItem.textContent?.slice(2).trim().replace(",", ".");
         this.totalItem = Number(element);
+
+        let listProductClicked: ObjProductClicked[] = [];
+
+        this.bomboniere_service.numberOfTheProductClicked$.subscribe((listProduct) => {
+          listProductClicked = listProduct;
+          this.listOfProductClicked = listProduct;
+        });
+
+        let ProductAlreadyChooseByUser = 0;
+
+        listProductClicked.forEach((elProduct) => {
+          ProductAlreadyChooseByUser += elProduct.quanityClicked;
+        });
+
+        this.quantityAlreadyBeenClickedLessMore = ProductAlreadyChooseByUser;
+
+        let containerInfoAboutTheProduct = document.querySelectorAll(".container-info-about-the-product") as NodeListOf<HTMLElement>;
+
+        containerInfoAboutTheProduct.forEach((container) => {
+          let containerPriceProductAndLessAndMore = container.querySelector(".container-price-product-and-less-and-more") as HTMLElement;
+          let h1ProductTitle = container.querySelector(".h1-product-title") as HTMLElement;
+
+          let containerLessAndMoreProduct = containerPriceProductAndLessAndMore.querySelector(".container-less-and-more-product") as HTMLElement;
+          let spanQuantityMore = containerLessAndMoreProduct.querySelector(".span-quantity-more") as HTMLElement;
+
+          if(ProductAlreadyChooseByUser >= this.numberItemsMaxProduct){
+            let containerLess = containerLessAndMoreProduct.firstChild as HTMLElement;
+            this.disableColorLess(containerLess);
+
+            let containerMore = containerLessAndMoreProduct.lastChild as HTMLElement;
+            this.disableColorMore(containerMore);
+          }else {
+            let containerLess = containerLessAndMoreProduct.firstChild as HTMLElement;
+            this.disableColorLess(containerLess);
+
+            let containerMore = containerLessAndMoreProduct.lastChild as HTMLElement;
+            this.activeColorMore(containerMore);
+          }
+
+          listProductClicked.forEach((elProduct) => {
+            if(h1ProductTitle.textContent === elProduct.title){
+              spanQuantityMore.textContent = elProduct.quanityClicked.toString();
+
+              if(ProductAlreadyChooseByUser < this.numberItemsMaxProduct){
+                let containerLess = containerLessAndMoreProduct.firstChild as HTMLElement;
+                this.activeColorLess(containerLess);
+
+                let containerMore = containerLessAndMoreProduct.lastChild as HTMLElement;
+                this.activeColorMore(containerMore);
+              }else {
+                let containerLess = containerLessAndMoreProduct.firstChild as HTMLElement;
+                this.activeColorLess(containerLess);
+
+                let containerMore = containerLessAndMoreProduct.lastChild as HTMLElement;
+                this.disableColorMore(containerMore);
+              }
+            };
+          })
+        });
       }, 50);
     }
+  }
+
+  disableColorLess(containerLess: HTMLElement){
+    containerLess.style.backgroundColor = "rgb(63, 71, 93)";
+    containerLess.style.cursor = "auto";
+  }
+
+  disableColorMore(containerMore: HTMLElement){
+    containerMore.style.backgroundColor = "rgb(63, 71, 93)";
+    containerMore.style.cursor = "auto";
+  }
+
+  activeColorLess(containerLess: HTMLElement){
+    containerLess.style.backgroundColor = "rgb(152, 170, 236)";
+    containerLess.style.cursor = "pointer";
+  }
+
+  activeColorMore(containerMore: HTMLElement){
+    containerMore.style.backgroundColor = "rgb(152, 170, 236)";
+    containerMore.style.cursor = "pointer";
   }
 
   makeTheSumForPutTotalValue(){
@@ -126,6 +206,7 @@ export class BomboniereComponent implements OnInit {
       this.makeTheSumForPutTotalValue();
 
       this.spanTotalTaxaPrice.textContent = `R$ ${this.totalFeeSum.toFixed(2)}`;
+      console.log(this.listOfProductClicked);
 
       this.bomboniere_service.updateNumberOfTheClickProduct(this.listOfProductClicked);
 

@@ -63,6 +63,10 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
         this.whatFunctionClicked = whatFunctionClicked;
       }));
 
+      this.subscription.push(this.type_of_the_payment_service.itensClickedTypeOfPayment$.subscribe((itens) => {
+        this.itensClickedByUser = itens;
+      }));
+
       if(this.timeoutIdContainerLessAndMore){
         clearTimeout(this.timeoutIdContainerLessAndMore);
       }
@@ -124,57 +128,6 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
           }
         });
       }
-
-      this.subscription.push(this.type_of_the_payment_service.itensClickedTypeOfPayment$.subscribe((itens) => {
-        this.itensClickedByUser = itens;
-      }));
-
-      // if(this.timeoutIdContainerTypeAll){
-      //   clearTimeout(this.timeoutIdContainerTypeAll);
-      // }
-
-      // this.timeoutIdContainerTypeAll = setTimeout(() => {
-      //   let containerTypeAll = document.querySelectorAll(".container-type") as NodeListOf<HTMLElement>;
-
-      //   if(this.itensClickedByUser.length > 0){
-      //     this.containerLessAndMore.forEach((container) => {
-      //     let containerLess = container.firstChild as HTMLElement;
-      //     let containerMore = container.lastChild as HTMLElement;
-
-      //     containerLess.style.backgroundColor = "rgb(63, 71, 93)";
-      //     containerLess.style.cursor = "auto";
-
-      //     containerMore.style.backgroundColor = "rgb(63, 71, 93)";
-      //     containerMore.style.cursor = "auto";
-      //     });
-      //   }
-
-      //   containerTypeAll.forEach((container) => {
-      //     let firstElement = container.firstChild as HTMLElement;
-      //     let LastElement = container.lastChild as HTMLElement;
-
-      //     let spanNameType = firstElement.querySelector(".span-form-name");
-
-      //     this.itensClickedByUser.forEach((el) => {
-      //       if(spanNameType && el.formName === spanNameType.textContent){
-      //         this.quantityAlreadyBeenClickedLessMore += el.quantityClicked;
-      //         let containerLess = LastElement.firstChild as HTMLElement;
-      //         let containerMore = LastElement.lastChild as HTMLElement;
-
-      //         containerLess.style.backgroundColor = "rgb(152, 170, 236)";
-      //         containerLess.style.cursor = "pointer";
-
-      //         containerMore.style.backgroundColor = "rgb(63, 71, 93)";
-      //         containerMore.style.cursor = "auto";
-
-      //         let spanQuantityMore = LastElement.querySelector(".span-quantity-more");
-      //         if(spanQuantityMore){
-      //           spanQuantityMore.textContent = el.quantityClicked.toString();
-      //         }
-      //       }
-      //     })
-      //   });
-      // }, 60);
     }
   }
 
