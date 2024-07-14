@@ -1,15 +1,21 @@
 .container-itens-about-movie-main {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   margin: 15px 0px;
+}
+
+.container-itens-about-movie {
+  display: flex;
+  flex-direction: column;
+  width: 1440px;
 }
 
 .container-itens-about-movie-and-order-summary {
   display: flex;
-  // align-items: center;
   justify-content: center;
   height: 1051px;
   margin-bottom: 70px;
+  width: 100%;
 }
 
 .container-seats-and-subtitle {

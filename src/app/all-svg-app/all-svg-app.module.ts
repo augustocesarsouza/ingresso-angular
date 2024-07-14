@@ -67,6 +67,10 @@ import { SvgMoreComponent } from './choose-seats-svg/svg-more/svg-more.component
 import { SvgLessComponent } from './choose-seats-svg/svg-less/svg-less.component';
 import { SvgChooseSeatsComponent } from './all-svg-itens-about-movie/svg-choose-seats/svg-choose-seats.component';
 import { SvgMoreForPaymentMethodComponent } from './all-svg-payment-methods/svg-more-for-payment-method/svg-more-for-payment-method.component';
+import { SvgCardCreditComponent } from './all-svg-payment/svg-card-credit/svg-card-credit.component';
+import { SvgCardDebitComponent } from './all-svg-payment/svg-card-debit/svg-card-debit.component';
+import { SvgPixPaymentComponent } from './all-svg-payment/svg-pix/svg-pix.component';
+import { SvgGooglePlayComponent } from './all-svg-payment/svg-google-play/svg-google-play.component';
 
 @NgModule({
   imports: [
@@ -138,7 +142,11 @@ import { SvgMoreForPaymentMethodComponent } from './all-svg-payment-methods/svg-
     SvgTicketFullComponent,
     SvgLessForPaymentMethodComponent,
     SvgMoreForPaymentMethodComponent,
-    SvgTicketForPaymentChooseComponent
+    SvgTicketForPaymentChooseComponent,
+    SvgCardCreditComponent,
+    SvgCardDebitComponent,
+    SvgPixPaymentComponent,
+    SvgGooglePlayComponent
   ],
   exports: [
     SvgLocationComponent,
@@ -207,7 +215,11 @@ import { SvgMoreForPaymentMethodComponent } from './all-svg-payment-methods/svg-
     SvgTicketFullComponent,
     SvgLessForPaymentMethodComponent,
     SvgMoreForPaymentMethodComponent,
-    SvgTicketForPaymentChooseComponent
+    SvgTicketForPaymentChooseComponent,
+    SvgCardCreditComponent,
+    SvgCardDebitComponent,
+    SvgPixPaymentComponent,
+    SvgGooglePlayComponent
 
   ]
 })

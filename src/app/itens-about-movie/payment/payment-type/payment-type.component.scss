@@ -1,0 +1,69 @@
+:host {
+  width: 100%;
+  display: block; /* Certifique-se de que o host esteja como bloco para que a largura seja aplicada corretamente */
+}
+
+.container-all-payment-methods-main {
+  display: flex;
+  justify-content: center;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.container-all-payment-methods {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.container-card-credit,
+.container-card-debit,
+.container-pix,
+.container-google-play {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgb(33, 38, 45);
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.container-card-credit > span {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+}
+
+.container-card-debit > span {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+}
+
+.container-pix {
+  padding: 18px 23px;
+  line-height: 1;
+}
+
+.container-pix > span {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+}
+
+.container-google-play {
+  gap: 5px;
+  padding: 8px 13px;
+
+}
+
+.container-google-play > span {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+}
+
+.container-svg-payment-pix{
+  display: flex;
+}
