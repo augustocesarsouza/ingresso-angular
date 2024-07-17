@@ -71,6 +71,8 @@ import { SvgCardCreditComponent } from './all-svg-payment/svg-card-credit/svg-ca
 import { SvgCardDebitComponent } from './all-svg-payment/svg-card-debit/svg-card-debit.component';
 import { SvgPixPaymentComponent } from './all-svg-payment/svg-pix/svg-pix.component';
 import { SvgGooglePlayComponent } from './all-svg-payment/svg-google-play/svg-google-play.component';
+import { CouponAndGiftCardComponent } from './all-svg-payment/coupon-and-gift-card/coupon-and-gift-card.component';
+import { SvgArrowPaymentComponent } from './all-svg-payment/svg-arrow-payment/svg-arrow-payment.component';
 
 @NgModule({
   imports: [
@@ -146,7 +148,9 @@ import { SvgGooglePlayComponent } from './all-svg-payment/svg-google-play/svg-go
     SvgCardCreditComponent,
     SvgCardDebitComponent,
     SvgPixPaymentComponent,
-    SvgGooglePlayComponent
+    SvgGooglePlayComponent,
+    CouponAndGiftCardComponent,
+    SvgArrowPaymentComponent
   ],
   exports: [
     SvgLocationComponent,
@@ -219,8 +223,9 @@ import { SvgGooglePlayComponent } from './all-svg-payment/svg-google-play/svg-go
     SvgCardCreditComponent,
     SvgCardDebitComponent,
     SvgPixPaymentComponent,
-    SvgGooglePlayComponent
-
+    SvgGooglePlayComponent,
+    CouponAndGiftCardComponent,
+    SvgArrowPaymentComponent
   ]
 })
 export class AllSvgAppModule { }

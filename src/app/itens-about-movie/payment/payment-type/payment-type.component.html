@@ -19,4 +19,80 @@
       <span>Google Pay</span>
     </div>
   </div>
+  <div class="container-line-discount-and-span">
+    <span>Desconto</span>
+    <div class="container-line-discount"></div>
+  </div>
+  <div class="container-clube-uol">
+    <div
+      class="container-img-clube-uol-main"
+      (click)="onClickContainerImgClubeMain()"
+    >
+      <div class="container-img-clube-uol">
+        <img
+          src="https://res.cloudinary.com/dyqsqg7pk/image/upload/v1703514340/logo_header_hksemr.png"
+          alt="clube-uol"
+        />
+      </div>
+      <app-svg-arrow-payment [rotate]="rotateClubeUol"></app-svg-arrow-payment>
+    </div>
+    <span
+      >Assinante UOL tem 2 ingressos por mês sem taxa de serviço.
+      <span class="span-know-more">Saiba mais</span></span
+    >
+    <div
+      class="container-info-about-put-the-cpf-or-cnpj"
+      [ngClass]="{ expanded: rotateClubeUol === '0' }"
+    >
+      <span
+        ><span class="subscriber-uol">É assinante UOL?</span> Digite seu
+        <strong>CPF</strong> ou <strong>CNPJ</strong> para consultar e aplicar o
+        seu benefício. Caso esteja disponível, a isenção da taxa será
+        automaticamente aplicada no valor de sua compra.</span
+      >
+
+      <div class="container-input-button-apply">
+        <input
+          type="text"
+          placeholder="Digite o CPF ou CNPJ"
+          id="input-number-cpf-cnpj"
+          #inputCpfCnpj
+          (change)="onChangeInputCpfCnpj(inputCpfCnpj)"
+        />
+        <button>APLICAR</button>
+      </div>
+    </div>
+  </div>
+  <div class="container-coupon-and-gift-card-arrow-main">
+    <div
+      class="container-coupon-and-gift-card-arrow"
+      (click)="onClickCuponGiftCard()"
+    >
+      <div class="container-coupon-and-gift-card">
+        <app-coupon-and-gift-card></app-coupon-and-gift-card>
+        <span>Cupom e vale-presente</span>
+      </div>
+      <app-svg-arrow-payment
+        [rotate]="rotateCuponGiftPresent"
+      ></app-svg-arrow-payment>
+    </div>
+    <div
+      class="container-info-coupon"
+      [ngClass]="{ expandedCoupon: rotateCuponGiftPresent === '0' }"
+    >
+      <span
+        >Insira o código do Vale-Presente, Cupom de Desconto ou Promocode.</span
+      >
+      <div class="conatiner-input-button-apply-coupon">
+        <input
+          type="text"
+          placeholder="Insira o código aqui"
+          id="input-coupon"
+          #inputCoupon
+          (change)="onChangeInputCoupon(inputCoupon)"
+        />
+        <button>APLICAR</button>
+      </div>
+    </div>
+  </div>
 </div>

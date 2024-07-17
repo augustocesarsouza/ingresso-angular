@@ -6,6 +6,7 @@
 .container-all-payment-methods-main {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   margin-right: 10px;
   margin-left: 10px;
 }
@@ -27,6 +28,7 @@
   background-color: rgb(33, 38, 45);
   padding: 8px 16px;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .container-card-credit > span {
@@ -66,4 +68,226 @@
 
 .container-svg-payment-pix{
   display: flex;
+}
+
+.container-line-discount-and-span {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  gap: 7px;
+  margin: 15px 0px;
+}
+
+.container-line-discount-and-span > span {
+  color: rgb(153, 153, 153);
+  font-size: 14px;
+}
+
+.container-line-discount {
+  border-top: 1px solid rgb(153, 153, 153);
+  width: 100%;
+}
+
+.container-clube-uol {
+  padding: 16px;
+  padding-bottom: 25px;
+  background-color: rgb(33, 38, 45);
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.container-img-clube-uol-main {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+}
+
+.container-img-clube-uol {
+  display: flex;
+  width: 103px;
+  padding: 7px;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.container-img-clube-uol > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.container-clube-uol > span {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.span-know-more{
+  color: rgb(0, 153, 255);
+}
+
+.container-info-about-put-the-cpf-or-cnpj {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-size: 14px;
+  width: 95%;
+  line-height: 1.2;
+
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.6s ease;
+}
+
+.container-info-about-put-the-cpf-or-cnpj.expanded {
+  margin-top: 10px;
+  border-top: 1px solid #6767676b;
+  max-height: 1000px;
+}
+
+.container-info-about-put-the-cpf-or-cnpj > span {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.subscriber-uol {
+  color: rgb(255, 214, 51);
+}
+
+.container-input-button-apply{
+  display: flex;
+  gap: 10px;
+  height: 48px;
+}
+
+.container-input-button-apply > input {
+  font-size: 14px;
+  border: 0px;
+  outline: 0px;
+  color: black;
+  width: 290px;
+  height: 100%;
+  border-radius: 5px;
+  padding-left: 5px;
+  border-left: 3px solid #999999;
+}
+
+.container-input-button-apply > button {
+  // border: solid rgb(152, 170, 236);
+  align-items: center;
+  border-radius: 12px;
+  display: flex;
+  font-weight: 700;
+  font-size: 14px;
+  -webkit-box-pack: center;
+  justify-content: center;
+  background: transparent;
+  color: rgb(102, 102, 102);
+  border: 3px solid rgb(102, 102, 102);
+  width: 130px;
+  height: 48px;
+
+  &:hover {
+    color: rgb(138 138 138);
+    border: 3px solid rgb(138 138 138);
+  }
+}
+
+.container-coupon-and-gift-card-arrow-main {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(33, 38, 45);
+  padding: 16px;
+  padding-bottom: 25px;
+  border-radius: 4px;
+}
+
+.container-coupon-and-gift-card-arrow {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+}
+
+.container-coupon-and-gift-card {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  gap: 10px;
+}
+
+.container-coupon-and-gift-card > span {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(152, 170, 236);
+  line-height: 1;
+}
+
+.container-info-coupon {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-size: 14px;
+  width: 95%;
+  line-height: 1.2;
+
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.6s ease;
+}
+
+.container-info-coupon.expandedCoupon {
+  margin-top: 10px;
+  // border-top: 1px solid #6767676b;
+  max-height: 1000px;
+}
+
+.container-info-coupon > span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.conatiner-input-button-apply-coupon{
+  display: flex;
+  gap: 10px;
+  height: 48px;
+}
+
+.conatiner-input-button-apply-coupon > input {
+  font-size: 14px;
+  border: 0px;
+  outline: 0px;
+  color: black;
+  width: 290px;
+  height: 100%;
+  border-radius: 5px;
+  padding-left: 5px;
+  border-left: 3px solid #999999;
+}
+
+.conatiner-input-button-apply-coupon > button {
+  // border: solid rgb(152, 170, 236);
+  align-items: center;
+  border-radius: 12px;
+  display: flex;
+  font-weight: 700;
+  font-size: 14px;
+  -webkit-box-pack: center;
+  justify-content: center;
+  background: transparent;
+  color: rgb(102, 102, 102);
+  border: 3px solid rgb(102, 102, 102);
+  width: 130px;
+  height: 48px;
+
+  &:hover {
+    color: rgb(138 138 138);
+    border: 3px solid rgb(138 138 138);
+  }
 }
