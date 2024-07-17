@@ -9,7 +9,6 @@ import { Subscription } from 'rxjs';
 })
 export class PaymentTypeComponent implements OnInit {
   private subscription: Subscription[] = [];
-  rotateCuponGiftPresent = "180";
 
   constructor(private order_summary_service: OrderSummaryService){
   }
@@ -22,17 +21,5 @@ export class PaymentTypeComponent implements OnInit {
         }
       }));
     }
-  }
-
-  onClickCuponGiftCard(){
-    if(this.rotateCuponGiftPresent === "180"){
-      this.rotateCuponGiftPresent = "0";
-    }else if(this.rotateCuponGiftPresent === "0"){
-      this.rotateCuponGiftPresent = "180";
-    }
-  }
-
-  onChangeInputCoupon(inputCoupon: HTMLInputElement){
-    const valueInput = inputCoupon.value;
   }
 }

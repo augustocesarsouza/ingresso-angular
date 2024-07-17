@@ -18,6 +18,7 @@ import { WhichPositionChooseComponent } from './which-position-choose/which-posi
 import { AllSvgAppModule } from '../all-svg-app/all-svg-app.module';
 import { PaymentTypeComponent } from './payment/payment-type/payment-type.component';
 import { ClubeUolComponent } from './payment/clube-uol/clube-uol.component';
+import { CouponGiftCardComponent } from './payment/coupon-gift-card/coupon-gift-card.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ClubeUolComponent } from './payment/clube-uol/clube-uol.component';
     BomboniereComponent,
     PaymentTypeComponent,
     ClubeUolComponent,
+    CouponGiftCardComponent,
   ],
   imports: [
     CommonModule,
