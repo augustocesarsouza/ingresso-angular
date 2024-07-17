@@ -17,6 +17,7 @@ import { ChooseSeatsInnerComponent } from './choose-seats-inner/choose-seats-inn
 import { WhichPositionChooseComponent } from './which-position-choose/which-position-choose.component';
 import { AllSvgAppModule } from '../all-svg-app/all-svg-app.module';
 import { PaymentTypeComponent } from './payment/payment-type/payment-type.component';
+import { ClubeUolComponent } from './payment/clube-uol/clube-uol.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { PaymentTypeComponent } from './payment/payment-type/payment-type.compon
     OnlySeatsComponent,
     BomboniereComponent,
     PaymentTypeComponent,
+    ClubeUolComponent,
   ],
   imports: [
     CommonModule,
