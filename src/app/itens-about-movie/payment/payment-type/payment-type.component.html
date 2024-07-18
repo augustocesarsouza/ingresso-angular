@@ -1,20 +1,95 @@
 <div class="container-all-payment-methods-main">
   <div class="container-all-payment-methods">
-    <div class="container-card-credit">
-      <app-svg-card-credit></app-svg-card-credit>
-      <span>Cartão de crédito</span>
+    <div
+      class="container-card-credit type-payment-method"
+      [ngClass]="{ expanded: elementClickedPaymentType === 'credit' }"
+      #containerCardCredit
+    >
+      <div
+        class="container-svg-card-credit-span"
+        (click)="onClickCardCredit(containerCardCredit)"
+      >
+        <app-svg-card-credit></app-svg-card-credit>
+        <span>Cartão de crédito</span>
+      </div>
+      <div class="container-info-about-the-card">
+        <label for="input-number-card" class="label-number-card">
+          <span>Número do cartão</span>
+          <input
+            type="text"
+            placeholder="1234 5678 9012 3456"
+            id="input-number-card"
+            #inputNumberCard
+            (focus)="onFocusInputs(inputNumberCard)"
+            (blur)="onBlurInputs(inputNumberCard)"
+          />
+        </label>
+        <div class="container-expiration-date-security-code">
+          <label for="input-expiration-date" class="label-expiration-date">
+            <span>Data de validade</span>
+            <input
+              type="text"
+              placeholder="MM/AA"
+              id="input-expiration-date"
+              #inputExpirationDate
+              (focus)="onFocusInputs(inputExpirationDate)"
+              (blur)="onBlurInputs(inputExpirationDate)"
+            />
+          </label>
+          <label for="input-security-code" class="label-security-code">
+            <span>Código de segurança</span>
+            <input
+              type="text"
+              placeholder="3 dígitos"
+              id="input-security-code"
+              #inputSecurityCode
+              (focus)="onFocusInputs(inputSecurityCode)"
+              (blur)="onBlurInputs(inputSecurityCode)"
+            />
+          </label>
+        </div>
+        <label for="input-name-card" class="label-name-card">
+          <span>Nome no cartão</span>
+          <input
+            type="text"
+            placeholder="Nome como está no cartão"
+            id="input-name-card"
+            #inputNameCard
+            (focus)="onFocusInputs(inputNameCard)"
+            (blur)="onBlurInputs(inputNameCard)"
+          />
+        </label>
+        <div class="container-box-accept">
+          <label for="save" class="label-box-accept-and-span">
+            <input type="checkbox" id="save" name="save" />
+            <span>Salvar para meu próximo pagamento</span>
+          </label>
+        </div>
+      </div>
     </div>
-    <div class="container-card-debit">
+    <div
+      class="container-card-debit type-payment-method"
+      #containerCardDebit
+      (click)="onClickCardDebit(containerCardDebit)"
+    >
       <app-svg-card-debit></app-svg-card-debit>
       <span>Cartão de débito</span>
     </div>
-    <div class="container-pix">
+    <div
+      class="container-pix type-payment-method"
+      #containerPix
+      (click)="onClickPix(containerPix)"
+    >
       <app-svg-payment-pix
         class="container-svg-payment-pix"
       ></app-svg-payment-pix>
       <span>Pix</span>
     </div>
-    <div class="container-google-play">
+    <div
+      class="container-google-play type-payment-method"
+      #containerGooglePlay
+      (click)="onClickGooglePlay(containerGooglePlay)"
+    >
       <app-svg-google-play></app-svg-google-play>
       <span>Google Pay</span>
     </div>
