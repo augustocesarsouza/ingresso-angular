@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 export class PaymentTypeComponent implements OnInit, OnDestroy {
   private subscription: Subscription[] = [];
   allContainerCreditDebitPixPay!: NodeListOf<HTMLElement>;
-  elementClickedPaymentType = "credit";
+  elementClickedPaymentType = "debit";
   private timeoutMouseEnter: any;
 
   mouseEnterInputNumber = false;
@@ -22,6 +22,8 @@ export class PaymentTypeComponent implements OnInit, OnDestroy {
 
   constructor(private order_summary_service: OrderSummaryService){
   }
+
+
 
   ngOnInit(): void {
     if(typeof document !== 'undefined'){
@@ -70,87 +72,22 @@ export class PaymentTypeComponent implements OnInit, OnDestroy {
           });
           mask.mask(inputSecurityCode);
         }
-
-        // if (inputNumberCpfCnpj) {
-        //   const mask = new Inputmask.default({
-        //     mask: [
-        //       "999.999.999-99",
-        //       "99.999.999/9999-99"
-        //     ],
-        //     definitions: {
-        //       '9': {
-        //         validator: "[0-9]",
-        //         cardinality: 1
-        //       }
-        //     },
-        //     keepStatic: true
-        //   });
-        //   mask.mask(inputNumberCpfCnpj);
-        // }
       });
 
-      document.body.addEventListener("click", this.handleEventClickBody.bind(this));
-      // document.body.addEventListener("click", () => this.handleEventClickBody()); - esses dois jeito funciona "bind"
+      // document.body.addEventListener("click", this.handleEventClickBody.bind(this));
     }
   }
 
-  handleEventClickBody(){
-    if(!this.mouseEnterInputNumber && this.inputThatWasClick){
-      this.inputThatWasClick.style.border = "none";
-
-      this.inputThatWasClick = undefined;
-    }
-
-    if(!this.mouseEnterInputExpirationDate && this.inputExpirationDate){
-      this.inputExpirationDate.style.border = "none";
-
-      this.inputExpirationDate = undefined;
-    }
-
-    if(!this.mouseEnterInputSecurityCode && this.inputSecurityCode){
-      this.inputSecurityCode.style.border = "none";
-
-      this.inputSecurityCode = undefined;
-    }
-  }
-
-  onFocusInputs(input: HTMLInputElement){
-    input.style.border = "2px solid #0075ff";
-  }
-
-  onBlurInputs(input: HTMLInputElement){
-    input.style.border = "none";
-  }
-
-  onClickCardCredit(containerCardCredit: HTMLDivElement){
+  onClickMethodPayment(containerCardCredit: HTMLDivElement, typePaymentName: string){
     this.removeBorderContainer();
 
     containerCardCredit.style.border = '1px solid rgb(152, 170, 236)';
 
-    if(this.elementClickedPaymentType.length <= 0){
-      this.elementClickedPaymentType = "credit";
-    }else {
+    if(this.elementClickedPaymentType === typePaymentName){
       this.elementClickedPaymentType = "";
+    }else {
+      this.elementClickedPaymentType = typePaymentName;
     }
-  }
-
-  onClickCardDebit(containerCardDebit: HTMLDivElement){
-    this.removeBorderContainer();
-
-    containerCardDebit.style.border = '1px solid rgb(152, 170, 236)';
-    this.elementClickedPaymentType = "debit";
-  }
-
-  onClickPix(containerPix: HTMLDivElement){
-    this.removeBorderContainer();
-
-    containerPix.style.border = '1px solid rgb(152, 170, 236)';
-  }
-
-  onClickGooglePlay(containerGooglePlay: HTMLDivElement){
-    this.removeBorderContainer();
-
-    containerGooglePlay.style.border = '1px solid rgb(152, 170, 236)';
   }
 
   removeBorderContainer(){
@@ -162,8 +99,8 @@ export class PaymentTypeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(typeof document !== 'undefined'){
-      document.body.removeEventListener("click", this.handleEventClickBody);
-    }
+    // if(typeof document !== 'undefined'){
+    //   document.body.removeEventListener("click", this.handleEventClickBody);
+    // }
   }
 }

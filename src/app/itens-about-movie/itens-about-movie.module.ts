@@ -19,6 +19,7 @@ import { AllSvgAppModule } from '../all-svg-app/all-svg-app.module';
 import { PaymentTypeComponent } from './payment/payment-type/payment-type.component';
 import { ClubeUolComponent } from './payment/clube-uol/clube-uol.component';
 import { CouponGiftCardComponent } from './payment/coupon-gift-card/coupon-gift-card.component';
+import { InfoAboutCardComponent } from './payment/info-about-card/info-about-card.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { CouponGiftCardComponent } from './payment/coupon-gift-card/coupon-gift-
     PaymentTypeComponent,
     ClubeUolComponent,
     CouponGiftCardComponent,
+    InfoAboutCardComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,109 @@
+:host {
+  display: block;
+}
+
+.container-info-about-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label-number-card {
+  display: flex;
+  flex-direction: column;
+  // gap: 10px;
+}
+
+.label-number-card > span {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+  user-select: none;
+}
+
+.label-number-card > input {
+  border-radius: 7px;
+  border: none;
+  padding: 7px 7px;
+  font-size: 16px;
+  outline: none;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.container-all-svg {
+  display: flex;
+  gap: 5px;
+}
+
+.container-expiration-date-security-code {
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+}
+
+.label-expiration-date {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.label-expiration-date > span {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+  user-select: none;
+}
+
+.label-expiration-date > input {
+  border-radius: 7px;
+  border: none;
+  padding: 7px 7px;
+  font-size: 16px;
+  outline: none;
+  height: 40px;
+}
+
+.label-security-code {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.label-security-code > span {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+  user-select: none;
+}
+
+.label-security-code > input {
+  border-radius: 7px;
+  border: none;
+  padding: 7px 7px;
+  font-size: 16px;
+  outline: none;
+  height: 40px;
+}
+
+.label-name-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.label-name-card > span {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+  user-select: none;
+}
+
+.label-name-card > input {
+  border-radius: 7px;
+  border: none;
+  padding: 7px 7px;
+  font-size: 16px;
+  outline: none;
+  height: 40px;
+}

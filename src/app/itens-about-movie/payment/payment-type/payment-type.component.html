@@ -7,61 +7,17 @@
     >
       <div
         class="container-svg-card-credit-span"
-        (click)="onClickCardCredit(containerCardCredit)"
+        (click)="onClickMethodPayment(containerCardCredit, 'credit')"
       >
         <app-svg-card-credit></app-svg-card-credit>
         <span>Cartão de crédito</span>
       </div>
       <div class="container-info-about-the-card">
-        <label for="input-number-card" class="label-number-card">
-          <span>Número do cartão</span>
-          <input
-            type="text"
-            placeholder="1234 5678 9012 3456"
-            id="input-number-card"
-            #inputNumberCard
-            (focus)="onFocusInputs(inputNumberCard)"
-            (blur)="onBlurInputs(inputNumberCard)"
-          />
-        </label>
-        <div class="container-expiration-date-security-code">
-          <label for="input-expiration-date" class="label-expiration-date">
-            <span>Data de validade</span>
-            <input
-              type="text"
-              placeholder="MM/AA"
-              id="input-expiration-date"
-              #inputExpirationDate
-              (focus)="onFocusInputs(inputExpirationDate)"
-              (blur)="onBlurInputs(inputExpirationDate)"
-            />
-          </label>
-          <label for="input-security-code" class="label-security-code">
-            <span>Código de segurança</span>
-            <input
-              type="text"
-              placeholder="3 dígitos"
-              id="input-security-code"
-              #inputSecurityCode
-              (focus)="onFocusInputs(inputSecurityCode)"
-              (blur)="onBlurInputs(inputSecurityCode)"
-            />
-          </label>
-        </div>
-        <label for="input-name-card" class="label-name-card">
-          <span>Nome no cartão</span>
-          <input
-            type="text"
-            placeholder="Nome como está no cartão"
-            id="input-name-card"
-            #inputNameCard
-            (focus)="onFocusInputs(inputNameCard)"
-            (blur)="onBlurInputs(inputNameCard)"
-          />
-        </label>
+        <app-info-about-card></app-info-about-card>
         <div class="container-box-accept">
           <label for="save" class="label-box-accept-and-span">
             <input type="checkbox" id="save" name="save" />
+            <span class="custom-checkbox"></span>
             <span>Salvar para meu próximo pagamento</span>
           </label>
         </div>
@@ -69,29 +25,54 @@
     </div>
     <div
       class="container-card-debit type-payment-method"
+      [ngClass]="{ expanded: elementClickedPaymentType === 'debit' }"
       #containerCardDebit
-      (click)="onClickCardDebit(containerCardDebit)"
     >
-      <app-svg-card-debit></app-svg-card-debit>
-      <span>Cartão de débito</span>
+      <div
+        class="container-svg-card-credit-span"
+        (click)="onClickMethodPayment(containerCardDebit, 'debit')"
+      >
+        <app-svg-card-debit></app-svg-card-debit>
+        <span>Cartão de débito</span>
+      </div>
+      <div class="container-info-about-the-card">
+        <div class="container-find-out-your-bank-is-accepted">
+          <span
+            ><span class="span-cick-here">Clique aqui</span> e descubra se o seu
+            banco é aceito.</span
+          >
+          <div class="container-svg-exclamation-mark-and-span">
+            <app-svg-exclamation-mark-payment></app-svg-exclamation-mark-payment>
+            <span
+              >Alguns bancos requerem um cartão de Débito virtual. Verifique se
+              o seu é um deles.</span
+            >
+            <!-- rgb(255, 206, 0) -->
+          </div>
+        </div>
+        <app-info-about-card></app-info-about-card>
+        <!-- editar aqui depois do jeito certo -->
+      </div>
     </div>
-    <div
-      class="container-pix type-payment-method"
-      #containerPix
-      (click)="onClickPix(containerPix)"
-    >
-      <app-svg-payment-pix
-        class="container-svg-payment-pix"
-      ></app-svg-payment-pix>
-      <span>Pix</span>
+    <div class="container-pix type-payment-method" #containerPix>
+      <div
+        class="container-svg-card-credit-span"
+        (click)="onClickMethodPayment(containerPix, 'pix')"
+      >
+        <app-svg-payment-pix
+          class="container-svg-payment-pix"
+        ></app-svg-payment-pix>
+        <span>Pix</span>
+      </div>
     </div>
-    <div
-      class="container-google-play type-payment-method"
-      #containerGooglePlay
-      (click)="onClickGooglePlay(containerGooglePlay)"
-    >
-      <app-svg-google-play></app-svg-google-play>
-      <span>Google Pay</span>
+    <div class="container-google-play type-payment-method" #containerGooglePlay>
+      <div
+        class="container-svg-card-credit-span"
+        (click)="onClickMethodPayment(containerGooglePlay, 'google-play')"
+      >
+        <app-svg-google-play></app-svg-google-play>
+        <span>Google Pay</span>
+      </div>
     </div>
   </div>
   <div class="container-line-discount-and-span">

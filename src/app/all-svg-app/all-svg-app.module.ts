@@ -73,6 +73,16 @@ import { SvgPixPaymentComponent } from './all-svg-payment/svg-pix/svg-pix.compon
 import { SvgGooglePlayComponent } from './all-svg-payment/svg-google-play/svg-google-play.component';
 import { CouponAndGiftCardComponent } from './all-svg-payment/coupon-and-gift-card/coupon-and-gift-card.component';
 import { SvgArrowPaymentComponent } from './all-svg-payment/svg-arrow-payment/svg-arrow-payment.component';
+import { MasterCardSvgComponent } from './all-svg-payment/card-svg-all/master-card-svg/master-card-svg.component';
+import { VisaSvgComponent } from './all-svg-payment/card-svg-all/visa-svg/visa-svg.component';
+import { AmericanExpressSvgComponent } from './all-svg-payment/card-svg-all/american-express-svg/american-express-svg.component';
+import { DinersClubSvgComponent } from './all-svg-payment/card-svg-all/diners-club-svg/diners-club-svg.component';
+import { DiscoverSvgComponent } from './all-svg-payment/card-svg-all/discover-svg/discover-svg.component';
+import { HipercardSvgComponent } from './all-svg-payment/card-svg-all/hipercard-svg/hipercard-svg.component';
+import { MaestroSvgComponent } from './all-svg-payment/card-svg-all/maestro-svg/maestro-svg.component';
+import { EloSvgComponent } from './all-svg-payment/card-svg-all/elo-svg/elo-svg.component';
+import { JcbSvgComponent } from './all-svg-payment/card-svg-all/jcb-svg/jcb-svg.component';
+import { SvgExclamationMarkPaymentComponent } from './all-svg-payment/svg-exclamation-mark-payment/svg-exclamation-mark-payment.component';
 
 @NgModule({
   imports: [
@@ -150,7 +160,17 @@ import { SvgArrowPaymentComponent } from './all-svg-payment/svg-arrow-payment/sv
     SvgPixPaymentComponent,
     SvgGooglePlayComponent,
     CouponAndGiftCardComponent,
-    SvgArrowPaymentComponent
+    SvgArrowPaymentComponent,
+    MasterCardSvgComponent,
+    VisaSvgComponent,
+    AmericanExpressSvgComponent,
+    DinersClubSvgComponent,
+    DiscoverSvgComponent,
+    HipercardSvgComponent,
+    MaestroSvgComponent,
+    EloSvgComponent,
+    JcbSvgComponent,
+    SvgExclamationMarkPaymentComponent
   ],
   exports: [
     SvgLocationComponent,
@@ -225,7 +245,17 @@ import { SvgArrowPaymentComponent } from './all-svg-payment/svg-arrow-payment/sv
     SvgPixPaymentComponent,
     SvgGooglePlayComponent,
     CouponAndGiftCardComponent,
-    SvgArrowPaymentComponent
+    SvgArrowPaymentComponent,
+    MasterCardSvgComponent,
+    VisaSvgComponent,
+    AmericanExpressSvgComponent,
+    DinersClubSvgComponent,
+    DiscoverSvgComponent,
+    HipercardSvgComponent,
+    MaestroSvgComponent,
+    EloSvgComponent,
+    JcbSvgComponent,
+    SvgExclamationMarkPaymentComponent
   ]
 })
 export class AllSvgAppModule { }
