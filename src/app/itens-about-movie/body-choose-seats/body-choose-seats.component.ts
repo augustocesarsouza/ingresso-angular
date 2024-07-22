@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { WitchFunctionWasClickedService } from '../service/witch-function-was-clicked.service';
 import { Router } from '@angular/router';
 import { OrderSummaryService } from '../service/order-summary.service';
+import { PositionType } from '../enum/app.enums-type-of-itens';
 
 export interface FormsOfPaymentClicked {
   formName: string;
@@ -29,6 +30,7 @@ export class BodyChooseSeatsComponent implements OnInit {
     if(navigation?.extras?.state){
       let state: any = navigation.extras.state;
       this.objectForOrderSummary = state.objectForOrderSummary;
+
       order_summary_service.setOrderSummary(this.objectForOrderSummary);
     }
   }
@@ -52,12 +54,12 @@ export class BodyChooseSeatsComponent implements OnInit {
     if(typeof document !== 'undefined'){
       let containerChooseSeatsAndOrderSummary = document.querySelector(".container-itens-about-movie-and-order-summary") as HTMLElement;
 
-      if(whatFunctionClicked === "tickets"){
+      if(whatFunctionClicked === PositionType.Tickets){
         containerChooseSeatsAndOrderSummary.style.height = "100%";
         this.router.navigate(['/itens-about-movie/tickets'], { state: { objectForOrderSummary: this.objectForOrderSummary } });
       }
 
-      if(whatFunctionClicked === "seats"){
+      if(whatFunctionClicked === PositionType.Seats){
         if(containerChooseSeatsAndOrderSummary){
           this.router.navigate(['/itens-about-movie/seats'], { state: { objectForOrderSummary: this.objectForOrderSummary } });
         }
@@ -65,9 +67,15 @@ export class BodyChooseSeatsComponent implements OnInit {
         containerChooseSeatsAndOrderSummary.style.height = "1051px";
       }
 
-      if(whatFunctionClicked === "bomboniere"){
+      if(whatFunctionClicked === PositionType.Popcorn){
         if(containerChooseSeatsAndOrderSummary){
-          this.router.navigate(['/itens-about-movie/bomboniere'], { state: { objectForOrderSummary: this.objectForOrderSummary } });
+          this.router.navigate(['/itens-about-movie/bomboniere']);
+        }
+      }
+
+      if(whatFunctionClicked === PositionType.Payment){
+        if(containerChooseSeatsAndOrderSummary){
+          this.router.navigate(['/itens-about-movie/payment']);
         }
       }
     }

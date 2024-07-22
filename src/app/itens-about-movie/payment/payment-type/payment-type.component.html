@@ -1,0 +1,132 @@
+<div class="container-all-payment-methods-main">
+  <div class="container-all-payment-methods">
+    <div
+      class="container-card-credit type-payment-method"
+      [ngClass]="{ expanded: elementClickedPaymentType === 'credit' }"
+      #containerCardCredit
+    >
+      <div
+        class="container-svg-card-credit-span"
+        (click)="onClickMethodPayment(containerCardCredit, 'credit')"
+      >
+        <app-svg-card-credit></app-svg-card-credit>
+        <span>Cartão de crédito</span>
+      </div>
+      <div class="container-info-about-the-card">
+        <app-info-about-card></app-info-about-card>
+        <div class="container-box-accept">
+          <label for="save" class="label-box-accept-and-span">
+            <input type="checkbox" id="save" name="save" />
+            <span class="custom-checkbox"></span>
+            <span>Salvar para meu próximo pagamento</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div
+      class="container-card-debit type-payment-method"
+      [ngClass]="{ expanded: elementClickedPaymentType === 'debit' }"
+      #containerCardDebit
+    >
+      <div
+        class="container-svg-card-credit-span"
+        (click)="onClickMethodPayment(containerCardDebit, 'debit')"
+      >
+        <app-svg-card-debit></app-svg-card-debit>
+        <span>Cartão de débito</span>
+      </div>
+      <div class="container-info-about-the-card">
+        <div class="container-find-out-your-bank-is-accepted">
+          <span
+            ><span class="span-cick-here">Clique aqui</span> e descubra se o seu
+            banco é aceito.</span
+          >
+          <div class="container-svg-exclamation-mark-and-span">
+            <app-svg-exclamation-mark-payment></app-svg-exclamation-mark-payment>
+            <span
+              >Alguns bancos requerem um cartão de Débito virtual. Verifique se
+              o seu é um deles.</span
+            >
+          </div>
+        </div>
+        <app-info-about-card></app-info-about-card>
+        <div class="container-span-policy">
+          <span
+            >Saiba mais sobre
+            <span class="span-policy-payment"
+              >Políticas de Pagamento.</span
+            ></span
+          >
+        </div>
+      </div>
+    </div>
+    <div
+      class="container-pix type-payment-method"
+      [ngClass]="{ expanded: elementClickedPaymentType === 'pix' }"
+      #containerPix
+    >
+      <div
+        class="container-svg-card-credit-span"
+        (click)="onClickMethodPayment(containerPix, 'pix')"
+      >
+        <app-svg-payment-pix
+          class="container-svg-payment-pix"
+        ></app-svg-payment-pix>
+        <span>Pix</span>
+      </div>
+      <div class="container-pix-content">
+        <span
+          >Antes de realizar o pagamento, confira se o CNPJ é
+          00860640*******.</span
+        >
+        <span
+          >Quando o pagamento for validado, você será automaticamente
+          redirecionado para a tela com as informações de sua compra.</span
+        >
+      </div>
+    </div>
+    <div
+      class="container-google-play type-payment-method"
+      [ngClass]="{ expanded: elementClickedPaymentType === 'google-pay' }"
+      #containerGooglePlay
+    >
+      <div
+        class="container-svg-card-credit-span"
+        (click)="onClickMethodPayment(containerGooglePlay, 'google-pay')"
+      >
+        <app-svg-google-play></app-svg-google-play>
+        <span>Google Pay</span>
+      </div>
+      <div class="container-google-pay-content">
+        <span
+          >Com o Google Pay é muito rápido e fácil de pagar. Ele reúne tudo que
+          você precisa para finalizar sua compra, com as mesmas vantagens e
+          benefícios de seus cartões físicos. E sua informação fica protegida em
+          uma das infraestruturas de segurança mais avançadas do mundo.</span
+        >
+        <span class="span-click-button-google-pay"
+          >Prossiga clicando no botão Google Pay.</span
+        >
+        <div class="container-google-pay-button">
+          <google-pay-button
+            *ngIf="isWindowDefined"
+            environment="TEST"
+            buttonSizeMode="fill"
+            buttonColor="white"
+            buttonLocale="pt"
+            buttonType="long"
+            [paymentRequest]="paymentRequest"
+            (loadpaymentdata)="onLoadPaymentData($event)"
+            class="google-pay-button"
+          ></google-pay-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-line-discount-and-span">
+    <span>Desconto</span>
+    <div class="container-line-discount"></div>
+  </div>
+  <app-clube-uol></app-clube-uol>
+  <app-coupon-gift-card></app-coupon-gift-card>
+</div>

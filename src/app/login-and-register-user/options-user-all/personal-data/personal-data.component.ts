@@ -141,7 +141,7 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
           let im = new Inputmask.default("(99) 99999-9999");
           im.mask(inputCellPhone);
         }
-      })
+      });
     }
 
     let userDateStorage = null;

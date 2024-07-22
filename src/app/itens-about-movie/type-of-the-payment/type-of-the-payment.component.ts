@@ -8,10 +8,16 @@ import { ObjectForOrderSummary } from '../../movie-info/movie-choose-movie-theat
 import { NumberOfTheTicketsClickedService } from '../service/number-of-the-tickets-clicked.service';
 import { OrderSummaryService } from '../service/order-summary.service';
 import { FormsOfPaymentClicked } from '../body-choose-seats/body-choose-seats.component';
+import { TypeOfThePaymentService } from '../service/type-of-the-payment.service';
 
 interface FormsOfPayment {
   formName: string;
   price: string;
+}
+
+export interface ItensClickedByUser {
+  formName: string;
+  quantityClicked: number;
 }
 
 @Component({
@@ -23,6 +29,7 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
   objectForOrderSummary!: ObjectForOrderSummary;
   private subscription: Subscription[] = [];
   private timeoutIdContainerLessAndMore: any;
+  private timeoutIdContainerTypeAll: any;
   items: number[] = [];
   itemsPaymentClicked: number[] = [];
   formsOfPayment: FormsOfPayment[] = [];
@@ -30,10 +37,12 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
   containerLessAndMore!: NodeListOf<HTMLElement>;
   quantityAlreadyBeenClickedLessMore = 0;
   listOfFormPaymentClicked: FormsOfPaymentClicked[] = [];
+  itensClickedByUser: ItensClickedByUser[] = [];
 
   constructor(private form_of_payment_service: FormOfPaymentService, private tickets_clicked_for_the_user_payment_method_service: TicketsClickedForTheUserPaymentMethodService,
     private witch_function_was_clicked_service: WitchFunctionWasClickedService, private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService,
-    private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService, order_summary_service: OrderSummaryService
+    private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService, order_summary_service: OrderSummaryService,
+    private type_of_the_payment_service: TypeOfThePaymentService
   ){
     this.subscription.push(order_summary_service.currentOrderSummary$.subscribe((orderSummary) => {
       if(orderSummary){
@@ -54,18 +63,65 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
         this.whatFunctionClicked = whatFunctionClicked;
       }));
 
+      this.subscription.push(this.type_of_the_payment_service.itensClickedTypeOfPayment$.subscribe((itens) => {
+        this.itensClickedByUser = itens;
+      }));
+
       if(this.timeoutIdContainerLessAndMore){
         clearTimeout(this.timeoutIdContainerLessAndMore);
       }
 
       this.timeoutIdContainerLessAndMore = setTimeout(() => {
         this.containerLessAndMore = document.querySelectorAll(".container-less-and-more");
-      }, 20);
+        if(this.containerLessAndMore.length <= 0) return;
+
+        let containerTypeAll = document.querySelectorAll(".container-type") as NodeListOf<HTMLElement>;
+
+        if(this.itensClickedByUser.length > 0){
+          this.containerLessAndMore.forEach((container) => {
+          let containerLess = container.firstChild as HTMLElement;
+          let containerMore = container.lastChild as HTMLElement;
+
+          containerLess.style.backgroundColor = "rgb(63, 71, 93)";
+          containerLess.style.cursor = "auto";
+
+          containerMore.style.backgroundColor = "rgb(63, 71, 93)";
+          containerMore.style.cursor = "auto";
+          });
+        }
+
+        containerTypeAll.forEach((container) => {
+          let firstElement = container.firstChild as HTMLElement;
+          let LastElement = container.lastChild as HTMLElement;
+
+          let spanNameType = firstElement.querySelector(".span-form-name");
+
+          this.itensClickedByUser.forEach((el) => {
+            if(spanNameType && el.formName === spanNameType.textContent){
+              this.quantityAlreadyBeenClickedLessMore += el.quantityClicked;
+              let containerLess = LastElement.firstChild as HTMLElement;
+              let containerMore = LastElement.lastChild as HTMLElement;
+
+              containerLess.style.backgroundColor = "rgb(152, 170, 236)";
+              containerLess.style.cursor = "pointer";
+
+              containerMore.style.backgroundColor = "rgb(63, 71, 93)";
+              containerMore.style.cursor = "auto";
+
+              let spanQuantityMore = LastElement.querySelector(".span-quantity-more");
+              if(spanQuantityMore){
+                spanQuantityMore.textContent = el.quantityClicked.toString();
+              }
+            }
+          })
+        });
+      }, 40);
 
       if(this.objectForOrderSummary && this.objectForOrderSummary.movieId !== undefined){
         this.form_of_payment_service.getMovieIdInfo(this.objectForOrderSummary.movieId).subscribe({
           next: (data: any) => {
             this.formsOfPayment = data.data;
+
           },
           error: (error: any) => {
             console.log(error);
@@ -75,13 +131,30 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
     }
   }
 
-  onClickMoreButton(form: FormsOfPayment, containerLessAndMore: HTMLDivElement){// FAZER O CLICK QUANDO CLICAR EM UM TYPEPAYMENT COLOCAR A COR NA 'PIPOCA'
+  onClickMoreButton(form: FormsOfPayment, containerLessAndMore: HTMLDivElement){
+    // QUANDO CLICAR EM MAIS SALVAR O VALOR QUE FOI CLICACO TIPO O NOME DO TIPO E QUANTAS VEZES PARA DEPOIS
+    // QUANDO EU VOLTAR PARA A ABA 'TOPOS DE INGRESSOS' EU CONSEGUIR COLOCAR DENOVO NOS SPANS DELE
     let spanQuantityMore = containerLessAndMore.querySelector(".span-quantity-more");
 
     if(spanQuantityMore && Number(spanQuantityMore.textContent) >= 0 && Number(spanQuantityMore.textContent) < this.items.length && this.quantityAlreadyBeenClickedLessMore < this.items.length){
       let value = Number(spanQuantityMore.textContent) + 1;
       spanQuantityMore.textContent = value.toString();
       this.quantityAlreadyBeenClickedLessMore += 1;
+      this.type_of_the_payment_service.updateQuantityAlreadyBeenClickedLessMore(this.quantityAlreadyBeenClickedLessMore);
+
+      if(this.itensClickedByUser.some((el) => el.formName === form.formName)){
+        this.itensClickedByUser.map((el) => {
+          if(el.formName === form.formName){
+            el.quantityClicked += 1;
+          }
+
+          return el;
+        })
+      }else {
+        this.itensClickedByUser.push({ formName: form.formName, quantityClicked: 1 });
+      }
+
+      this.type_of_the_payment_service.updateItensClickedTypeOfPayment(this.itensClickedByUser);
 
       this.itemsPaymentClicked = Array.from({ length: this.quantityAlreadyBeenClickedLessMore }, (_, i) => i);
       this.number_of_the_tickets_clicked_service.updateNumberOfTheClickTickets(this.itemsPaymentClicked);
@@ -107,6 +180,12 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
         let containerLess = containerLessAndMore.firstChild as HTMLElement;
         containerLess.style.backgroundColor = "rgb(152, 170, 236)";
         containerLess.style.cursor = "pointer";
+
+        if(this.items.length >= Number(spanQuantityMore.textContent)){
+          let containerMore = containerLessAndMore.lastChild as HTMLElement;
+          containerMore.style.backgroundColor = "rgb(63, 71, 93)";
+          containerMore.style.cursor = "auto";
+        }
       }
 
       if(this.quantityAlreadyBeenClickedLessMore === this.items.length){
@@ -127,6 +206,19 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
       let value = Number(spanQuantityMore.textContent) - 1;
       spanQuantityMore.textContent = value.toString();
       this.quantityAlreadyBeenClickedLessMore -= 1;
+      this.type_of_the_payment_service.updateQuantityAlreadyBeenClickedLessMore(this.quantityAlreadyBeenClickedLessMore);
+
+      this.itensClickedByUser.map((el) => {
+        if(el.formName === form.formName){
+          el.quantityClicked -= 1;
+        }
+
+        return el;
+      });
+
+      this.itensClickedByUser = this.itensClickedByUser.filter((el) => el.quantityClicked > 0);
+
+      this.type_of_the_payment_service.updateItensClickedTypeOfPayment(this.itensClickedByUser);
 
       this.itemsPaymentClicked = Array.from({ length: this.quantityAlreadyBeenClickedLessMore }, (_, i) => i);
       this.number_of_the_tickets_clicked_service.updateNumberOfTheClickTickets(this.itemsPaymentClicked);
@@ -160,43 +252,18 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
           }
         });
       }
-    }
-  }
 
-  onMouseEnterLess($event: MouseEvent, form: FormsOfPayment){
-    let elementMain = $event.relatedTarget as HTMLElement;
-    let element = $event.target as HTMLElement;
-    if(elementMain)
+      if(this.quantityAlreadyBeenClickedLessMore <= 0){
+        this.containerLessAndMore.forEach((el) => {
+          let containerLess = el.firstChild as HTMLElement;
+          containerLess.style.backgroundColor = "rgb(63, 71, 93)";
+          containerLess.style.cursor = "auto";
 
-    if(elementMain && Number(elementMain.textContent) > 0 ){
-      element.style.backgroundColor = "rgb(152, 170, 236)";
-    }
-  }
-
-  onMouseLeaveLess($event: MouseEvent, form: FormsOfPayment){
-    let elementMain = $event.relatedTarget as HTMLElement;
-    let element = $event.target as HTMLElement;
-
-    if(elementMain && Number(elementMain.textContent) > 0){
-      element.style.backgroundColor = "rgb(114, 130, 182)";
-    }
-  }
-
-  onMouseEnterMore($event: MouseEvent, form: FormsOfPayment){
-    let elementMain = $event.relatedTarget as HTMLElement;
-    let element = $event.target as HTMLElement;
-
-    if(elementMain && Number(elementMain.textContent) >= 0 && this.quantityAlreadyBeenClickedLessMore < this.items.length){
-      element.style.backgroundColor = "rgb(114, 130, 182)";
-    }
-  }
-
-  onMouseLeaveMore($event: MouseEvent, form: FormsOfPayment){
-    let elementMain = $event.relatedTarget as HTMLElement;
-    let element = $event.target as HTMLElement;
-
-    if(elementMain && Number(elementMain.textContent) >= 0 && this.quantityAlreadyBeenClickedLessMore < this.items.length){
-      element.style.backgroundColor = "rgb(152, 170, 236)";
+          let containerMore = el.lastChild as HTMLElement;
+          containerMore.style.backgroundColor = "rgb(152, 170, 236";
+          containerMore.style.cursor = "pointer";
+        });
+      }
     }
   }
 
@@ -209,6 +276,10 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
 
     if(this.timeoutIdContainerLessAndMore){
       clearTimeout(this.timeoutIdContainerLessAndMore);
+    }
+
+    if(this.timeoutIdContainerTypeAll){
+      clearTimeout(this.timeoutIdContainerTypeAll);
     }
   }
 }

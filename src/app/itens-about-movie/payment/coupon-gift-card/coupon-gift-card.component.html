@@ -1,0 +1,32 @@
+<div class="container-coupon-and-gift-card-arrow-main">
+  <div
+    class="container-coupon-and-gift-card-arrow"
+    (click)="onClickCuponGiftCard()"
+  >
+    <div class="container-coupon-and-gift-card">
+      <app-coupon-and-gift-card></app-coupon-and-gift-card>
+      <span>Cupom e vale-presente</span>
+    </div>
+    <app-svg-arrow-payment
+      [rotate]="rotateCuponGiftPresent"
+    ></app-svg-arrow-payment>
+  </div>
+  <div
+    class="container-info-coupon"
+    [ngClass]="{ expandedCoupon: rotateCuponGiftPresent === '0' }"
+  >
+    <span
+      >Insira o código do Vale-Presente, Cupom de Desconto ou Promocode.</span
+    >
+    <div class="conatiner-input-button-apply-coupon">
+      <input
+        type="text"
+        placeholder="Insira o código aqui"
+        id="input-coupon"
+        #inputCoupon
+        (change)="onChangeInputCoupon(inputCoupon)"
+      />
+      <button>APLICAR</button>
+    </div>
+  </div>
+</div>

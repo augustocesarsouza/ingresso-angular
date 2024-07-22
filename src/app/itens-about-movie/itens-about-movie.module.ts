@@ -16,6 +16,11 @@ import { BodyChooseSeatsComponent } from './body-choose-seats/body-choose-seats.
 import { ChooseSeatsInnerComponent } from './choose-seats-inner/choose-seats-inner.component';
 import { WhichPositionChooseComponent } from './which-position-choose/which-position-choose.component';
 import { AllSvgAppModule } from '../all-svg-app/all-svg-app.module';
+import { PaymentTypeComponent } from './payment/payment-type/payment-type.component';
+import { ClubeUolComponent } from './payment/clube-uol/clube-uol.component';
+import { CouponGiftCardComponent } from './payment/coupon-gift-card/coupon-gift-card.component';
+import { InfoAboutCardComponent } from './payment/info-about-card/info-about-card.component';
+import { GooglePayButtonModule } from '@google-pay/button-angular';
 
 
 @NgModule({
@@ -32,12 +37,17 @@ import { AllSvgAppModule } from '../all-svg-app/all-svg-app.module';
     BackOrProgressFooterComponent,
     OnlySeatsComponent,
     BomboniereComponent,
+    PaymentTypeComponent,
+    ClubeUolComponent,
+    CouponGiftCardComponent,
+    InfoAboutCardComponent,
   ],
   imports: [
     CommonModule,
     ItensAboutMovieRoutingModule,
     FormsModule,
     AllSvgAppModule,
+    GooglePayButtonModule
 
   ],
   exports: [

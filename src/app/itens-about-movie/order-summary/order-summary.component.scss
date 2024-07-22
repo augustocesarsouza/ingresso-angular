@@ -1,3 +1,9 @@
+:host {
+  width: 100%;
+  max-width: 273px;
+  margin-right: 10px;
+}
+
 .container-order-summary-and-total-order {
   display: flex;
   flex-direction: column;
@@ -5,7 +11,8 @@
   background-color: rgb(33, 38, 45);
   padding: 16px 16px 8px;
   border-radius: 4px;
-  width: 273px;
+  width: 100%;
+  // width: 273px;
   // max-width: 300px;
   height: 100%;
 }

@@ -1,0 +1,58 @@
+<div class="container-info-about-card">
+  <label for="input-number-card" class="label-number-card">
+    <span>Número do cartão</span>
+    <input
+      type="text"
+      placeholder="1234 5678 9012 3456"
+      id="input-number-card"
+      #inputNumberCard
+      (focus)="onFocusInputs(inputNumberCard)"
+      (blur)="onBlurInputs(inputNumberCard)"
+    />
+    <div class="container-all-svg">
+      <app-master-card-svg></app-master-card-svg>
+      <app-visa-svg></app-visa-svg>
+      <app-american-express-svg></app-american-express-svg>
+      <app-diners-club-svg></app-diners-club-svg>
+      <app-discover-svg></app-discover-svg>
+      <app-hipercard-svg></app-hipercard-svg>
+      <app-maestro-svg></app-maestro-svg>
+      <app-elo-svg></app-elo-svg>
+    </div>
+  </label>
+  <div class="container-expiration-date-security-code">
+    <label for="input-expiration-date" class="label-expiration-date">
+      <span>Data de validade</span>
+      <input
+        type="text"
+        placeholder="MM/AA"
+        id="input-expiration-date"
+        #inputExpirationDate
+        (focus)="onFocusInputs(inputExpirationDate)"
+        (blur)="onBlurInputs(inputExpirationDate)"
+      />
+    </label>
+    <label for="input-security-code" class="label-security-code">
+      <span>Código de segurança</span>
+      <input
+        type="text"
+        placeholder="3 dígitos"
+        id="input-security-code"
+        #inputSecurityCode
+        (focus)="onFocusInputs(inputSecurityCode)"
+        (blur)="onBlurInputs(inputSecurityCode)"
+      />
+    </label>
+  </div>
+  <label for="input-name-card" class="label-name-card">
+    <span>Nome no cartão</span>
+    <input
+      type="text"
+      placeholder="Nome como está no cartão"
+      id="input-name-card"
+      #inputNameCard
+      (focus)="onFocusInputs(inputNameCard)"
+      (blur)="onBlurInputs(inputNameCard)"
+    />
+  </label>
+</div>

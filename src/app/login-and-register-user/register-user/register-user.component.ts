@@ -251,21 +251,30 @@ export class RegisterUserComponent extends BaseFormComponent implements OnInit {
     }
 
     if(this.formulario.valid){
-      await fetch("/api/v1/public/user/create", {
+      let resp = await fetch("/api/v1/public/user/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(objCreate)
-      })
-      .then((res) => {
-        // console.log(res);
-
-        this.confirmEmailRegister = true;
-      })
-      .catch((error) => {
-        // console.log(error)
       });
+
+      if(resp.status === 200){
+        let json = await resp.json();
+        let data = json.data;
+        this.confirmEmailRegister = data.emailSendSuccessfully;
+      }else {
+        this.confirmEmailRegister = false;
+      }
+
+      // .then((res) => {
+      //   console.log(res);
+
+      //   this.confirmEmailRegister = true;
+      // })
+      // .catch((error) => {
+      //   // console.log(error)
+      // });
     }
   }
 

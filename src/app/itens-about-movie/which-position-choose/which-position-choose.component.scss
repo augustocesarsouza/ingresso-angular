@@ -22,7 +22,8 @@
 
 .span-seats,
 .span-tickets,
-.span-popcorn {
+.span-popcorn,
+.span-payment {
   position: absolute;
   left: -52px;
   top: 38px;
@@ -38,6 +39,10 @@
 
 .span-popcorn {
   left: 250px;
+}
+
+.span-payment {
+  left: 405px;
 }
 
 .container-line-white {
