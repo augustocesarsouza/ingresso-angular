@@ -20,6 +20,7 @@ import { PaymentTypeComponent } from './payment/payment-type/payment-type.compon
 import { ClubeUolComponent } from './payment/clube-uol/clube-uol.component';
 import { CouponGiftCardComponent } from './payment/coupon-gift-card/coupon-gift-card.component';
 import { InfoAboutCardComponent } from './payment/info-about-card/info-about-card.component';
+import { GooglePayButtonModule } from '@google-pay/button-angular';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { InfoAboutCardComponent } from './payment/info-about-card/info-about-car
     ItensAboutMovieRoutingModule,
     FormsModule,
     AllSvgAppModule,
+    GooglePayButtonModule
 
   ],
   exports: [

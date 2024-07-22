@@ -21,7 +21,7 @@ export interface FormsOfPaymentClicked {
 export class BodyChooseSeatsComponent implements OnInit {
   objectForOrderSummary!: ObjectForOrderSummary;
   private subscription: Subscription[] = [];
-  whatFunctionClicked = 'payment';
+  whatFunctionClicked = 'seats';
   containerLessAndMore!: NodeListOf<HTMLElement>;
   listOfFormPaymentClicked: FormsOfPaymentClicked[] = [];
 

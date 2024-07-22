@@ -47,14 +47,24 @@
               >Alguns bancos requerem um cartão de Débito virtual. Verifique se
               o seu é um deles.</span
             >
-            <!-- rgb(255, 206, 0) -->
           </div>
         </div>
         <app-info-about-card></app-info-about-card>
-        <!-- editar aqui depois do jeito certo -->
+        <div class="container-span-policy">
+          <span
+            >Saiba mais sobre
+            <span class="span-policy-payment"
+              >Políticas de Pagamento.</span
+            ></span
+          >
+        </div>
       </div>
     </div>
-    <div class="container-pix type-payment-method" #containerPix>
+    <div
+      class="container-pix type-payment-method"
+      [ngClass]="{ expanded: elementClickedPaymentType === 'pix' }"
+      #containerPix
+    >
       <div
         class="container-svg-card-credit-span"
         (click)="onClickMethodPayment(containerPix, 'pix')"
@@ -64,14 +74,52 @@
         ></app-svg-payment-pix>
         <span>Pix</span>
       </div>
+      <div class="container-pix-content">
+        <span
+          >Antes de realizar o pagamento, confira se o CNPJ é
+          00860640*******.</span
+        >
+        <span
+          >Quando o pagamento for validado, você será automaticamente
+          redirecionado para a tela com as informações de sua compra.</span
+        >
+      </div>
     </div>
-    <div class="container-google-play type-payment-method" #containerGooglePlay>
+    <div
+      class="container-google-play type-payment-method"
+      [ngClass]="{ expanded: elementClickedPaymentType === 'google-pay' }"
+      #containerGooglePlay
+    >
       <div
         class="container-svg-card-credit-span"
-        (click)="onClickMethodPayment(containerGooglePlay, 'google-play')"
+        (click)="onClickMethodPayment(containerGooglePlay, 'google-pay')"
       >
         <app-svg-google-play></app-svg-google-play>
         <span>Google Pay</span>
+      </div>
+      <div class="container-google-pay-content">
+        <span
+          >Com o Google Pay é muito rápido e fácil de pagar. Ele reúne tudo que
+          você precisa para finalizar sua compra, com as mesmas vantagens e
+          benefícios de seus cartões físicos. E sua informação fica protegida em
+          uma das infraestruturas de segurança mais avançadas do mundo.</span
+        >
+        <span class="span-click-button-google-pay"
+          >Prossiga clicando no botão Google Pay.</span
+        >
+        <div class="container-google-pay-button">
+          <google-pay-button
+            *ngIf="isWindowDefined"
+            environment="TEST"
+            buttonSizeMode="fill"
+            buttonColor="white"
+            buttonLocale="pt"
+            buttonType="long"
+            [paymentRequest]="paymentRequest"
+            (loadpaymentdata)="onLoadPaymentData($event)"
+            class="google-pay-button"
+          ></google-pay-button>
+        </div>
       </div>
     </div>
   </div>

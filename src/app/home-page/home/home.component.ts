@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   movieHighlight!: MovieHighlight;
-  moviesTrending!: Array<MovieTrending>;
-  theaters!: Array<Theater>;
+  moviesTrending!: MovieTrending[];
+  theaters!: Theater[];
 
   constructor(private movieService: MovieService, private theaterService: TheaterService, private router: Router) { }
 

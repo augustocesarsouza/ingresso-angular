@@ -142,6 +142,8 @@ export class LoginUserComponent implements OnInit, OnDestroy {
     this.loginUserService.loginUser(valueCpfOrEmail, valuePassword)
     .subscribe({
       next: (success: any) => {
+        console.log(success);
+
         let user = success.data;
 
         if(user.codeSentSuccessfullyEmail){

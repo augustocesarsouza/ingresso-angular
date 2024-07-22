@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OrderSummaryService } from '../../service/order-summary.service';
 import { Subscription } from 'rxjs';
+import { ObjectForOrderSummary } from '../../../movie-info/movie-choose-movie-theater/movie-choose-movie-theater.component';
 
 @Component({
   selector: 'app-payment-type',
@@ -10,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class PaymentTypeComponent implements OnInit, OnDestroy {
   private subscription: Subscription[] = [];
   allContainerCreditDebitPixPay!: NodeListOf<HTMLElement>;
-  elementClickedPaymentType = "debit";
+  elementClickedPaymentType = "";
   private timeoutMouseEnter: any;
 
   mouseEnterInputNumber = false;
@@ -20,62 +21,65 @@ export class PaymentTypeComponent implements OnInit, OnDestroy {
   inputExpirationDate: HTMLInputElement | undefined = undefined;
   inputSecurityCode: HTMLInputElement | undefined = undefined;
 
+  paymentRequest!: google.payments.api.PaymentDataRequest;
+  typeof: any;
+  isWindowDefined = false;
+
   constructor(private order_summary_service: OrderSummaryService){
+
   }
 
-
-
   ngOnInit(): void {
-    if(typeof document !== 'undefined'){
+    this.isWindowDefined = typeof window !== 'undefined';
+
+    if(typeof document !== 'undefined' && typeof window !== 'undefined'){
       this.allContainerCreditDebitPixPay = document.querySelectorAll(".type-payment-method") as NodeListOf<HTMLElement>;
 
-      this.subscription.push(this.order_summary_service.currentOrderSummary$.subscribe((el) => {
+      this.subscription.push(this.order_summary_service.currentOrderSummary$.subscribe((el: ObjectForOrderSummary | null) => {
         if(el){
-          // console.log(el);
+          console.log(el);
         }
       }));
 
-      import('inputmask').then(Inputmask => {
-        let inputNumberCard = document.getElementById('input-number-card');
-        let inputExpirationDate = document.getElementById('input-expiration-date');
-        let inputSecurityCode = document.getElementById('input-security-code');
-
-        if (inputNumberCard) {
-          let mask = new Inputmask.default({
-            mask: "9999 9999 9999 9999",
-            placeholder: " ",
-            insertMode: true,
-            showMaskOnHover: false,
-            showMaskOnFocus: false
-          });
-          mask.mask(inputNumberCard);
+      this.paymentRequest = {
+        apiVersion: 2,
+        apiVersionMinor: 0,
+        allowedPaymentMethods: [
+          {
+            type: 'CARD',
+            parameters: {
+              allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+              allowedCardNetworks: ['VISA', 'MASTERCARD'],
+            },
+            tokenizationSpecification: {
+              type: 'PAYMENT_GATEWAY',
+              parameters: {
+                gateway: 'example',
+                gatewayMerchantId: 'exampleGatewayMerchantId',
+              }
+            },
+          },
+        ],
+        merchantInfo: {
+          merchantId: '188472847284728742784',
+          merchantName: 'Demo Only',
+        },
+        transactionInfo: {
+          totalPriceStatus: 'FINAL',
+          totalPriceLabel: 'Total',
+          totalPrice: '100.00',
+          currencyCode: 'BRL',
+          countryCode: 'BR',
         }
-
-        if (inputExpirationDate) {
-          let mask = new Inputmask.default({
-            mask: "99/99",
-            placeholder: " ",
-            insertMode: true,  // Ensure the mask does not insert mode to avoid jumping characters
-            showMaskOnHover: false,
-            showMaskOnFocus: false
-          });
-          mask.mask(inputExpirationDate);
-        }
-
-        if (inputSecurityCode) {
-          let mask = new Inputmask.default({
-            mask: "9999",
-            placeholder: " ",
-            insertMode: true,
-            showMaskOnHover: false,
-            showMaskOnFocus: false
-          });
-          mask.mask(inputSecurityCode);
-        }
-      });
+      };
 
       // document.body.addEventListener("click", this.handleEventClickBody.bind(this));
     }
+  }
+
+  onLoadPaymentData($event: Event){
+    console.log("teste");
+
   }
 
   onClickMethodPayment(containerCardCredit: HTMLDivElement, typePaymentName: string){
