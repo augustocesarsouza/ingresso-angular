@@ -83,6 +83,7 @@ import { MaestroSvgComponent } from './all-svg-payment/card-svg-all/maestro-svg/
 import { EloSvgComponent } from './all-svg-payment/card-svg-all/elo-svg/elo-svg.component';
 import { JcbSvgComponent } from './all-svg-payment/card-svg-all/jcb-svg/jcb-svg.component';
 import { SvgExclamationMarkPaymentComponent } from './all-svg-payment/svg-exclamation-mark-payment/svg-exclamation-mark-payment.component';
+import { SvgIngressoIComponent } from './all-svg-check-in/svg-ingresso-i/svg-ingresso-i.component';
 
 @NgModule({
   imports: [
@@ -170,7 +171,8 @@ import { SvgExclamationMarkPaymentComponent } from './all-svg-payment/svg-exclam
     MaestroSvgComponent,
     EloSvgComponent,
     JcbSvgComponent,
-    SvgExclamationMarkPaymentComponent
+    SvgExclamationMarkPaymentComponent,
+    SvgIngressoIComponent
   ],
   exports: [
     SvgLocationComponent,
@@ -255,7 +257,8 @@ import { SvgExclamationMarkPaymentComponent } from './all-svg-payment/svg-exclam
     MaestroSvgComponent,
     EloSvgComponent,
     JcbSvgComponent,
-    SvgExclamationMarkPaymentComponent
+    SvgExclamationMarkPaymentComponent,
+    SvgIngressoIComponent
   ]
 })
 export class AllSvgAppModule { }

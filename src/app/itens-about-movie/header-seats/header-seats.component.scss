@@ -14,6 +14,7 @@
   display: flex;
   gap: 50px;
   margin-right: 10px;
+  user-select: none;
 }
 
 .container-name-user {
@@ -21,6 +22,7 @@
   align-items: center;
   color: #fff;
   gap: 6px;
+  position: relative;
 }
 
 .container-name-user > span {
@@ -29,6 +31,41 @@
 
 .container-svg-user-body {
   display: flex;
+  cursor: pointer;
+}
+
+.container-info-about-user {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  left: 75px;
+  top: 58px;
+  width: 202px;
+  font-size: 14px;
+  padding: 12px;
+  border-radius: 5px;
+  background-color: rgb(5 31 42);
+  border: 1px solid rgb(152, 170, 236);
+  user-select: text;
+}
+
+.container-info-about-user > span {
+  color: #fff;
+  font-size: 16px;
+  color: rgb(110 131 152);
+}
+
+.container-info-about-user > a {
+  text-decoration: none;
+  color: rgb(124 152 254);
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    color: rgb(89 109 182);
+  }
 }
 
 .container-service {
@@ -44,4 +81,157 @@
 
 .container-svg {
   display: flex;
+}
+
+.modal-content {
+  background-color: rgb(33 38 45);
+  color: #fff;
+  position: relative;
+  padding: 0px 64px;
+  width: 400px;
+  height: 336px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.modal-content > button {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  right: 20px;
+  top: 17px;
+  color: #fff !important;
+  border: none;
+}
+
+.container-svg-ingresso-and-title {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.container-svg-ingresso-i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-header {
+  justify-content: center;
+  border: none;
+  padding: 0;
+}
+
+.modal-header > h5 {
+  font-size: 16px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.container-cpf-or-email {
+  display: flex;
+  gap: 10px;
+  border-left: 4px solid rgb(217 217 217);
+  border-top: 1px solid rgb(217 217 217);
+  border-bottom: 1px solid rgb(217 217 217);
+  border-right: 1px solid rgb(217 217 217);
+  padding: 6px 5px;
+  // padding: 2px 5px; depois de click
+  align-items: center;
+  background: #fff;
+  border-radius: 3px;
+}
+
+.container-svg-user {
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  gap: 8px;
+  padding-right: 0px;
+}
+
+.container-svg-user > svg {
+  width: 15px;
+  fill: rgb(217 217 217);
+}
+
+.line-split {
+  border-right: 1px solid rgb(217 217 217);
+  height: 13px;
+}
+
+.container-input-and-button-continue{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container-span-cpf-email-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.container-span-cpf-email-input > span {
+  font-size: 10px;
+  color: rgb(177 177 177);
+  display: none;
+}
+
+.container-span-cpf-email-input > input {
+  border: none;
+  font-size: 12px;
+  width: 100%;
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-bottom: 0px;
+}
+
+.container-span-cpf-email-input > input:focus {
+  outline: none;
+}
+
+.container-info-about-error-input-cpf-or-email {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.container-info-about-error-input-cpf-or-email > span {
+  font-size: 14px;
+  color: rgb(255, 90, 80);
+}
+
+.container-svg-exclamation-mark{
+  display: flex;
+}
+
+.modal-body {
+  border: none;
+  padding: 0;
+}
+
+.modal-footer {
+  justify-content: center;
+  border: none;
+  padding: 0;
+}
+
+.modal-footer > button {
+  width: 100%;
+  margin: 0;
+  background-image: linear-gradient(to left,#6c04ba, #3255e2);
+  color: rgb(255, 255, 255);
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0;
+  height: 48px;
+
+  &:hover {
+    background-image: linear-gradient(to left,#591091, #162f94);
+    color: #ffffffa2;
+  }
 }
