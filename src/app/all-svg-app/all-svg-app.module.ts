@@ -84,6 +84,10 @@ import { EloSvgComponent } from './all-svg-payment/card-svg-all/elo-svg/elo-svg.
 import { JcbSvgComponent } from './all-svg-payment/card-svg-all/jcb-svg/jcb-svg.component';
 import { SvgExclamationMarkPaymentComponent } from './all-svg-payment/svg-exclamation-mark-payment/svg-exclamation-mark-payment.component';
 import { SvgIngressoIComponent } from './all-svg-check-in/svg-ingresso-i/svg-ingresso-i.component';
+import { SvgCardBeClientComponent } from './all-svg-benefits-be-client/svg-card-be-client/svg-card-be-client.component';
+import { SvgTicketBeClientComponent } from './all-svg-benefits-be-client/svg-ticket-be-client/svg-ticket-be-client.component';
+import { SvgStarBeClientComponent } from './all-svg-benefits-be-client/svg-star-be-client/svg-star-be-client.component';
+import { SvgCellPhoneBeClientComponent } from './all-svg-benefits-be-client/svg-cell-phone-be-client/svg-cell-phone-be-client.component';
 
 @NgModule({
   imports: [
@@ -172,7 +176,11 @@ import { SvgIngressoIComponent } from './all-svg-check-in/svg-ingresso-i/svg-ing
     EloSvgComponent,
     JcbSvgComponent,
     SvgExclamationMarkPaymentComponent,
-    SvgIngressoIComponent
+    SvgIngressoIComponent,
+    SvgCardBeClientComponent,
+    SvgTicketBeClientComponent,
+    SvgStarBeClientComponent,
+    SvgCellPhoneBeClientComponent
   ],
   exports: [
     SvgLocationComponent,
@@ -258,7 +266,12 @@ import { SvgIngressoIComponent } from './all-svg-check-in/svg-ingresso-i/svg-ing
     EloSvgComponent,
     JcbSvgComponent,
     SvgExclamationMarkPaymentComponent,
-    SvgIngressoIComponent
+    SvgIngressoIComponent,
+    SvgCardBeClientComponent,
+    SvgTicketBeClientComponent,
+    SvgStarBeClientComponent,
+    SvgCellPhoneBeClientComponent
+
   ]
 })
 export class AllSvgAppModule { }

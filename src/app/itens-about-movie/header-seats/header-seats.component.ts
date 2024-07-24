@@ -237,4 +237,24 @@ export class HeaderSeatsComponent implements OnInit {
   onClickCreateNewAccount(){
 
   }
+
+  onClickContainerSvgArrowPayment(){
+    if(typeof document === 'undefined') return;
+
+    this.AccountExist = true;
+    this.showInsertCpfOrEmail = true;
+    this.showInputEmailUser = false;
+    this.clickChangeEmail = true;
+
+    this.valueForEmailChooseForUser = this.inputValueEmailOrCpf;
+
+
+    clearTimeout(this.settimeOutAny);
+
+    this.settimeOutAny = setTimeout(() => {
+      this.containerMainSvgInput = document.querySelector('.container-cpf-or-email') as HTMLElement;
+      this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
+      this.errorInputEmailOrCpfNotHaveValueRight= false;
+    }, 50);
+  }
 }

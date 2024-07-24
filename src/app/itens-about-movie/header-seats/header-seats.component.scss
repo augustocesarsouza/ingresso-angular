@@ -88,6 +88,7 @@
   color: #fff;
   position: relative;
   padding: 0px 64px;
+  padding-bottom: 80px;
   width: 400px;
   // height: 336px;
   min-height: 336px;
@@ -119,7 +120,9 @@
 }
 
 .modal-header {
+  display: flex;
   justify-content: center;
+  align-items: flex-start;
   border: none;
   padding: 0;
   margin-bottom: 40px;
@@ -129,6 +132,11 @@
   font-size: 16px;
   text-align: center;
   line-height: 1.4;
+}
+
+.container-svg-arrow-payment {
+  display: flex;
+  cursor: pointer;
 }
 
 .container-cpf-or-email {
@@ -238,7 +246,7 @@
 .container-create-new-account {
   justify-content: center;
   border: none;
-  padding: 0;
+  padding: 10px 0px;
 }
 
 .container-create-new-account > button {
@@ -285,6 +293,7 @@
 
 .container-enter-without-register {
   display: flex;
+  padding: 10px 0px;
 }
 
 .container-enter-without-register > button {
@@ -301,6 +310,37 @@
     border-color: rgba(152, 170, 236, 0.808);
     color: #ffffffcc;
   }
+}
+
+.container-info-about-be-client {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+}
+
+.container-info-about-be-client > span {
+  font-size: 12px;
+  text-align: center;
+  width: 190px;
+}
+
+.container-svg-benefits-be-client {
+  display: flex;
+}
+
+.container-svg-benefits {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  width: 50px;
+}
+
+.container-svg-benefits > span {
+  font-size: 10px;
+  line-height: 1;
+  text-align: center;
 }
 
 .container-info-about-error-input-cpf-or-email {

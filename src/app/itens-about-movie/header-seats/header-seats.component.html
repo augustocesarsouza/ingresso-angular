@@ -65,6 +65,14 @@
             </h5>
           </div>
           <div class="modal-header" *ngIf="!AccountExist">
+            <app-svg-arrow-payment
+              width="22px"
+              height="22px"
+              fill="rgb(152, 170, 236)"
+              rotate="270"
+              class="container-svg-arrow-payment"
+              (click)="onClickContainerSvgArrowPayment()"
+            ></app-svg-arrow-payment>
             <h5 class="modal-title" id="exampleModalLabel">
               Você ainda não tem conta. Entre sem cadastro ou crie uma conta
             </h5>
@@ -88,6 +96,7 @@
                 placeholder="Digite seu CPF ou E-mail"
                 #inputCpfOrEmail
                 class="input-cpf-email"
+                [value]="valueForEmailChooseForUser"
                 (input)="onInputCpfEmail($event)"
                 (click)="onClickInputCpfOrEmail()"
                 (blur)="onBlurInputCpfOrEmail()"
@@ -105,7 +114,7 @@
           </div>
           <div
             class="container-button-create-accout-line-and-button-enter-without-register"
-            *ngIf="!showInputEmailUser"
+            *ngIf="showInputEmailUser"
           >
             <div class="container-create-new-account">
               <button
@@ -124,6 +133,27 @@
             </div>
             <div class="container-enter-without-register">
               <button>ENTRAR SEM CADASTRO</button>
+            </div>
+            <div class="container-info-about-be-client">
+              <span>Vantagens de ser um cliente Ingresso.com</span>
+              <div class="container-svg-benefits-be-client">
+                <div class="container-svg-benefits">
+                  <app-svg-card-be-client></app-svg-card-be-client>
+                  <span>Salvar cartões</span>
+                </div>
+                <div class="container-svg-benefits">
+                  <app-svg-ticket-be-client></app-svg-ticket-be-client>
+                  <span>Cancelar pedidos</span>
+                </div>
+                <div class="container-svg-benefits">
+                  <app-svg-star-be-client></app-svg-star-be-client>
+                  <span>Favoritar cinemas</span>
+                </div>
+                <div class="container-svg-benefits">
+                  <app-svg-cell-phone-be-client></app-svg-cell-phone-be-client>
+                  <span>Retirar pelo App</span>
+                </div>
+              </div>
             </div>
           </div>
           <div
