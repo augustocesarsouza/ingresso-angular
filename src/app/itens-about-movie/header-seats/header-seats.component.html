@@ -59,14 +59,19 @@
           <app-svg-ingresso-i
             class="container-svg-ingresso-i"
           ></app-svg-ingresso-i>
-          <div class="modal-header">
+          <div class="modal-header" *ngIf="showInsertCpfOrEmail">
             <h5 class="modal-title" id="exampleModalLabel">
               Insira seu CPF ou e-mail para continuar a compra
             </h5>
           </div>
+          <div class="modal-header" *ngIf="!AccountExist">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Você ainda não tem conta. Entre sem cadastro ou crie uma conta
+            </h5>
+          </div>
         </div>
         <div class="container-input-and-button-continue">
-          <div class="container-cpf-or-email">
+          <div class="container-cpf-or-email" *ngIf="showInsertCpfOrEmail">
             <div class="container-svg-user">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21">
                 <path
@@ -89,6 +94,38 @@
               />
             </div>
           </div>
+          <div class="container-email-user-valid" *ngIf="showInputEmailUser">
+            <span>E-mail</span>
+            <input
+              type="text"
+              [value]="valueForEmailChooseForUser"
+              class="input-email"
+            />
+            <label (click)="onClickChangeEmail()">Trocar</label>
+          </div>
+          <div
+            class="container-button-create-accout-line-and-button-enter-without-register"
+            *ngIf="!showInputEmailUser"
+          >
+            <div class="container-create-new-account">
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="onClickCreateNewAccount()"
+              >
+                <app-svg-ingresso-i></app-svg-ingresso-i>
+                CRIAR UMA CONTA
+              </button>
+            </div>
+            <div class="container-line-white-and-span-or">
+              <span class="line-white-for-buttons"></span>
+              <span class="span-or">ou</span>
+              <span class="line-white-for-buttons"></span>
+            </div>
+            <div class="container-enter-without-register">
+              <button>ENTRAR SEM CADASTRO</button>
+            </div>
+          </div>
           <div
             class="container-info-about-error-input-cpf-or-email"
             *ngIf="errorInputEmailOrCpfNotHaveValueRight"
@@ -101,7 +138,7 @@
             ></app-svg-exclamation-mark>
             <span>É obrigatório informar o CPF ou e-mail.</span>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer" *ngIf="showInsertCpfOrEmail">
             <button
               type="button"
               class="btn btn-primary"

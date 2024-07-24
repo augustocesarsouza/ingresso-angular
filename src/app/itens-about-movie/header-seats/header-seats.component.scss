@@ -89,10 +89,10 @@
   position: relative;
   padding: 0px 64px;
   width: 400px;
-  height: 336px;
+  // height: 336px;
+  min-height: 336px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
 }
 
 .modal-content > button {
@@ -115,12 +115,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 24px;
 }
 
 .modal-header {
   justify-content: center;
   border: none;
   padding: 0;
+  margin-bottom: 40px;
 }
 
 .modal-header > h5 {
@@ -191,6 +193,114 @@
 
 .container-span-cpf-email-input > input:focus {
   outline: none;
+}
+
+.container-email-user-valid {
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  position: relative;
+}
+
+.container-email-user-valid > span {
+  font-size: 12px;
+  color: grey;
+  line-height: 1;
+  cursor: default;
+
+}
+
+.container-email-user-valid > input {
+  border: none;
+  outline: none;
+  cursor: default;
+  background-color: rgb(33, 38, 45);
+  color: grey;
+  font-size: 14px;
+  padding: 0;
+  pointer-events: none;
+}
+
+.container-email-user-valid > label {
+  font-size: 14px;
+  color: rgb(152, 170, 236);
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+.container-button-create-accout-line-and-button-enter-without-register {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.container-create-new-account {
+  justify-content: center;
+  border: none;
+  padding: 0;
+}
+
+.container-create-new-account > button {
+  width: 100%;
+  margin: 0;
+  background-image: linear-gradient(to left,#6c04ba, #3255e2);
+  color: rgb(255, 255, 255);
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  &:hover {
+    background-image: linear-gradient(to left,#591091, #162f94);
+    color: #ffffffa2;
+  }
+}
+
+.container-line-white-and-span-or {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.line-white-for-buttons {
+  background: rgb(204, 204, 204);
+  height: 1px;
+  width: 100%;
+}
+
+.span-or {
+  line-height: 1.5;
+  display: flex;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(153, 153, 153);
+}
+
+.container-enter-without-register {
+  display: flex;
+}
+
+.container-enter-without-register > button {
+  width: 100%;
+  background: none;
+  color: #fff;
+  border: 3px solid rgb(152, 170, 236);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 0px;
+
+  &:hover{
+    border-color: rgba(152, 170, 236, 0.808);
+    color: #ffffffcc;
+  }
 }
 
 .container-info-about-error-input-cpf-or-email {

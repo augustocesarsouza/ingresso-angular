@@ -11,8 +11,21 @@ export class HeaderSeatsComponent implements OnInit {
   inputValueEmailOrCpf = "";
   errorInputEmailOrCpfNotHaveValueRight = false;
 
+  AccountExist = true;
+  showInsertCpfOrEmail = true;
+  showInputEmailUser = false;
+  clickChangeEmail = false;
+  valueForEmailChooseForUser = "";
+
   spanCpfOrEmail!: HTMLElement;
   containerMainSvgInput!: HTMLElement;
+
+  settimeOutAny: any;
+
+  colorBorderGreen = "rgb(0, 204, 0)";
+  colorBorderBlue = "#2196F3";
+  colorBorderRed = "rgb(233, 74, 38)";
+  colorBorderGrey = "rgb(217, 217, 217)";
 
   constructor(private router: Router){
   }
@@ -150,11 +163,13 @@ export class HeaderSeatsComponent implements OnInit {
   onClickInputCpfOrEmail(){
     if(this.spanCpfOrEmail){
       this.spanCpfOrEmail.style.display = 'block';
-      this.containerMainSvgInput.style.padding = '2px 5px';
 
-      if(this.containerMainSvgInput.style.borderColor !== "rgb(233, 74, 38)"){
-        console.log("aqui");
-        this.containerMainSvgInput.style.borderColor = '#2196F3';
+      if(!this.clickChangeEmail){
+        this.containerMainSvgInput.style.padding = '2px 5px';
+      }
+
+      if(this.containerMainSvgInput.style.borderColor !== this.colorBorderGreen && this.containerMainSvgInput.style.borderColor !== this.colorBorderRed){
+        this.containerMainSvgInput.style.borderColor = this.colorBorderBlue;
       }
     }
   }
@@ -164,8 +179,8 @@ export class HeaderSeatsComponent implements OnInit {
       this.spanCpfOrEmail.style.display = 'none';
       this.containerMainSvgInput.style.padding = '6px 5px';
 
-      if(this.containerMainSvgInput.style.borderColor !== "rgb(233, 74, 38)"){
-        this.containerMainSvgInput.style.borderColor = 'rgb(217 217 217)';
+      if(this.containerMainSvgInput.style.borderColor !== this.colorBorderGreen && this.containerMainSvgInput.style.borderColor !== this.colorBorderRed){
+        this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
       }
     }
   }
@@ -175,10 +190,12 @@ export class HeaderSeatsComponent implements OnInit {
     this.inputValueEmailOrCpf = input.value;
 
     if(input.value.includes("@") && input.value.includes(".com")){
-      this.containerMainSvgInput.style.borderColor = "rgb(0, 204, 0)";
+      this.containerMainSvgInput.style.borderColor = this.colorBorderGreen;
       this.errorInputEmailOrCpfNotHaveValueRight = false;
     }else {
-      this.containerMainSvgInput.style.borderColor = "rgb(217, 217, 217)";
+      if(this.containerMainSvgInput.style.borderColor !== this.colorBorderGreen && this.containerMainSvgInput.style.borderColor !== this.colorBorderRed){
+        this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
+      }
     }
   }
 
@@ -186,9 +203,38 @@ export class HeaderSeatsComponent implements OnInit {
     if(typeof document === 'undefined') return;
 
     if(!this.inputValueEmailOrCpf.includes("@") || !this.inputValueEmailOrCpf.includes(".com")){
-      this.containerMainSvgInput.style.borderColor = "rgb(233, 74, 38)";
+      this.containerMainSvgInput.style.borderColor = this.colorBorderRed;
       this.errorInputEmailOrCpfNotHaveValueRight = true;
     }
+
+    if(this.inputValueEmailOrCpf.includes("@") && this.inputValueEmailOrCpf.includes(".com")){
+      this.AccountExist = false;
+      this.showInsertCpfOrEmail = false;
+      this.showInputEmailUser = true;
+
+      let inputCpfEmail = document.querySelector(".input-cpf-email") as HTMLInputElement;
+      this.valueForEmailChooseForUser = inputCpfEmail.value;
+    }
+  }
+
+  onClickChangeEmail(){
+    this.AccountExist = true;
+    this.showInsertCpfOrEmail = true;
+    this.showInputEmailUser = false;
+    this.clickChangeEmail = true;
+    this.inputValueEmailOrCpf = "";
+
+    clearTimeout(this.settimeOutAny);
+
+    this.settimeOutAny = setTimeout(() => {
+      this.containerMainSvgInput = document.querySelector('.container-cpf-or-email') as HTMLElement;
+
+      this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
+      this.errorInputEmailOrCpfNotHaveValueRight= false;
+    }, 50);
+  }
+
+  onClickCreateNewAccount(){
 
   }
 }
