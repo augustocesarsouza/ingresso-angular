@@ -88,6 +88,7 @@ import { SvgCardBeClientComponent } from './all-svg-benefits-be-client/svg-card-
 import { SvgTicketBeClientComponent } from './all-svg-benefits-be-client/svg-ticket-be-client/svg-ticket-be-client.component';
 import { SvgStarBeClientComponent } from './all-svg-benefits-be-client/svg-star-be-client/svg-star-be-client.component';
 import { SvgCellPhoneBeClientComponent } from './all-svg-benefits-be-client/svg-cell-phone-be-client/svg-cell-phone-be-client.component';
+import { SvgEyeCutComponent } from './svg-eye-cut/svg-eye-cut.component';
 
 @NgModule({
   imports: [
@@ -180,7 +181,8 @@ import { SvgCellPhoneBeClientComponent } from './all-svg-benefits-be-client/svg-
     SvgCardBeClientComponent,
     SvgTicketBeClientComponent,
     SvgStarBeClientComponent,
-    SvgCellPhoneBeClientComponent
+    SvgCellPhoneBeClientComponent,
+    SvgEyeCutComponent
   ],
   exports: [
     SvgLocationComponent,
@@ -270,8 +272,8 @@ import { SvgCellPhoneBeClientComponent } from './all-svg-benefits-be-client/svg-
     SvgCardBeClientComponent,
     SvgTicketBeClientComponent,
     SvgStarBeClientComponent,
-    SvgCellPhoneBeClientComponent
-
+    SvgCellPhoneBeClientComponent,
+    SvgEyeCutComponent
   ]
 })
 export class AllSvgAppModule { }

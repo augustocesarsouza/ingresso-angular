@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,21 +6,26 @@ import { Router } from '@angular/router';
   templateUrl: './header-seats.component.html',
   styleUrl: './header-seats.component.scss'
 })
-export class HeaderSeatsComponent implements OnInit {
+export class HeaderSeatsComponent implements OnInit, OnDestroy {
   wasClickedSvgUser = true;
   inputValueEmailOrCpf = "";
+  inputValuePassword = "";
   errorInputEmailOrCpfNotHaveValueRight = false;
 
-  AccountExist = true;
+  AccountExist = false;
   showInsertCpfOrEmail = true;
   showInputEmailUser = false;
-  clickChangeEmail = false;
   valueForEmailChooseForUser = "";
 
-  spanCpfOrEmail!: HTMLElement;
   containerMainSvgInput!: HTMLElement;
+  spanCpfOrEmail!: HTMLElement;
+
+  containerMainSvgPassword!: HTMLElement;
+  containerPasswordInput!: HTMLElement;
+  spanPassword!: HTMLElement;
 
   settimeOutAny: any;
+  settimeOutAnyLogin: any;
 
   colorBorderGreen = "rgb(0, 204, 0)";
   colorBorderBlue = "#2196F3";
@@ -36,6 +41,10 @@ export class HeaderSeatsComponent implements OnInit {
     this.containerMainSvgInput = document.querySelector('.container-cpf-or-email') as HTMLElement;
     let containerSpanAndInput = document.querySelector('.container-span-cpf-email-input') as HTMLElement;
     this.spanCpfOrEmail = containerSpanAndInput?.firstChild as HTMLElement;
+
+    this.containerMainSvgPassword = document.querySelector('.container-svg-password') as HTMLElement;
+    this.containerPasswordInput = document.querySelector('.container-password-input') as HTMLElement;
+    this.spanPassword = this.containerPasswordInput?.firstChild as HTMLElement;
 
     if(this.wasClickedSvgUser){
       let containerSvgUserBody = document.querySelector(".container-svg-user-body");
@@ -160,13 +169,50 @@ export class HeaderSeatsComponent implements OnInit {
   onClickLogginOrRegister(){
   }
 
+  updateProperties(){
+    clearTimeout(this.settimeOutAny);
+
+    this.settimeOutAny = setTimeout(() => {
+      this.containerMainSvgInput = document.querySelector('.container-cpf-or-email') as HTMLElement;
+      let containerSpanAndInput = document.querySelector('.container-span-cpf-email-input') as HTMLElement;
+      this.spanCpfOrEmail = containerSpanAndInput?.firstChild as HTMLElement;
+    }, 50);
+  }
+
+  updatePropertiesLogin(){
+    clearTimeout(this.settimeOutAnyLogin);
+
+    this.settimeOutAnyLogin = setTimeout(() => {
+      this.containerMainSvgPassword = document.querySelector('.container-svg-password') as HTMLElement;
+      this.containerPasswordInput = document.querySelector('.container-password-input') as HTMLElement;
+      this.spanPassword = this.containerPasswordInput?.firstChild as HTMLElement;
+    }, 50);
+  }
+
+  onClickCloseEnterUser(){
+    this.AccountExist = false;
+    this.showInsertCpfOrEmail = true;
+    this.showInputEmailUser = false;
+
+    this.errorInputEmailOrCpfNotHaveValueRight= false;
+
+    this.updateProperties();
+
+    this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
+    this.valueForEmailChooseForUser = "";
+    this.inputValueEmailOrCpf = "";
+
+    let inputCpfEmail = document.querySelector(".input-cpf-email") as HTMLInputElement;
+    if(inputCpfEmail){
+      inputCpfEmail.value = "";
+    }
+  }
+
   onClickInputCpfOrEmail(){
     if(this.spanCpfOrEmail){
       this.spanCpfOrEmail.style.display = 'block';
 
-      if(!this.clickChangeEmail){
-        this.containerMainSvgInput.style.padding = '2px 5px';
-      }
+      this.containerMainSvgInput.style.padding = '2px 5px';
 
       if(this.containerMainSvgInput.style.borderColor !== this.colorBorderGreen && this.containerMainSvgInput.style.borderColor !== this.colorBorderRed){
         this.containerMainSvgInput.style.borderColor = this.colorBorderBlue;
@@ -208,9 +254,12 @@ export class HeaderSeatsComponent implements OnInit {
     }
 
     if(this.inputValueEmailOrCpf.includes("@") && this.inputValueEmailOrCpf.includes(".com")){
-      this.AccountExist = false;
+      this.AccountExist = true;
+      // É AQUI QUE EU VOU VERIFICAR SE A CONTA EXISTE ATRAVER DE UM "SERVICE"
       this.showInsertCpfOrEmail = false;
       this.showInputEmailUser = true;
+
+      this.updatePropertiesLogin();
 
       let inputCpfEmail = document.querySelector(".input-cpf-email") as HTMLInputElement;
       this.valueForEmailChooseForUser = inputCpfEmail.value;
@@ -218,20 +267,16 @@ export class HeaderSeatsComponent implements OnInit {
   }
 
   onClickChangeEmail(){
-    this.AccountExist = true;
+    this.AccountExist = false;
     this.showInsertCpfOrEmail = true;
     this.showInputEmailUser = false;
-    this.clickChangeEmail = true;
-    this.inputValueEmailOrCpf = "";
 
-    clearTimeout(this.settimeOutAny);
+    this.valueForEmailChooseForUser = this.inputValueEmailOrCpf;
 
-    this.settimeOutAny = setTimeout(() => {
-      this.containerMainSvgInput = document.querySelector('.container-cpf-or-email') as HTMLElement;
+    this.updateProperties();
 
-      this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
-      this.errorInputEmailOrCpfNotHaveValueRight= false;
-    }, 50);
+    this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
+    this.errorInputEmailOrCpfNotHaveValueRight= false;
   }
 
   onClickCreateNewAccount(){
@@ -241,20 +286,57 @@ export class HeaderSeatsComponent implements OnInit {
   onClickContainerSvgArrowPayment(){
     if(typeof document === 'undefined') return;
 
-    this.AccountExist = true;
+    this.AccountExist = false;
     this.showInsertCpfOrEmail = true;
     this.showInputEmailUser = false;
-    this.clickChangeEmail = true;
 
     this.valueForEmailChooseForUser = this.inputValueEmailOrCpf;
 
+    this.updateProperties();
 
+    this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
+    this.errorInputEmailOrCpfNotHaveValueRight= false;
+  }
+
+  onCLickEnterAsClient(){
+
+  }
+
+  onClickInputPassword(){
+    if(this.spanPassword){
+      this.spanPassword.style.display = 'block';
+      this.containerMainSvgPassword.style.padding = '2px 5px';
+
+      if(this.containerMainSvgPassword.style.borderColor !== this.colorBorderGreen){
+        this.containerMainSvgPassword.style.borderColor = this.colorBorderBlue;
+      }
+    }
+  }
+
+  onBlurInputPassword(){
+    if(this.spanPassword){
+      this.spanPassword.style.display = 'none';
+      this.containerMainSvgPassword.style.padding = '6px 5px';
+
+      if(this.containerMainSvgPassword.style.borderColor !== this.colorBorderGreen){
+        this.containerMainSvgPassword.style.borderColor = this.colorBorderGrey;
+      };
+    }
+  }
+
+  onInputPassword(event: Event) {
+    let input = event.target as HTMLInputElement;
+    this.inputValuePassword = input.value;
+
+    if(input.value.length > 0){
+      this.containerMainSvgPassword.style.borderColor = this.colorBorderGreen;
+    }else {
+      this.containerMainSvgPassword.style.borderColor = this.colorBorderGrey;
+    }
+  }
+
+  ngOnDestroy(): void {
     clearTimeout(this.settimeOutAny);
-
-    this.settimeOutAny = setTimeout(() => {
-      this.containerMainSvgInput = document.querySelector('.container-cpf-or-email') as HTMLElement;
-      this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
-      this.errorInputEmailOrCpfNotHaveValueRight= false;
-    }, 50);
+    clearTimeout(this.settimeOutAnyLogin);
   }
 }

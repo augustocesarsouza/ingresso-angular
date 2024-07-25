@@ -139,7 +139,8 @@
   cursor: pointer;
 }
 
-.container-cpf-or-email {
+.container-cpf-or-email,
+.container-svg-password {
   display: flex;
   gap: 10px;
   border-left: 4px solid rgb(217 217 217);
@@ -169,6 +170,40 @@
 .line-split {
   border-right: 1px solid rgb(217 217 217);
   height: 13px;
+}
+
+.container-password-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+
+.container-password-input > span {
+  font-size: 10px;
+  color: rgb(177 177 177);
+  display: none;
+}
+
+.container-password-input > input {
+  border: none;
+  font-size: 12px;
+  width: 100%;
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-bottom: 0px;
+}
+
+.container-password-input > input:focus {
+  outline: none;
+}
+
+.container-svg-eye-cut {
+  position: absolute;
+  right: 8px;
+  top: -3px;
+  display: flex;
 }
 
 .container-input-and-button-continue{
@@ -263,6 +298,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+  line-height: 1;
 
   &:hover {
     background-image: linear-gradient(to left,#591091, #162f94);
@@ -273,14 +309,16 @@
 .container-line-white-and-span-or {
   display: flex;
   justify-content: center;
-  align-items: center;
+  // align-items: center;
   gap: 10px;
+  line-height: 1;
 }
 
 .line-white-for-buttons {
   background: rgb(204, 204, 204);
   height: 1px;
   width: 100%;
+  margin-top: 14px;
 }
 
 .span-or {
@@ -305,6 +343,7 @@
   font-size: 14px;
   font-weight: 600;
   padding: 8px 0px;
+  line-height: 1;
 
   &:hover{
     border-color: rgba(152, 170, 236, 0.808);
