@@ -139,6 +139,12 @@
   cursor: pointer;
 }
 
+.container-input-password-and-span-problems {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .container-cpf-or-email,
 .container-svg-password {
   display: flex;
@@ -152,6 +158,11 @@
   align-items: center;
   background: #fff;
   border-radius: 3px;
+}
+
+.container-svg-password {
+  position: relative;
+  width: 100%;
 }
 
 .container-svg-user {
@@ -177,7 +188,6 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  position: relative;
 }
 
 .container-password-input > span {
@@ -201,9 +211,30 @@
 
 .container-svg-eye-cut {
   position: absolute;
-  right: 8px;
-  top: -3px;
+  right: 10px;
+  top: 7px;
   display: flex;
+  cursor: pointer;
+  user-select: none;
+}
+
+.span-problems-logging-in {
+  font-size: 16px;
+  color: rgb(152, 170, 236);
+  margin-top: 10px;
+  line-height: 1;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.container-checkbox-keep-me-logged {
+  display: flex;
+  gap: 10px;
+  line-height: 1;
+  margin: 6px 0px;
+  font-size: 16px;
+  margin-right: 68px;
+  margin-top: 18px;
 }
 
 .container-input-and-button-continue{
@@ -227,7 +258,7 @@
 
 .container-span-cpf-email-input > input {
   border: none;
-  font-size: 12px;
+  font-size: 14px;
   width: 100%;
   padding-top: 0px;
   padding-left: 0px;
@@ -342,7 +373,7 @@
   border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
-  padding: 8px 0px;
+  padding: 12px 0px;
   line-height: 1;
 
   &:hover{
@@ -406,6 +437,7 @@
   justify-content: center;
   border: none;
   padding: 0;
+  position: relative;
 }
 
 .modal-footer > button {
@@ -423,4 +455,194 @@
     background-image: linear-gradient(to left,#591091, #162f94);
     color: #ffffffa2;
   }
+}
+
+@keyframes gywwQJ {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.container-cicle-loading {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+  position: absolute;
+  left: 60px;
+}
+
+.cicle-loading{
+  width: 100%;
+  height: 100%;
+  border-width: 4px;
+  border-style: solid;
+  border-color: rgb(255, 255, 255) rgb(0, 0, 0) rgb(0, 0, 0);
+  border-image: initial;
+  border-radius: 50%;
+  // animation: 1.5s linear 0s infinite normal none running gywwQJ;
+  animation: gywwQJ 1.5s linear infinite;
+}
+
+
+.container-modal-confirmed-code-send-email {//
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(59, 59, 59, 0.363);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10;
+}
+
+.container-modal-central-send-code-email {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 19rem;
+  height: 27rem;
+  // padding: 10px 19px;
+  background-color: #fff;
+
+  // gap: 18px; quando codigo chegar
+  //   width: 19rem;
+  //   height: 25rem;
+}
+
+.container-modal-central-send-code-email > h1 {
+  font-size: 22px;
+  color: rgb(109, 109, 109);
+}
+
+.container-img-background-code {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  background-image: url("https://res.cloudinary.com/dyqsqg7pk/image/upload/v1713697148/dark_cfnstp.jpg");
+  background-size: contain;
+  position: relative;
+  width: 100%;
+  border-radius: 4px;
+  padding: 16px 0px;
+  padding-bottom: 70px;
+  position: relative;
+}
+
+.container-slice-img {
+  width: 100%;
+  height: 40px;
+  background-color: transparent;
+  background-image: -webkit-radial-gradient(50% -1px, circle cover, transparent 27px, rgb(4, 18, 24) 0px);
+  position: absolute;
+  bottom: 0;
+}
+
+.container-svg-exit {
+  display: flex;
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+}
+
+.container-main-part-bottom-code {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: rgb(4, 18, 24);
+  height: 100%;
+
+}
+
+.container-part-bottom-code {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 16px;
+  gap: 20px;
+}
+
+.container-part-bottom-code > h1 {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+  color: rgb(255, 255, 255);
+  margin-bottom: 0px;
+}
+
+.container-part-bottom-code > span {
+  font-size: 15px;
+  text-align: left;
+  color: rgb(255, 255, 255);
+}
+
+.span-code-confirmed-1 {
+  font-size: 14px;
+  line-height: 1.3;
+  text-align: center;
+  color: rgb(118 118 118);
+}
+
+.container-where-insert-the-code{
+  display: flex;
+  gap: 5px;
+}
+
+.container-input-code {
+  display: flex;
+}
+
+.container-input-code > input {
+  outline: none;
+  width: 32px;
+  height: 44px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.container-resend-email-code {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.container-resend-email-code > span {
+  font-size: 14px;
+  color: rgb(65, 129, 197);
+  cursor: pointer;
+}
+
+.container-code-resend-successfully {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.container-code-resend-successfully > svg {
+  fill: rgb(15, 190, 40);
+}
+
+.container-code-resend-successfully > span {
+  font-size: 14px;
+  color: rgb(15, 190, 40);
+}
+
+.container-svg-lock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-input-cod-and-svg-lock {
+  display: flex;
 }

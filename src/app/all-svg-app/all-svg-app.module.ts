@@ -89,6 +89,8 @@ import { SvgTicketBeClientComponent } from './all-svg-benefits-be-client/svg-tic
 import { SvgStarBeClientComponent } from './all-svg-benefits-be-client/svg-star-be-client/svg-star-be-client.component';
 import { SvgCellPhoneBeClientComponent } from './all-svg-benefits-be-client/svg-cell-phone-be-client/svg-cell-phone-be-client.component';
 import { SvgEyeCutComponent } from './svg-eye-cut/svg-eye-cut.component';
+import { SvgEyeOpenComponent } from './svg-eye-open/svg-eye-open.component';
+import { SvgNotificationCodeSentEmailComponent } from './svg-notification-code-sent-email/svg-notification-code-sent-email.component';
 
 @NgModule({
   imports: [
@@ -182,7 +184,9 @@ import { SvgEyeCutComponent } from './svg-eye-cut/svg-eye-cut.component';
     SvgTicketBeClientComponent,
     SvgStarBeClientComponent,
     SvgCellPhoneBeClientComponent,
-    SvgEyeCutComponent
+    SvgEyeCutComponent,
+    SvgEyeOpenComponent,
+    SvgNotificationCodeSentEmailComponent
   ],
   exports: [
     SvgLocationComponent,
@@ -273,7 +277,9 @@ import { SvgEyeCutComponent } from './svg-eye-cut/svg-eye-cut.component';
     SvgTicketBeClientComponent,
     SvgStarBeClientComponent,
     SvgCellPhoneBeClientComponent,
-    SvgEyeCutComponent
+    SvgEyeCutComponent,
+    SvgEyeOpenComponent,
+    SvgNotificationCodeSentEmailComponent
   ]
 })
 export class AllSvgAppModule { }
