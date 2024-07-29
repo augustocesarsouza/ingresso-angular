@@ -8,7 +8,12 @@
     </div>
     <div class="container-name-user-service">
       <div class="container-name-user">
-        <span>Olá, visitante</span>
+        <span *ngIf="!userLogin || !codeConfirmedForTheUser"
+          >Olá, visitante</span
+        >
+        <span *ngIf="userLogin && codeConfirmedForTheUser"
+          >Olá, {{ userLogin.name }}</span
+        >
         <app-svg-user
           class="container-svg-user-body"
           width="24px"
@@ -17,8 +22,31 @@
           (click)="onClickUser()"
         ></app-svg-user>
         <div class="container-info-about-user" *ngIf="wasClickedSvgUser">
-          <span>Olá, Visitante!</span>
-          <a (click)="onClickLogginOrRegister()">Entre ou Cadastre-se</a>
+          <span
+            *ngIf="!userLogin || !codeConfirmedForTheUser"
+            class="span-user-visitor-site"
+            >Olá, Visitante!</span
+          >
+          <span
+            *ngIf="userLogin && codeConfirmedForTheUser"
+            class="span-user-login-name"
+            >Olá, {{ userLogin.name }}</span
+          >
+          <span
+            *ngIf="userLogin && codeConfirmedForTheUser"
+            class="span-user-login-email"
+            >{{ userLogin.email }}</span
+          >
+          <a
+            (click)="onClickLogginOrRegister()"
+            *ngIf="!userLogin || !codeConfirmedForTheUser"
+            >Entre ou Cadastre-se</a
+          >
+          <a
+            (click)="onClickExit()"
+            *ngIf="userLogin && codeConfirmedForTheUser"
+            >Sair</a
+          >
         </div>
       </div>
       <div class="container-service">

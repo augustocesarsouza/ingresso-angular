@@ -54,18 +54,44 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
   colorBorderGrey = "rgb(217, 217, 217)";
 
   @ViewChildren('input0, input1, input2, input3, input4, input5') inputs!: QueryList<ElementRef>;
-  userLogin!: Data;
+  userLogin!: Data | null;
   invalidUsernamePasswordOrCode: { value: boolean } = { value: false };
   inputNotAllHasValue = false;
   codeSendForEmailConfirmedLogin = false;
   showModalForLogin = false;
   mostrarMeuModalProprio = false;
+  codeConfirmedForTheUser = false;
 
   constructor(private router: Router, private loginUserService: LoginUserService, private dataService: DataService, private check_if_email_already_exsits_Service: CheckIfEmailAlreadyExsitsService){
   }
 
   ngOnInit(): void {
     if(typeof document === 'undefined') return;
+
+    let userLocalStorage = null;
+
+    if(typeof window !== "undefined"){
+      userLocalStorage = localStorage.getItem('userLogin');
+    }
+
+    if(userLocalStorage === "null" || userLocalStorage === null){
+      this.subscriptions.push(this.dataService.data$.subscribe((data: Data) => {
+        const userJSON = JSON.stringify(data);
+
+        if(typeof window !== "undefined"){
+          localStorage.setItem('userLogin', userJSON);
+        }
+
+        this.userLogin = data;
+      }));
+    }else {
+      if(userLocalStorage){
+        let userJSON: Data = JSON.parse(userLocalStorage);
+        this.userLogin = userJSON;
+        this.codeConfirmedForTheUser = true;
+
+      }
+    }
 
     if(this.wasClickedSvgUser){
       let containerSvgUserBody = document.querySelector(".container-svg-user-body");
@@ -92,7 +118,7 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
           .container-svg-user-body::after {
             content: "";
             position: absolute;
-            top: 35px;
+            top: 37px;
             right: -1px;
             border-width: 13px;
             border-style: solid;
@@ -180,6 +206,45 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
       }
 
     });
+  }
+
+  blockArrowUser(){
+    let containerSvgUserBody = document.querySelector(".container-svg-user-body") as HTMLElement;
+    console.log(containerSvgUserBody);
+
+    if(containerSvgUserBody){
+      const beforeStyle = document.createElement('style');
+      beforeStyle.innerHTML = `
+        .container-svg-user-body::before {
+          content: "";
+          position: absolute;
+          top: 34px;
+          border-width: 12px;
+          border-style: solid;
+          border-color: transparent transparent rgb(152, 170, 236);
+          border-image: initial;
+          display: none;
+        }
+      `;
+      document.head.appendChild(beforeStyle);
+
+      const afterStyle = document.createElement('style');
+      afterStyle.innerHTML = `
+        .container-svg-user-body::after {
+          content: "";
+          position: absolute;
+          top: 35px;
+          right: -1px;
+          border-width: 13px;
+          border-style: solid;
+          border-color: transparent transparent rgb(5, 31, 42);
+          border-image: initial;
+          z-index: 2;
+          display: none;
+        }
+      `;
+      document.head.appendChild(afterStyle);
+    }
   }
 
   onInput(event: Event, index: number) {
@@ -303,6 +368,17 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
     }, 50);
 
     this.mostrarMeuModalProprio = true;
+  }
+
+  onClickExit(){
+    if(typeof window !== "undefined"){
+      localStorage.removeItem('userLogin');
+    }
+
+    this.userLogin = null;
+    this.dataService.setData(null);
+    this.wasClickedSvgUser = false;
+    this.blockArrowUser();
   }
 
   updateProperties(){
@@ -604,13 +680,10 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
     if(inputWithValue < this.inputs.length){
       this.inputNotAllHasValue = true;
 
-      clearTimeout(this.settimeOutInputNotHaveValue);
       this.inputNotAllHasValue = false;
-
-      // this.settimeOutInputNotHaveValue = setTimeout(() => {
-      //   this.inputNotAllHasValue = false;
-      // }, 2000);
     }else {
+      if(this.userLogin === null) return;
+
       this.inputNotAllHasValue = false;
 
       let valueInput = inputValue;
@@ -621,8 +694,8 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
       const res = await fetch(`/api/v1/public/user/verific/${valueInput}/${idUser}`);
 
       if(res.status === 200){
-
         this.codeSendForEmailConfirmedLogin = false;
+        this.codeConfirmedForTheUser = true;
         setTimeout(() => {
           this.mostrarMeuModalProprio = false;
         }, 1000);

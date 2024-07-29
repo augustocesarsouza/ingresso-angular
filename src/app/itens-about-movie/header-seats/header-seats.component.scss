@@ -42,7 +42,8 @@
   gap: 10px;
   left: 75px;
   top: 58px;
-  width: 202px;
+  // width: 202px;
+  max-width: 450px;
   font-size: 14px;
   padding: 12px;
   border-radius: 5px;
@@ -51,10 +52,13 @@
   user-select: text;
 }
 
-.container-info-about-user > span {
+.span-user-visitor-site {
   color: #fff;
   font-size: 16px;
   color: rgb(110 131 152);
+  width: 170px;
+  text-align: center;
+
 }
 
 .container-info-about-user > a {
@@ -62,10 +66,24 @@
   color: rgb(124 152 254);
   font-size: 16px;
   cursor: pointer;
+  text-align: center;
+  font-weight: 600;
 
   &:hover {
     color: rgb(89 109 182);
   }
+}
+
+.span-user-login-name {
+  font-size: 16px;
+  color: rgb(110 131 152);
+  text-align: center;
+}
+
+.span-user-login-email {
+  font-size: 16px;
+  color: rgb(102 110 117);
+  text-align: center;
 }
 
 .container-service {

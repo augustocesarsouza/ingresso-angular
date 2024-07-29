@@ -14,6 +14,8 @@ export interface ErrorObj {
 export interface Data {
   id: string;
   name: string;
+  email: string;
+  token: string;
 }
 
 @Component({
