@@ -5,7 +5,7 @@ import { DataService } from '../data.service';
 import { Subscription, combineLatest } from 'rxjs';
 import { jwtDecode } from "jwt-decode";
 
-interface ErrorObj {
+export interface ErrorObj {
   data: Data,
   message: string;
   typeMessage: string;

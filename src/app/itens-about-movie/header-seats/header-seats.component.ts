@@ -1,7 +1,10 @@
-import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { CheckIfEmailAlreadyExsitsService } from '../service/check-if-email-already-exsits.service';
 import { Subscription } from 'rxjs';
+import { LoginUserService } from '../../login-and-register-user/login-user.service';
+import { Data, ErrorObj } from '../../login-and-register-user/login-user/login-user.component';
+import { DataService } from '../../login-and-register-user/data.service';
 
 interface CheckExistsEmail {
   userExists: boolean;
@@ -26,7 +29,6 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
   showInsertCpfOrEmail = true;
   showInputEmailUser = false;
   EyeCutSvgOrEyeOpen = true;
-  codeSendFormEmailConfirmedLogin = true;
   valueForEmailChooseForUser = "";
 
   containerMainSvgInput!: HTMLElement;
@@ -43,6 +45,8 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
   settimeOutAnyLogin: any;
   settimeOutLoadingCicle: any;
   settimeOutButtonContinue: any;
+  settimeOutInputNotHaveValue: any;
+  settimeOutInputPassword: any;
 
   colorBorderGreen = "rgb(0, 204, 0)";
   colorBorderBlue = "#2196F3";
@@ -50,22 +54,18 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
   colorBorderGrey = "rgb(217, 217, 217)";
 
   @ViewChildren('input0, input1, input2, input3, input4, input5') inputs!: QueryList<ElementRef>;
+  userLogin!: Data;
+  invalidUsernamePasswordOrCode: { value: boolean } = { value: false };
+  inputNotAllHasValue = false;
+  codeSendForEmailConfirmedLogin = false;
+  showModalForLogin = false;
+  mostrarMeuModalProprio = false;
 
-  constructor(private router: Router, private check_if_email_already_exsits_Service: CheckIfEmailAlreadyExsitsService){
+  constructor(private router: Router, private loginUserService: LoginUserService, private dataService: DataService, private check_if_email_already_exsits_Service: CheckIfEmailAlreadyExsitsService){
   }
 
   ngOnInit(): void {
     if(typeof document === 'undefined') return;
-
-    this.containerMainSvgInput = document.querySelector('.container-cpf-or-email') as HTMLElement;
-    let containerSpanAndInput = document.querySelector('.container-span-cpf-email-input') as HTMLElement;
-    this.spanCpfOrEmail = containerSpanAndInput?.firstChild as HTMLElement;
-
-    this.containerMainSvgPassword = document.querySelector('.container-svg-password') as HTMLElement;
-    this.containerPasswordInput = document.querySelector('.container-password-input') as HTMLElement;
-    this.spanPassword = this.containerPasswordInput?.firstChild as HTMLElement;
-
-    this.inputPassword = document.querySelector('.input-password') as HTMLInputElement;
 
     if(this.wasClickedSvgUser){
       let containerSvgUserBody = document.querySelector(".container-svg-user-body");
@@ -288,7 +288,21 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
       if(modalFooter){
         this.buttonContinue = modalFooter.lastChild as HTMLElement;
       }
+
+      this.containerMainSvgInput = document.querySelector('.container-cpf-or-email') as HTMLElement;
+      let containerSpanAndInput = document.querySelector('.container-span-cpf-email-input') as HTMLElement;
+      this.spanCpfOrEmail = containerSpanAndInput?.firstChild as HTMLElement;
+
+      this.containerMainSvgPassword = document.querySelector('.container-svg-password') as HTMLElement;
+      this.containerPasswordInput = document.querySelector('.container-password-input') as HTMLElement;
+      this.spanPassword = this.containerPasswordInput?.firstChild as HTMLElement;
+
+      // this.inputPassword = document.querySelector('.input-password') as HTMLInputElement;
+      // console.log(this.inputPassword);
+
     }, 50);
+
+    this.mostrarMeuModalProprio = true;
   }
 
   updateProperties(){
@@ -324,11 +338,13 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
     clearTimeout(this.settimeOutAny);
 
     this.settimeOutAny = setTimeout(() => {
-      this.inputPassword = document.querySelector('.input-password') as HTMLInputElement;
+      this.inputPassword = document.querySelector('.input-password-send-code') as HTMLInputElement;
     });
   }
 
   onClickCloseEnterUser(){
+
+    this.mostrarMeuModalProprio = false;
     this.AccountExist = false;
     this.showInsertCpfOrEmail = true;
     this.showInputEmailUser = false;
@@ -338,7 +354,10 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
 
     this.updateProperties();
 
-    this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
+    if(this.containerMainSvgInput){
+      this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
+    }
+
     this.valueForEmailChooseForUser = "";
     this.inputValueEmailOrCpf = "";
 
@@ -375,13 +394,17 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
     let input = event.target as HTMLInputElement;
     this.inputValueEmailOrCpf = input.value;
 
-    if(input.value.includes("@") && input.value.includes(".com")){
+    if(input.value.includes("@") && input.value.includes(".com") && this.containerMainSvgInput){
       this.containerMainSvgInput.style.borderColor = this.colorBorderGreen;
       this.errorInputEmailOrCpfNotHaveValueRight = false;
     }else {
-      if(this.containerMainSvgInput.style.borderColor !== this.colorBorderGreen && this.containerMainSvgInput.style.borderColor !== this.colorBorderRed){
+      if(this.containerMainSvgInput && this.containerMainSvgInput.style.borderColor !== this.colorBorderGreen && this.containerMainSvgInput.style.borderColor !== this.colorBorderRed){
         this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
       }
+    }
+
+    if(this.inputValueEmailOrCpf.length <= 0){
+      this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
     }
   }
 
@@ -390,7 +413,7 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
 
     this.updateProprietieInputPassword();
 
-    if(!this.inputValueEmailOrCpf.includes("@") || !this.inputValueEmailOrCpf.includes(".com")){
+    if(!this.inputValueEmailOrCpf.includes("@") || !this.inputValueEmailOrCpf.includes(".com") && this.containerMainSvgInput){
       this.containerMainSvgInput.style.borderColor = this.colorBorderRed;
       this.errorInputEmailOrCpfNotHaveValueRight = true;
     }
@@ -420,6 +443,12 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
         }, 1000);
       }));
     }
+
+    clearTimeout(this.settimeOutInputPassword);
+
+    this.settimeOutInputPassword = setTimeout(() => {
+      this.inputPassword = document.querySelector('.input-password-send-code') as HTMLInputElement;
+    }, 1500);
   }
 
   onClickChangeEmail(){
@@ -437,7 +466,9 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
 
     clearTimeout(this.settimeOutAnyColor);
     this.settimeOutAnyColor = setTimeout(() => {
-      this.containerMainSvgInput.style.borderColor = this.colorBorderGreen;
+      if(this.containerMainSvgInput){
+        this.containerMainSvgInput.style.borderColor = this.colorBorderGreen;
+      }
       this.errorInputEmailOrCpfNotHaveValueRight= false;
     }, 50);
   }
@@ -462,15 +493,48 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
 
     clearTimeout(this.settimeOutAnyColor);
     this.settimeOutAnyColor = setTimeout(() => {
-      this.containerMainSvgInput.style.borderColor = this.colorBorderGreen;
+      if(this.containerMainSvgInput){
+        this.containerMainSvgInput.style.borderColor = this.colorBorderGreen;
+      }
       this.errorInputEmailOrCpfNotHaveValueRight= false;
     }, 50);
   }
 
   onCLickEnterAsClient(){
-    this.codeSendFormEmailConfirmedLogin = false;
-    // fazer aqui que vai mandar o codigo no email do usuario
-    // depois que ele clicar em logar como cliente
+    if(typeof document === "undefined") return;
+
+    let inputPassword = document.querySelector(".input-password-send-code") as HTMLInputElement;
+
+    let valueCpfOrEmail = this.valueForEmailChooseForUser;
+    let valuePassword = inputPassword.value;
+
+    this.loginUserService.loginUser(valueCpfOrEmail, valuePassword)
+    .subscribe({
+      next: (success: any) => {
+        console.log(success);
+
+        let user = success.data;
+
+        if(user.codeSentSuccessfullyEmail){
+          this.userLogin = user;
+
+          this.dataService.setData(user);
+          this.codeSendForEmailConfirmedLogin = true;
+        }
+      },
+      error: error => {
+        if(error.status === 401){
+          this.invalidUsernamePasswordOrCode.value = true;
+        }
+
+        const errorObj: ErrorObj = error.error;
+
+        if(errorObj.typeMessage === "email"){
+          this.userLogin = errorObj.data;
+          // this.confirmEmailRegister = true;
+        }
+      }
+    });
   }
 
   onClickInputPassword(){
@@ -519,7 +583,56 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
   }
 
   onClickSvgExitCodeEmail(){
-    this.codeSendFormEmailConfirmedLogin = !this.codeSendFormEmailConfirmedLogin;
+    this.codeSendForEmailConfirmedLogin = !this.codeSendForEmailConfirmedLogin;
+  }
+
+  onClickResendCode(){
+
+  }
+
+  async onClickContinueCode(){
+    let inputWithValue = 0;
+    let inputValue = "";
+
+    this.inputs.toArray().forEach((el: ElementRef<HTMLInputElement>) => {
+      if(el.nativeElement.value.length > 0){
+        inputWithValue++;
+        inputValue += el.nativeElement.value;
+      }
+    });
+
+    if(inputWithValue < this.inputs.length){
+      this.inputNotAllHasValue = true;
+
+      clearTimeout(this.settimeOutInputNotHaveValue);
+      this.inputNotAllHasValue = false;
+
+      // this.settimeOutInputNotHaveValue = setTimeout(() => {
+      //   this.inputNotAllHasValue = false;
+      // }, 2000);
+    }else {
+      this.inputNotAllHasValue = false;
+
+      let valueInput = inputValue;
+      let idUser = this.userLogin.id;
+      // userLogin  - só pegar a variavel e trocar de "visitante" para nome e arrumar modal
+      // e ver se o login vou colocado como variavel global todas as partes deve ter esse login this.dataService.setData(user);
+
+      const res = await fetch(`/api/v1/public/user/verific/${valueInput}/${idUser}`);
+
+      if(res.status === 200){
+
+        this.codeSendForEmailConfirmedLogin = false;
+        setTimeout(() => {
+          this.mostrarMeuModalProprio = false;
+        }, 1000);
+      }else if(res.status === 400){
+        this.codeSendForEmailConfirmedLogin = false;
+        this.invalidUsernamePasswordOrCode.value = true;
+      }
+
+
+    }
   }
 
   ngOnDestroy(): void {
@@ -528,6 +641,7 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
     clearTimeout(this.settimeOutAnyColor);
     clearTimeout(this.settimeOutLoadingCicle);
     clearTimeout(this.settimeOutButtonContinue);
+    clearTimeout(this.settimeOutInputNotHaveValue);
 
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }

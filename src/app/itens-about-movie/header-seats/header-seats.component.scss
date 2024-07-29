@@ -106,6 +106,16 @@
   border: none;
 }
 
+.button-close-insert-email {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  position: absolute;
+  right: 16px;
+  top: 13px;
+  cursor: pointer;
+}
+
 .container-svg-ingresso-and-title {
   display: flex;
   flex-direction: column;
@@ -509,13 +519,9 @@
   align-items: center;
   position: relative;
   width: 19rem;
-  height: 27rem;
-  // padding: 10px 19px;
+  height: 25rem;
   background-color: #fff;
-
-  // gap: 18px; quando codigo chegar
-  //   width: 19rem;
-  //   height: 25rem;
+  border-radius: 50px;
 }
 
 .container-modal-central-send-code-email > h1 {
@@ -556,10 +562,11 @@
 .container-main-part-bottom-code {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 40px;
   background: rgb(4, 18, 24);
   height: 100%;
-
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 .container-part-bottom-code {
@@ -592,11 +599,59 @@
 
 .container-where-insert-the-code{
   display: flex;
+  // justify-content: center;
+  align-items: center;
+  flex-direction: column;
   gap: 5px;
 }
 
 .container-input-code {
   display: flex;
+  gap: 4px;
+}
+
+.container-error-input-miss-value {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  line-height: 1;
+}
+
+.container-error-input-miss-value > span {
+  font-size: 14px;
+  font-weight: 400;
+  color: #db4444;
+}
+
+.container-svg-exclamation-mark-error-input {
+  display: flex;
+}
+
+.container-resend-code-and-continue {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+.container-resend-code-and-continue > span {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(152, 170, 236);
+  line-height: 1;
+  padding-left: 65px;
+  cursor: pointer;
+}
+
+.container-resend-code-and-continue > a {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(152, 170, 236);
+  line-height: 1;
+  text-align: end;
+  text-decoration: none;
+  padding-right: 20px;
+  cursor: pointer;
 }
 
 .container-input-code > input {
@@ -645,4 +700,16 @@
 
 .container-input-cod-and-svg-lock {
   display: flex;
+}
+
+.modal-meu-proprio {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(43 43 43 / 38%);
 }
