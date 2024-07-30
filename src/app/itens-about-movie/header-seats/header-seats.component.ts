@@ -35,8 +35,8 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
   containerMainSvgInput!: HTMLElement;
   spanCpfOrEmail!: HTMLElement;
 
-  containerMainSvgPassword!: HTMLElement;
   containerPasswordInput!: HTMLElement;
+  containerMainSvgPassword!: HTMLElement;
   spanPassword!: HTMLElement;
   inputPassword!: HTMLInputElement;
   buttonContinue!: HTMLElement;
@@ -420,7 +420,6 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
   }
 
   onClickCloseEnterUser(){
-
     this.mostrarMeuModalProprio = false;
     this.AccountExist = false;
     this.showInsertCpfOrEmail = true;
@@ -428,6 +427,9 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
 
     this.errorInputEmailOrCpfNotHaveValueRight= false;
     this.EyeCutSvgOrEyeOpen = true;
+
+    this.clickTroubleLoggingIn = false;
+    this.alreadyClickedContinue = false;
 
     this.updateProperties();
 
@@ -709,7 +711,6 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
 
   onClickContainerSvgArrowTroubleLogging(){
     this.clickTroubleLoggingIn = false;
-
     this.AccountExist = true;
     this.alreadyClickedContinue = true;
     this.showInsertCpfOrEmail = false;

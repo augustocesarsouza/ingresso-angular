@@ -23,6 +23,7 @@ import { PaymentMethodsComponent } from './options-user-all/payment-methods/paym
 import { CardCreditAllComponent } from './options-user-all/card-credit-all/card-credit-all.component';
 import { CardDebitAllComponent } from './options-user-all/card-debit-all/card-debit-all.component';
 import { DigitalWalletsAllComponent } from './options-user-all/digital-wallets-all/digital-wallets-all.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { DigitalWalletsAllComponent } from './options-user-all/digital-wallets-a
     CardCreditAllComponent,
     CardDebitAllComponent,
     DigitalWalletsAllComponent,
+    PasswordChangeComponent,
   ],
   imports: [
     CommonModule,

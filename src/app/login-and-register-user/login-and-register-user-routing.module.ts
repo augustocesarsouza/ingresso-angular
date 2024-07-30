@@ -7,10 +7,12 @@ import { MyOrdersComponent } from './options-user-all/my-orders/my-orders.compon
 import { MyOrdersCinemaComponent } from './options-user-all/my-orders-cinema/my-orders-cinema.component';
 import { PersonalDataComponent } from './options-user-all/personal-data/personal-data.component';
 import { PaymentMethodsComponent } from './options-user-all/payment-methods/payment-methods.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginUserComponent },
   { path: 'register', component: RegisterUserComponent },
+  { path: 'password-change/:token', component: PasswordChangeComponent },
   { path: 'confirmation-of-email', component: LoginUserComponent },
   { path: '', component: MyOrdersComponent,
     children: [
