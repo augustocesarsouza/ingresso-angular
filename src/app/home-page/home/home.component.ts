@@ -17,7 +17,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   theaters!: Theater[];
 
   constructor(private movieService: MovieService, private theaterService: TheaterService, private router: Router) { }
-
+  // ver amanha como funciona o scroll dos movies quando clica e ele pucha para o lado e salva qual é o
+  // component para eu poder voltar aqui no "component" que faz isso
   ngOnInit(): void {
     if (typeof document !== 'undefined') {
       document.body.style.backgroundColor = "rgb(4, 18, 24)";

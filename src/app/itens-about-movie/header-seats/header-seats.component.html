@@ -112,6 +112,19 @@
             Faça login com sua conta Ingresso ou entre sem cadastro
           </h5>
         </div>
+        <div class="modal-header" *ngIf="clickTroubleLoggingIn">
+          <app-svg-arrow-payment
+            width="22px"
+            height="22px"
+            fill="rgb(152, 170, 236)"
+            rotate="270"
+            class="container-svg-arrow-payment"
+            (click)="onClickContainerSvgArrowTroubleLogging()"
+          ></app-svg-arrow-payment>
+          <h5 class="modal-title" id="exampleModalLabel">
+            Problemas para entrar
+          </h5>
+        </div>
       </div>
       <div class="container-input-and-button-continue">
         <div class="container-cpf-or-email" *ngIf="showInsertCpfOrEmail">
@@ -191,7 +204,11 @@
           >
             <span>Usuário, senha ou código inválidos</span>
           </div>
-          <span class="span-problems-logging-in">Problemas para entrar ?</span>
+          <span
+            class="span-problems-logging-in"
+            (click)="onClickTroubleLoggingIn()"
+            >Problemas para entrar ?</span
+          >
           <div class="container-checkbox-keep-me-logged">
             <input
               type="checkbox"
@@ -255,6 +272,47 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="container-trouble-logging-in" *ngIf="clickTroubleLoggingIn">
+          <h1>
+            Digite seu cpf ou e-mail e selecione o que aconteceu com você.
+          </h1>
+
+          <div class="container-cpf-or-email">
+            <div class="container-svg-user">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21">
+                <path
+                  stroke-width="0.5"
+                  d="M13.817 11.563a17.96 17.96 0 0 1 4.468 1.447c.953.498 1.582 1.636 1.483 2.67l-.196 1.987c-.11 1.036-.958 1.998-1.964 2.187a45.12 45.12 0 0 1-14.315.002c-1.019-.192-1.865-1.137-1.972-2.189-.087-.836-.145-1.41-.2-1.989-.1-1.011.52-2.163 1.44-2.649a18.16 18.16 0 0 1 4.875-1.53l.39-.063.106.648-.648.096-.107-.726.648-.096-.424.501-.115-.098a3.027 3.027 0 0 1-.212-.198c-.375-.387-.62-.854-.662-1.31l-.036-.333a1.417 1.417 0 0 1-.71-1.089l-.194-1.875a1.405 1.405 0 0 1 .429-1.17l-.047-.439c-.138-1.455.035-2.462 1.022-3.343C7.7 1.19 9.03.722 10.446.722c1.438 0 2.747.47 3.59 1.299.978.875 1.142 1.872 1.001 3.337l-.047.425a1.407 1.407 0 0 1 .428 1.174l-.194 1.871a1.4 1.4 0 0 1-.711 1.094l-.041.342c-.035.449-.282.915-.655 1.3a2.983 2.983 0 0 1-.21.196l-.118.1-.424-.5.65.09-.1.725-.65-.09.107-.648.387.064a18.575 18.575 0 0 1 .358.062zm-.644 1.176-.377-.062a.64.64 0 0 1-.528-.72l.097-.705a.64.64 0 0 1 .22-.4l.114-.098c.237-.202.385-.446.398-.607l.086-.719a.64.64 0 0 1 .384-.513l.21-.089c.03-.012.05-.04.053-.076l.19-1.832a.096.096 0 0 0-.024-.077 12.543 12.543 0 0 0-.185-.145.64.64 0 0 1-.246-.578l.083-.756c.1-1.039-.003-1.67-.577-2.183-.588-.579-1.54-.92-2.626-.92-1.064 0-2.035.341-2.604.903-.587.525-.697 1.157-.599 2.193l.084.768a.64.64 0 0 1-.249.578l-.172.131c-.031.034-.038.056-.035.083l.19 1.83a.1.1 0 0 0 .056.081l.211.09a.64.64 0 0 1 .383.52l.077.698c.015.168.162.413.406.62l.112.096c.119.1.196.24.219.394l.104.707a.64.64 0 0 1-.528.725l-.38.062a16.408 16.408 0 0 0-4.38 1.37c-.415.22-.752.844-.705 1.312.053.563.11 1.119.193 1.93.048.468.457.924.87 1.002a42.63 42.63 0 0 0 13.505-.001c.397-.075.814-.547.862-1l.19-1.928c.045-.48-.289-1.088-.735-1.328a16.272 16.272 0 0 0-4.347-1.356z"
+                ></path>
+              </svg>
+              <div class="line-split"></div>
+            </div>
+            <div class="container-span-cpf-email-input">
+              <span>CPF ou E-mail</span>
+              <input
+                type="text"
+                placeholder="Digite seu CPF ou E-mail"
+                #inputCpfOrEmail
+                class="input-cpf-email"
+                [value]="valueForEmailChooseForUser"
+                (input)="onInputCpfEmail($event)"
+                (click)="onClickInputCpfOrEmail()"
+                (blur)="onBlurInputCpfOrEmail()"
+              />
+            </div>
+          </div>
+
+          <div class="container-option-what-happened">
+            <div class="container-option"></div>
+            <span>Esqueci minha senha</span>
+          </div>
+          <span class="span-in-case-questions"
+            >Em caso de dúvidas, acesse o
+            <span class="span-service">atendimento.</span></span
+          >
+          <button class="button-confirm-trouble-logging-in">CONFIRMAR</button>
         </div>
 
         <div

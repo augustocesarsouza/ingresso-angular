@@ -18,7 +18,7 @@ interface CheckExistsEmail {
 export class HeaderSeatsComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
 
-  wasClickedSvgUser = true;
+  wasClickedSvgUser = false;
   inputValueEmailOrCpf = "";
   inputValuePassword = "";
   errorInputEmailOrCpfNotHaveValueRight = false;
@@ -29,6 +29,7 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
   showInsertCpfOrEmail = true;
   showInputEmailUser = false;
   EyeCutSvgOrEyeOpen = true;
+  clickTroubleLoggingIn = false;
   valueForEmailChooseForUser = "";
 
   containerMainSvgInput!: HTMLElement;
@@ -118,7 +119,7 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
           .container-svg-user-body::after {
             content: "";
             position: absolute;
-            top: 37px;
+            top: 36px;
             right: -1px;
             border-width: 13px;
             border-style: solid;
@@ -447,7 +448,7 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
     if(this.spanCpfOrEmail){
       this.spanCpfOrEmail.style.display = 'block';
 
-      this.containerMainSvgInput.style.padding = '2px 5px';
+      this.containerMainSvgInput.style.padding = '1px 5px';
 
       if(this.containerMainSvgInput.style.borderColor !== this.colorBorderGreen && this.containerMainSvgInput.style.borderColor !== this.colorBorderRed){
         this.containerMainSvgInput.style.borderColor = this.colorBorderBlue;
@@ -703,9 +704,32 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
         this.codeSendForEmailConfirmedLogin = false;
         this.invalidUsernamePasswordOrCode.value = true;
       }
-
-
     }
+  }
+
+  onClickContainerSvgArrowTroubleLogging(){
+    this.clickTroubleLoggingIn = false;
+
+    this.AccountExist = true;
+    this.alreadyClickedContinue = true;
+    this.showInsertCpfOrEmail = false;
+    this.showInputEmailUser = true;
+  }
+
+  onClickTroubleLoggingIn(){
+    this.clickTroubleLoggingIn = true;
+    this.alreadyClickedContinue = false;
+    this.AccountExist = false;
+    this.showInputEmailUser = false;
+
+    setTimeout(() => {
+      this.containerMainSvgInput = document.querySelector('.container-cpf-or-email') as HTMLElement;
+      let containerSpanAndInput = document.querySelector('.container-span-cpf-email-input') as HTMLElement;
+      this.spanCpfOrEmail = containerSpanAndInput?.firstChild as HTMLElement;
+
+      let modalContent = document.querySelector(".modal-content") as HTMLElement;
+      modalContent.style.paddingBottom = "50px";
+    }, 50);
   }
 
   ngOnDestroy(): void {
