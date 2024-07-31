@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { LoginUserService } from '../../login-and-register-user/login-user.service';
 import { Data, ErrorObj } from '../../login-and-register-user/login-user/login-user.component';
 import { DataService } from '../../login-and-register-user/data.service';
+import { UserService } from '../service/user.service';
 
 interface CheckExistsEmail {
   userExists: boolean;
@@ -63,7 +64,7 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
   mostrarMeuModalProprio = false;
   codeConfirmedForTheUser = false;
 
-  constructor(private router: Router, private loginUserService: LoginUserService, private dataService: DataService, private check_if_email_already_exsits_Service: CheckIfEmailAlreadyExsitsService){
+  constructor(private router: Router, private loginUserService: LoginUserService, private UserService: UserService, private dataService: DataService, private check_if_email_already_exsits_Service: CheckIfEmailAlreadyExsitsService){
   }
 
   ngOnInit(): void {
@@ -707,6 +708,25 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
         this.invalidUsernamePasswordOrCode.value = true;
       }
     }
+  }
+
+  onClickConfirmSendTokenEmail(){
+    // tem que colocar um modal falando que o email foi enviado
+
+    this.subscriptions.push(this.UserService.sendTokenForEmail(this.inputValueEmailOrCpf).subscribe({
+      next: (data: any) => {
+        // se der certo tem que mostrar para o usuario que foi enviado com sucesso
+      },
+      error: (error: any) => {
+        if(error.status === 400){
+          console.log(error);
+
+        }
+
+        // if(error.status === 403){
+        // }
+      }
+    }));
   }
 
   onClickContainerSvgArrowTroubleLogging(){

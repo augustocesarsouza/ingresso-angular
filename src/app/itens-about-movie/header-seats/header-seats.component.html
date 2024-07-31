@@ -312,7 +312,12 @@
             >Em caso de dúvidas, acesse o
             <span class="span-service">atendimento.</span></span
           >
-          <button class="button-confirm-trouble-logging-in">CONFIRMAR</button>
+          <button
+            class="button-confirm-trouble-logging-in"
+            (click)="onClickConfirmSendTokenEmail()"
+          >
+            CONFIRMAR
+          </button>
         </div>
 
         <div
