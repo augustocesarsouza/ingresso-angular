@@ -49,6 +49,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
         }
       });
     }
+
     let userLocalStorage = null;
 
     if(typeof window !== "undefined"){
@@ -181,6 +182,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     if(typeof window !== "undefined"){
       localStorage.removeItem('userLogin');
     }
+
     this.userLogin = null;
     this.dataService.setData(null);
     this.router.navigate(['/my-account/login']);

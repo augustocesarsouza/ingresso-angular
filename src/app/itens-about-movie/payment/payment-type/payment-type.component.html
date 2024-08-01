@@ -13,7 +13,9 @@
         <span>Cartão de crédito</span>
       </div>
       <div class="container-info-about-the-card">
-        <app-info-about-card></app-info-about-card>
+        <app-info-about-card
+          *ngIf="elementClickedPaymentType === 'credit'"
+        ></app-info-about-card>
         <div class="container-box-accept">
           <label for="save" class="label-box-accept-and-span">
             <input type="checkbox" id="save" name="save" />
@@ -49,7 +51,9 @@
             >
           </div>
         </div>
-        <app-info-about-card></app-info-about-card>
+        <app-info-about-card
+          *ngIf="elementClickedPaymentType === 'debit'"
+        ></app-info-about-card>
         <div class="container-span-policy">
           <span
             >Saiba mais sobre

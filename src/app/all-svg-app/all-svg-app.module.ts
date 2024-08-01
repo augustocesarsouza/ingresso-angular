@@ -83,6 +83,14 @@ import { MaestroSvgComponent } from './all-svg-payment/card-svg-all/maestro-svg/
 import { EloSvgComponent } from './all-svg-payment/card-svg-all/elo-svg/elo-svg.component';
 import { JcbSvgComponent } from './all-svg-payment/card-svg-all/jcb-svg/jcb-svg.component';
 import { SvgExclamationMarkPaymentComponent } from './all-svg-payment/svg-exclamation-mark-payment/svg-exclamation-mark-payment.component';
+import { SvgIngressoIComponent } from './all-svg-check-in/svg-ingresso-i/svg-ingresso-i.component';
+import { SvgCardBeClientComponent } from './all-svg-benefits-be-client/svg-card-be-client/svg-card-be-client.component';
+import { SvgTicketBeClientComponent } from './all-svg-benefits-be-client/svg-ticket-be-client/svg-ticket-be-client.component';
+import { SvgStarBeClientComponent } from './all-svg-benefits-be-client/svg-star-be-client/svg-star-be-client.component';
+import { SvgCellPhoneBeClientComponent } from './all-svg-benefits-be-client/svg-cell-phone-be-client/svg-cell-phone-be-client.component';
+import { SvgEyeCutComponent } from './svg-eye-cut/svg-eye-cut.component';
+import { SvgEyeOpenComponent } from './svg-eye-open/svg-eye-open.component';
+import { SvgNotificationCodeSentEmailComponent } from './svg-notification-code-sent-email/svg-notification-code-sent-email.component';
 
 @NgModule({
   imports: [
@@ -170,7 +178,15 @@ import { SvgExclamationMarkPaymentComponent } from './all-svg-payment/svg-exclam
     MaestroSvgComponent,
     EloSvgComponent,
     JcbSvgComponent,
-    SvgExclamationMarkPaymentComponent
+    SvgExclamationMarkPaymentComponent,
+    SvgIngressoIComponent,
+    SvgCardBeClientComponent,
+    SvgTicketBeClientComponent,
+    SvgStarBeClientComponent,
+    SvgCellPhoneBeClientComponent,
+    SvgEyeCutComponent,
+    SvgEyeOpenComponent,
+    SvgNotificationCodeSentEmailComponent
   ],
   exports: [
     SvgLocationComponent,
@@ -255,7 +271,15 @@ import { SvgExclamationMarkPaymentComponent } from './all-svg-payment/svg-exclam
     MaestroSvgComponent,
     EloSvgComponent,
     JcbSvgComponent,
-    SvgExclamationMarkPaymentComponent
+    SvgExclamationMarkPaymentComponent,
+    SvgIngressoIComponent,
+    SvgCardBeClientComponent,
+    SvgTicketBeClientComponent,
+    SvgStarBeClientComponent,
+    SvgCellPhoneBeClientComponent,
+    SvgEyeCutComponent,
+    SvgEyeOpenComponent,
+    SvgNotificationCodeSentEmailComponent
   ]
 })
 export class AllSvgAppModule { }
