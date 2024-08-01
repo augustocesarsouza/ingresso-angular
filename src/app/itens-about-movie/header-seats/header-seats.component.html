@@ -428,6 +428,42 @@
         </div>
 
         <div
+          class="container-modal-main-about-send-token-to-email"
+          *ngIf="tokenEmailSendToEmail"
+        >
+          <div class="container-modal-central-send-token-to-email">
+            <div class="container-img-background-code">
+              <app-svg-notification-code-sent-email
+                class="container-svg-notification-token-sent-email"
+              ></app-svg-notification-code-sent-email>
+              <div class="container-slice-img"></div>
+              <app-svg-exit
+                class="container-svg-exit-token-send-to-email"
+                (click)="onClickSvgExitCodeEmail()"
+                fill="#03A9F4"
+              ></app-svg-exit>
+            </div>
+            <div class="container-body-part">
+              <div class="container-info-about-send-to-email">
+                <h1>Pronto!</h1>
+                <span
+                  >Se suas informações estiverem corretas, um link será enviado
+                  para o e-mail cadastrado para que você defina uma nova
+                  senha.</span
+                >
+                <span
+                  >Em caso de dúvidas, entre em contato por e-mail, com a
+                  <span class="span-send-to-email-token"
+                    >Central de Ajuda</span
+                  ></span
+                >
+              </div>
+              <button (click)="onClickContinueSendToEmail()">Continuar</button>
+            </div>
+          </div>
+        </div>
+
+        <div
           class="container-info-about-error-input-cpf-or-email"
           *ngIf="errorInputEmailOrCpfNotHaveValueRight"
         >

@@ -63,6 +63,7 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
   showModalForLogin = false;
   mostrarMeuModalProprio = false;
   codeConfirmedForTheUser = false;
+  tokenEmailSendToEmail = false;
 
   constructor(private router: Router, private loginUserService: LoginUserService, private UserService: UserService, private dataService: DataService, private check_if_email_already_exsits_Service: CheckIfEmailAlreadyExsitsService){
   }
@@ -711,22 +712,33 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
   }
 
   onClickConfirmSendTokenEmail(){
-    // tem que colocar um modal falando que o email foi enviado
-
     this.subscriptions.push(this.UserService.sendTokenForEmail(this.inputValueEmailOrCpf).subscribe({
       next: (data: any) => {
         // se der certo tem que mostrar para o usuario que foi enviado com sucesso
+        this.tokenEmailSendToEmail = true;
       },
       error: (error: any) => {
         if(error.status === 400){
           console.log(error);
-
         }
 
         // if(error.status === 403){
         // }
       }
     }));
+  }
+
+  onClickContinueSendToEmail(){
+    this.AccountExist = false;
+    this.alreadyClickedContinue = false;
+    this.showInsertCpfOrEmail = true;
+    this.showInputEmailUser = false;
+
+    this.valueForEmailChooseForUser = "";
+    this.EyeCutSvgOrEyeOpen = true;
+    this.mostrarMeuModalProprio = false;
+    this.tokenEmailSendToEmail = false;
+    this.clickTroubleLoggingIn = false;
   }
 
   onClickContainerSvgArrowTroubleLogging(){
