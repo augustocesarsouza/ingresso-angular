@@ -19,6 +19,7 @@ export class BackOrProgressFooterComponent implements OnInit, AfterViewInit {
   whatFunctionClicked = 'seats';
 
   buttonSeats!: HTMLElement;
+  buttonBack!: HTMLElement;
   timeoutGetSeatsAny: any;
 
   constructor(private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService, private witch_function_was_clicked_service: WitchFunctionWasClickedService, private tickets_clicked_for_the_user_payment_method_service: TicketsClickedForTheUserPaymentMethodService, private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService,
@@ -33,7 +34,10 @@ export class BackOrProgressFooterComponent implements OnInit, AfterViewInit {
     if(typeof document === 'undefined') return;
 
     let buttonSeats = document.querySelector(".button-seats") as HTMLElement;
+    let buttonBack = document.querySelector(".button-back") as HTMLElement;
+
     this.buttonSeats = buttonSeats;
+    this.buttonBack = buttonBack;
 
     this.subscription.push(this.witch_function_was_clicked_service.arrayWhatWasClicked$.subscribe((whatFunctionClicked) => {
       if(whatFunctionClicked.length <= 0) return;
@@ -46,9 +50,17 @@ export class BackOrProgressFooterComponent implements OnInit, AfterViewInit {
 
       this.whatFunctionClicked = whatFunctionClicked;
 
-      if(whatFunctionClicked === "seats"){
+      if(whatFunctionClicked === PositionType.Seats){
+        this.can_pass_to_popcorn_service.updateCanPassOnToPorcorn(false);
         this.itemsPaymentClicked = [];
         this.tickets_clicked_for_the_user_payment_method_service.updateNumberOfTheClickSeats([]);
+      }
+
+      if(whatFunctionClicked !== PositionType.Seats){
+        buttonBack.style.border = "3px solid rgb(152, 170, 236)";
+        buttonBack.style.color = "rgb(152, 170, 236)";
+        buttonBack.style.cursor = "pointer";
+        buttonBack.style.fontWeight = "700";
       }
     }));
 
@@ -105,6 +117,10 @@ export class BackOrProgressFooterComponent implements OnInit, AfterViewInit {
     if(this.can_pass_to_popcorn_service.currentCanPassOnToPorcorn){
       this.witch_function_was_clicked_service.updateWhatWasClicked(PositionType.Popcorn);
     }
+  }
+
+  onClickGoToPayment(){
+    this.witch_function_was_clicked_service.updateWhatWasClicked(PositionType.Payment);
   }
 
   onClickBack(){
