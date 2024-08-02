@@ -120,7 +120,13 @@ export class BackOrProgressFooterComponent implements OnInit, AfterViewInit {
   }
 
   onClickGoToPayment(){
-    this.witch_function_was_clicked_service.updateWhatWasClicked(PositionType.Payment);
+    let userLocalStorage = localStorage.getItem("userLogin");
+
+    if(userLocalStorage !== "null"){
+      this.witch_function_was_clicked_service.updateWhatWasClicked(PositionType.Payment);
+    }else {
+
+    }
   }
 
   onClickBack(){

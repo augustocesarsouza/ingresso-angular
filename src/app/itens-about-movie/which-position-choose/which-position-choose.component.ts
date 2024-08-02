@@ -238,12 +238,16 @@ export class WhichPositionChooseComponent implements OnInit, AfterViewInit, OnDe
       this.number_of_the_tickets_clicked_service.numberOfTheClickTickets$.subscribe((ticketsClicked) => {
         this.ticketsClicked = ticketsClicked.length;
 
+        let userLocalStorage = localStorage.getItem("userLogin");
+
         if(this.quantityAlreadyBeenClickedLessMore === this.numberSeatsClicked){
           this.fillBomboniere = "rgb(152, 170, 236)";
           this.borderBomboniere = "1px solid rgb(152, 170, 236)";
 
-          this.fillPayment = "rgb(152, 170, 236)";
-          this.borderPayment = "1px solid rgb(152, 170, 236)";
+          if(userLocalStorage !== "null"){
+            this.fillPayment = "rgb(152, 170, 236)";
+            this.borderPayment = "1px solid rgb(152, 170, 236)";
+          }
         }else {
           this.fillBomboniere = "rgb(52 60 70)";
           this.borderBomboniere = "1px solid rgb(52, 60, 70)";
@@ -259,18 +263,46 @@ export class WhichPositionChooseComponent implements OnInit, AfterViewInit, OnDe
 
       if(whatFunctionClicked === PositionType.Seats){
         this.aplicationFuncionalidadeDeColocarCorNoSeats(whatFunctionClicked);
+
+        let userLocalStorage = localStorage.getItem("userLogin");
+
+        if(userLocalStorage === "null"){
+          this.fillPayment = "rgb(52, 60, 70)";
+          this.borderPayment = "1px solid rgb(52, 60, 70)";
+        }
       }
 
       if(whatFunctionClicked === PositionType.Tickets){
         this.aplicationFuncionalidadeDeColocarCorNoTickets(whatFunctionClicked);
+
+        let userLocalStorage = localStorage.getItem("userLogin");
+
+        if(userLocalStorage === "null"){
+          this.fillPayment = "rgb(52, 60, 70)";
+          this.borderPayment = "1px solid rgb(52, 60, 70)";
+        }
       }
 
       if(whatFunctionClicked === PositionType.Popcorn){
         this.aplicationFuncionalidadeDeColocarCorNoBomboniere(whatFunctionClicked);
+
+        let userLocalStorage = localStorage.getItem("userLogin");
+
+        if(userLocalStorage === "null"){
+          this.fillPayment = "rgb(52, 60, 70)";
+          this.borderPayment = "1px solid rgb(52, 60, 70)";
+        }
       }
 
       if(whatFunctionClicked === PositionType.Payment){
         this.aplicationFuncionalidadeDeColocarCorNoCard(whatFunctionClicked);
+
+        let userLocalStorage = localStorage.getItem("userLogin");
+
+        if(userLocalStorage === "null"){
+          this.fillPayment = "rgb(52, 60, 70)";
+          this.borderPayment = "1px solid rgb(52, 60, 70)";
+        }
       }
     }));
 
@@ -282,49 +314,7 @@ export class WhichPositionChooseComponent implements OnInit, AfterViewInit, OnDe
 
     this.containerSvgTickets.addEventListener("click", () => {
       if(this.numberSeatsClicked > 0){
-        // this.aplicationFuncionalidadeDeColocarCorNoTickets(PositionType.Tickets);
         this.witch_function_was_clicked_service.updateWhatWasClicked(PositionType.Tickets);
-
-        // jaClicouTickets = true;
-        // alreadyClickedOnceTickets = true;
-        // this.witch_function_was_clicked_service.updateWhatWasClicked(PositionType.Tickets);
-        // this.whatFunctionWasClickedByUser = PositionType.Tickets;
-
-        // containerLineWhiteAll[0].style.borderColor = "rgb(152, 170, 236)";
-        // containerLineWhiteAll[1].style.borderColor = "rgb(52, 60, 70)";
-        // containerLineWhiteAll[2].style.borderColor = "rgb(52, 60, 70)";
-
-        // containerSvgTickets.style.display = "flex";
-        // containerSvgTickets.style.backgroundColor = "rgb(49, 85, 232)";
-        // containerSvgTickets.style.padding = "5px";
-        // containerSvgTickets.style.borderRadius = "50%";
-
-        // this.fillTickets = "#fff";
-        // this.borderTickets = "none";
-        // this.paddingTickets = "0px";
-        // this.widthHeightTickets = "24px";
-        // this.borderRadiusTickets = "none";
-
-        // containerSvgChooseSeats.style.display = "flex";
-        // containerSvgChooseSeats.style.backgroundColor = "transparent";
-        // containerSvgChooseSeats.style.padding = "0px";
-        // containerSvgChooseSeats.style.borderRadius = "50%";
-
-        // this.fillSeats = "rgb(152, 170, 236)";
-        // this.borderSeats = "1px solid rgb(152, 170, 236)";
-        // this.paddingSeats = "4px";
-        // this.widthHeightSeats = "27px";
-        // this.borderRadiusSeats = "50%";
-
-        // if(this.ticketsClicked > 0){
-        //   this.retiraCorBomboniere(containerSvgBomboniere);
-
-        //   this.retiraCorPayment(containerSvgCard);
-
-        //   this.retiraCorBomboniere(containerSvgBomboniere);
-
-        //   containerLineWhiteAll[1].style.borderColor = "rgb(52, 60, 70)";
-        // }
       }
     });
 
@@ -335,31 +325,10 @@ export class WhichPositionChooseComponent implements OnInit, AfterViewInit, OnDe
     });
 
     this.containerSvgCard.addEventListener("click", () => {
-      if(this.quantityAlreadyBeenClickedLessMore === this.numberSeatsClicked){
+      let userLocalStorage = localStorage.getItem("userLogin");
+
+      if(this.quantityAlreadyBeenClickedLessMore === this.numberSeatsClicked && userLocalStorage !== "null"){
         this.witch_function_was_clicked_service.updateWhatWasClicked(PositionType.Payment);
-
-        // this.witch_function_was_clicked_service.updateWhatWasClicked(PositionType.Payment);
-        // this.whatFunctionWasClickedByUser = PositionType.Payment;
-
-        // this.containerLineWhiteAll[2].style.borderColor = "rgb(152, 170, 236)";
-        // this.containerLineWhiteAll[1].style.borderColor = "rgb(152, 170, 236)";
-
-        // this.containerSvgCard.style.display = "flex";
-        // this.containerSvgCard.style.backgroundColor = "rgb(49, 85, 232)";
-        // this.containerSvgCard.style.padding = "5px";
-        // this.containerSvgCard.style.borderRadius = "50%";
-
-        // this.fillPayment = "#fff";
-        // this.borderPayment = "none";
-        // this.paddingPayment = "0px";
-        // this.widthHeightPayment = "24px";
-        // this.borderRadiusPayment = "none";
-
-        // // this.retiraCorPayment(containerSvgCard);
-
-        // this.retiraCorTickets(this.containerSvgTickets);
-
-        // this.retiraCorBomboniere(this.containerSvgBomboniere);
       }
     });
   }

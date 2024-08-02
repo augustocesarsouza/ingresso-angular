@@ -367,7 +367,6 @@ export class HeaderSeatsComponent implements OnInit, OnDestroy {
 
       // this.inputPassword = document.querySelector('.input-password') as HTMLInputElement;
       // console.log(this.inputPassword);
-
     }, 50);
 
     this.mostrarMeuModalProprio = true;
