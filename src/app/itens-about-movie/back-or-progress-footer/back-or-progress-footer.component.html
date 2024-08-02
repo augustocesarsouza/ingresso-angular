@@ -1,6 +1,6 @@
 <div class="container-back-or-progress-main">
   <div class="container-back-or-progress">
-    <button class="button-back">VOLTAR</button>
+    <button class="button-back" (click)="onClickBack()">VOLTAR</button>
     <div
       class="container-tickets-about-seats"
       *ngIf="whatFunctionClicked === 'seats'"
@@ -29,7 +29,11 @@
     >
       Escolher Ingressos
     </button>
-    <button class="button-tickets" *ngIf="whatFunctionClicked === 'tickets'">
+    <button
+      class="button-tickets"
+      *ngIf="whatFunctionClicked === 'tickets'"
+      (click)="onClickGoToPopcorn()"
+    >
       Ir para Pipoca
     </button>
     <button

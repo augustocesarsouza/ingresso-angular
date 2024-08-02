@@ -4,6 +4,8 @@ import { NumberOfTheSeatsClickedService } from '../service/number-of-the-seats-c
 import { WitchFunctionWasClickedService } from '../service/witch-function-was-clicked.service';
 import { TicketsClickedForTheUserPaymentMethodService } from '../service/tickets-clicked-for-the-user-payment-method.service';
 import { NumberOfTheTicketsClickedService } from '../service/number-of-the-tickets-clicked.service';
+import { PositionType } from '../enum/app.enums-type-of-itens';
+import { CanPassToPopcornService } from '../service/can-pass-to-popcorn.service';
 
 @Component({
   selector: 'app-back-or-progress-footer',
@@ -19,7 +21,9 @@ export class BackOrProgressFooterComponent implements OnInit, AfterViewInit {
   buttonSeats!: HTMLElement;
   timeoutGetSeatsAny: any;
 
-  constructor(private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService, private witch_function_was_clicked_service: WitchFunctionWasClickedService, private tickets_clicked_for_the_user_payment_method_service: TicketsClickedForTheUserPaymentMethodService, private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService){
+  constructor(private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService, private witch_function_was_clicked_service: WitchFunctionWasClickedService, private tickets_clicked_for_the_user_payment_method_service: TicketsClickedForTheUserPaymentMethodService, private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService,
+    private can_pass_to_popcorn_service: CanPassToPopcornService
+  ){
   }
 
   ngOnInit(): void {
@@ -47,9 +51,6 @@ export class BackOrProgressFooterComponent implements OnInit, AfterViewInit {
         this.tickets_clicked_for_the_user_payment_method_service.updateNumberOfTheClickSeats([]);
       }
     }));
-
-
-
 
     const buttonSeatsMouseEnter = () => {
       if(buttonSeats){
@@ -97,7 +98,22 @@ export class BackOrProgressFooterComponent implements OnInit, AfterViewInit {
   onClickSeats(){
     if(this.items.length <= 0) return;
 
-    this.witch_function_was_clicked_service.updateWhatWasClicked("tickets");
+    this.witch_function_was_clicked_service.updateWhatWasClicked(PositionType.Tickets);
   }
 
+  onClickGoToPopcorn(){
+    if(this.can_pass_to_popcorn_service.currentCanPassOnToPorcorn){
+      this.witch_function_was_clicked_service.updateWhatWasClicked(PositionType.Popcorn);
+    }
+  }
+
+  onClickBack(){
+    if(this.whatFunctionClicked === PositionType.Tickets){
+      this.witch_function_was_clicked_service.updateWhatWasClicked(PositionType.Seats);
+    }else if(this.whatFunctionClicked === PositionType.Popcorn){
+      this.witch_function_was_clicked_service.updateWhatWasClicked(PositionType.Tickets);
+    }else if(this.whatFunctionClicked === PositionType.Payment){
+      this.witch_function_was_clicked_service.updateWhatWasClicked(PositionType.Popcorn);
+    }
+  }
 }
