@@ -21,6 +21,7 @@ import { ClubeUolComponent } from './payment/clube-uol/clube-uol.component';
 import { CouponGiftCardComponent } from './payment/coupon-gift-card/coupon-gift-card.component';
 import { InfoAboutCardComponent } from './payment/info-about-card/info-about-card.component';
 import { GooglePayButtonModule } from '@google-pay/button-angular';
+import { ModalLoginCheckoutComponent } from './modal-login-checkout/modal-login-checkout.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { GooglePayButtonModule } from '@google-pay/button-angular';
     ClubeUolComponent,
     CouponGiftCardComponent,
     InfoAboutCardComponent,
+    ModalLoginCheckoutComponent,
   ],
   imports: [
     CommonModule,

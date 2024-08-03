@@ -48,3 +48,8 @@
     </button>
   </div>
 </div>
+<app-modal-login-checkout
+  *ngIf="mostrarMeuModalProprio"
+  [funcionCloseModal]="funcionCloseModal"
+  [funcionaCodeConfirmedForTheUser]="funcionaCodeConfirmedForTheUser"
+></app-modal-login-checkout>

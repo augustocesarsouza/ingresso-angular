@@ -22,12 +22,20 @@ export class BackOrProgressFooterComponent implements OnInit, AfterViewInit {
   buttonBack!: HTMLElement;
   timeoutGetSeatsAny: any;
 
+  mostrarMeuModalProprio = false;
+  codeConfirmedForTheUser = false;
+
   constructor(private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService, private witch_function_was_clicked_service: WitchFunctionWasClickedService, private tickets_clicked_for_the_user_payment_method_service: TicketsClickedForTheUserPaymentMethodService, private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService,
     private can_pass_to_popcorn_service: CanPassToPopcornService
   ){
   }
 
   ngOnInit(): void {
+    if(typeof document === 'undefined') return;
+
+    document.body.style.position = 'relative';
+    this.funcionCloseModal = this.funcionCloseModal.bind(this);
+    this.funcionaCodeConfirmedForTheUser = this.funcionaCodeConfirmedForTheUser.bind(this);
   }
 
   ngAfterViewInit(): void {
@@ -125,7 +133,7 @@ export class BackOrProgressFooterComponent implements OnInit, AfterViewInit {
     if(userLocalStorage !== "null"){
       this.witch_function_was_clicked_service.updateWhatWasClicked(PositionType.Payment);
     }else {
-
+      this.mostrarMeuModalProprio = true;
     }
   }
 
@@ -137,5 +145,13 @@ export class BackOrProgressFooterComponent implements OnInit, AfterViewInit {
     }else if(this.whatFunctionClicked === PositionType.Payment){
       this.witch_function_was_clicked_service.updateWhatWasClicked(PositionType.Popcorn);
     }
+  }
+
+  funcionCloseModal(){
+    this.mostrarMeuModalProprio = false;
+  }
+
+  funcionaCodeConfirmedForTheUser = (value: boolean) => {
+    this.codeConfirmedForTheUser = value;
   }
 }

@@ -1,0 +1,424 @@
+<div class="modal-meu-proprio">
+  <div class="modal-content">
+    <app-svg-exit
+      class="button-close-insert-email"
+      (click)="onClickCloseEnterUser()"
+      width="100%"
+      height="100%"
+      fill="#03A9F4"
+    ></app-svg-exit>
+    <div class="container-svg-ingresso-and-title">
+      <app-svg-ingresso-i class="container-svg-ingresso-i"></app-svg-ingresso-i>
+      <div class="modal-header" *ngIf="showInsertCpfOrEmail">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Insira seu CPF ou e-mail para continuar a compra
+        </h5>
+      </div>
+      <div class="modal-header" *ngIf="!AccountExist && alreadyClickedContinue">
+        <app-svg-arrow-payment
+          width="22px"
+          height="22px"
+          fill="rgb(152, 170, 236)"
+          rotate="270"
+          class="container-svg-arrow-payment"
+          (click)="onClickContainerSvgArrowPayment()"
+        ></app-svg-arrow-payment>
+        <h5 class="modal-title" id="exampleModalLabel">
+          Você ainda não tem conta. Entre sem cadastro ou crie uma conta
+        </h5>
+      </div>
+      <div class="modal-header" *ngIf="AccountExist && alreadyClickedContinue">
+        <app-svg-arrow-payment
+          width="22px"
+          height="22px"
+          fill="rgb(152, 170, 236)"
+          rotate="270"
+          class="container-svg-arrow-payment"
+          (click)="onClickContainerSvgArrowPayment()"
+        ></app-svg-arrow-payment>
+        <h5 class="modal-title" id="exampleModalLabel">
+          Faça login com sua conta Ingresso ou entre sem cadastro
+        </h5>
+      </div>
+      <div class="modal-header" *ngIf="clickTroubleLoggingIn">
+        <app-svg-arrow-payment
+          width="22px"
+          height="22px"
+          fill="rgb(152, 170, 236)"
+          rotate="270"
+          class="container-svg-arrow-payment"
+          (click)="onClickContainerSvgArrowTroubleLogging()"
+        ></app-svg-arrow-payment>
+        <h5 class="modal-title" id="exampleModalLabel">
+          Problemas para entrar
+        </h5>
+      </div>
+    </div>
+    <div class="container-input-and-button-continue">
+      <div class="container-cpf-or-email" *ngIf="showInsertCpfOrEmail">
+        <div class="container-svg-user">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21">
+            <path
+              stroke-width="0.5"
+              d="M13.817 11.563a17.96 17.96 0 0 1 4.468 1.447c.953.498 1.582 1.636 1.483 2.67l-.196 1.987c-.11 1.036-.958 1.998-1.964 2.187a45.12 45.12 0 0 1-14.315.002c-1.019-.192-1.865-1.137-1.972-2.189-.087-.836-.145-1.41-.2-1.989-.1-1.011.52-2.163 1.44-2.649a18.16 18.16 0 0 1 4.875-1.53l.39-.063.106.648-.648.096-.107-.726.648-.096-.424.501-.115-.098a3.027 3.027 0 0 1-.212-.198c-.375-.387-.62-.854-.662-1.31l-.036-.333a1.417 1.417 0 0 1-.71-1.089l-.194-1.875a1.405 1.405 0 0 1 .429-1.17l-.047-.439c-.138-1.455.035-2.462 1.022-3.343C7.7 1.19 9.03.722 10.446.722c1.438 0 2.747.47 3.59 1.299.978.875 1.142 1.872 1.001 3.337l-.047.425a1.407 1.407 0 0 1 .428 1.174l-.194 1.871a1.4 1.4 0 0 1-.711 1.094l-.041.342c-.035.449-.282.915-.655 1.3a2.983 2.983 0 0 1-.21.196l-.118.1-.424-.5.65.09-.1.725-.65-.09.107-.648.387.064a18.575 18.575 0 0 1 .358.062zm-.644 1.176-.377-.062a.64.64 0 0 1-.528-.72l.097-.705a.64.64 0 0 1 .22-.4l.114-.098c.237-.202.385-.446.398-.607l.086-.719a.64.64 0 0 1 .384-.513l.21-.089c.03-.012.05-.04.053-.076l.19-1.832a.096.096 0 0 0-.024-.077 12.543 12.543 0 0 0-.185-.145.64.64 0 0 1-.246-.578l.083-.756c.1-1.039-.003-1.67-.577-2.183-.588-.579-1.54-.92-2.626-.92-1.064 0-2.035.341-2.604.903-.587.525-.697 1.157-.599 2.193l.084.768a.64.64 0 0 1-.249.578l-.172.131c-.031.034-.038.056-.035.083l.19 1.83a.1.1 0 0 0 .056.081l.211.09a.64.64 0 0 1 .383.52l.077.698c.015.168.162.413.406.62l.112.096c.119.1.196.24.219.394l.104.707a.64.64 0 0 1-.528.725l-.38.062a16.408 16.408 0 0 0-4.38 1.37c-.415.22-.752.844-.705 1.312.053.563.11 1.119.193 1.93.048.468.457.924.87 1.002a42.63 42.63 0 0 0 13.505-.001c.397-.075.814-.547.862-1l.19-1.928c.045-.48-.289-1.088-.735-1.328a16.272 16.272 0 0 0-4.347-1.356z"
+            ></path>
+          </svg>
+          <div class="line-split"></div>
+        </div>
+        <div class="container-span-cpf-email-input">
+          <span>CPF ou E-mail</span>
+          <input
+            type="text"
+            placeholder="Digite seu CPF ou E-mail"
+            #inputCpfOrEmail
+            class="input-cpf-email"
+            [value]="valueForEmailChooseForUser"
+            (input)="onInputCpfEmail($event)"
+            (click)="onClickInputCpfOrEmail()"
+            (blur)="onBlurInputCpfOrEmail()"
+          />
+        </div>
+      </div>
+      <div class="container-email-user-valid" *ngIf="showInputEmailUser">
+        <span>E-mail</span>
+        <input
+          type="text"
+          [value]="valueForEmailChooseForUser"
+          class="input-email"
+        />
+        <label (click)="onClickChangeEmail()">Trocar</label>
+      </div>
+      <div
+        class="container-input-password-and-span-problems"
+        *ngIf="AccountExist"
+      >
+        <div class="container-svg-password">
+          <div class="container-svg-user">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 33">
+              <path
+                d="M9.42 12.892c0-.18.002-.337.003-.53l.003-.52c.004-.705.006-1.252.006-1.579 0-2.287 2.223-4.43 6.377-4.43 4.134 0 6.348 2.184 6.348 4.435v2.07l.001.554h.899c1.506 0 2.72 1.196 2.72 2.65v8.819c0 1.46-1.214 2.649-2.72 2.649H8.499c-1.506 0-2.721-1.196-2.721-2.65v-8.819c0-1.46 1.215-2.649 2.721-2.649h.92zm1.818 0h9.102v-1.01l-.001-1.614c0-.376-.254-.987-.754-1.48-.751-.741-1.971-1.19-3.776-1.19-1.815 0-3.044.44-3.799 1.166-.507.489-.76 1.095-.76 1.5 0 .33-.002.88-.006 1.588l-.003.52-.003.52zm-3.642 2.65v8.819c0 .482.404.884.903.884h14.558a.894.894 0 0 0 .903-.884v-8.82a.898.898 0 0 0-.903-.884H8.499a.894.894 0 0 0-.903.884zm9.112 5.043v2.145a.75.75 0 0 1-.75.75h-.34a.75.75 0 0 1-.75-.75v-2.133a1.755 1.755 0 0 1-.908-1.528c0-.975.814-1.765 1.818-1.765s1.818.79 1.818 1.765c0 .644-.356 1.208-.888 1.516z"
+              ></path>
+            </svg>
+            <div class="line-split"></div>
+          </div>
+          <div class="container-password-input">
+            <span>Senha</span>
+            <input
+              type="password"
+              placeholder="Senha"
+              class="input-password-send-code"
+              #inputPassword
+              (input)="onInputPassword($event)"
+              (click)="onClickInputPassword()"
+              (blur)="onBlurInputPassword()"
+            />
+            <app-svg-eye-cut
+              *ngIf="EyeCutSvgOrEyeOpen"
+              fill="gray"
+              class="container-svg-eye-cut"
+              (click)="onClickContainerSvgEyeCut()"
+            ></app-svg-eye-cut>
+            <app-svg-eye-open
+              *ngIf="!EyeCutSvgOrEyeOpen"
+              fill="gray"
+              class="container-svg-eye-cut"
+              (click)="onClickContainerSvgEyeOpen()"
+            ></app-svg-eye-open>
+          </div>
+        </div>
+        <div
+          class="container-invalid-username-password-or-code"
+          *ngIf="invalidUsernamePasswordOrCode.value"
+        >
+          <app-svg-exclamation-mark
+            width="16px"
+            height="16px"
+            fill="rgb(255, 90, 80)"
+            class="container-svg-exclamation-mark"
+          ></app-svg-exclamation-mark>
+          <span>Usuário, senha ou código inválidos</span>
+        </div>
+        <span
+          class="span-problems-logging-in"
+          (click)="onClickTroubleLoggingIn()"
+          >Problemas para entrar ?</span
+        >
+        <div class="container-checkbox-keep-me-logged">
+          <input
+            type="checkbox"
+            id="span-keep-me-logged"
+            name="span-keep-me-logged"
+          />
+          <span id="span-keep-me-logged">Mantenha-me conectado</span>
+        </div>
+      </div>
+
+      <div
+        class="container-button-create-accout-line-and-button-enter-without-register"
+        *ngIf="showInputEmailUser"
+      >
+        <div class="container-create-new-account" *ngIf="!AccountExist">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="onClickCreateNewAccount()"
+          >
+            <app-svg-ingresso-i></app-svg-ingresso-i>
+            CRIAR UMA CONTA
+          </button>
+        </div>
+        <div class="container-create-new-account" *ngIf="AccountExist">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="onClickEnterAsClient()"
+          >
+            <app-svg-ingresso-i></app-svg-ingresso-i>
+            ENTRAR COMO CLIENTE
+          </button>
+        </div>
+        <div class="container-line-white-and-span-or">
+          <span class="line-white-for-buttons"></span>
+          <span class="span-or">ou</span>
+          <span class="line-white-for-buttons"></span>
+        </div>
+        <div class="container-enter-without-register">
+          <button>ENTRAR SEM CADASTRO</button>
+        </div>
+        <div class="container-info-about-be-client">
+          <span>Vantagens de ser um cliente Ingresso.com</span>
+          <div class="container-svg-benefits-be-client">
+            <div class="container-svg-benefits">
+              <app-svg-card-be-client></app-svg-card-be-client>
+              <span>Salvar cartões</span>
+            </div>
+            <div class="container-svg-benefits">
+              <app-svg-ticket-be-client></app-svg-ticket-be-client>
+              <span>Cancelar pedidos</span>
+            </div>
+            <div class="container-svg-benefits">
+              <app-svg-star-be-client></app-svg-star-be-client>
+              <span>Favoritar cinemas</span>
+            </div>
+            <div class="container-svg-benefits">
+              <app-svg-cell-phone-be-client></app-svg-cell-phone-be-client>
+              <span>Retirar pelo App</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-trouble-logging-in" *ngIf="clickTroubleLoggingIn">
+        <h1>Digite seu cpf ou e-mail e selecione o que aconteceu com você.</h1>
+
+        <div class="container-cpf-or-email">
+          <div class="container-svg-user">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21">
+              <path
+                stroke-width="0.5"
+                d="M13.817 11.563a17.96 17.96 0 0 1 4.468 1.447c.953.498 1.582 1.636 1.483 2.67l-.196 1.987c-.11 1.036-.958 1.998-1.964 2.187a45.12 45.12 0 0 1-14.315.002c-1.019-.192-1.865-1.137-1.972-2.189-.087-.836-.145-1.41-.2-1.989-.1-1.011.52-2.163 1.44-2.649a18.16 18.16 0 0 1 4.875-1.53l.39-.063.106.648-.648.096-.107-.726.648-.096-.424.501-.115-.098a3.027 3.027 0 0 1-.212-.198c-.375-.387-.62-.854-.662-1.31l-.036-.333a1.417 1.417 0 0 1-.71-1.089l-.194-1.875a1.405 1.405 0 0 1 .429-1.17l-.047-.439c-.138-1.455.035-2.462 1.022-3.343C7.7 1.19 9.03.722 10.446.722c1.438 0 2.747.47 3.59 1.299.978.875 1.142 1.872 1.001 3.337l-.047.425a1.407 1.407 0 0 1 .428 1.174l-.194 1.871a1.4 1.4 0 0 1-.711 1.094l-.041.342c-.035.449-.282.915-.655 1.3a2.983 2.983 0 0 1-.21.196l-.118.1-.424-.5.65.09-.1.725-.65-.09.107-.648.387.064a18.575 18.575 0 0 1 .358.062zm-.644 1.176-.377-.062a.64.64 0 0 1-.528-.72l.097-.705a.64.64 0 0 1 .22-.4l.114-.098c.237-.202.385-.446.398-.607l.086-.719a.64.64 0 0 1 .384-.513l.21-.089c.03-.012.05-.04.053-.076l.19-1.832a.096.096 0 0 0-.024-.077 12.543 12.543 0 0 0-.185-.145.64.64 0 0 1-.246-.578l.083-.756c.1-1.039-.003-1.67-.577-2.183-.588-.579-1.54-.92-2.626-.92-1.064 0-2.035.341-2.604.903-.587.525-.697 1.157-.599 2.193l.084.768a.64.64 0 0 1-.249.578l-.172.131c-.031.034-.038.056-.035.083l.19 1.83a.1.1 0 0 0 .056.081l.211.09a.64.64 0 0 1 .383.52l.077.698c.015.168.162.413.406.62l.112.096c.119.1.196.24.219.394l.104.707a.64.64 0 0 1-.528.725l-.38.062a16.408 16.408 0 0 0-4.38 1.37c-.415.22-.752.844-.705 1.312.053.563.11 1.119.193 1.93.048.468.457.924.87 1.002a42.63 42.63 0 0 0 13.505-.001c.397-.075.814-.547.862-1l.19-1.928c.045-.48-.289-1.088-.735-1.328a16.272 16.272 0 0 0-4.347-1.356z"
+              ></path>
+            </svg>
+            <div class="line-split"></div>
+          </div>
+          <div class="container-span-cpf-email-input">
+            <span>CPF ou E-mail</span>
+            <input
+              type="text"
+              placeholder="Digite seu CPF ou E-mail"
+              #inputCpfOrEmail
+              class="input-cpf-email"
+              [value]="valueForEmailChooseForUser"
+              (input)="onInputCpfEmail($event)"
+              (click)="onClickInputCpfOrEmail()"
+              (blur)="onBlurInputCpfOrEmail()"
+            />
+          </div>
+        </div>
+
+        <div class="container-option-what-happened">
+          <div class="container-option"></div>
+          <span>Esqueci minha senha</span>
+        </div>
+        <span class="span-in-case-questions"
+          >Em caso de dúvidas, acesse o
+          <span class="span-service">atendimento.</span></span
+        >
+        <button
+          class="button-confirm-trouble-logging-in"
+          (click)="onClickConfirmSendTokenEmail()"
+        >
+          CONFIRMAR
+        </button>
+      </div>
+
+      <div
+        class="container-modal-confirmed-code-send-email"
+        *ngIf="codeSendForEmailConfirmedLogin"
+      >
+        <div class="container-modal-central-send-code-email">
+          <div class="container-img-background-code">
+            <div class="container-svg-lock">
+              <app-svg-notification-code-sent-email></app-svg-notification-code-sent-email>
+            </div>
+            <div class="container-slice-img"></div>
+            <app-svg-exit
+              class="container-svg-exit"
+              (click)="onClickSvgExitCodeEmail()"
+            ></app-svg-exit>
+          </div>
+          <div class="container-main-part-bottom-code">
+            <div class="container-part-bottom-code">
+              <h1>Falta pouco!</h1>
+              <span class="span-code-confirmed-1"
+                >Enviamos um código de verificação para o seu e-mail. Digite-o
+                abaixo:</span
+              >
+            </div>
+            <div class="container-where-insert-the-code">
+              <div class="container-input-code">
+                <input
+                  type="text"
+                  maxlength="1"
+                  placeholder="·"
+                  autocomplete="off"
+                  id="input-code-one"
+                  (input)="onInput($event, 0)"
+                  (keydown)="onKeyDown($event, 0)"
+                  #input0
+                />
+                <input
+                  type="text"
+                  maxlength="1"
+                  placeholder="·"
+                  autocomplete="off"
+                  id="input-code-two"
+                  (input)="onInput($event, 1)"
+                  (keydown)="onKeyDown($event, 1)"
+                  #input1
+                />
+                <input
+                  type="text"
+                  maxlength="1"
+                  placeholder="·"
+                  autocomplete="off"
+                  id="input-code-three"
+                  (input)="onInput($event, 2)"
+                  (keydown)="onKeyDown($event, 2)"
+                  #input2
+                />
+                <input
+                  type="text"
+                  maxlength="1"
+                  placeholder="·"
+                  autocomplete="off"
+                  id="input-code-four"
+                  (input)="onInput($event, 3)"
+                  (keydown)="onKeyDown($event, 3)"
+                  #input3
+                />
+                <input
+                  type="text"
+                  maxlength="1"
+                  placeholder="·"
+                  autocomplete="off"
+                  id="input-code-five"
+                  (input)="onInput($event, 4)"
+                  (keydown)="onKeyDown($event, 4)"
+                  #input4
+                />
+                <input
+                  type="text"
+                  maxlength="1"
+                  placeholder="·"
+                  autocomplete="off"
+                  id="input-code-six"
+                  (input)="onInput($event, 5)"
+                  (keydown)="onKeyDown($event, 5)"
+                  #input5
+                />
+              </div>
+              <div
+                class="container-error-input-miss-value"
+                *ngIf="inputNotAllHasValue"
+              >
+                <app-svg-exclamation-mark
+                  class="container-svg-exclamation-mark-error-input"
+                  fill="#db4444"
+                  width="20px"
+                  height="20px"
+                ></app-svg-exclamation-mark>
+                <span>Digite o código de verificação.</span>
+              </div>
+            </div>
+            <div class="container-resend-code-and-continue">
+              <span (click)="onClickResendCode()">Reenviar código</span>
+              <a (click)="onClickContinueCode()">Continuar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="container-modal-main-about-send-token-to-email"
+        *ngIf="tokenEmailSendToEmail"
+      >
+        <div class="container-modal-central-send-token-to-email">
+          <div class="container-img-background-code">
+            <app-svg-notification-code-sent-email
+              class="container-svg-notification-token-sent-email"
+            ></app-svg-notification-code-sent-email>
+            <div class="container-slice-img"></div>
+            <app-svg-exit
+              class="container-svg-exit-token-send-to-email"
+              (click)="onClickSvgExitCodeEmail()"
+              fill="#03A9F4"
+            ></app-svg-exit>
+          </div>
+          <div class="container-body-part">
+            <div class="container-info-about-send-to-email">
+              <h1>Pronto!</h1>
+              <span
+                >Se suas informações estiverem corretas, um link será enviado
+                para o e-mail cadastrado para que você defina uma nova
+                senha.</span
+              >
+              <span
+                >Em caso de dúvidas, entre em contato por e-mail, com a
+                <span class="span-send-to-email-token"
+                  >Central de Ajuda</span
+                ></span
+              >
+            </div>
+            <button (click)="onClickContinueSendToEmail()">Continuar</button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="container-info-about-error-input-cpf-or-email"
+        *ngIf="errorInputEmailOrCpfNotHaveValueRight"
+      >
+        <app-svg-exclamation-mark
+          width="16px"
+          height="16px"
+          fill="rgb(255, 90, 80)"
+          class="container-svg-exclamation-mark"
+        ></app-svg-exclamation-mark>
+        <span>É obrigatório informar o CPF ou e-mail.</span>
+      </div>
+      <div class="modal-footer" *ngIf="showInsertCpfOrEmail">
+        <div class="container-cicle-loading" *ngIf="showLoadingCicle">
+          <div class="cicle-loading"></div>
+        </div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="onClickContinue()"
+        >
+          CONTINUAR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
