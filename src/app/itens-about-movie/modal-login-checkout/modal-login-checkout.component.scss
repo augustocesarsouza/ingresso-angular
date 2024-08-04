@@ -4,7 +4,8 @@
   color: #fff;
   position: relative;
   padding: 0px 64px;
-  padding-bottom: 80px;
+  // padding-bottom: 80px;
+  padding-bottom: 50px;
   width: 400px;
   // height: 336px;
   min-height: 336px;
@@ -356,6 +357,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  line-height: 1.2;
 }
 
 .container-info-about-error-input-cpf-or-email > span {
@@ -780,4 +782,84 @@
   font-size: 14px;
   color: rgb(65, 129, 197);
   cursor: pointer;
+}
+
+.container-inputs-about-create-new-account {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.container-input-phone-and-span-warning {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.container-info-input-create-account {
+  display: flex;
+  // gap: 10px;
+  border-left: 4px solid rgb(217 217 217);
+  border-top: 1px solid rgb(217 217 217);
+  border-bottom: 1px solid rgb(217 217 217);
+  border-right: 1px solid rgb(217 217 217);
+  padding: 10px 5px;
+  background: #fff;
+  border-radius: 3px;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.container-info-input-create-account > span {
+  font-size: 10px;
+  color: rgb(177 177 177);
+  display: none;
+}
+
+.container-info-input-create-account > input {
+  border: none;
+  font-size: 13px;
+  width: 100%;
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-bottom: 0px;
+}
+
+.container-info-input-create-account > input:focus {
+  outline: none;
+}
+
+.span-info-create-account {
+  font-size: 14px;
+  line-height: 1.2;
+  color: rgb(173, 182, 194);
+  margin-bottom: 7px;
+}
+
+.span-check-if-cpf-already-exist {
+  font-size: 14px;
+  line-height: 1.2;
+  color: rgb(207 65 65);
+  margin-bottom: 10px;
+}
+
+.button-continue-create-account {
+  width: 100%;
+  margin: 0;
+  background-image: linear-gradient(to left,#6c04ba, #3255e2);
+  color: rgb(255, 255, 255);
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0;
+  height: 48px;
+  border-radius: 10px;
+
+  &:hover {
+    background-image: linear-gradient(to left,#591091, #162f94);
+    color: #ffffffa2;
+  }
 }

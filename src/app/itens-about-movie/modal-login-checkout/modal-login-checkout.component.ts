@@ -5,10 +5,14 @@ import { Router } from '@angular/router';
 import { LoginUserService } from '../../login-and-register-user/login-user.service';
 import { UserService } from '../service/user.service';
 import { DataService } from '../../login-and-register-user/data.service';
-import { CheckIfEmailAlreadyExsitsService } from '../service/check-if-email-already-exsits.service';
+import { CheckIfInfoUserAlreadyExsitsService } from '../service/check-if-info-user-already-exsits.service';
 
 interface CheckExistsEmail {
   userExists: boolean;
+}
+
+interface CheckExistsCpf {
+  cpfExists: boolean;
 }
 
 @Component({
@@ -26,14 +30,18 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
   // inputValuePassword = "";
   errorInputEmailOrCpfNotHaveValueRight = false;
   showLoadingCicle = false;
+  showLoadingCicleToCreateAccount = false;
+  cpfNotExist = false;
 
   AccountExist = false;
   alreadyClickedContinue = false;
+  clickTroubleLoggingIn = false;
+  clickCreateNewAccount = false;
   showInsertCpfOrEmail = true;
   showInputEmailUser = false;
   EyeCutSvgOrEyeOpen = true;
-  clickTroubleLoggingIn = false;
-  valueForEmailChooseForUser = "";
+  valueForEmailChooseForUser = "adscad@gmail.com";
+  valueForCpfChooseForUser = " 072.850.071-02";
 
   containerMainSvgInput!: HTMLElement;
   spanCpfOrEmail!: HTMLElement;
@@ -48,6 +56,7 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
   settimeOutAnyColor: any;
   settimeOutAnyLogin: any;
   settimeOutLoadingCicle: any;
+  settimeOutSpanCpfNotExist: any;
   settimeOutButtonContinue: any;
   settimeOutInputNotHaveValue: any;
   settimeOutInputPassword: any;
@@ -66,7 +75,11 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
   showModalForLogin = false;
   tokenEmailSendToEmail = false;
 
-  constructor(private router: Router, private loginUserService: LoginUserService, private UserService: UserService, private dataService: DataService, private               check_if_email_already_exsits_Service: CheckIfEmailAlreadyExsitsService){
+  spanNomeErrorCreateNewAccount = false;
+  spanPhoneErrorCreateNewAccount = false;
+  spanCpfErrorCreateNewAccount = false;
+
+  constructor(private router: Router, private loginUserService: LoginUserService, private UserService: UserService, private dataService: DataService, private               check_if_info_user_already_exsits_service: CheckIfInfoUserAlreadyExsitsService){
   }
 
   onInput(event: Event, index: number) {
@@ -100,8 +113,6 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
     this.containerMainSvgPassword = document.querySelector('.container-svg-password') as HTMLElement;
     this.containerPasswordInput = document.querySelector('.container-password-input') as HTMLElement;
     this.spanPassword = this.containerPasswordInput?.firstChild as HTMLElement;
-
-    // this.mostrarMeuModalProprio = true;
   }
 
   updateProperties(){
@@ -210,6 +221,139 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  onClickInputCreateAccount(inputCpfOrEmail: HTMLInputElement, spanNomeCreateNewAccount: HTMLSpanElement, containerInputNomeCreateNewAccount: HTMLDivElement,
+    containerInputPhoneCreateNewAccount: HTMLDivElement, containerInputCpfCreateNewAccount: HTMLDivElement
+  ){
+    this.spanNomeErrorCreateNewAccount = false;
+    this.spanPhoneErrorCreateNewAccount = false;
+    this.spanCpfErrorCreateNewAccount = false;
+
+    containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderGrey;
+    containerInputPhoneCreateNewAccount.style.borderColor = this.colorBorderGrey;
+    containerInputCpfCreateNewAccount.style.borderColor = this.colorBorderGrey;
+
+    if(spanNomeCreateNewAccount){
+      spanNomeCreateNewAccount.style.display = 'block';
+
+      containerInputNomeCreateNewAccount.style.padding = '2px 5px';
+
+      containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderBlue;
+
+      // if(containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderGreen && containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderRed){
+      //   containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderBlue;
+      // }
+    }
+  }
+
+  onBlurInputCreateAccount(inputCpfOrEmail: HTMLInputElement, spanNomeCreateNewAccount: HTMLSpanElement, containerInputNomeCreateNewAccount: HTMLDivElement){
+    if(spanNomeCreateNewAccount){
+      spanNomeCreateNewAccount.style.display = 'none';
+      containerInputNomeCreateNewAccount.style.padding = '10px 5px';
+
+      if(containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderGreen && containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderRed){
+        containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderGrey;
+      }
+    }
+  }
+
+  onInputName(event: Event, containerInputCreateNewAccount: HTMLDivElement) {
+    let input = event.target as HTMLInputElement;
+    this.inputValueEmailOrCpf = input.value;
+
+    if(this.inputValueEmailOrCpf.length <= 0){
+      this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
+    }
+  }
+
+  onInputCpf(event: Event, containerInputCreateNewAccount: HTMLDivElement) {
+    let input = event.target as HTMLInputElement;
+    let valurInputCpf = input.value;
+
+    if(valurInputCpf.length <= 0){
+      this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
+    }
+  }
+
+  onInputPhone(event: Event, containerInputCreateNewAccount: HTMLDivElement) {
+    let input = event.target as HTMLInputElement;
+    let valurInputPhone = input.value;
+
+    // valurInputPhone - remover dessa variavel os "_" e depois pegar o 'onClickContinueCreateAccount' e verficar se o "CPF" Já existe
+
+    if(valurInputPhone.length <= 0){
+      this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
+    }
+  }
+
+  podeMandarParaBackandTestarCpf = false;
+
+  onClickContinueCreateAccount(buttonContinueCreateAccount: HTMLButtonElement, inputNomeCreateNewAccount: HTMLInputElement, inputCpfCreateNewAccount: HTMLInputElement,
+    inputPhoneCreateNewAccount: HTMLInputElement, containerInputNomeCreateNewAccount:HTMLDivElement, containerInputPhoneCreateNewAccount: HTMLDivElement,
+    containerInputCpfCreateNewAccount: HTMLDivElement){
+
+    let valueNomeInput = inputNomeCreateNewAccount.value;
+    let valuePhoneInput = inputPhoneCreateNewAccount.value;
+    let valurCpfInput = inputCpfCreateNewAccount.value;
+
+    let regex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+    if(!regex.test(valurCpfInput)){
+      containerInputCpfCreateNewAccount.style.borderColor = this.colorBorderRed;
+      this.spanCpfErrorCreateNewAccount = true;
+      this.podeMandarParaBackandTestarCpf = false;
+    }
+
+    if(valuePhoneInput.replace(/[_\.\-\(\)]/g, '').length < 11){
+      containerInputPhoneCreateNewAccount.style.borderColor = this.colorBorderRed;
+      this.spanPhoneErrorCreateNewAccount = true;
+      this.podeMandarParaBackandTestarCpf = false;
+    }
+
+    if(valueNomeInput.length < 3 || valueNomeInput.includes("@")){
+      containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderRed;
+      this.spanNomeErrorCreateNewAccount = true;
+      this.podeMandarParaBackandTestarCpf = false;
+    }
+
+    if(regex.test(valurCpfInput) && valuePhoneInput.replace(/[_\.\-\(\)]/g, '').length >= 11 && valueNomeInput.length >= 3 && !valueNomeInput.includes("@")){
+      this.podeMandarParaBackandTestarCpf = true;
+
+    }
+
+    if(!this.podeMandarParaBackandTestarCpf) return;
+    if(this.showLoadingCicleToCreateAccount === true) return;
+
+    this.showLoadingCicleToCreateAccount = true;
+    buttonContinueCreateAccount.style.backgroundImage = "linear-gradient(to left, rgb(102, 102, 102), rgb(102, 102, 102))";
+    buttonContinueCreateAccount.style.color = "rgb(0 0 0)";
+
+    clearTimeout(this.settimeOutLoadingCicle);
+    clearTimeout(this.settimeOutSpanCpfNotExist);
+
+    this.subscriptions.push(this.check_if_info_user_already_exsits_service.checkIfCpfAlreadyExists(valurCpfInput).subscribe((data: any) => {
+      this.settimeOutLoadingCicle = setTimeout(() => {
+        let result: CheckExistsCpf = data.data;
+        console.log(result);
+
+        this.showLoadingCicleToCreateAccount = false;
+        this.cpfNotExist = result.cpfExists;
+
+        //result.cpfExists - se for "FALSO" ele pode passar
+        // rever o video que eu fiz lá para criar as propriedades finais
+
+        if(!result.cpfExists){
+          containerInputCpfCreateNewAccount.style.borderColor = this.colorBorderGreen;
+        }
+
+        this.settimeOutSpanCpfNotExist = setTimeout(() => {
+          this.cpfNotExist = false;
+        }, 2000);
+
+        buttonContinueCreateAccount.style.backgroundImage = "linear-gradient(to left, #6c04ba, #3255e2)";
+        buttonContinueCreateAccount.style.color = "rgb(255, 255, 255)";
+      }, 2000);
+    }));
+  }
+
   onClickContinue(){
     if(typeof document === 'undefined') return;
 
@@ -227,7 +371,7 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
 
       clearTimeout(this.settimeOutLoadingCicle);
 
-      this.subscriptions.push(this.check_if_email_already_exsits_Service.checkIfEmailAlreadyExists(this.inputValueEmailOrCpf).subscribe((data: any) => {
+      this.subscriptions.push(this.check_if_info_user_already_exsits_service.checkIfEmailAlreadyExists(this.inputValueEmailOrCpf).subscribe((data: any) => {
         this.settimeOutLoadingCicle = setTimeout(() => {
           let result: CheckExistsEmail = data.data;
 
@@ -276,6 +420,42 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
   }
 
   onClickCreateNewAccount(){
+    this.clickCreateNewAccount = true;
+    this.alreadyClickedContinue = false;
+    this.showInputEmailUser = false;
+
+    import('inputmask').then(Inputmask => {
+      let inputCpfCreateAccount = document.getElementById('input-cpf-create-account');
+      let inputPhoneCreateAccount = document.getElementById('input-phone-create-account');
+
+      if (inputCpfCreateAccount) {
+        let mask = new Inputmask.default({
+          mask: "999.999.999-99",
+          placeholder: "___.___.___-__",
+          insertMode: true, // Ensure the mask does not insert mode to avoid jumping characters
+          showMaskOnHover: false,
+          showMaskOnFocus: false
+        });
+        mask.mask(inputCpfCreateAccount);
+      }
+
+      if (inputPhoneCreateAccount) {
+        let mask = new Inputmask.default({
+          mask: "(99)99999-9999",
+          placeholder: "(__)_____-____",
+          insertMode: true,
+          showMaskOnHover: false,
+          showMaskOnFocus: false
+        });
+        mask.mask(inputPhoneCreateAccount);
+      }
+    });
+  }
+
+  onClickContainerSvgArrowCreateAccount(){
+    this.clickCreateNewAccount = false;
+    this.alreadyClickedContinue = true;
+    this.showInputEmailUser = true;
 
   }
 
