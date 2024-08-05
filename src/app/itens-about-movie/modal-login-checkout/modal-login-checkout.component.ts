@@ -32,6 +32,7 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
   showLoadingCicle = false;
   showLoadingCicleToCreateAccount = false;
   cpfNotExist = false;
+  showStep2CreateAccount = false;
 
   AccountExist = false;
   alreadyClickedContinue = false;
@@ -40,8 +41,10 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
   showInsertCpfOrEmail = true;
   showInputEmailUser = false;
   EyeCutSvgOrEyeOpen = true;
+  EyeCutSvgOrEyeOpenCreateAccount = true;
+
   valueForEmailChooseForUser = "adscad@gmail.com";
-  valueForCpfChooseForUser = " 072.850.071-02";
+  valueForCpfChooseForUser = "";
 
   containerMainSvgInput!: HTMLElement;
   spanCpfOrEmail!: HTMLElement;
@@ -78,6 +81,10 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
   spanNomeErrorCreateNewAccount = false;
   spanPhoneErrorCreateNewAccount = false;
   spanCpfErrorCreateNewAccount = false;
+
+  valueNomeInput = "";
+  valuePhoneInput = "";
+  valurCpfInput = "072.850.071-02";
 
   constructor(private router: Router, private loginUserService: LoginUserService, private UserService: UserService, private dataService: DataService, private               check_if_info_user_already_exsits_service: CheckIfInfoUserAlreadyExsitsService){
   }
@@ -245,10 +252,14 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  onBlurInputCreateAccount(inputCpfOrEmail: HTMLInputElement, spanNomeCreateNewAccount: HTMLSpanElement, containerInputNomeCreateNewAccount: HTMLDivElement){
+  onBlurInputCreateAccount(input: HTMLInputElement, spanNomeCreateNewAccount: HTMLSpanElement, containerInputNomeCreateNewAccount: HTMLDivElement){
+    let valueInput = input.value;
+
     if(spanNomeCreateNewAccount){
-      spanNomeCreateNewAccount.style.display = 'none';
-      containerInputNomeCreateNewAccount.style.padding = '10px 5px';
+      if(valueInput.length <= 0 || valueInput.replace(/[_\.\-\(\)]/g, '').length <= 0){
+        spanNomeCreateNewAccount.style.display = 'none';
+        containerInputNomeCreateNewAccount.style.padding = '10px 5px';
+      }
 
       if(containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderGreen && containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderRed){
         containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderGrey;
@@ -256,13 +267,62 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  onInputName(event: Event, containerInputCreateNewAccount: HTMLDivElement) {
+  onInputConfirmationEmail(event: Event) {
     let input = event.target as HTMLInputElement;
     this.inputValueEmailOrCpf = input.value;
+
+    if(input.value.includes("@") && input.value.includes(".com") && this.containerMainSvgInput){
+      this.containerMainSvgInput.style.borderColor = this.colorBorderGreen;
+      this.errorInputEmailOrCpfNotHaveValueRight = false;
+    }else {
+      if(this.containerMainSvgInput && this.containerMainSvgInput.style.borderColor !== this.colorBorderGreen && this.containerMainSvgInput.style.borderColor !== this.colorBorderRed){
+        this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
+      }
+    }
 
     if(this.inputValueEmailOrCpf.length <= 0){
       this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
     }
+  }
+
+  onClickInputConfirmationEmailCreateAccount(inputCpfOrEmail: HTMLInputElement, spanNomeCreateNewAccount: HTMLSpanElement, containerInputConfirmationEmailCreateNewAccount: HTMLDivElement
+  ){
+    this.spanNomeErrorCreateNewAccount = false;
+    this.spanPhoneErrorCreateNewAccount = false;
+    this.spanCpfErrorCreateNewAccount = false;
+
+    // containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderGrey;
+
+    if(spanNomeCreateNewAccount){
+      spanNomeCreateNewAccount.style.display = 'block';
+
+      containerInputConfirmationEmailCreateNewAccount.style.padding = '2px 5px';
+
+      containerInputConfirmationEmailCreateNewAccount.style.borderColor = this.colorBorderBlue;
+
+      // if(containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderGreen && containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderRed){
+      //   containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderBlue;
+      // }
+    }
+  }
+
+  onBlurInputConfirmationEmailCreateAccount(input: HTMLInputElement, spanNomeCreateNewAccount: HTMLSpanElement, containerInputConfirmationEmailCreateNewAccount: HTMLDivElement){
+    let valueInput = input.value;
+
+    if(spanNomeCreateNewAccount){
+      if(valueInput.length <= 0){
+        spanNomeCreateNewAccount.style.display = 'none';
+        containerInputConfirmationEmailCreateNewAccount.style.padding = '10px 5px';
+      }
+
+      if(containerInputConfirmationEmailCreateNewAccount.style.borderColor !== this.colorBorderGreen && containerInputConfirmationEmailCreateNewAccount.style.borderColor !== this.colorBorderRed){
+        containerInputConfirmationEmailCreateNewAccount.style.borderColor = this.colorBorderGrey;
+      }
+    }
+  }
+
+  onInputName(event: Event, containerInputCreateNewAccount: HTMLDivElement) {
+    let input = event.target as HTMLInputElement;
   }
 
   onInputCpf(event: Event, containerInputCreateNewAccount: HTMLDivElement) {
@@ -295,6 +355,8 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
     let valuePhoneInput = inputPhoneCreateNewAccount.value;
     let valurCpfInput = inputCpfCreateNewAccount.value;
 
+
+
     let regex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
     if(!regex.test(valurCpfInput)){
       containerInputCpfCreateNewAccount.style.borderColor = this.colorBorderRed;
@@ -316,11 +378,14 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
 
     if(regex.test(valurCpfInput) && valuePhoneInput.replace(/[_\.\-\(\)]/g, '').length >= 11 && valueNomeInput.length >= 3 && !valueNomeInput.includes("@")){
       this.podeMandarParaBackandTestarCpf = true;
-
     }
 
     if(!this.podeMandarParaBackandTestarCpf) return;
     if(this.showLoadingCicleToCreateAccount === true) return;
+
+    this.valueNomeInput = valueNomeInput;
+    this.valuePhoneInput = valuePhoneInput;
+    this.valurCpfInput = valurCpfInput;
 
     this.showLoadingCicleToCreateAccount = true;
     buttonContinueCreateAccount.style.backgroundImage = "linear-gradient(to left, rgb(102, 102, 102), rgb(102, 102, 102))";
@@ -336,9 +401,8 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
 
         this.showLoadingCicleToCreateAccount = false;
         this.cpfNotExist = result.cpfExists;
-
-        //result.cpfExists - se for "FALSO" ele pode passar
-        // rever o video que eu fiz lá para criar as propriedades finais
+        this.showStep2CreateAccount = !result.cpfExists;
+        this.clickCreateNewAccount = false;
 
         if(!result.cpfExists){
           containerInputCpfCreateNewAccount.style.borderColor = this.colorBorderGreen;
@@ -456,7 +520,40 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
     this.clickCreateNewAccount = false;
     this.alreadyClickedContinue = true;
     this.showInputEmailUser = true;
+  }
 
+  onClickContainerSvgArrowStep2CreateAccount(){
+    this.clickCreateNewAccount = true;
+    this.alreadyClickedContinue = false;
+    this.showStep2CreateAccount = false;
+    this.showInputEmailUser = false;
+
+    import('inputmask').then(Inputmask => {
+      let inputCpfCreateAccount = document.getElementById('input-cpf-create-account');
+      let inputPhoneCreateAccount = document.getElementById('input-phone-create-account');
+
+      if (inputCpfCreateAccount) {
+        let mask = new Inputmask.default({
+          mask: "999.999.999-99",
+          placeholder: "___.___.___-__",
+          insertMode: true, // Ensure the mask does not insert mode to avoid jumping characters
+          showMaskOnHover: false,
+          showMaskOnFocus: false
+        });
+        mask.mask(inputCpfCreateAccount);
+      }
+
+      if (inputPhoneCreateAccount) {
+        let mask = new Inputmask.default({
+          mask: "(99)99999-9999",
+          placeholder: "(__)_____-____",
+          insertMode: true,
+          showMaskOnHover: false,
+          showMaskOnFocus: false
+        });
+        mask.mask(inputPhoneCreateAccount);
+      }
+    });
   }
 
   onClickContainerSvgArrowPayment(){
@@ -529,6 +626,56 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  onClickInputPasswordCreateAccount(inputCpfOrEmail: HTMLInputElement, spanNomeCreateNewAccount: HTMLSpanElement, containerInputConfirmationEmailCreateNewAccount: HTMLDivElement,
+    containerSvgPasswordCreateNewAccount: HTMLDivElement
+  ){
+
+    // containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderGrey;
+
+    if(spanNomeCreateNewAccount){
+      spanNomeCreateNewAccount.style.display = 'block';
+
+      containerSvgPasswordCreateNewAccount.style.padding = "0px";
+      containerInputConfirmationEmailCreateNewAccount.style.padding = '2px 5px';
+
+      containerInputConfirmationEmailCreateNewAccount.style.borderColor = this.colorBorderBlue;
+
+      // if(containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderGreen && containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderRed){
+      //   containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderBlue;
+      // }
+    }
+  }
+
+  onBlurInputPasswordCreateAccount(input: HTMLInputElement, spanNomeCreateNewAccount: HTMLSpanElement, containerInputConfirmationEmailCreateNewAccount: HTMLDivElement,
+    containerSvgPasswordCreateNewAccount: HTMLDivElement
+  ){
+    let valueInput = input.value;
+
+    if(spanNomeCreateNewAccount){
+      if(valueInput.length <= 0){
+        spanNomeCreateNewAccount.style.display = 'none';
+        containerSvgPasswordCreateNewAccount.style.padding = '10px 5px';
+        containerInputConfirmationEmailCreateNewAccount.style.padding = '0px';
+      }
+
+      if(containerInputConfirmationEmailCreateNewAccount.style.borderColor !== this.colorBorderGreen && containerInputConfirmationEmailCreateNewAccount.style.borderColor !== this.colorBorderRed){
+        containerInputConfirmationEmailCreateNewAccount.style.borderColor = this.colorBorderGrey;
+      }
+    }
+  }
+
+  onClickContainerSvgEyeCutCreateAccount(inputPasswordCreateNewAccount: HTMLInputElement){
+    this.EyeCutSvgOrEyeOpenCreateAccount = false;
+
+    inputPasswordCreateNewAccount.type = "text";
+  }
+
+  onClickContainerSvgEyeOpenCreateAccount(inputPasswordCreateNewAccount: HTMLInputElement){
+    this.EyeCutSvgOrEyeOpenCreateAccount = true;
+
+    inputPasswordCreateNewAccount.type = "password";
+  }
+
   onClickInputPassword(){
     if(this.spanPassword){
       this.spanPassword.style.display = 'block';
@@ -551,14 +698,88 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  onInputPassword(event: Event) {
+  onInputPassword(event: Event){
     let input = event.target as HTMLInputElement;
-    // this.inputValuePassword = input.value;
+  }
 
-    if(input.value.length > 0){
-      this.containerMainSvgPassword.style.borderColor = this.colorBorderGreen;
+  onInputPasswordCreateAccount(event: Event, spanMinimumOneLowercaseLetter:HTMLParagraphElement, spanMinimunOneUppercaseLetter:HTMLParagraphElement, spanMinimunOneNumber:HTMLParagraphElement, spanMinimunEightCharacters:HTMLParagraphElement) {
+    let input = event.target as HTMLInputElement;
+    let inputValuePassword = input.value;
+
+    let hasUppercase = false;
+    let hasLowercase = false;
+    let hasNumber = false;
+    let hasEightNumber = false;
+
+    if(inputValuePassword.length > 0){
+      for (let i = 0; i < inputValuePassword.length; i++) {
+        const caracter = inputValuePassword[i];
+
+        if (/[A-Z]/.test(caracter)) {
+          hasUppercase = true;
+          spanMinimunOneUppercaseLetter.style.color = "rgb(56 195 105)";
+          break;
+
+        }else {
+          hasUppercase = false;
+        }
+
+        if (hasUppercase && hasLowercase && hasNumber) {
+          break;
+        }
+      }
+
+      for (let i = 0; i < inputValuePassword.length; i++) {
+        const caracter = inputValuePassword[i];
+
+        if (/[a-z]/.test(caracter)) {
+          hasLowercase = true;
+          spanMinimumOneLowercaseLetter.style.color = "rgb(56 195 105)";
+          break;
+        }else {
+          hasLowercase = false;
+        }
+
+        if (hasUppercase && hasLowercase && hasNumber) {
+          break;
+        }
+      }
+
+      for (let i = 0; i < inputValuePassword.length; i++) {
+        const caracter = inputValuePassword[i];
+
+        if (/[0-9]/.test(caracter)) {
+          hasNumber = true;
+          spanMinimunOneNumber.style.color = "rgb(56 195 105)";
+          break;
+        }else {
+          hasNumber = false;
+        }
+
+        if (hasUppercase && hasLowercase && hasNumber) {
+          break;
+        }
+      }
+    }
+
+    if(!hasUppercase){
+      spanMinimunOneUppercaseLetter.style.color = "rgb(155, 155, 155)";
+    }
+
+    if(!hasLowercase){
+      spanMinimumOneLowercaseLetter.style.color = "rgb(155, 155, 155)";
+    }
+
+    if(!hasNumber){
+      spanMinimunOneNumber.style.color = "rgb(155, 155, 155)";
+    }
+
+
+    if(inputValuePassword.length >= 9){
+      hasEightNumber = true;
+      spanMinimunEightCharacters.style.color = "rgb(56 195 105)";
     }else {
-      this.containerMainSvgPassword.style.borderColor = this.colorBorderGrey;
+      spanMinimunEightCharacters.style.color = "rgb(155, 155, 155)";
     }
   }
 
@@ -572,6 +793,10 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
     this.EyeCutSvgOrEyeOpen = true;
 
     this.inputPassword.type = "password";
+  }
+
+  onClickButtonCreateAccount(){
+    // criar a conta
   }
 
   onClickSvgExitCodeEmail(){

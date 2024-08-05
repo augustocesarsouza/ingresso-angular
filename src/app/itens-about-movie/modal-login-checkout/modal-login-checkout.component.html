@@ -66,6 +66,19 @@
           Crie uma conta em 2 passos
         </h5>
       </div>
+      <div class="modal-header" *ngIf="showStep2CreateAccount">
+        <app-svg-arrow-payment
+          width="22px"
+          height="22px"
+          fill="rgb(152, 170, 236)"
+          rotate="270"
+          class="container-svg-arrow-payment"
+          (click)="onClickContainerSvgArrowStep2CreateAccount()"
+        ></app-svg-arrow-payment>
+        <h5 class="modal-title" id="exampleModalLabel">
+          Crie uma conta em 2 passos
+        </h5>
+      </div>
     </div>
     <div class="container-input-and-button-continue">
       <div class="container-cpf-or-email" *ngIf="showInsertCpfOrEmail">
@@ -94,7 +107,9 @@
       </div>
       <div
         class="container-email-user-valid"
-        *ngIf="showInputEmailUser || clickCreateNewAccount"
+        *ngIf="
+          showInputEmailUser || clickCreateNewAccount || showStep2CreateAccount
+        "
       >
         <span>E-mail</span>
         <input
@@ -225,7 +240,7 @@
       </div>
 
       <div
-        class="container-inputs-about-create-new-account"
+        class="container-step-1-for-create-account"
         *ngIf="clickCreateNewAccount"
       >
         <div class="container-input-phone-and-span-warning">
@@ -238,6 +253,7 @@
               type="text"
               placeholder="*Nome"
               #inputNomeCreateNewAccount
+              [value]="valueNomeInput"
               class="input-name-create-account"
               (input)="onInputName($event, containerInputCpfCreateNewAccount)"
               (click)="
@@ -284,7 +300,7 @@
               type="text"
               placeholder="*CPF"
               #inputCpfCreateNewAccount
-              [value]="valueForCpfChooseForUser"
+              [value]="valurCpfInput"
               id="input-cpf-create-account"
               (input)="onInputCpf($event, containerInputCpfCreateNewAccount)"
               (click)="
@@ -329,6 +345,7 @@
               type="text"
               placeholder="*Celular"
               #inputPhoneCreateNewAccount
+              [value]="valuePhoneInput"
               id="input-phone-create-account"
               (input)="
                 onInputPhone($event, containerInputPhoneCreateNewAccount)
@@ -402,6 +419,139 @@
             CONTINUAR
           </button>
         </div>
+      </div>
+
+      <div
+        class="container-step-2-for-create-account"
+        *ngIf="showStep2CreateAccount"
+      >
+        <div
+          class="container-info-input-create-account"
+          #containerInputConfirmationEmailCreateNewAccount
+        >
+          <span #spanConfirmationEmailCreateNewAccount
+            >*Confirmação de e-mail</span
+          >
+          <input
+            type="text"
+            placeholder="*Confirmação de e-mail"
+            #inputConfirmationEmailCreateNewAccount
+            class="input-name-create-account"
+            (input)="onInputConfirmationEmail($event)"
+            (click)="
+              onClickInputConfirmationEmailCreateAccount(
+                inputConfirmationEmailCreateNewAccount,
+                spanConfirmationEmailCreateNewAccount,
+                containerInputConfirmationEmailCreateNewAccount
+              )
+            "
+            (blur)="
+              onBlurInputConfirmationEmailCreateAccount(
+                inputConfirmationEmailCreateNewAccount,
+                spanConfirmationEmailCreateNewAccount,
+                containerInputConfirmationEmailCreateNewAccount
+              )
+            "
+          />
+        </div>
+        <div
+          class="container-svg-password-create-new-account"
+          #containerSvgPasswordCreateNewAccount
+        >
+          <div
+            class="container-password-input-create-new-account"
+            #containerInputPasswordCreateNewAccount
+          >
+            <span #spanPasswordCreateNewAccount>*Senha</span>
+            <input
+              type="password"
+              placeholder="*Senha"
+              class="input-password-send-code"
+              #inputPasswordCreateNewAccount
+              (input)="
+                onInputPasswordCreateAccount(
+                  $event,
+                  spanMinimumOneLowercaseLetter,
+                  spanMinimunOneUppercaseLetter,
+                  spanMinimunOneNumber,
+                  spanMinimunEightCharacters
+                )
+              "
+              (click)="
+                onClickInputPasswordCreateAccount(
+                  inputPasswordCreateNewAccount,
+                  spanPasswordCreateNewAccount,
+                  containerInputPasswordCreateNewAccount,
+                  containerSvgPasswordCreateNewAccount
+                )
+              "
+              (blur)="
+                onBlurInputPasswordCreateAccount(
+                  inputPasswordCreateNewAccount,
+                  spanPasswordCreateNewAccount,
+                  containerInputPasswordCreateNewAccount,
+                  containerSvgPasswordCreateNewAccount
+                )
+              "
+            />
+            <app-svg-eye-cut
+              *ngIf="EyeCutSvgOrEyeOpenCreateAccount"
+              fill="gray"
+              class="container-svg-eye-cut"
+              (click)="
+                onClickContainerSvgEyeCutCreateAccount(
+                  inputPasswordCreateNewAccount
+                )
+              "
+            ></app-svg-eye-cut>
+            <app-svg-eye-open
+              *ngIf="!EyeCutSvgOrEyeOpenCreateAccount"
+              fill="gray"
+              class="container-svg-eye-cut"
+              (click)="
+                onClickContainerSvgEyeOpenCreateAccount(
+                  inputPasswordCreateNewAccount
+                )
+              "
+            ></app-svg-eye-open>
+          </div>
+        </div>
+        <div class="container-password-requirement">
+          <p class="para-1">
+            Sua senha precisa atender aos seguintes critérios:
+          </p>
+          <p class="para-2" #spanMinimumOneLowercaseLetter>
+            Mínimo uma letra minúscula *
+          </p>
+          <p class="para-3" #spanMinimunOneUppercaseLetter>
+            Mínimo uma letra maiúscula *
+          </p>
+          <p class="para-4" #spanMinimunOneNumber>Mínimo um número *</p>
+          <p class="para-5" #spanMinimunEightCharacters>
+            Mínimo de 8 caracteres *
+          </p>
+        </div>
+        <div class="container-receive-news">
+          <input type="checkbox" />
+          <span>Quero receber novidades e mensagens da Ingresso.com.</span>
+        </div>
+        <div class="container-span-info-above-receive-new">
+          <span class="span-info-create-account"
+            >Ao continuar, aceito os
+            <span class="span-service">Termos de Uso</span> e
+            <span class="span-service">Política de Privacidade.</span></span
+          >
+          <span
+            >Deseja excluir sua conta? Siga os
+            <span class="span-service">passos a seguir</span></span
+          >
+        </div>
+        <button
+          class="button-create-account"
+          (click)="onClickButtonCreateAccount()"
+        >
+          CRIAR CONTA
+        </button>
       </div>
 
       <div class="container-trouble-logging-in" *ngIf="clickTroubleLoggingIn">
