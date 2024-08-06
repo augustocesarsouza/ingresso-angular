@@ -17,6 +17,33 @@ export class LoginUserService {
     return this.http.get(`/api/v1/public/user/login/${emailOrCpf}/${password}`).pipe(take(1));
   }
 
+  createAccountUserCheckout(objCreate: any){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      // 'Authorization': 'Bearer your-auth-token' // Se necessário
+    });
+
+    const options = {
+      headers: headers,
+    };
+
+    return this.http.post(`/api/v1/public/user/create-account-to-checkout`, objCreate, options).pipe(take(1));
+  }
+
+  verifyConfirmedUserEmail(valueInput: string, idUser: string){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      // 'Authorization': 'Bearer your-auth-token' // Se necessário
+    });
+
+    const options = {
+      headers: headers,
+    };
+
+    return this.http.get(`/api/v1/public/user/verify-confirmed-user-email/${valueInput}/${idUser}`).pipe(take(1));
+  }
+
+
   resendCodeEmail(userLogin: Data){
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
