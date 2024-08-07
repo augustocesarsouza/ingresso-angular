@@ -9,6 +9,7 @@ import { NumberOfTheTicketsClickedService } from '../service/number-of-the-ticke
 import { OrderSummaryService } from '../service/order-summary.service';
 import { FormsOfPaymentClicked } from '../body-choose-seats/body-choose-seats.component';
 import { TypeOfThePaymentService } from '../service/type-of-the-payment.service';
+import { CanPassToPopcornService } from '../service/can-pass-to-popcorn.service';
 
 interface FormsOfPayment {
   formName: string;
@@ -41,7 +42,7 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
 
   constructor(private form_of_payment_service: FormOfPaymentService, private tickets_clicked_for_the_user_payment_method_service: TicketsClickedForTheUserPaymentMethodService,
     private witch_function_was_clicked_service: WitchFunctionWasClickedService, private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService,
-    private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService, order_summary_service: OrderSummaryService,
+    private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService, order_summary_service: OrderSummaryService, private can_pass_to_popcorn_service: CanPassToPopcornService,
     private type_of_the_payment_service: TypeOfThePaymentService
   ){
     this.subscription.push(order_summary_service.currentOrderSummary$.subscribe((orderSummary) => {
@@ -132,8 +133,6 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
   }
 
   onClickMoreButton(form: FormsOfPayment, containerLessAndMore: HTMLDivElement){
-    // QUANDO CLICAR EM MAIS SALVAR O VALOR QUE FOI CLICACO TIPO O NOME DO TIPO E QUANTAS VEZES PARA DEPOIS
-    // QUANDO EU VOLTAR PARA A ABA 'TOPOS DE INGRESSOS' EU CONSEGUIR COLOCAR DENOVO NOS SPANS DELE
     let spanQuantityMore = containerLessAndMore.querySelector(".span-quantity-more");
 
     if(spanQuantityMore && Number(spanQuantityMore.textContent) >= 0 && Number(spanQuantityMore.textContent) < this.items.length && this.quantityAlreadyBeenClickedLessMore < this.items.length){
@@ -181,7 +180,7 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
         containerLess.style.backgroundColor = "rgb(152, 170, 236)";
         containerLess.style.cursor = "pointer";
 
-        if(this.items.length >= Number(spanQuantityMore.textContent)){
+        if(this.items.length === Number(spanQuantityMore.textContent)){
           let containerMore = containerLessAndMore.lastChild as HTMLElement;
           containerMore.style.backgroundColor = "rgb(63, 71, 93)";
           containerMore.style.cursor = "auto";
@@ -189,12 +188,16 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
       }
 
       if(this.quantityAlreadyBeenClickedLessMore === this.items.length){
-          this.containerLessAndMore.forEach((el) => {
+        this.containerLessAndMore.forEach((el) => {
           let containerMore = el.lastChild as HTMLElement;
 
           containerMore.style.backgroundColor = "rgb(63, 71, 93)";
           containerMore.style.cursor = "auto";
         });
+
+        this.can_pass_to_popcorn_service.updateCanPassOnToPorcorn(true);
+      }else {
+        this.can_pass_to_popcorn_service.updateCanPassOnToPorcorn(false);
       }
     }
   }
@@ -263,6 +266,8 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
           containerMore.style.backgroundColor = "rgb(152, 170, 236";
           containerMore.style.cursor = "pointer";
         });
+
+        this.can_pass_to_popcorn_service.updateCanPassOnToPorcorn(false);
       }
     }
   }

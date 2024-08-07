@@ -180,6 +180,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   onClickLogOutOfTheAccount(){
     if(typeof window !== "undefined"){
+      console.log("sdfvkjsd");
+
       localStorage.removeItem('userLogin');
     }
 

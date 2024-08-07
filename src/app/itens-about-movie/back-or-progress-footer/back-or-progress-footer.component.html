@@ -1,6 +1,6 @@
 <div class="container-back-or-progress-main">
   <div class="container-back-or-progress">
-    <button class="button-back">VOLTAR</button>
+    <button class="button-back" (click)="onClickBack()">VOLTAR</button>
     <div
       class="container-tickets-about-seats"
       *ngIf="whatFunctionClicked === 'seats'"
@@ -22,6 +22,34 @@
         *ngFor="let itemPayment of itemsPaymentClicked"
       ></app-svg-ticket-for-payment-choose>
     </div>
-    <button class="button-progress">AVANÇAR</button>
+    <button
+      class="button-seats"
+      *ngIf="whatFunctionClicked === 'seats'"
+      (click)="onClickSeats()"
+    >
+      Escolher Ingressos
+    </button>
+    <button
+      class="button-tickets"
+      *ngIf="whatFunctionClicked === 'tickets'"
+      (click)="onClickGoToPopcorn()"
+    >
+      Ir para Pipoca
+    </button>
+    <button
+      class="button-bomboniere"
+      *ngIf="whatFunctionClicked === 'bomboniere'"
+      (click)="onClickGoToPayment()"
+    >
+      Ir para Pagamento
+    </button>
+    <button class="button-payment" *ngIf="whatFunctionClicked === 'payment'">
+      Pagar
+    </button>
   </div>
 </div>
+<app-modal-login-checkout
+  *ngIf="mostrarMeuModalProprio"
+  [funcionCloseModal]="funcionCloseModal"
+  [funcionaCodeConfirmedForTheUser]="funcionaCodeConfirmedForTheUser"
+></app-modal-login-checkout>
