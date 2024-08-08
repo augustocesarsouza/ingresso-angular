@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ObjHoursCinemaMovie } from '../movie-choose-movie-theater/movie-choose-movie-theater.component';
 import { movieChooseMovieTheater } from '../../interface-models/movie-interface/movie-choose-movie-theater';
 import { CinemaMovieGetAll } from '../../interface-models/cinema-movie-interface/cinema-movie-get-all';
@@ -8,7 +8,7 @@ import { CinemaMovieGetAll } from '../../interface-models/cinema-movie-interface
   templateUrl: './schudule-movie-theater.component.html',
   styleUrl: './schudule-movie-theater.component.scss'
 })
-export class SchuduleMovieTheaterComponent {
+export class SchuduleMovieTheaterComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input() itemSchedule!: ObjHoursCinemaMovie;
   @Input() type!: string;
   @Input() typeView!: string;
@@ -23,6 +23,11 @@ export class SchuduleMovieTheaterComponent {
   ngOnInit(): void {
   }
 
+  ngAfterViewInit(): void {
+    // console.log("AfterViewInit");
+
+  }
+
   onClickHour(itemHour: string, typeView: string){
     if (this.onClickChooseSeatsForThisHour) {
       this.onClickChooseSeatsForThisHour(this.movieChooseMovieTheater, this.item, itemHour, this.containerScheduleDublado);
@@ -33,5 +38,8 @@ export class SchuduleMovieTheaterComponent {
 
   replaceStringHours(hour: string){
     return hour.replace(/[^0-9:]/g, '');
+  }
+
+  ngOnDestroy(): void {
   }
 }
