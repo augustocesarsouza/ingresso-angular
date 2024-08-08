@@ -23,7 +23,6 @@ interface CheckExistsCpf {
 export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
   @Input() funcionCloseModal!: () => void;
   @Input() funcionaCodeConfirmedForTheUser!: (value: boolean) => void;
-
   subscriptions: Subscription[] = [];
 
   inputValueEmailOrCpf = "";
@@ -31,6 +30,7 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
   errorInputEmailOrCpfNotHaveValueRight = false;
   showLoadingCicle = false;
   showLoadingCicleToCreateAccount = false;
+  showLoadingCicleToCreateAccountCheckout = false;
   cpfNotExist = false;
   showStep2CreateAccount = false;
 
@@ -84,16 +84,21 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
 
   valueNomeInput = "";
   valuePhoneInput = "";
+  valuePhoneInputToSave = "";
   valueCpfInput = "";
   valuePassword = "";
-  valurCpfInput = "767.062.330-64";
+  valurCpfInput = "";
 
   @ViewChildren('inputCreate0, inputCreate1, inputCreate2, inputCreate3, inputCreate4, inputCreate5') inputsCreateAccount!: QueryList<ElementRef>;
   confirmationEmailNotSameEmail = true;
   codeSendForEmailCreateAccount = false;
+  codeSendToEmailLoginAccount = false;
   inputNotAllHasValueCreateAccount = false;
+  codeSentToEmail = false;
+  showModalToUrlSentToEmail = false;
 
-  constructor(private router: Router, private loginUserService: LoginUserService, private UserService: UserService, private dataService: DataService, private               check_if_info_user_already_exsits_service: CheckIfInfoUserAlreadyExsitsService, private login_user_service: LoginUserService){
+  constructor(private router: Router, private loginUserService: LoginUserService, private UserService: UserService, private dataService: DataService,
+    private check_if_info_user_already_exsits_service: CheckIfInfoUserAlreadyExsitsService, private login_user_service: LoginUserService){
   }
 
   onInput(event: Event, index: number) {
@@ -384,6 +389,7 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
 
     this.valueNomeInput = valueNomeInput;
     this.valuePhoneInput = valuePhoneInput;
+    this.valuePhoneInputToSave = valuePhoneInput;
     this.valurCpfInput = valurCpfInput;
 
     this.showLoadingCicleToCreateAccount = true;
@@ -400,16 +406,18 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
 
         this.showLoadingCicleToCreateAccount = false;
         this.cpfNotExist = result.cpfExists;
-        this.showStep2CreateAccount = !result.cpfExists;
-        this.clickCreateNewAccount = false;
 
-        if(!result.cpfExists){
-          containerInputCpfCreateNewAccount.style.borderColor = this.colorBorderGreen;
+        if(result.cpfExists){
+          this.settimeOutSpanCpfNotExist = setTimeout(() => {
+            this.cpfNotExist = false;
+          }, 3000);
         }
 
-        this.settimeOutSpanCpfNotExist = setTimeout(() => {
-          this.cpfNotExist = false;
-        }, 2000);
+        if(!result.cpfExists){
+          this.showStep2CreateAccount = !result.cpfExists;
+          containerInputCpfCreateNewAccount.style.borderColor = this.colorBorderGreen;
+          this.clickCreateNewAccount = false;
+        }
 
         buttonContinueCreateAccount.style.backgroundImage = "linear-gradient(to left, #6c04ba, #3255e2)";
         buttonContinueCreateAccount.style.color = "rgb(255, 255, 255)";
@@ -519,6 +527,12 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
     this.clickCreateNewAccount = false;
     this.alreadyClickedContinue = true;
     this.showInputEmailUser = true;
+    this.cpfNotExist = false;
+
+    this.valueNomeInput = "";
+    this.valuePhoneInput = "";
+    this.valuePhoneInputToSave = "";
+    this.valueCpfInput = "";
   }
 
   onClickContainerSvgArrowStep2CreateAccount(){
@@ -593,11 +607,17 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
 
         let user = success.data;
 
+        if(user.confirmEmail && !user.confirmEmail){
+          this.showModalToUrlSentToEmail = true;
+        }
+
         if(user.codeSentSuccessfullyEmail){
           this.userLogin = user;
+          this.codeSendToEmailLoginAccount = user.codeSentSuccessfullyEmail;
 
-          // this.dataService.setData(user);
-          this.codeSendForEmailConfirmedLogin = true;
+          if(user.confirmEmail){
+            this.codeSendForEmailConfirmedLogin = true;
+          }
         }
       },
       error: error => {
@@ -623,6 +643,15 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
         }
       }
     });
+  }
+
+  onClickContinueConfirmEmailEmail(){
+    this.showModalToUrlSentToEmail = false;
+
+  }
+
+  onClickSvgExitConfirmEmailEmail(){
+    this.showModalToUrlSentToEmail = false;
   }
 
   onClickInputPasswordCreateAccount(inputCpfOrEmail: HTMLInputElement, spanNomeCreateNewAccount: HTMLSpanElement, containerInputConfirmationEmailCreateNewAccount: HTMLDivElement,
@@ -816,8 +845,13 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
     this.inputPassword.type = "password";
   }
 
-  onClickButtonCreateAccount(containerSvgPasswordCreateNewAccount: HTMLDivElement, containerInputConfirmationEmailCreateNewAccount: HTMLDivElement){
+  onClickButtonCreateAccount(containerSvgPasswordCreateNewAccount: HTMLDivElement, containerInputConfirmationEmailCreateNewAccount: HTMLDivElement,
+    buttonCreateAccountCheckout: HTMLButtonElement
+  ){
     this.alreadyClickedCreateAccount = true;
+    this.showLoadingCicleToCreateAccountCheckout = true;
+    buttonCreateAccountCheckout.style.backgroundImage = "linear-gradient(to left, #717171, #535353)";
+    buttonCreateAccountCheckout.style.color = "rgb(0 0 0)";
 
     if(!this.hasUppercase || !this.hasLowercase || !this.hasNumber || !this.hasEightNumber){
       containerSvgPasswordCreateNewAccount.style.borderColor = this.colorBorderRed;
@@ -849,7 +883,13 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
       };
 
       this.login_user_service.createAccountUserCheckout(objUserCreate).subscribe((data: any) => {
-        console.log(data); // tenta fazer o REENVIAR CODE DE EMAIL AMANHA e "SE NÃO CONFIRMAR O CODE E Mudar no banco de dados que foi confirmado o email"
+        console.log(data);
+        this.showLoadingCicleToCreateAccountCheckout = false;
+
+        buttonCreateAccountCheckout.style.backgroundImage = "linear-gradient(to left, #6c04ba, #3255e2)";
+        buttonCreateAccountCheckout.style.color = "rgb(255, 255, 255)";
+
+        // tenta fazer o REENVIAR CODE DE EMAIL AMANHA e "SE NÃO CONFIRMAR O CODE E Mudar no banco de dados que foi confirmado o email"
         // Tem que avisar o usuario tipo quando ele for se logar "FALAR QUE ELE TEM QUE CONFIRMAR O EMAIL MANDANDO O CODIGO NO EMAIL DELE NOVAMENTE"
         let dataUser = data.data;
         this.userLogin = dataUser; // - aqui tem que ter o "ID" que acabou de criar do usuario
@@ -884,10 +924,22 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
   }
 
   onClickResendCodeCreateAccount(){
+    // this.userLogin.id
+    if(this.userLogin === null) return;
 
+    this.login_user_service.resendCodeEmailCheckout(this.userLogin.id).subscribe({
+      next: (data: any) => {
+        console.log(data);
+
+        this.codeSentToEmail = true;
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    });;
   }
 
-  async onClickContinueCodeCreateAccount(){
+  onClickContinueCodeCreateAccount(){
     let inputWithValue = 0;
     let inputValue = "";
 
@@ -910,47 +962,55 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
       let valueInput = inputValue;
       let idUser = this.userLogin.id;
 
-      // const res = await fetch(`/api/v1/public/user/verify-confirmed-user-email/${valueInput}/${idUser}`);
+      if(this.codeSendForEmailCreateAccount){
+        this.login_user_service.verifyConfirmedUserEmail(valueInput, idUser).subscribe({
+          next: (data: any) => {
+            console.log(data);
 
-      this.login_user_service.verifyConfirmedUserEmail(valueInput, idUser).subscribe({
-        next: (data: any) => {
-          console.log(data);
+            this.codeSendForEmailConfirmedLogin = false;
+            // this.codeConfirmedForTheUser = true;
+            this.funcionaCodeConfirmedForTheUser(true);
+            this.dataService.setData(this.userLogin);
+            setTimeout(() => {
+              // this.mostrarMeuModalProprio = false;
+              this.funcionCloseModal();
+            }, 1000);
+          },
+          error: (error: any) => {
+            console.log(error);
+            this.codeSendForEmailConfirmedLogin = false;
+            this.invalidUsernamePasswordOrCode.value = true;
 
-          this.codeSendForEmailConfirmedLogin = false;
-          // this.codeConfirmedForTheUser = true;
-          this.funcionaCodeConfirmedForTheUser(true);
-          this.dataService.setData(this.userLogin);
-          setTimeout(() => {
-            // this.mostrarMeuModalProprio = false;
-            this.funcionCloseModal();
-          }, 1000);
-        },
-        error: (error: any) => {
-          console.log(error);
-          this.codeSendForEmailConfirmedLogin = false;
-          this.invalidUsernamePasswordOrCode.value = true;
+            this.dataService.setData(null);
+            this.userLogin = null;
+          }
+        });
+      }
 
-          this.dataService.setData(null);
-          this.userLogin = null;
-        }
-      });;
+      if(this.codeSendToEmailLoginAccount){
+        this.login_user_service.verifyCodeLoginUser(valueInput, idUser).subscribe({
+          next: (data: any) => {
+            console.log(data);
 
-      // if(res.status === 200){
-      //   this.codeSendForEmailConfirmedLogin = false;
-      //   // this.codeConfirmedForTheUser = true;
-      //   this.funcionaCodeConfirmedForTheUser(true);
-      //   this.dataService.setData(this.userLogin);
-      //   setTimeout(() => {
-      //     // this.mostrarMeuModalProprio = false;
-      //     this.funcionCloseModal();
-      //   }, 1000);
-      // }else if(res.status === 400){
-      //   this.codeSendForEmailConfirmedLogin = false;
-      //   this.invalidUsernamePasswordOrCode.value = true;
+            this.codeSendToEmailLoginAccount = false;
+            // this.codeConfirmedForTheUser = true;
+            this.funcionaCodeConfirmedForTheUser(true);
+            this.dataService.setData(this.userLogin);
+            setTimeout(() => {
+              // this.mostrarMeuModalProprio = false;
+              this.funcionCloseModal();
+            }, 1000);
+          },
+          error: (error: any) => {
+            console.log(error);
+            this.codeSendForEmailConfirmedLogin = false;
+            this.invalidUsernamePasswordOrCode.value = true;
 
-      //   this.dataService.setData(null);
-      //   this.userLogin = null;
-      // }
+            this.dataService.setData(null);
+            this.userLogin = null;
+          }
+        });
+      }
     }
   }
 

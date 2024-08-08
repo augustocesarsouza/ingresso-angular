@@ -558,28 +558,30 @@
   flex-direction: column;
   gap: 40px;
   margin-bottom: 20px;
-}
-
-.container-resend-code-and-continue > span {
   font-size: 14px;
   font-weight: 400;
-  color: rgb(152, 170, 236);
   line-height: 1;
-  padding-left: 65px;
+  padding: 0 30px;
+}
+
+.span-code-resent-to-email {
+  color: rgb(152, 170, 236);
+  padding-left: 37px;
   cursor: pointer;
 }
 
 .container-resend-code-and-continue > a {
-  font-size: 14px;
-  font-weight: 400;
   color: rgb(152, 170, 236);
-  line-height: 1;
   text-align: end;
   text-decoration: none;
-  padding-right: 20px;
   cursor: pointer;
 }
 
+.span-code-resent-to-email-successfully {
+  line-height: 1.1;
+  color: rgb(218, 79, 79);
+  text-align: end;
+}
 
 .modal-meu-proprio {
   position: absolute;

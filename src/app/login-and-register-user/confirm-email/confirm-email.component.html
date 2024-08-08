@@ -1,0 +1,11 @@
+<div class="container-main-password-change">
+  <app-ingresso-top class="container-ingresso-header"></app-ingresso-top>
+  <div class="container-filling-out-info-change-password" *ngIf="confirmEmail">
+    <h1>EMAIL CONFIRMADO!</h1>
+    <p>TUDO CERTO!</p>
+  </div>
+  <div class="container-filling-out-info-change-password" *ngIf="!confirmEmail">
+    <h1>VERIFICANDO</h1>
+  </div>
+  <app-footer-ingresso class="container-footer-ingresso"></app-footer-ingresso>
+</div>

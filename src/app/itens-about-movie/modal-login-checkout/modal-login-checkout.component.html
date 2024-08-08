@@ -240,6 +240,35 @@
       </div>
 
       <div
+        class="container-modal-confirmed-code-send-email"
+        *ngIf="showModalToUrlSentToEmail"
+      >
+        <div class="container-modal-central-send-code-email">
+          <div class="container-img-background-code">
+            <div class="container-svg-lock">
+              <app-svg-notification-code-sent-email></app-svg-notification-code-sent-email>
+            </div>
+            <div class="container-slice-img"></div>
+            <app-svg-exit
+              class="container-svg-exit"
+              (click)="onClickSvgExitConfirmEmailEmail()"
+            ></app-svg-exit>
+          </div>
+          <div class="container-main-part-bottom-code">
+            <div class="container-part-bottom-code">
+              <h1>Falta pouco! Verifique seu Email</h1>
+              <span class="span-code-confirmed-1"
+                >Enviamos uma email para você confirmar registro da conta</span
+              >
+            </div>
+            <div class="container-resend-code-and-continue">
+              <a (click)="onClickContinueConfirmEmailEmail()">Continuar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
         class="container-step-1-for-create-account"
         *ngIf="clickCreateNewAccount"
       >
@@ -253,6 +282,7 @@
               type="text"
               placeholder="*Nome"
               #inputNomeCreateNewAccount
+              [value]="valueNomeInput"
               class="input-name-create-account"
               (input)="
                 onInputNameCreateAccount(
@@ -354,6 +384,7 @@
               type="text"
               placeholder="*Celular"
               #inputPhoneCreateNewAccount
+              [value]="valuePhoneInputToSave"
               id="input-phone-create-account"
               (input)="
                 onInputPhoneCreateAccount(
@@ -587,22 +618,32 @@
             <span class="span-service">passos a seguir</span></span
           >
         </div>
-        <button
-          class="button-create-account"
-          (click)="
-            onClickButtonCreateAccount(
-              containerSvgPasswordCreateNewAccount,
-              containerInputConfirmationEmailCreateNewAccount
-            )
-          "
-        >
-          CRIAR CONTA
-        </button>
+        <div class="modal-footer">
+          <div
+            class="container-cicle-loading"
+            *ngIf="showLoadingCicleToCreateAccountCheckout"
+          >
+            <div class="cicle-loading"></div>
+          </div>
+          <button
+            class="button-create-account"
+            #buttonCreateAccountCheckout
+            (click)="
+              onClickButtonCreateAccount(
+                containerSvgPasswordCreateNewAccount,
+                containerInputConfirmationEmailCreateNewAccount,
+                buttonCreateAccountCheckout
+              )
+            "
+          >
+            CRIAR CONTA
+          </button>
+        </div>
       </div>
 
       <div
         class="container-modal-confirmed-code-send-email"
-        *ngIf="codeSendForEmailCreateAccount"
+        *ngIf="codeSendForEmailCreateAccount || codeSendToEmailLoginAccount"
       >
         <div class="container-modal-central-send-code-email">
           <div class="container-img-background-code">
@@ -700,10 +741,26 @@
               </div>
             </div>
             <div class="container-resend-code-and-continue">
-              <span (click)="onClickResendCodeCreateAccount()"
+              <span
+                class="span-code-resent-to-email"
+                (click)="onClickResendCodeCreateAccount()"
                 >Reenviar código</span
               >
-              <a (click)="onClickContinueCodeCreateAccount()">Continuar</a>
+              <span
+                class="span-code-resent-to-email-successfully"
+                *ngIf="codeSentToEmail"
+                >Codigo Reenviado para Email!</span
+              >
+              <a
+                (click)="onClickContinueCodeCreateAccount()"
+                *ngIf="codeSendForEmailCreateAccount"
+                >Continuar</a
+              >
+              <a
+                (click)="onClickContinueCodeCreateAccount()"
+                *ngIf="codeSendToEmailLoginAccount"
+                >Continuar</a
+              >
             </div>
           </div>
         </div>

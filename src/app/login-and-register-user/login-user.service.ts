@@ -43,6 +43,13 @@ export class LoginUserService {
     return this.http.get(`/api/v1/public/user/verify-confirmed-user-email/${valueInput}/${idUser}`).pipe(take(1));
   }
 
+  verifyCodeLoginUser(valueInput: string, idUser: string){
+    return this.http.get(`/api/v1/public/user/verific/${valueInput}/${idUser}`).pipe(take(1));
+  }
+
+  resendCodeEmailCheckout(userId: string){
+    return this.http.get(`/api/v1/public/user/resend-code-verify-email-checkout/${userId}`).pipe(take(1));
+  }
 
   resendCodeEmail(userLogin: Data){
     const headers = new HttpHeaders({

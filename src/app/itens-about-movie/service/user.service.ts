@@ -28,4 +28,8 @@ export class UserService {
 
     return this.http.put(`/api/v1/public/user/update-user-password`, user, options).pipe(take(1));
   }
+
+  confirmTokenRegisterUser(token: string){
+    return this.http.get(`/api/v1/public/user/confirm-token/${token}`).pipe(take(1));
+  }
 }
