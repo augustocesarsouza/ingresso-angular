@@ -1,17 +1,9 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MovieService } from '../../home-page/services/movie.service';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { movieChooseMovieTheater } from '../../interface-models/movie-interface/movie-choose-movie-theater';
-import { addDays, format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
 import { CinemaMovieService } from '../../home-page/services/cinema-movie.service';
 import { CinemaMovieGetAll } from '../../interface-models/cinema-movie-interface/cinema-movie-get-all';
-import { Location } from '@angular/common';
-
-export interface next7DaysProps {
-  dayYear: string;
-  weekDay: string;
-}
 
 export interface ObjHoursCinemaMovie {
   type: string;
@@ -43,7 +35,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
   cinemaMovieGetAllFiltered: CinemaMovieGetAll[] = [];
   cinemaMovieSchedule: { [key: string]: ObjHoursCinemaMovie[] } = {};
   cinemaMovieScheduleFiltered: { [key: string]: ObjHoursCinemaMovie[] } = {};
-  next7Days!: next7DaysProps[];
   typesThatAlreadyClicked: string[] = [];
   containerTypeAll!: NodeListOf<HTMLElement>;
   containerDateAll!: NodeListOf<HTMLElement>;
@@ -119,13 +110,12 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
         let objHour: { [key: string]: ObjHoursCinemaMovie[] } = {};
         let objHourAll: ObjHoursCinemaMovie[] = [];
 
-        data.data.forEach((el: CinemaMovieGetAll) => {
+        this.cinemaMovieGetAll.forEach((el: CinemaMovieGetAll) => {
           let array = el.screeningSchedule.split(',');
 
           let arrayOnlyDublado: string[] = [];
           let arrayOnlyLegendado: string[] = [];
           let arrayOnlyLegendadoVip: string[] = [];
-
 
           array.forEach((elInner: string) => {
             if(elInner.includes("D")){
@@ -200,37 +190,8 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
       });
     });
 
-    const today = new Date();
-    const dayToday = today.getDate();
-
-    const next7DaysEffect: next7DaysProps[] = [];
-
-    for (let i = 0; i < 7; i++) {
-      const day = addDays(today, i);
-
-      const weekDay = format(day, 'E', { locale: ptBR });
-      const formattedDay = format(day, 'dd', { locale: ptBR });
-      const formattedMonth = format(day, 'MM', { locale: ptBR });
-
-      if (dayToday === Number(formattedDay)) {
-        // setWeekDay(weekDay)
-
-        const objData = {
-          dayYear: `${formattedDay}/${formattedMonth}`,
-          weekDay: 'Hoje',
-        };
-        next7DaysEffect.push(objData);
-      } else {
-        const objData = {
-          dayYear: `${formattedDay}/${formattedMonth}`,
-          weekDay: weekDay.slice(0, 3),
-        };
-        next7DaysEffect.push(objData);
-      }
-    }
-
-    this.next7Days = next7DaysEffect;
     this.onClickChooseSeatsForThisHour = this.onClickChooseSeatsForThisHour.bind(this);
+    this.onClickContainerType = this.onClickContainerType.bind(this);
     this.cdRef.detectChanges();
   }
 
