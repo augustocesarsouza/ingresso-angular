@@ -84,7 +84,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
         });
 
         this.spanAboutTheMovie?.addEventListener("click", () => {
-
           this.spanSessions.style.border = "none";
           this.spanSessions.style.fontWeight = '100';
           this.spanAboutTheMovie.style.borderBottom = "4px solid rgb(50, 85, 226)";
@@ -275,10 +274,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
   replaceStringHours(hour: string){
     return hour.replace(/[^0-9:]/g, '');
   }
-
-  // descriptionMovieAbout(description: string): string {
-  //   return description.substring(0, 105) + "...";
-  // }
 
   onClickContainerType(item: string){
     if(this.typesThatAlreadyClicked.some((el) => el === item)){
