@@ -94,12 +94,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
         this.containerDateAll.forEach((el) => {
           el.addEventListener("click", () => this.onClickContainerDate(el));
         });
-
-        // let containerDetails = document.querySelector(".container-details") as HTMLElement;
-        // containerDetails.addEventListener("click", () => {
-        //   console.log(this.itemCinemaMovieClickedDetails);
-        //   this.clickedDetails = true;
-        // });
       }, 30);
     }
 
@@ -201,6 +195,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
     this.onClickContainerType = this.onClickContainerType.bind(this);
     this.onClickSeats = this.onClickSeats.bind(this);
     this.onClickExitSvg = this.onClickExitSvg.bind(this);
+    this.onSeeSessions = this.onSeeSessions.bind(this);
     this.cdRef.detectChanges();
   }
 

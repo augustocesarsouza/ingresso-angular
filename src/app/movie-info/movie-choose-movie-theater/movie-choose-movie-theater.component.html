@@ -45,49 +45,12 @@
           [room]="room"
         >
         </app-movie-location-hours-filtered>
-
-        <div
-          class="container-main-about-movie"
-          *ngIf="isClickedSpanAbountTheMovie"
-        >
-          <div class="container-synopsis">
-            <h1>Sinopse:</h1>
-            <span>{{ movieChooseMovieTheater.description }}</span>
-            <div class="container-button-see-sessions">
-              <button (click)="onSeeSessions()">Ver sessões</button>
-            </div>
-          </div>
-          <div class="container-datasheet-main">
-            <h1>Ficha técnica:</h1>
-            <div class="container-datasheet">
-              <div class="container-itens-datasheet">
-                <h2>Nome Original:</h2>
-                <span>Harry Potter and the Prisoner of Azkaban</span>
-              </div>
-              <div class="container-itens-datasheet">
-                <h2>Direção:</h2>
-                <span>Alfonso Cuarón</span>
-              </div>
-              <div class="container-itens-datasheet">
-                <h2>Duração:</h2>
-                <span>142 min</span>
-              </div>
-              <div class="container-itens-datasheet">
-                <h2>Gênero:</h2>
-                <span>Aventura</span>
-              </div>
-              <div class="container-itens-datasheet">
-                <h2>Distribuidor:</h2>
-                <span>Warner Bros</span>
-              </div>
-              <div class="container-itens-datasheet">
-                <h2>País de Origem:</h2>
-                <app-svg-eua></app-svg-eua>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
+      <app-movie-info-about-movie
+        [isClickedSpanAbountTheMovie]="isClickedSpanAbountTheMovie"
+        [movieChooseMovieTheater]="movieChooseMovieTheater"
+        [onSeeSessions]="onSeeSessions"
+      ></app-movie-info-about-movie>
     </div>
   </div>
 
