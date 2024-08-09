@@ -62,13 +62,15 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
   room = 0;
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService, private cinemaMovieService: CinemaMovieService,
-    private location: Location
+  constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService, private cinemaMovieService: CinemaMovieService
   ){
-    if(typeof document === 'undefined') return;
   }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
+    // localStorage.removeItem('reloaded');
 
     if(typeof document !== "undefined"){
         this.timeoutId = setTimeout(() => {
@@ -232,11 +234,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
 
     this.next7Days = next7DaysEffect;
     this.onClickChooseSeatsForThisHour = this.onClickChooseSeatsForThisHour.bind(this);
-  }
-
-  ngAfterViewInit(): void {
-    // localStorage.removeItem('reloaded');
-
   }
 
   putValueSpanSessions(){
