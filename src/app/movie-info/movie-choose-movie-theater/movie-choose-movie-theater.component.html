@@ -89,7 +89,7 @@
         <div
           class="container-location-hours-movie-theater-main"
           *ngIf="
-            getCinemaArrayFiltered().length <= 0 &&
+            objHoursToCinemaMovieScheduleFiltered.length <= 0 &&
             mostrarCinemaMovieGetAllFiltered
           "
         >
@@ -134,7 +134,7 @@
               </div>
             </div>
             <div class="container-schedule-and-type-movie">
-              <div *ngFor="let schedule of getCinemaArray()">
+              <div *ngFor="let schedule of objHourss">
                 <div *ngIf="schedule.key === item.cinemaDTO.id">
                   <div *ngFor="let itemSchedule of schedule.value">
                     <app-schudule-movie-theater
@@ -193,7 +193,7 @@
         </div>
         <div
           class="container-location-hours-movie-theater-main"
-          *ngIf="getCinemaArrayFiltered().length >= 0"
+          *ngIf="objHoursToCinemaMovieScheduleFiltered.length >= 0"
         >
           <div
             class="container-location-hours-movie-theater"
@@ -236,7 +236,9 @@
               </div>
             </div>
             <div class="container-schedule-and-type-movie">
-              <div *ngFor="let schedule of getCinemaArrayFiltered()">
+              <div
+                *ngFor="let schedule of objHoursToCinemaMovieScheduleFiltered"
+              >
                 <div *ngIf="schedule.key === item.cinemaDTO.id">
                   <div *ngFor="let itemSchedule of schedule.value">
                     <app-schudule-movie-theater
@@ -293,131 +295,131 @@
             </div>
           </div>
         </div>
-      </div>
-      <div
-        class="container-main-about-movie"
-        *ngIf="isClickedSpanAbountTheMovie"
-      >
-        <div class="container-synopsis">
-          <h1>Sinopse:</h1>
-          <span>{{ movieChooseMovieTheater.description }}</span>
-          <div class="container-button-see-sessions">
-            <button (click)="onSeeSessions()">Ver sessões</button>
+        <div
+          class="container-main-about-movie"
+          *ngIf="isClickedSpanAbountTheMovie"
+        >
+          <div class="container-synopsis">
+            <h1>Sinopse:</h1>
+            <span>{{ movieChooseMovieTheater.description }}</span>
+            <div class="container-button-see-sessions">
+              <button (click)="onSeeSessions()">Ver sessões</button>
+            </div>
           </div>
-        </div>
-        <div class="container-datasheet-main">
-          <h1>Ficha técnica:</h1>
-          <div class="container-datasheet">
-            <div class="container-itens-datasheet">
-              <h2>Nome Original:</h2>
-              <span>Harry Potter and the Prisoner of Azkaban</span>
-            </div>
-            <div class="container-itens-datasheet">
-              <h2>Direção:</h2>
-              <span>Alfonso Cuarón</span>
-            </div>
-            <div class="container-itens-datasheet">
-              <h2>Duração:</h2>
-              <span>142 min</span>
-            </div>
-            <div class="container-itens-datasheet">
-              <h2>Gênero:</h2>
-              <span>Aventura</span>
-            </div>
-            <div class="container-itens-datasheet">
-              <h2>Distribuidor:</h2>
-              <span>Warner Bros</span>
-            </div>
-            <div class="container-itens-datasheet">
-              <h2>País de Origem:</h2>
-              <app-svg-eua></app-svg-eua>
+          <div class="container-datasheet-main">
+            <h1>Ficha técnica:</h1>
+            <div class="container-datasheet">
+              <div class="container-itens-datasheet">
+                <h2>Nome Original:</h2>
+                <span>Harry Potter and the Prisoner of Azkaban</span>
+              </div>
+              <div class="container-itens-datasheet">
+                <h2>Direção:</h2>
+                <span>Alfonso Cuarón</span>
+              </div>
+              <div class="container-itens-datasheet">
+                <h2>Duração:</h2>
+                <span>142 min</span>
+              </div>
+              <div class="container-itens-datasheet">
+                <h2>Gênero:</h2>
+                <span>Aventura</span>
+              </div>
+              <div class="container-itens-datasheet">
+                <h2>Distribuidor:</h2>
+                <span>Warner Bros</span>
+              </div>
+              <div class="container-itens-datasheet">
+                <h2>País de Origem:</h2>
+                <app-svg-eua></app-svg-eua>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="container-modal" *ngIf="clickedDetails">
-  <div class="container-modal-central">
-    <app-svg-exit
-      class="container-svg-exit"
-      width="28px"
-      height="28px"
-      fill="#fff"
-      (click)="onClickExitSvg()"
-    ></app-svg-exit>
-    <div class="container-svg-question-mark-span">
-      <app-svg-question-mark
-        class="container-svg-question-mark"
-        width="31px"
-        height="31px"
-        fill="rgb(140 157 215)"
-      ></app-svg-question-mark>
-      <span>Atendimento</span>
-    </div>
-    <div class="container-location-movie">
-      <div class="container-img-location">
-        <img
-          src="https://res.cloudinary.com/dyqsqg7pk/image/upload/v1719232074/map-generic.04beb52d_y4ne70.png"
-          alt="location-movie"
-        />
+  <div class="container-modal" *ngIf="clickedDetails">
+    <div class="container-modal-central">
+      <app-svg-exit
+        class="container-svg-exit"
+        width="28px"
+        height="28px"
+        fill="#fff"
+        (click)="onClickExitSvg()"
+      ></app-svg-exit>
+      <div class="container-svg-question-mark-span">
+        <app-svg-question-mark
+          class="container-svg-question-mark"
+          width="31px"
+          height="31px"
+          fill="rgb(140 157 215)"
+        ></app-svg-question-mark>
+        <span>Atendimento</span>
       </div>
-      <div class="container-location-name-and-svg-location">
-        <app-svg-location></app-svg-location>
-        <span *ngIf="itemCinemaMovieClickedDetails">{{
-          itemCinemaMovieClickedDetails.cinemaDTO.district
-        }}</span>
+      <div class="container-location-movie">
+        <div class="container-img-location">
+          <img
+            src="https://res.cloudinary.com/dyqsqg7pk/image/upload/v1719232074/map-generic.04beb52d_y4ne70.png"
+            alt="location-movie"
+          />
+        </div>
+        <div class="container-location-name-and-svg-location">
+          <app-svg-location></app-svg-location>
+          <span *ngIf="itemCinemaMovieClickedDetails">{{
+            itemCinemaMovieClickedDetails.cinemaDTO.district
+          }}</span>
+        </div>
       </div>
-    </div>
-    <span class="span-forms-withdrawal">Formas de Retirada</span>
-    <div class="container-types-of-the-withdrawal">
-      <div class="container-width-adjust">
-        <div class="container-forms-withdrawal">
-          <app-svg-ticket-cabin
-            class="container-svg-forms-withdrawal"
-            width="40px"
-            height="40px"
-            fill="#fff"
-          ></app-svg-ticket-cabin>
-          <h2>Bilheteria ou Autoatendimento</h2>
-          <span
-            >Apresente o código de busca na bilheteria para trocar pelos
-            ingressos. Leve o documento de identidade e o mesmo cartão de
-            crédito utilizado no ato da compra.</span
-          >
-        </div>
-        <div class="container-forms-withdrawal">
-          <app-svg-ticket-cabin
-            class="container-svg-forms-withdrawal"
-            width="40px"
-            height="40px"
-            fill="#fff"
-          ></app-svg-ticket-cabin>
-          <h2>Impressão</h2>
-          <span
-            >Imprima seus ingressos e mostre-os na entrada do evento. Leve o
-            documento comprovante em caso de meia-entrada.</span
-          >
-        </div>
-        <div class="container-forms-withdrawal">
-          <app-svg-ticket-cabin
-            class="container-svg-forms-withdrawal"
-            width="40px"
-            height="40px"
-            fill="#fff"
-          ></app-svg-ticket-cabin>
-          <h2>Aplicativo</h2>
-          <span
-            >Acesse Meus Pedidos no nosso app e interaja com o ingresso para
-            validá-lo. Mostre a tela do dispositivo na entrada do
-            espetáculo.</span
-          >
+      <span class="span-forms-withdrawal">Formas de Retirada</span>
+      <div class="container-types-of-the-withdrawal">
+        <div class="container-width-adjust">
+          <div class="container-forms-withdrawal">
+            <app-svg-ticket-cabin
+              class="container-svg-forms-withdrawal"
+              width="40px"
+              height="40px"
+              fill="#fff"
+            ></app-svg-ticket-cabin>
+            <h2>Bilheteria ou Autoatendimento</h2>
+            <span
+              >Apresente o código de busca na bilheteria para trocar pelos
+              ingressos. Leve o documento de identidade e o mesmo cartão de
+              crédito utilizado no ato da compra.</span
+            >
+          </div>
+          <div class="container-forms-withdrawal">
+            <app-svg-ticket-cabin
+              class="container-svg-forms-withdrawal"
+              width="40px"
+              height="40px"
+              fill="#fff"
+            ></app-svg-ticket-cabin>
+            <h2>Impressão</h2>
+            <span
+              >Imprima seus ingressos e mostre-os na entrada do evento. Leve o
+              documento comprovante em caso de meia-entrada.</span
+            >
+          </div>
+          <div class="container-forms-withdrawal">
+            <app-svg-ticket-cabin
+              class="container-svg-forms-withdrawal"
+              width="40px"
+              height="40px"
+              fill="#fff"
+            ></app-svg-ticket-cabin>
+            <h2>Aplicativo</h2>
+            <span
+              >Acesse Meus Pedidos no nosso app e interaja com o ingresso para
+              validá-lo. Mostre a tela do dispositivo na entrada do
+              espetáculo.</span
+            >
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<app-footer class="container-footer"></app-footer>
+  <app-footer class="container-footer"></app-footer>
+</div>

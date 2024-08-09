@@ -1,11 +1,12 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MovieService } from '../../home-page/services/movie.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { movieChooseMovieTheater } from '../../interface-models/movie-interface/movie-choose-movie-theater';
 import { addDays, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { CinemaMovieService } from '../../home-page/services/cinema-movie.service';
 import { CinemaMovieGetAll } from '../../interface-models/cinema-movie-interface/cinema-movie-get-all';
+import { Location } from '@angular/common';
 
 export interface next7DaysProps {
   dayYear: string;
@@ -35,8 +36,8 @@ export interface ObjectForOrderSummary {
   templateUrl: './movie-choose-movie-theater.component.html',
   styleUrl: './movie-choose-movie-theater.component.scss'
 })
-export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
-  movieChooseMovieTheater!: movieChooseMovieTheater;
+export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, AfterViewInit {
+  movieChooseMovieTheater!: movieChooseMovieTheater |null;
   movieId: string = "";
   cinemaMovieGetAll: CinemaMovieGetAll[] = [];
   cinemaMovieGetAllFiltered: CinemaMovieGetAll[] = [];
@@ -60,10 +61,15 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
   @ViewChild('containerScheduleDublado') containerScheduleDublado!: ElementRef<HTMLDivElement>;
   room = 0;
 
-  constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService, private cinemaMovieService: CinemaMovieService){
+
+  constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService, private cinemaMovieService: CinemaMovieService,
+    private location: Location
+  ){
+    if(typeof document === 'undefined') return;
   }
 
   ngOnInit(): void {
+
     if(typeof document !== "undefined"){
         this.timeoutId = setTimeout(() => {
         document.body.style.backgroundColor = "rgb(4, 18, 24)";
@@ -78,6 +84,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
         });
 
         this.spanAboutTheMovie?.addEventListener("click", () => {
+
           this.spanSessions.style.border = "none";
           this.spanSessions.style.fontWeight = '100';
           this.spanAboutTheMovie.style.borderBottom = "4px solid rgb(50, 85, 226)";
@@ -190,6 +197,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
         });
 
         this.cinemaMovieSchedule = objHour;
+        this.getCinemaArray(objHour);
       });
     });
 
@@ -226,6 +234,11 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
     this.onClickChooseSeatsForThisHour = this.onClickChooseSeatsForThisHour.bind(this);
   }
 
+  ngAfterViewInit(): void {
+    // localStorage.removeItem('reloaded');
+
+  }
+
   putValueSpanSessions(){
     this.spanSessions.style.borderBottom = "4px solid rgb(50, 85, 226)";
     this.spanSessions.style.fontWeight = '600';
@@ -234,6 +247,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
   }
 
   onClickContainerDate(el: HTMLElement){
+
     this.containerDateAll.forEach((elFor) => {
       elFor.className = "container-date";
     });
@@ -241,18 +255,25 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
     el.className = "container-date-1";
   }
 
-  getCinemaArray() {
-    return Object.keys(this.cinemaMovieSchedule).map(key => ({
+  objHourss!: {key: string; value: ObjHoursCinemaMovie[];}[];
+  objHoursToCinemaMovieScheduleFiltered: {key: string; value: ObjHoursCinemaMovie[];}[] = [];
+
+  getCinemaArray(objHour: {[key: string]: ObjHoursCinemaMovie[] }) {
+    let value = Object.keys(objHour).map(key => ({
       key: key,
       value: this.cinemaMovieSchedule[key]
     }));
+
+    this.objHourss = value;
   }
 
-  getCinemaArrayFiltered() {
-    return Object.keys(this.cinemaMovieScheduleFiltered).map(key => ({
+  getCinemaArrayFiltered(cinemaMovieScheduleFiltered: {[key: string]: ObjHoursCinemaMovie[];}) {
+    let value = Object.keys(cinemaMovieScheduleFiltered).map(key => ({
       key: key,
-      value: this.cinemaMovieScheduleFiltered[key]
+      value: cinemaMovieScheduleFiltered[key]
     }));
+
+    this.objHoursToCinemaMovieScheduleFiltered = value;
   }
 
   replaceStringHours(hour: string){
@@ -339,6 +360,8 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
       this.mostrarCinemaMovieGetAllFiltered = false;
     }
 
+    this.getCinemaArrayFiltered(this.cinemaMovieScheduleFiltered);
+
     this.containerTypeAll.forEach((elHtml: HTMLElement) => {
       let textContent = elHtml.textContent?.trim() || '';
 
@@ -371,16 +394,19 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
         let scrollLeft: any;
 
         containerTypesOfTheWithdrawal?.addEventListener("mousedown", (e) => {
+
           clickeContainerAdjust = true;
           startX = e.pageX - containerTypesOfTheWithdrawal.offsetLeft;
           scrollLeft = containerTypesOfTheWithdrawal.scrollLeft;
         });
 
         containerTypesOfTheWithdrawal?.addEventListener("mouseup", (e) => {
+
           clickeContainerAdjust = false;
         });
 
         containerTypesOfTheWithdrawal?.addEventListener("mousemove", (e: any) => {
+
           if(!clickeContainerAdjust) return;
           e.preventDefault();
 
@@ -478,5 +504,8 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy {
     if(this.timeoutId){
       clearTimeout(this.timeoutId);
     }
+    // if(localStorage){
+    //   localStorage.removeItem('reloaded');
+    // }
   }
 }

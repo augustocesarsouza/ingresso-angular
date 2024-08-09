@@ -5,6 +5,7 @@ import { WitchFunctionWasClickedService } from '../service/witch-function-was-cl
 import { NumberOfTheTicketsClickedService } from '../service/number-of-the-tickets-clicked.service';
 import { PositionType } from '../enum/app.enums-type-of-itens';
 import { TypeOfThePaymentService } from '../service/type-of-the-payment.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-which-position-choose',
@@ -55,9 +56,23 @@ export class WhichPositionChooseComponent implements OnInit, AfterViewInit, OnDe
   containerSvgBomboniere!: HTMLElement;
   containerSvgCard!: HTMLElement;
 
+  private timeoutGetUrlId: any;
+
   constructor(private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService, private witch_function_was_clicked_service: WitchFunctionWasClickedService,
-    private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService, private type_of_the_payment_service: TypeOfThePaymentService
+    private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService, private type_of_the_payment_service: TypeOfThePaymentService, private router: Router
   ){
+    if(typeof window === "undefined") return;
+    window.onpopstate = () => {
+      clearTimeout(this.timeoutGetUrlId);
+
+      this.timeoutGetUrlId = setTimeout(() => {
+        let getNameWhichPosition = this.router.url.slice(this.router.url.lastIndexOf("/") + 1);
+        this.witch_function_was_clicked_service.updateWhatWasClicked(getNameWhichPosition);
+        // let urlValue = this.router.url;
+        // let lastIndex = urlValue.lastIndexOf("/") + 1;
+        // let getNameWhichPosition = urlValue.slice(lastIndex);
+      }, 1);
+    }
   }
 
   ngOnInit(): void {
@@ -206,6 +221,8 @@ export class WhichPositionChooseComponent implements OnInit, AfterViewInit, OnDe
 
   ngAfterViewInit(): void {
     if(typeof document === 'undefined') return;
+    document.documentElement.scrollTop = 0;
+
 
     this.containerSvgChooseSeats = document.querySelector(".container-svg-itens-about-movie") as HTMLElement;
     this.containerSvgTickets = document.querySelector(".container-svg-tickets") as HTMLElement;
@@ -378,5 +395,7 @@ export class WhichPositionChooseComponent implements OnInit, AfterViewInit, OnDe
         el.unsubscribe();
       })
     }
+
+    clearTimeout(this.timeoutGetUrlId);
   }
 }

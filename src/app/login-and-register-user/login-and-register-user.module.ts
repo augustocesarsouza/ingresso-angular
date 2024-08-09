@@ -24,6 +24,7 @@ import { CardCreditAllComponent } from './options-user-all/card-credit-all/card-
 import { CardDebitAllComponent } from './options-user-all/card-debit-all/card-debit-all.component';
 import { DigitalWalletsAllComponent } from './options-user-all/digital-wallets-all/digital-wallets-all.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
+import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
     CardDebitAllComponent,
     DigitalWalletsAllComponent,
     PasswordChangeComponent,
+    ConfirmEmailComponent,
   ],
   imports: [
     CommonModule,
