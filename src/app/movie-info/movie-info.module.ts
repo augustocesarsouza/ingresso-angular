@@ -7,11 +7,13 @@ import { MovieInfoRoutingModule } from './movie-info-routing.module';
 import { SharedModuleModule } from '../shared-module/shared-module.module';
 import { AllSvgAppModule } from "../all-svg-app/all-svg-app.module";
 import { SchuduleMovieTheaterComponent } from './schudule-movie-theater/schudule-movie-theater.component';
+import { BannerInfoAboutMovieComponent } from './banner-info-about-movie/banner-info-about-movie.component';
 
 @NgModule({
     declarations: [
         MovieChooseMovieTheaterComponent,
         SchuduleMovieTheaterComponent,
+        BannerInfoAboutMovieComponent,
     ],
     imports: [
         CommonModule,

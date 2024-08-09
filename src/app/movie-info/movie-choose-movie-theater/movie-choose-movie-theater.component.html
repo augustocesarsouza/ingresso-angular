@@ -4,45 +4,9 @@
   class="container-main-choose-movie-theater"
   *ngIf="movieChooseMovieTheater"
 >
-  <div class="container-here">
-    <div class="container-banner-movie-main">
-      <div class="container-banner-movie-description">
-        <div class="container-banner-movie">
-          <img
-            [src]="movieChooseMovieTheater.imgUrl"
-            [alt]="movieChooseMovieTheater.title"
-          />
-        </div>
-        <div class="container-description-movie">
-          <h1>{{ movieChooseMovieTheater.title }}</h1>
-          <div class="container-movie-ration-duration-gender">
-            <div class="container-movie-ration">
-              <span>{{ movieChooseMovieTheater.movieRating }}</span>
-            </div>
-            <div class="container-duration">
-              <span>{{ movieChooseMovieTheater.duration }}</span>
-            </div>
-            <div class="container-line-white"></div>
-            <div class="container-gender">
-              <span>{{ movieChooseMovieTheater.gender }}</span>
-            </div>
-          </div>
-          <div class="container-description-about-movie">
-            <span>{{
-              descriptionMovieAbout(movieChooseMovieTheater.description)
-            }}</span>
-            <a>Continuar lendo</a>
-          </div>
-          <div class="container-share">
-            <div class="container-svg-share">
-              <app-svg-share class="svg-share"></app-svg-share>
-            </div>
-            <span>Compartilhar</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <app-banner-info-about-movie
+    [movieChooseMovieTheater]="movieChooseMovieTheater"
+  ></app-banner-info-about-movie>
   <div class="container-sessions-about-the-movie-main-main">
     <div class="container-sessions-about-the-movie-main">
       <div class="container-sessions-about-the-movie">

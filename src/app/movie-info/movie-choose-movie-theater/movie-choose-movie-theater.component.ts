@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MovieService } from '../../home-page/services/movie.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { movieChooseMovieTheater } from '../../interface-models/movie-interface/movie-choose-movie-theater';
@@ -37,7 +37,7 @@ export interface ObjectForOrderSummary {
   styleUrl: './movie-choose-movie-theater.component.scss'
 })
 export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, AfterViewInit {
-  movieChooseMovieTheater!: movieChooseMovieTheater |null;
+  movieChooseMovieTheater!: movieChooseMovieTheater;
   movieId: string = "";
   cinemaMovieGetAll: CinemaMovieGetAll[] = [];
   cinemaMovieGetAllFiltered: CinemaMovieGetAll[] = [];
@@ -61,8 +61,8 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
   @ViewChild('containerScheduleDublado') containerScheduleDublado!: ElementRef<HTMLDivElement>;
   room = 0;
 
-
-  constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService, private cinemaMovieService: CinemaMovieService
+  constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService, private cinemaMovieService: CinemaMovieService,
+    private cdRef: ChangeDetectorRef
   ){
   }
 
@@ -70,8 +70,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
   }
 
   ngAfterViewInit(): void {
-    // localStorage.removeItem('reloaded');
-
     if(typeof document !== "undefined"){
         this.timeoutId = setTimeout(() => {
         document.body.style.backgroundColor = "rgb(4, 18, 24)";
@@ -234,6 +232,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
 
     this.next7Days = next7DaysEffect;
     this.onClickChooseSeatsForThisHour = this.onClickChooseSeatsForThisHour.bind(this);
+    this.cdRef.detectChanges();
   }
 
   putValueSpanSessions(){
@@ -277,9 +276,9 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
     return hour.replace(/[^0-9:]/g, '');
   }
 
-  descriptionMovieAbout(description: string): string {
-    return description.substring(0, 105) + "...";
-  }
+  // descriptionMovieAbout(description: string): string {
+  //   return description.substring(0, 105) + "...";
+  // }
 
   onClickContainerType(item: string){
     if(this.typesThatAlreadyClicked.some((el) => el === item)){
