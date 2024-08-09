@@ -10,6 +10,8 @@ import { SchuduleMovieTheaterComponent } from './schudule-movie-theater/schudule
 import { BannerInfoAboutMovieComponent } from './banner-info-about-movie/banner-info-about-movie.component';
 import { MovieSessionsAndInfoComponent } from './movie-sessions-and-info/movie-sessions-and-info.component';
 import { DayAndDayWeakAndMovieTheaterTypesComponent } from './day-and-day-weak-and-movie-theater-types/day-and-day-weak-and-movie-theater-types.component';
+import { MovieLocationHoursNormalComponent } from './movie-location-hours-normal/movie-location-hours-normal.component';
+import { MovieLocationHoursFilteredComponent } from './movie-location-hours-filtered/movie-location-hours-filtered.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +20,8 @@ import { DayAndDayWeakAndMovieTheaterTypesComponent } from './day-and-day-weak-a
         BannerInfoAboutMovieComponent,
         MovieSessionsAndInfoComponent,
         DayAndDayWeakAndMovieTheaterTypesComponent,
+        MovieLocationHoursNormalComponent,
+        MovieLocationHoursFilteredComponent,
     ],
     imports: [
         CommonModule,

@@ -1,0 +1,98 @@
+<div
+  class="container-location-hours-movie-theater-main"
+  *ngIf="objHoursToCinemaMovieScheduleFiltered.length >= 0"
+>
+  <div
+    class="container-location-hours-movie-theater"
+    *ngFor="let item of cinemaMovieGetAllFiltered"
+  >
+    <div class="container-location-movie-theater">
+      <div class="container-location-svg">
+        <app-svg-heart
+          width="30px"
+          height="30px"
+          fill="rgb(152 170 236)"
+        ></app-svg-heart>
+        <div class="container-location-h1-span">
+          <h1>{{ item.cinemaDTO.nameCinema }}</h1>
+          <span>{{ item.cinemaDTO.district }}</span>
+        </div>
+      </div>
+      <div class="container-seats-price-details">
+        <div class="container-seats">
+          <app-svg-seats
+            class="container-svg-location"
+            fill="rgb(152 170 236)"
+          ></app-svg-seats>
+          <span>Assentos</span>
+        </div>
+        <div class="container-seats">
+          <app-svg-price
+            class="container-svg-location"
+            fill="rgb(152 170 236)"
+          ></app-svg-price>
+          <span>Preços</span>
+        </div>
+        <div class="container-seats">
+          <app-svg-details
+            class="container-svg-location"
+            fill="rgb(152 170 236)"
+          ></app-svg-details>
+          <span>Detalhes</span>
+        </div>
+      </div>
+    </div>
+    <div class="container-schedule-and-type-movie">
+      <div *ngFor="let schedule of objHoursToCinemaMovieScheduleFiltered">
+        <div *ngIf="schedule.key === item.cinemaDTO.id">
+          <div *ngFor="let itemSchedule of schedule.value">
+            <app-schudule-movie-theater
+              *ngIf="itemSchedule.type === 'DUBLADO'"
+              [itemSchedule]="itemSchedule"
+              type="DUBLADO"
+              typeView="DUBLADO"
+              [movieChooseMovieTheater]="movieChooseMovieTheater"
+              [item]="item"
+              [onClickChooseSeatsForThisHour]="onClickChooseSeatsForThisHour"
+            ></app-schudule-movie-theater>
+            <app-schudule-movie-theater
+              *ngIf="itemSchedule.type === 'LEGENDADO'"
+              [itemSchedule]="itemSchedule"
+              type="LEGENDADO"
+              typeView="LEGENDADO"
+              [movieChooseMovieTheater]="movieChooseMovieTheater"
+              [item]="item"
+              [onClickChooseSeatsForThisHour]="onClickChooseSeatsForThisHour"
+            ></app-schudule-movie-theater>
+            <div
+              class="container-schedule-dublado"
+              *ngIf="itemSchedule.type === 'LV'"
+              #containerScheduleDublado
+            >
+              <div class="container-span-type-more-than-one">
+                <span>VIP</span>
+                <span>LEGENDADO</span>
+              </div>
+              <div class="container-hours">
+                <div
+                  class="container-schedule-hour"
+                  *ngFor="let itemHour of itemSchedule.arryHours"
+                  (click)="
+                    onClickChooseSeatsForThisHour(
+                      movieChooseMovieTheater,
+                      item,
+                      itemHour,
+                      null
+                    )
+                  "
+                >
+                  {{ replaceStringHours(itemHour) }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
