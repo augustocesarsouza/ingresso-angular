@@ -24,8 +24,6 @@ export class SchuduleMovieTheaterComponent implements AfterViewInit, OnInit, OnD
   }
 
   ngAfterViewInit(): void {
-    // console.log("AfterViewInit");
-
   }
 
   onClickHour(itemHour: string, typeView: string){

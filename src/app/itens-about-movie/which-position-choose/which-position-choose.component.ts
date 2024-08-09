@@ -61,12 +61,12 @@ export class WhichPositionChooseComponent implements OnInit, AfterViewInit, OnDe
   constructor(private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService, private witch_function_was_clicked_service: WitchFunctionWasClickedService,
     private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService, private type_of_the_payment_service: TypeOfThePaymentService, private router: Router
   ){
+    if(typeof window === "undefined") return;
     window.onpopstate = () => {
       clearTimeout(this.timeoutGetUrlId);
 
       this.timeoutGetUrlId = setTimeout(() => {
         let getNameWhichPosition = this.router.url.slice(this.router.url.lastIndexOf("/") + 1);
-        console.log(getNameWhichPosition);
         this.witch_function_was_clicked_service.updateWhatWasClicked(getNameWhichPosition);
         // let urlValue = this.router.url;
         // let lastIndex = urlValue.lastIndexOf("/") + 1;
@@ -221,7 +221,6 @@ export class WhichPositionChooseComponent implements OnInit, AfterViewInit, OnDe
 
   ngAfterViewInit(): void {
     if(typeof document === 'undefined') return;
-    console.log("aqui");
     document.documentElement.scrollTop = 0;
 
 

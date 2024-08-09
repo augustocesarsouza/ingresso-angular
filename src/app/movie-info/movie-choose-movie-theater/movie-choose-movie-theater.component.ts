@@ -268,15 +268,10 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
   }
 
   getCinemaArrayFiltered(cinemaMovieScheduleFiltered: {[key: string]: ObjHoursCinemaMovie[];}) {
-
     let value = Object.keys(cinemaMovieScheduleFiltered).map(key => ({
       key: key,
       value: cinemaMovieScheduleFiltered[key]
     }));
-
-    console.log(value);
-    console.log(this.mostrarCinemaMovieGetAllFiltered);
-
 
     this.objHoursToCinemaMovieScheduleFiltered = value;
   }
