@@ -23,298 +23,165 @@
   gap: 20px;
 }
 
-// .container-date-1 {
-//   display: flex;
-//   flex-direction: column;
-//   font-size: 18px;
-//   color: #fff;
-//   font-weight: 700;
-//   line-height: 1.4;
-//   cursor: pointer;
-// }
-
-// .container-location-hours-movie-theater-main {
-//   display: flex;
-//   flex-direction: column;
-//   gap: 10px;
-//   width: 74%;
-// }//
-
-// .container-location-hours-movie-theater {
-//   display: flex;
-//   flex-direction: column;
-//   background-color: rgb(33 38 45);
-//   border-radius: 15px;
-//   // padding: 15px;
-//   padding-bottom: 16px;
-//   padding-left: 20px;
-//   padding-right: 20px;
-//   padding-top: 16px;
-// }//
-
-// .container-location-movie-theater {
-//   display: flex;
-//   width: 100%;
-//   justify-content: space-between;
-//   border-bottom: 1px solid rgba(129, 129, 129, 0.329);
-//   padding-bottom: 25px;
-// }//
-
-// .container-location-svg {
-//   display: flex;
-//   align-items: center;
-//   gap: 15px;
-// }//
-
-// .container-location-h1-span {
-//   display: flex;
-//   flex-direction: column;
-//   line-height: 1;
-// }//
-
-// .container-location-h1-span > h1 {
-//   font-size: 16px;
-//   color: #fff;
-// }//
-
-// .container-location-h1-span > span {
-//   font-size: 14px;
-//   color: rgb(153, 153, 153);
-// }//
-
-// .container-seats-price-details {
-//   display: flex;
-//   gap: 12px;
-//   height: 25px;
-// }//
-
-// .container-svg-location {
-//   display: flex;
-// }//
-
-// .container-seats {
-//   display: flex;
-//   align-items: center;
-//   gap: 5px;
-//   cursor: pointer;
-// }//
-
-// .container-seats > span {
-//   font-size: 15px;
-//   color: rgb(240, 240, 240);
-//   line-height: 1;
-// }//
-
-// .container-schedule-and-type-movie {
-//   padding-top: 10px;
-// }//
-
-// .container-schedule-dublado {
-//   display: flex;
-//   flex-direction: column;
-//   gap: 7px;
-//   color: #fff;
-//   padding-top: 15px;
-// }//
-
-// .container-span-type-more-than-one {
-//   display: flex;
-//   gap: 10px;
-// }//
-
-// .container-span-type-more-than-one > span {
-//   color: #fff;
-//   line-height: 1;
-//   background-color: rgb(50, 85, 226);
-//   font-size: 11px;
-//   font-weight: 700;
-//   padding: 4px 17px;
-//   border-radius: 5px;
-// }//
-
-// .container-hours{
-//   display: flex;
-//   gap: 10px;
-// }//
-
-// .container-schedule-hour {
-//   border: 2px solid rgb(152, 170, 236);
-//   color: rgb(152, 170, 236);
-//   padding: 0 50px;
-//   height: 40px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   font-size: 16px;
-//   font-weight: 600;
-//   border-radius: 10px;
-//   cursor: pointer;
-// }//
-
-// .container-schedule-hour:hover {
-//   color: rgb(120, 145, 235);
-//   border-color: rgb(120, 145, 235);
-// }//
-
 .container-footer {
   width: 100%;
 }
 
-.container-modal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(59, 59, 59, 0.363);
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 5;
-}
+// .container-modal {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   background-color: rgba(59, 59, 59, 0.363);
+//   width: 100%;
+//   height: 100%;
+//   position: fixed;
+//   left: 0;
+//   top: 0;
+//   z-index: 5;
+// }
 
-.container-modal-central {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  gap: 20px;
-  width: 39rem;
-  height: 42rem;
-  padding: 30px 25px;
-  background-color: rgb(33 38 45);
-}
+// .container-modal-central {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   // position: relative;
+//   gap: 20px;
+//   width: 39rem;
+//   height: 42rem;
+//   padding: 30px 25px;
+//   background-color: rgb(33 38 45);
+// }
 
-.container-svg-exit {
-  display: flex;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  cursor: pointer;
-}
+// .container-svg-exit {
+//   display: flex;
+//   position: absolute;
+//   right: 10px;
+//   top: 10px;
+//   cursor: pointer;
+// }
 
-.container-svg-question-mark-span {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+// .container-svg-question-mark-span {
+//   display: flex;
+//   align-items: center;
+//   gap: 10px;
+// }
 
-.container-svg-question-mark-span > span {
-  color: rgb(140 157 215);
-  font-size: 20px;
-  font-weight: 700;
-}
+// .container-svg-question-mark-span > span {
+//   color: rgb(140 157 215);
+//   font-size: 20px;
+//   font-weight: 700;
+// }
 
-.container-svg-question-mark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(52 60 70);
-  border-radius: 50%;
-  padding: 5px 5px;
-}
+// .container-svg-question-mark {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   background-color: rgb(52 60 70);
+//   border-radius: 50%;
+//   padding: 5px 5px;
+// }
 
-.container-location-movie {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  position: relative;
-  margin-bottom: 50px;
-}
+// .container-location-movie {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   width: 100%;
+//   position: relative;
+//   margin-bottom: 50px;
+// }
 
-.container-img-location {
-  width: 100%;
-}
+// .container-img-location {
+//   width: 100%;
+// }
 
-.container-img-location > img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 10px;
-}
+// .container-img-location > img {
+//   width: 100%;
+//   height: 250px;
+//   object-fit: cover;
+//   border-radius: 10px;
+// }
 
-.container-location-name-and-svg-location {
-  display: flex;
-  align-items: center;
-  background-color: rgb(33, 38, 45);
-  position: absolute;
-  // left: 85px;
-  bottom: -27px;
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
-  height: 60px;
-  padding: 0px 15px;
-}
+// .container-location-name-and-svg-location {
+//   display: flex;
+//   align-items: center;
+//   background-color: rgb(33, 38, 45);
+//   position: absolute;
+//   // left: 85px;
+//   bottom: -27px;
+//   border-top-left-radius: 7px;
+//   border-top-right-radius: 7px;
+//   height: 60px;
+//   padding: 0px 15px;
+// }
 
-.container-location-name-and-svg-location > span {
-  font-size: 20px;
-  color: #fff;
-}
+// .container-location-name-and-svg-location > span {
+//   font-size: 20px;
+//   color: #fff;
+// }
 
-.span-forms-withdrawal {
-  font-size: 20px;
-  color: #fff;
-}
+// .span-forms-withdrawal {
+//   font-size: 20px;
+//   color: #fff;
+// }
 
-.container-types-of-the-withdrawal {
-  display: flex;
-  align-items: flex-end;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  width: 100%;
-  height: 100%;
-}
+// .container-types-of-the-withdrawal {
+//   display: flex;
+//   align-items: flex-end;
+//   overflow-x: hidden;
+//   overflow-y: hidden;
+//   width: 100%;
+//   height: 100%;
+// }
 
-.container-width-adjust {
-  display: flex;
-  width: 1130px;
-  user-select: none;
+// .container-width-adjust {
+//   display: flex;
+//   width: 1130px;
+//   user-select: none;
 
-  // transform: translateX(0%);
-  // transition: transform 0.1s ease;
-}
+//   // transform: translateX(0%);
+//   // transition: transform 0.1s ease;
+// }
 
-.container-forms-withdrawal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 350px;
-  height: 200px;
-  background-color: rgb(52 60 70);
-  border-radius: 10px;
-  padding-bottom: 30px;
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-top: 40px;
-  position: relative;
-  margin-right: 15px;
-}
+// .container-forms-withdrawal {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   flex-direction: column;
+//   width: 350px;
+//   height: 200px;
+//   background-color: rgb(52 60 70);
+//   border-radius: 10px;
+//   padding-bottom: 30px;
+//   padding-left: 25px;
+//   padding-right: 25px;
+//   padding-top: 40px;
+//   position: relative;
+//   margin-right: 15px;
+// }
 
-.container-forms-withdrawal > h2 {
-  font-size: 20px;
-  color: #fff;
-}
+// .container-forms-withdrawal > h2 {
+//   font-size: 20px;
+//   color: #fff;
+// }
 
-.container-forms-withdrawal > span {
-  font-size: 16px;
-  color: rgb(153, 153, 153);
-  line-height: 1.1;
-  text-align: center;
-}
+// .container-forms-withdrawal > span {
+//   font-size: 16px;
+//   color: rgb(153, 153, 153);
+//   line-height: 1.1;
+//   text-align: center;
+// }
 
-.container-svg-forms-withdrawal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(50, 85, 226);
-  padding: 10px;
-  border-radius: 50%;
-  position: absolute;
-  left: 150px;
-  top: -30px;
-}
+// .container-svg-forms-withdrawal {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   background-color: rgb(50, 85, 226);
+//   padding: 10px;
+//   border-radius: 50%;
+//   position: absolute;
+//   left: 150px;
+//   top: -30px;
+// }
 
 .container-main-about-movie {
   display: flex;

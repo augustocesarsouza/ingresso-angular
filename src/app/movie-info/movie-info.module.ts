@@ -12,6 +12,7 @@ import { MovieSessionsAndInfoComponent } from './movie-sessions-and-info/movie-s
 import { DayAndDayWeakAndMovieTheaterTypesComponent } from './day-and-day-weak-and-movie-theater-types/day-and-day-weak-and-movie-theater-types.component';
 import { MovieLocationHoursNormalComponent } from './movie-location-hours-normal/movie-location-hours-normal.component';
 import { MovieLocationHoursFilteredComponent } from './movie-location-hours-filtered/movie-location-hours-filtered.component';
+import { ModalDetailsAboutMovieTheaterComponent } from './modal-details-about-movie-theater/modal-details-about-movie-theater.component';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { MovieLocationHoursFilteredComponent } from './movie-location-hours-filt
         DayAndDayWeakAndMovieTheaterTypesComponent,
         MovieLocationHoursNormalComponent,
         MovieLocationHoursFilteredComponent,
+        ModalDetailsAboutMovieTheaterComponent,
     ],
     imports: [
         CommonModule,

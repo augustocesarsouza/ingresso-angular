@@ -91,86 +91,11 @@
     </div>
   </div>
 
-  <div class="container-modal" *ngIf="clickedDetails">
-    <div class="container-modal-central">
-      <app-svg-exit
-        class="container-svg-exit"
-        width="28px"
-        height="28px"
-        fill="#fff"
-        (click)="onClickExitSvg()"
-      ></app-svg-exit>
-      <div class="container-svg-question-mark-span">
-        <app-svg-question-mark
-          class="container-svg-question-mark"
-          width="31px"
-          height="31px"
-          fill="rgb(140 157 215)"
-        ></app-svg-question-mark>
-        <span>Atendimento</span>
-      </div>
-      <div class="container-location-movie">
-        <div class="container-img-location">
-          <img
-            src="https://res.cloudinary.com/dyqsqg7pk/image/upload/v1719232074/map-generic.04beb52d_y4ne70.png"
-            alt="location-movie"
-          />
-        </div>
-        <div class="container-location-name-and-svg-location">
-          <app-svg-location></app-svg-location>
-          <span *ngIf="itemCinemaMovieClickedDetails">{{
-            itemCinemaMovieClickedDetails.cinemaDTO.district
-          }}</span>
-        </div>
-      </div>
-      <span class="span-forms-withdrawal">Formas de Retirada</span>
-      <div class="container-types-of-the-withdrawal">
-        <div class="container-width-adjust">
-          <div class="container-forms-withdrawal">
-            <app-svg-ticket-cabin
-              class="container-svg-forms-withdrawal"
-              width="40px"
-              height="40px"
-              fill="#fff"
-            ></app-svg-ticket-cabin>
-            <h2>Bilheteria ou Autoatendimento</h2>
-            <span
-              >Apresente o código de busca na bilheteria para trocar pelos
-              ingressos. Leve o documento de identidade e o mesmo cartão de
-              crédito utilizado no ato da compra.</span
-            >
-          </div>
-          <div class="container-forms-withdrawal">
-            <app-svg-ticket-cabin
-              class="container-svg-forms-withdrawal"
-              width="40px"
-              height="40px"
-              fill="#fff"
-            ></app-svg-ticket-cabin>
-            <h2>Impressão</h2>
-            <span
-              >Imprima seus ingressos e mostre-os na entrada do evento. Leve o
-              documento comprovante em caso de meia-entrada.</span
-            >
-          </div>
-          <div class="container-forms-withdrawal">
-            <app-svg-ticket-cabin
-              class="container-svg-forms-withdrawal"
-              width="40px"
-              height="40px"
-              fill="#fff"
-            ></app-svg-ticket-cabin>
-            <h2>Aplicativo</h2>
-            <span
-              >Acesse Meus Pedidos no nosso app e interaja com o ingresso para
-              validá-lo. Mostre a tela do dispositivo na entrada do
-              espetáculo.</span
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <app-footer class="container-footer"></app-footer>
 </div>
+
+<app-modal-details-about-movie-theater
+  [clickedDetails]="clickedDetails"
+  [itemCinemaMovieClickedDetails]="itemCinemaMovieClickedDetails"
+  [onClickExitSvg]="onClickExitSvg"
+></app-modal-details-about-movie-theater>

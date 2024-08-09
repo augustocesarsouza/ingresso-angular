@@ -62,7 +62,8 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
 
   ngAfterViewInit(): void {
     if(typeof document !== "undefined"){
-        this.timeoutId = setTimeout(() => {
+      document.body.style.position = "relative";
+      this.timeoutId = setTimeout(() => {
         document.body.style.backgroundColor = "rgb(4, 18, 24)";
 
         this.spanSessions = document.querySelector(".span-sessions") as HTMLSpanElement;
@@ -93,6 +94,12 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
         this.containerDateAll.forEach((el) => {
           el.addEventListener("click", () => this.onClickContainerDate(el));
         });
+
+        // let containerDetails = document.querySelector(".container-details") as HTMLElement;
+        // containerDetails.addEventListener("click", () => {
+        //   console.log(this.itemCinemaMovieClickedDetails);
+        //   this.clickedDetails = true;
+        // });
       }, 30);
     }
 
@@ -192,6 +199,8 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
 
     // this.onClickChooseSeatsForThisHour = this.onClickChooseSeatsForThisHour.bind(this);
     this.onClickContainerType = this.onClickContainerType.bind(this);
+    this.onClickSeats = this.onClickSeats.bind(this);
+    this.onClickExitSvg = this.onClickExitSvg.bind(this);
     this.cdRef.detectChanges();
   }
 
@@ -333,7 +342,7 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
     clearTimeout(this.timeoutIdSlide);
 
     this.itemCinemaMovieClickedDetails = item;
-    this.clickedDetails = !this.clickedDetails;
+    this.clickedDetails = true;
 
     if(typeof document !== "undefined"){
       document.body.style.overflow = "hidden";
@@ -370,74 +379,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
     }
   }
 
-  // onClickChooseSeatsForThisHour(movieChooseMovieTheater: movieChooseMovieTheater, item: CinemaMovieGetAll, itemHour: string, containerScheduleDublado: ElementRef<HTMLDivElement> | null): void{
-  //   // container-date -> pegar esse 'querySelector'
-  //   if(typeof document !== 'undefined'){
-  //     const diasDaSemana = [
-  //       'domingo',
-  //       'segunda-feira',
-  //       'terça-feira',
-  //       'quarta-feira',
-  //       'quinta-feira',
-  //       'sexta-feira',
-  //       'sábado'
-  //     ];
-
-  //     let containerDate = document.querySelector(".container-date-1");
-  //     let spanDayMonth = containerDate?.firstChild?.textContent;
-  //     let indiceDia = new Date().getDay();
-
-  //     const nomeDia = diasDaSemana[indiceDia];
-  //     let nameDaySplit = nomeDia.slice(0, 3).toUpperCase();
-
-  //     itemHour = itemHour.trim();
-  //     spanDayMonth = spanDayMonth?.trim();
-  //     nameDaySplit = nameDaySplit.trim();
-
-  //     let dayMonthAndDayWeek = `${nameDaySplit} ${spanDayMonth} ${itemHour.slice(0, 5)}`;
-  //     let typeMovieTheater = "";
-
-  //     if(containerScheduleDublado){
-  //       let containerSpanTypeMoreThanOne = containerScheduleDublado.nativeElement.querySelector(".container-span-type-view");
-  //       let spans = containerSpanTypeMoreThanOne?.childNodes;
-  //       if(spans && spans[0] && spans[0].textContent){
-  //         typeMovieTheater = spans[0].textContent;
-  //       }
-  //     }else {
-  //       let containerSpanTypeMoreThanOne = this.containerScheduleDublado.nativeElement.querySelector(".container-span-type-more-than-one");
-  //       let spans = containerSpanTypeMoreThanOne?.childNodes;
-
-  //       spans?.forEach((span: ChildNode, index: number) => {
-  //         typeMovieTheater += span.textContent;
-
-  //         if(spans.length > index + 1){
-  //           typeMovieTheater += ",";
-  //         }
-  //       });
-  //     }
-
-  //     let containerRegion = document.querySelector(".container-region");
-  //     let spanRegion = containerRegion?.lastChild?.textContent;
-
-  //     if(spanRegion){
-  //       this.room += 1;
-  //       let objectForOrderSummary: ObjectForOrderSummary = {
-  //         movieId: this.movieId,
-  //         title: movieChooseMovieTheater.title,
-  //         movieRating: movieChooseMovieTheater.movieRating,
-  //         dayMonthAndDayWeek: dayMonthAndDayWeek,
-  //         typeMovieTheater: typeMovieTheater,
-  //         locationMovieTheater: item.cinemaDTO.nameCinema,
-  //         spanRegion: spanRegion,
-  //         imgMovie: movieChooseMovieTheater.imgUrl,
-  //         room: this.room
-  //       };
-
-  //       this.router.navigate(['/itens-about-movie'], { state: { objectForOrderSummary } });
-  //     }
-  //   }
-  // }
-
   onClickExitSvg(){
     if(typeof document !== "undefined"){
       document.body.style.overflow = "auto";
@@ -456,8 +397,5 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
     if(this.timeoutId){
       clearTimeout(this.timeoutId);
     }
-    // if(localStorage){
-    //   localStorage.removeItem('reloaded');
-    // }
   }
 }
