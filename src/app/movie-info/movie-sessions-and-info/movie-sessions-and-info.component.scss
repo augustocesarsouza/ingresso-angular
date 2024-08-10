@@ -1,0 +1,37 @@
+:host {
+  display: block;
+}
+
+.container-sessions-about-the-movie {
+  display: flex;
+  border-bottom: 2px  solid rgba(92, 92, 92, 0.671);
+  width: 74%;
+}
+
+.container-span-session-about {
+  color: #fff;
+  display: flex;
+}
+
+.container-span-session-about > span {
+  padding: 10px 20px;
+}
+
+.span-sessions {
+  border-bottom: 4px solid rgb(50, 85, 226);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.span-about-the-movie {
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,29 @@
+<div class="container-day-and-day-weak-and-movie-theater-types">
+  <div class="container-date-movie-theater">
+    <div class="container-date" *ngFor="let item of next7Days; let i = index">
+      <span>{{ item.dayYear }}</span>
+      <span>{{ item.weekDay }}</span>
+    </div>
+  </div>
+
+  <div class="container-movie-theater-types-and-svg-loupe">
+    <div class="container-loupe-svg">
+      <app-svg-loupe-movie-theater
+        width="28px"
+        height="28px"
+        fill="rgb(152, 170, 236)"
+      ></app-svg-loupe-movie-theater>
+    </div>
+    <div class="container-test">
+      <div class="container-movie-theater-types">
+        <div
+          class="container-type"
+          *ngFor="let item of arrayWhichTypeOfMovieTheaterHave"
+          (click)="onClickContainerType(item)"
+        >
+          {{ item }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

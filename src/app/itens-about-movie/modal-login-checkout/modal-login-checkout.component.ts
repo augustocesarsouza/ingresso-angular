@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Data, ErrorObj } from '../../login-and-register-user/login-user/login-user.component';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -6,21 +6,22 @@ import { LoginUserService } from '../../login-and-register-user/login-user.servi
 import { UserService } from '../service/user.service';
 import { DataService } from '../../login-and-register-user/data.service';
 import { CheckIfInfoUserAlreadyExsitsService } from '../service/check-if-info-user-already-exsits.service';
+import { ColorsForSpan } from '../enum/colors-for-span';
 
 interface CheckExistsEmail {
   userExists: boolean;
 }
 
-interface CheckExistsCpf {
-  cpfExists: boolean;
-}
+// interface CheckExistsCpf {
+//   cpfExists: boolean;
+// }
 
 @Component({
   selector: 'app-modal-login-checkout',
   templateUrl: './modal-login-checkout.component.html',
   styleUrl: './modal-login-checkout.component.scss'
 })
-export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
+export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() funcionCloseModal!: () => void;
   @Input() funcionaCodeConfirmedForTheUser!: (value: boolean) => void;
   subscriptions: Subscription[] = [];
@@ -29,7 +30,7 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
   // inputValuePassword = "";
   errorInputEmailOrCpfNotHaveValueRight = false;
   showLoadingCicle = false;
-  showLoadingCicleToCreateAccount = false;
+  // showLoadingCicleToCreateAccount = false;
   showLoadingCicleToCreateAccountCheckout = false;
   cpfNotExist = false;
   showStep2CreateAccount = false;
@@ -65,10 +66,10 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
   settimeOutInputPassword: any;
   timeoutErrorLoginUser: any;
 
-  colorBorderGreen = "rgb(0, 204, 0)";
-  colorBorderBlue = "#2196F3";
-  colorBorderRed = "rgb(233, 74, 38)";
-  colorBorderGrey = "rgb(217, 217, 217)";
+  colorBorderGreen = ColorsForSpan.colorBorderGreen;
+  colorBorderBlue = ColorsForSpan.colorBorderBlue;
+  colorBorderRed = ColorsForSpan.colorBorderRed;
+  colorBorderGrey = ColorsForSpan.colorBorderGrey;
 
   @ViewChildren('input0, input1, input2, input3, input4, input5') inputs!: QueryList<ElementRef>;
   userLogin!: Data | null;
@@ -78,9 +79,9 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
   showModalForLogin = false;
   tokenEmailSendToEmail = false;
 
-  spanNomeErrorCreateNewAccount = false;
-  spanPhoneErrorCreateNewAccount = false;
-  spanCpfErrorCreateNewAccount = false;
+  // spanNomeErrorCreateNewAccount = false;
+  // spanPhoneErrorCreateNewAccount = false;
+  // spanCpfErrorCreateNewAccount = false;
 
   valueNomeInput = "";
   valuePhoneInput = "";
@@ -99,6 +100,21 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
 
   constructor(private router: Router, private loginUserService: LoginUserService, private UserService: UserService, private dataService: DataService,
     private check_if_info_user_already_exsits_service: CheckIfInfoUserAlreadyExsitsService, private login_user_service: LoginUserService){
+  }
+
+  ngOnInit(): void {
+    this.onClickContainerSvgArrowPayment = this.onClickContainerSvgArrowPayment.bind(this);
+    this.onClickContainerSvgArrowTroubleLogging = this.onClickContainerSvgArrowTroubleLogging.bind(this);
+    this.onClickContainerSvgArrowCreateAccount = this.onClickContainerSvgArrowCreateAccount.bind(this);
+    this.onClickContainerSvgArrowStep2CreateAccount = this.onClickContainerSvgArrowStep2CreateAccount.bind(this);
+    this.changeValueShowStep2CreateAccount = this.changeValueShowStep2CreateAccount.bind(this);
+    this.changeValueClickCreateNewAccount = this.changeValueClickCreateNewAccount.bind(this);
+
+    this.changeValueValueNomeInput = this.changeValueValueNomeInput.bind(this);
+    this.changeValueValuePhoneInput = this.changeValueValuePhoneInput.bind(this);
+    this.changeValueValuePhoneInputToSave = this.changeValueValuePhoneInputToSave.bind(this);
+    this.changeValueValueCpfInput = this.changeValueValueCpfInput.bind(this);
+    this.changeValueValurCpfInput = this.changeValueValurCpfInput.bind(this);
   }
 
   onInput(event: Event, index: number) {
@@ -240,43 +256,36 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  onClickInputCreateAccount(inputCpfOrEmail: HTMLInputElement, spanNomeCreateNewAccount: HTMLSpanElement, containerInputNomeCreateNewAccount: HTMLDivElement,
-    containerInputPhoneCreateNewAccount: HTMLDivElement, containerInputCpfCreateNewAccount: HTMLDivElement
-  ){
-    this.spanNomeErrorCreateNewAccount = false;
-    this.spanPhoneErrorCreateNewAccount = false;
-    this.spanCpfErrorCreateNewAccount = false;
-
-    containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderGrey;
-    containerInputPhoneCreateNewAccount.style.borderColor = this.colorBorderGrey;
-    containerInputCpfCreateNewAccount.style.borderColor = this.colorBorderGrey;
-
-    if(spanNomeCreateNewAccount){
-      spanNomeCreateNewAccount.style.display = 'block';
-
-      containerInputNomeCreateNewAccount.style.padding = '2px 5px';
-
-      containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderBlue;
-
-      // if(containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderGreen && containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderRed){
-      //   containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderBlue;
-      // }
-    }
+  changeValueShowStep2CreateAccount(value: boolean){
+    this.showStep2CreateAccount = value;
   }
 
-  onBlurInputCreateAccount(input: HTMLInputElement, spanNomeCreateNewAccount: HTMLSpanElement, containerInputNomeCreateNewAccount: HTMLDivElement){
-    let valueInput = input.value;
+  changeValueClickCreateNewAccount(value: boolean){
+    this.clickCreateNewAccount = value;
+  }
 
-    if(spanNomeCreateNewAccount){
-      if(valueInput.length <= 0 || valueInput.replace(/[_\.\-\(\)]/g, '').length <= 0){
-        spanNomeCreateNewAccount.style.display = 'none';
-        containerInputNomeCreateNewAccount.style.padding = '10px 5px';
-      }
+  changeValueValueNomeInput(value: string){
+    this.valueNomeInput = value;
+  }
 
-      if(containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderGreen && containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderRed){
-        containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderGrey;
-      }
-    }
+  changeValueValuePhoneInput(value: string){
+    this.valuePhoneInput = value;
+  }
+
+  changeValueValuePhoneInputToSave(value: string){
+    this.valuePhoneInputToSave = value;
+  }
+
+  changeValueValueCpfInput(value: string){
+    this.valueCpfInput = value;
+  }
+
+  changeValueValurCpfInput(value: string){
+    this.valurCpfInput = value;
+  }
+
+  changeValueCpfNotExist(value: boolean){
+    this.cpfNotExist = value;
   }
 
   onInputConfirmationEmail(event: Event, containerInputConfirmationEmailCreateNewAccount: HTMLDivElement) {
@@ -321,108 +330,6 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
         containerInputConfirmationEmailCreateNewAccount.style.borderColor = this.colorBorderGrey;
       }
     }
-  }
-
-  onInputNameCreateAccount(event: Event, containerInputCreateNewAccount: HTMLDivElement) {
-    let input = event.target as HTMLInputElement;
-
-    this.valueNomeInput = input.value;
-  }
-
-  onInputCpfCreateAccount(event: Event, containerInputCreateNewAccount: HTMLDivElement) {
-    let input = event.target as HTMLInputElement;
-    let valurInputCpf = input.value;
-
-    this.valueCpfInput = valurInputCpf;
-
-    if(valurInputCpf.length <= 0){
-      this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
-    }
-  }
-
-  onInputPhoneCreateAccount(event: Event, containerInputCreateNewAccount: HTMLDivElement) {
-    let input = event.target as HTMLInputElement;
-    let valurInputPhone = input.value;
-
-    this.valuePhoneInput = valurInputPhone;
-
-    if(valurInputPhone.length <= 0){
-      this.containerMainSvgInput.style.borderColor = this.colorBorderGrey;
-    }
-  }
-
-  podeMandarParaBackandTestarCpf = false;
-
-  onClickContinueCreateAccount(buttonContinueCreateAccount: HTMLButtonElement, inputNomeCreateNewAccount: HTMLInputElement, inputCpfCreateNewAccount: HTMLInputElement,
-    inputPhoneCreateNewAccount: HTMLInputElement, containerInputNomeCreateNewAccount:HTMLDivElement, containerInputPhoneCreateNewAccount: HTMLDivElement,
-    containerInputCpfCreateNewAccount: HTMLDivElement){
-
-    let valueNomeInput = inputNomeCreateNewAccount.value;
-    let valuePhoneInput = inputPhoneCreateNewAccount.value;
-    let valurCpfInput = inputCpfCreateNewAccount.value;
-
-    let regex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-    if(!regex.test(valurCpfInput)){
-      containerInputCpfCreateNewAccount.style.borderColor = this.colorBorderRed;
-      this.spanCpfErrorCreateNewAccount = true;
-      this.podeMandarParaBackandTestarCpf = false;
-    }
-
-    if(valuePhoneInput.replace(/[_\.\-\(\)]/g, '').length < 11){
-      containerInputPhoneCreateNewAccount.style.borderColor = this.colorBorderRed;
-      this.spanPhoneErrorCreateNewAccount = true;
-      this.podeMandarParaBackandTestarCpf = false;
-    }
-
-    if(valueNomeInput.length < 3 || valueNomeInput.includes("@")){
-      containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderRed;
-      this.spanNomeErrorCreateNewAccount = true;
-      this.podeMandarParaBackandTestarCpf = false;
-    }
-
-    if(regex.test(valurCpfInput) && valuePhoneInput.replace(/[_\.\-\(\)]/g, '').length >= 11 && valueNomeInput.length >= 3 && !valueNomeInput.includes("@")){
-      this.podeMandarParaBackandTestarCpf = true;
-    }
-
-    if(!this.podeMandarParaBackandTestarCpf) return;
-    if(this.showLoadingCicleToCreateAccount === true) return;
-
-    this.valueNomeInput = valueNomeInput;
-    this.valuePhoneInput = valuePhoneInput;
-    this.valuePhoneInputToSave = valuePhoneInput;
-    this.valurCpfInput = valurCpfInput;
-
-    this.showLoadingCicleToCreateAccount = true;
-    buttonContinueCreateAccount.style.backgroundImage = "linear-gradient(to left, rgb(102, 102, 102), rgb(102, 102, 102))";
-    buttonContinueCreateAccount.style.color = "rgb(0 0 0)";
-
-    clearTimeout(this.settimeOutLoadingCicle);
-    clearTimeout(this.settimeOutSpanCpfNotExist);
-
-    this.subscriptions.push(this.check_if_info_user_already_exsits_service.checkIfCpfAlreadyExists(valurCpfInput).subscribe((data: any) => {
-      this.settimeOutLoadingCicle = setTimeout(() => {
-        let result: CheckExistsCpf = data.data;
-        console.log(result);
-
-        this.showLoadingCicleToCreateAccount = false;
-        this.cpfNotExist = result.cpfExists;
-
-        if(result.cpfExists){
-          this.settimeOutSpanCpfNotExist = setTimeout(() => {
-            this.cpfNotExist = false;
-          }, 3000);
-        }
-
-        if(!result.cpfExists){
-          this.showStep2CreateAccount = !result.cpfExists;
-          containerInputCpfCreateNewAccount.style.borderColor = this.colorBorderGreen;
-          this.clickCreateNewAccount = false;
-        }
-
-        buttonContinueCreateAccount.style.backgroundImage = "linear-gradient(to left, #6c04ba, #3255e2)";
-        buttonContinueCreateAccount.style.color = "rgb(255, 255, 255)";
-      }, 2000);
-    }));
   }
 
   onClickContinue(){
@@ -584,6 +491,7 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
     this.updateProperties();
 
     clearTimeout(this.settimeOutAnyColor);
+
     this.settimeOutAnyColor = setTimeout(() => {
       if(this.containerMainSvgInput){
         this.containerMainSvgInput.style.borderColor = this.colorBorderGreen;
@@ -895,6 +803,12 @@ export class ModalLoginCheckoutComponent implements AfterViewInit, OnDestroy {
         this.userLogin = dataUser; // - aqui tem que ter o "ID" que acabou de criar do usuario
         this.codeSendForEmailCreateAccount = dataUser.emailSendSuccessfully;
       });
+    }else {
+      setTimeout(() => {
+        this.showLoadingCicleToCreateAccountCheckout = false;
+        buttonCreateAccountCheckout.style.backgroundImage = "linear-gradient(to left, #6c04ba, #3255e2)";
+        buttonCreateAccountCheckout.style.color = "rgb(255, 255, 255)";
+      }, 3000);
     }
   }
 

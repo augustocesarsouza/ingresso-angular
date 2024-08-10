@@ -1,0 +1,34 @@
+.container-svg-ingresso-and-title {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.container-svg-ingresso-i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  border: none;
+  padding: 0;
+  margin-bottom: 40px;
+}
+
+.modal-header > h5 {
+  font-size: 16px;
+  text-align: center;
+  line-height: 1.4;
+  width: 245px;
+}
+
+.container-svg-arrow-payment {
+  display: flex;
+  cursor: pointer;
+}
+
