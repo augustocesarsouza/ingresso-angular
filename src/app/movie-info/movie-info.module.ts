@@ -14,6 +14,7 @@ import { MovieLocationHoursNormalComponent } from './movie-location-hours-normal
 import { MovieLocationHoursFilteredComponent } from './movie-location-hours-filtered/movie-location-hours-filtered.component';
 import { ModalDetailsAboutMovieTheaterComponent } from './modal-details-about-movie-theater/modal-details-about-movie-theater.component';
 import { MovieInfoAboutMovieComponent } from './movie-info-about-movie/movie-info-about-movie.component';
+import { MovieInfoLocationAndScheduleHourComponent } from './movie-info-location-and-schedule-hour/movie-info-location-and-schedule-hour.component';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { MovieInfoAboutMovieComponent } from './movie-info-about-movie/movie-inf
         MovieLocationHoursFilteredComponent,
         ModalDetailsAboutMovieTheaterComponent,
         MovieInfoAboutMovieComponent,
+        MovieInfoLocationAndScheduleHourComponent,
     ],
     imports: [
         CommonModule,
