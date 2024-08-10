@@ -7,79 +7,24 @@
       height="100%"
       fill="#03A9F4"
     ></app-svg-exit>
-    <div class="container-svg-ingresso-and-title">
-      <app-svg-ingresso-i class="container-svg-ingresso-i"></app-svg-ingresso-i>
-      <div class="modal-header" *ngIf="showInsertCpfOrEmail">
-        <h5 class="modal-title" id="exampleModalLabel">
-          Insira seu CPF ou e-mail para continuar a compra
-        </h5>
-      </div>
-      <div class="modal-header" *ngIf="!AccountExist && alreadyClickedContinue">
-        <app-svg-arrow-payment
-          width="22px"
-          height="22px"
-          fill="rgb(152, 170, 236)"
-          rotate="270"
-          class="container-svg-arrow-payment"
-          (click)="onClickContainerSvgArrowPayment()"
-        ></app-svg-arrow-payment>
-        <h5 class="modal-title" id="exampleModalLabel">
-          Você ainda não tem conta. Entre sem cadastro ou crie uma conta
-        </h5>
-      </div>
-      <div class="modal-header" *ngIf="AccountExist && alreadyClickedContinue">
-        <app-svg-arrow-payment
-          width="22px"
-          height="22px"
-          fill="rgb(152, 170, 236)"
-          rotate="270"
-          class="container-svg-arrow-payment"
-          (click)="onClickContainerSvgArrowPayment()"
-        ></app-svg-arrow-payment>
-        <h5 class="modal-title" id="exampleModalLabel">
-          Faça login com sua conta Ingresso ou entre sem cadastro
-        </h5>
-      </div>
-      <div class="modal-header" *ngIf="clickTroubleLoggingIn">
-        <app-svg-arrow-payment
-          width="22px"
-          height="22px"
-          fill="rgb(152, 170, 236)"
-          rotate="270"
-          class="container-svg-arrow-payment"
-          (click)="onClickContainerSvgArrowTroubleLogging()"
-        ></app-svg-arrow-payment>
-        <h5 class="modal-title" id="exampleModalLabel">
-          Problemas para entrar
-        </h5>
-      </div>
-      <div class="modal-header" *ngIf="clickCreateNewAccount">
-        <app-svg-arrow-payment
-          width="22px"
-          height="22px"
-          fill="rgb(152, 170, 236)"
-          rotate="270"
-          class="container-svg-arrow-payment"
-          (click)="onClickContainerSvgArrowCreateAccount()"
-        ></app-svg-arrow-payment>
-        <h5 class="modal-title" id="exampleModalLabel">
-          Crie uma conta em 2 passos
-        </h5>
-      </div>
-      <div class="modal-header" *ngIf="showStep2CreateAccount">
-        <app-svg-arrow-payment
-          width="22px"
-          height="22px"
-          fill="rgb(152, 170, 236)"
-          rotate="270"
-          class="container-svg-arrow-payment"
-          (click)="onClickContainerSvgArrowStep2CreateAccount()"
-        ></app-svg-arrow-payment>
-        <h5 class="modal-title" id="exampleModalLabel">
-          Crie uma conta em 2 passos
-        </h5>
-      </div>
-    </div>
+    <app-header-part-to-checkout-login
+      [showInsertCpfOrEmail]="showInsertCpfOrEmail"
+      [AccountExist]="AccountExist"
+      [alreadyClickedContinue]="alreadyClickedContinue"
+      [clickTroubleLoggingIn]="clickTroubleLoggingIn"
+      [clickCreateNewAccount]="clickCreateNewAccount"
+      [showStep2CreateAccount]="showStep2CreateAccount"
+      [onClickContainerSvgArrowPayment]="onClickContainerSvgArrowPayment"
+      [onClickContainerSvgArrowTroubleLogging]="
+        onClickContainerSvgArrowTroubleLogging
+      "
+      [onClickContainerSvgArrowCreateAccount]="
+        onClickContainerSvgArrowCreateAccount
+      "
+      [onClickContainerSvgArrowStep2CreateAccount]="
+        onClickContainerSvgArrowStep2CreateAccount
+      "
+    ></app-header-part-to-checkout-login>
     <div class="container-input-and-button-continue">
       <div class="container-cpf-or-email" *ngIf="showInsertCpfOrEmail">
         <div class="container-svg-user">
@@ -268,200 +213,21 @@
         </div>
       </div>
 
-      <div
-        class="container-step-1-for-create-account"
+      <app-step-1-to-create-new-account
         *ngIf="clickCreateNewAccount"
-      >
-        <div class="container-input-phone-and-span-warning">
-          <div
-            class="container-info-input-create-account"
-            #containerInputNomeCreateNewAccount
-          >
-            <span #spanNomeCreateNewAccount>*Nome</span>
-            <input
-              type="text"
-              placeholder="*Nome"
-              #inputNomeCreateNewAccount
-              [value]="valueNomeInput"
-              class="input-name-create-account"
-              (input)="
-                onInputNameCreateAccount(
-                  $event,
-                  containerInputCpfCreateNewAccount
-                )
-              "
-              (click)="
-                onClickInputCreateAccount(
-                  inputNomeCreateNewAccount,
-                  spanNomeCreateNewAccount,
-                  containerInputNomeCreateNewAccount,
-                  containerInputPhoneCreateNewAccount,
-                  containerInputCpfCreateNewAccount
-                )
-              "
-              (blur)="
-                onBlurInputCreateAccount(
-                  inputNomeCreateNewAccount,
-                  spanNomeCreateNewAccount,
-                  containerInputNomeCreateNewAccount
-                )
-              "
-            />
-          </div>
-          <div
-            class="container-info-about-error-input"
-            *ngIf="spanNomeErrorCreateNewAccount"
-          >
-            <app-svg-exclamation-mark
-              width="16px"
-              height="16px"
-              fill="rgb(255, 90, 80)"
-              class="container-svg-exclamation-mark"
-            ></app-svg-exclamation-mark>
-            <span
-              >O nome precisa ter entre 3 e 60 caracteres e não possuir
-              caracteres especiais</span
-            >
-          </div>
-        </div>
-        <div class="container-input-phone-and-span-warning">
-          <div
-            class="container-info-input-create-account"
-            #containerInputCpfCreateNewAccount
-          >
-            <span #spanCpfCreateNewAccount>*CPF</span>
-            <input
-              type="text"
-              placeholder="*CPF"
-              #inputCpfCreateNewAccount
-              [value]="valurCpfInput"
-              id="input-cpf-create-account"
-              (input)="
-                onInputCpfCreateAccount(
-                  $event,
-                  containerInputCpfCreateNewAccount
-                )
-              "
-              (click)="
-                onClickInputCreateAccount(
-                  inputCpfCreateNewAccount,
-                  spanCpfCreateNewAccount,
-                  containerInputCpfCreateNewAccount,
-                  containerInputNomeCreateNewAccount,
-                  containerInputPhoneCreateNewAccount
-                )
-              "
-              (blur)="
-                onBlurInputCreateAccount(
-                  inputCpfCreateNewAccount,
-                  spanCpfCreateNewAccount,
-                  containerInputCpfCreateNewAccount
-                )
-              "
-            />
-          </div>
-
-          <div
-            class="container-info-about-error-input"
-            *ngIf="spanCpfErrorCreateNewAccount"
-          >
-            <app-svg-exclamation-mark
-              width="16px"
-              height="16px"
-              fill="rgb(255, 90, 80)"
-              class="container-svg-exclamation-mark"
-            ></app-svg-exclamation-mark>
-            <span>O campo CPF é obrigatório.</span>
-          </div>
-        </div>
-        <div class="container-input-phone-and-span-warning">
-          <div
-            class="container-info-input-create-account"
-            #containerInputPhoneCreateNewAccount
-          >
-            <span #spanPhoneCreateNewAccount>*Celular</span>
-            <input
-              type="text"
-              placeholder="*Celular"
-              #inputPhoneCreateNewAccount
-              [value]="valuePhoneInputToSave"
-              id="input-phone-create-account"
-              (input)="
-                onInputPhoneCreateAccount(
-                  $event,
-                  containerInputPhoneCreateNewAccount
-                )
-              "
-              (click)="
-                onClickInputCreateAccount(
-                  inputPhoneCreateNewAccount,
-                  spanPhoneCreateNewAccount,
-                  containerInputPhoneCreateNewAccount,
-                  containerInputNomeCreateNewAccount,
-                  containerInputCpfCreateNewAccount
-                )
-              "
-              (blur)="
-                onBlurInputCreateAccount(
-                  inputPhoneCreateNewAccount,
-                  spanPhoneCreateNewAccount,
-                  containerInputPhoneCreateNewAccount
-                )
-              "
-            />
-          </div>
-          <div
-            class="container-info-about-error-input"
-            *ngIf="spanPhoneErrorCreateNewAccount"
-          >
-            <app-svg-exclamation-mark
-              width="16px"
-              height="16px"
-              fill="rgb(255, 90, 80)"
-              class="container-svg-exclamation-mark"
-            ></app-svg-exclamation-mark>
-            <span>Insira um número válido.</span>
-          </div>
-        </div>
-        <span class="span-info-create-account"
-          >Ao continuar, aceito os
-          <span class="span-service">Termos de Uso</span> e
-          <span class="span-service">Política de Privacidade.</span></span
-        >
-        <span
-          class="span-check-if-cpf-already-exist"
-          *ngIf="showLoadingCicleToCreateAccount"
-          >Verificando se o CPF já existe...</span
-        >
-        <span class="span-check-if-cpf-already-exist" *ngIf="cpfNotExist"
-          >CPF já cadastrado.</span
-        >
-        <div class="modal-footer">
-          <div
-            class="container-cicle-loading"
-            *ngIf="showLoadingCicleToCreateAccount"
-          >
-            <div class="cicle-loading"></div>
-          </div>
-          <button
-            class="button-continue-create-account"
-            #buttonContinueCreateAccount
-            (click)="
-              onClickContinueCreateAccount(
-                buttonContinueCreateAccount,
-                inputNomeCreateNewAccount,
-                inputCpfCreateNewAccount,
-                inputPhoneCreateNewAccount,
-                containerInputNomeCreateNewAccount,
-                containerInputPhoneCreateNewAccount,
-                containerInputCpfCreateNewAccount
-              )
-            "
-          >
-            CONTINUAR
-          </button>
-        </div>
-      </div>
+        [valueNomeInput]="valueNomeInput"
+        [valuePhoneInputToSave]="valuePhoneInputToSave"
+        [changeValueValueNomeInput]="changeValueValueNomeInput"
+        [changeValueValuePhoneInput]="changeValueValuePhoneInput"
+        [changeValueValuePhoneInputToSave]="changeValueValuePhoneInputToSave"
+        [changeValueValueCpfInput]="changeValueValueCpfInput"
+        [changeValueValurCpfInput]="changeValueValurCpfInput"
+        [changeValueShowStep2CreateAccount]="changeValueShowStep2CreateAccount"
+        [changeValueClickCreateNewAccount]="changeValueClickCreateNewAccount"
+        [changeValueCpfNotExist]="changeValueCpfNotExist"
+        [cpfNotExist]="cpfNotExist"
+        [valurCpfInput]="valurCpfInput"
+      ></app-step-1-to-create-new-account>
 
       <div
         class="container-step-2-for-create-account"

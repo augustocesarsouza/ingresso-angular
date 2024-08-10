@@ -1,0 +1,69 @@
+<div class="container-svg-ingresso-and-title">
+  <app-svg-ingresso-i class="container-svg-ingresso-i"></app-svg-ingresso-i>
+  <div class="modal-header" *ngIf="showInsertCpfOrEmail">
+    <h5 id="exampleModalLabel">
+      Insira seu CPF ou e-mail para continuar a compra
+    </h5>
+  </div>
+  <div class="modal-header" *ngIf="!AccountExist && alreadyClickedContinue">
+    <app-svg-arrow-payment
+      width="22px"
+      height="22px"
+      fill="rgb(152, 170, 236)"
+      rotate="270"
+      class="container-svg-arrow-payment"
+      (click)="onClickContainerSvgArrowPayment()"
+    ></app-svg-arrow-payment>
+    <h5 id="exampleModalLabel">
+      Você ainda não tem conta. Entre sem cadastro ou crie uma conta
+    </h5>
+  </div>
+  <div class="modal-header" *ngIf="AccountExist && alreadyClickedContinue">
+    <app-svg-arrow-payment
+      width="22px"
+      height="22px"
+      fill="rgb(152, 170, 236)"
+      rotate="270"
+      class="container-svg-arrow-payment"
+      (click)="onClickContainerSvgArrowPayment()"
+    ></app-svg-arrow-payment>
+    <h5 id="exampleModalLabel">
+      Faça login com sua conta Ingresso ou entre sem cadastro
+    </h5>
+  </div>
+  <div class="modal-header" *ngIf="clickTroubleLoggingIn">
+    <app-svg-arrow-payment
+      width="22px"
+      height="22px"
+      fill="rgb(152, 170, 236)"
+      rotate="270"
+      class="container-svg-arrow-payment"
+      (click)="onClickContainerSvgArrowTroubleLogging()"
+    ></app-svg-arrow-payment>
+    <h5 id="exampleModalLabel">Problemas para entrar</h5>
+  </div>
+  <div
+    class="modal-header"
+    *ngIf="clickCreateNewAccount || showStep2CreateAccount"
+  >
+    <app-svg-arrow-payment
+      width="22px"
+      height="22px"
+      fill="rgb(152, 170, 236)"
+      rotate="270"
+      *ngIf="clickCreateNewAccount"
+      class="container-svg-arrow-payment"
+      (click)="onClickContainerSvgArrowCreateAccount()"
+    ></app-svg-arrow-payment>
+    <app-svg-arrow-payment
+      width="22px"
+      height="22px"
+      fill="rgb(152, 170, 236)"
+      rotate="270"
+      *ngIf="showStep2CreateAccount"
+      class="container-svg-arrow-payment"
+      (click)="onClickContainerSvgArrowStep2CreateAccount()"
+    ></app-svg-arrow-payment>
+    <h5 id="exampleModalLabel">Crie uma conta em 2 passos</h5>
+  </div>
+</div>

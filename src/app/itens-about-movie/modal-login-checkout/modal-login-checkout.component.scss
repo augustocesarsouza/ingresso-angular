@@ -33,39 +33,39 @@
   cursor: pointer;
 }
 
-.container-svg-ingresso-and-title {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+// .container-svg-ingresso-and-title {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 20px;
+// }
 
-.container-svg-ingresso-i {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 24px;
-}
+// .container-svg-ingresso-i {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   margin-top: 24px;
+// }
 
-.modal-header {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  border: none;
-  padding: 0;
-  margin-bottom: 40px;
-}
+// .modal-header {
+//   display: flex;
+//   justify-content: center;
+//   align-items: flex-start;
+//   border: none;
+//   padding: 0;
+//   margin-bottom: 40px;
+// }
 
-.modal-header > h5 {
-  font-size: 16px;
-  text-align: center;
-  line-height: 1.4;
-  width: 245px;
-}
+// .modal-header > h5 {
+//   font-size: 16px;
+//   text-align: center;
+//   line-height: 1.4;
+//   width: 245px;
+// }
 
-.container-svg-arrow-payment {
-  display: flex;
-  cursor: pointer;
-}
+// .container-svg-arrow-payment {
+//   display: flex;
+//   cursor: pointer;
+// }
 
 .container-input-password-and-span-problems {
   display: flex;
@@ -786,17 +786,17 @@
   cursor: pointer;
 }
 
-.container-step-1-for-create-account {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
+// .container-step-1-for-create-account {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 7px;
+// }
 
-.container-input-phone-and-span-warning {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
+// .container-input-phone-and-span-warning {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 3px;
+// }
 
 .container-step-2-for-create-account {
   display: flex;
@@ -888,30 +888,30 @@
   margin-bottom: 7px;
 }
 
-.span-check-if-cpf-already-exist {
-  font-size: 14px;
-  line-height: 1.2;
-  color: rgb(207 65 65);
-  margin-bottom: 10px;
-}
+// .span-check-if-cpf-already-exist {
+//   font-size: 14px;
+//   line-height: 1.2;
+//   color: rgb(207 65 65);
+//   margin-bottom: 10px;
+// }
 
-.button-continue-create-account {
-  width: 100%;
-  margin: 0;
-  background-image: linear-gradient(to left,#6c04ba, #3255e2);
-  color: rgb(255, 255, 255);
-  border: none;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 0;
-  height: 48px;
-  border-radius: 10px;
+// .button-continue-create-account {
+//   width: 100%;
+//   margin: 0;
+//   background-image: linear-gradient(to left,#6c04ba, #3255e2);
+//   color: rgb(255, 255, 255);
+//   border: none;
+//   font-size: 14px;
+//   font-weight: 600;
+//   padding: 0;
+//   height: 48px;
+//   border-radius: 10px;
 
-  &:hover {
-    background-image: linear-gradient(to left,#591091, #162f94);
-    color: #ffffffa2;
-  }
-}
+//   &:hover {
+//     background-image: linear-gradient(to left,#591091, #162f94);
+//     color: #ffffffa2;
+//   }
+// }
 
 .container-password-requirement {
   line-height: 1.3;

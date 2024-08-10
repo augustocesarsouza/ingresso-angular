@@ -22,6 +22,8 @@ import { CouponGiftCardComponent } from './payment/coupon-gift-card/coupon-gift-
 import { InfoAboutCardComponent } from './payment/info-about-card/info-about-card.component';
 import { GooglePayButtonModule } from '@google-pay/button-angular';
 import { ModalLoginCheckoutComponent } from './modal-login-checkout/modal-login-checkout.component';
+import { HeaderPartToCheckoutLoginComponent } from './header-part-to-checkout-login/header-part-to-checkout-login.component';
+import { Step1ToCreateNewAccountComponent } from './step-1-to-create-new-account/step-1-to-create-new-account.component';
 
 
 @NgModule({
@@ -43,6 +45,8 @@ import { ModalLoginCheckoutComponent } from './modal-login-checkout/modal-login-
     CouponGiftCardComponent,
     InfoAboutCardComponent,
     ModalLoginCheckoutComponent,
+    HeaderPartToCheckoutLoginComponent,
+    Step1ToCreateNewAccountComponent,
   ],
   imports: [
     CommonModule,
