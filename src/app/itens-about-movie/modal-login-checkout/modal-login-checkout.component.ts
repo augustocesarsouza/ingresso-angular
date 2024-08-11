@@ -41,7 +41,7 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
   showInputEmailUser = false;
   EyeCutSvgOrEyeOpen = true;
 
-  valueForEmailChooseForUser = "tuinmoto7@gmail.com";
+  valueForEmailChooseForUser = "augustocesarsantana90@gmail.com";
   valueForCpfChooseForUser = "";
 
   containerMainSvgInput!: HTMLElement;
@@ -84,11 +84,12 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
 
   @ViewChildren('inputCreate0, inputCreate1, inputCreate2, inputCreate3, inputCreate4, inputCreate5') inputsCreateAccount!: QueryList<ElementRef>;
   confirmationEmailNotSameEmail = true;
-  codeSendForEmailCreateAccount = false;
+  onClickTroubleLoggingIncodeSendForEmailCreateAccount = false;
   codeSendToEmailLoginAccount = false;
   inputNotAllHasValueCreateAccount = false;
   codeSentToEmail = false;
   showModalToUrlSentToEmail = false;
+  codeSendForEmailCreateAccount = false;
 
   constructor(private router: Router, private loginUserService: LoginUserService, private UserService: UserService, private dataService: DataService,
     private check_if_info_user_already_exsits_service: CheckIfInfoUserAlreadyExsitsService, private login_user_service: LoginUserService){
@@ -178,7 +179,7 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
 
     this.settimeOutAny = setTimeout(() => {
       this.inputPassword = document.querySelector('.input-password-send-code') as HTMLInputElement;
-    });
+    }, 50);
   }
 
   onClickCloseEnterUser(){
@@ -250,6 +251,18 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
     }
   }
 
+  onClickInputCpfOrEmailTroubleLoggingIn(){
+  }
+
+  onInputCpfEmailTroubleLoggingIn(event: Event) {
+    let input = event.target as HTMLInputElement;
+    this.inputValueEmailOrCpf = input.value;
+  }
+
+  onBlurInputCpfOrEmailTroubleLoggingIn(){
+
+  }
+
   changeValueShowStep2CreateAccount(value: boolean){
     this.showStep2CreateAccount = value;
   }
@@ -288,6 +301,10 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
 
   changeValueCodeSendForEmailCreateAccount(value: boolean){
     this.codeSendForEmailCreateAccount = value;
+  }
+
+  changeValueValueForEmailChooseForUser(value: string){
+    this.valueForEmailChooseForUser = value;
   }
 
   onClickContinue(){
@@ -481,9 +498,9 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
           this.userLogin = user;
           this.codeSendToEmailLoginAccount = user.codeSentSuccessfullyEmail;
 
-          if(user.confirmEmail){
-            this.codeSendForEmailConfirmedLogin = true;
-          }
+          // if(user.confirmEmail){
+          //   this.codeSendForEmailConfirmedLogin = true;
+          // }
         }
       },
       error: error => {
@@ -513,7 +530,6 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
 
   onClickContinueConfirmEmailEmail(){
     this.showModalToUrlSentToEmail = false;
-
   }
 
   onClickSvgExitConfirmEmailEmail(){
@@ -560,10 +576,13 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
 
   onClickSvgExitCodeEmail(){
     this.codeSendForEmailConfirmedLogin = !this.codeSendForEmailConfirmedLogin;
+
   }
 
   onClickSvgExitCodeEmailCreateAccount(){
-    this.codeSendForEmailCreateAccount = !this.codeSendForEmailCreateAccount;
+    this.codeSendForEmailConfirmedLogin = false;
+    this.codeSendForEmailCreateAccount = false;
+    this.codeSendToEmailLoginAccount = false;
   }
 
   onInputCreateAccount(event: Event, index: number) {

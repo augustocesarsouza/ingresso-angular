@@ -345,6 +345,7 @@
   border: none;
   padding: 0;
   position: relative;
+  margin-top: 15px;
 }
 
 .modal-footer > button {
@@ -397,7 +398,7 @@
 }
 
 
-.container-modal-confirmed-code-send-email {//
+.container-modal-confirmed-code-send-email {
   display: flex;
   align-items: center;
   justify-content: center;
