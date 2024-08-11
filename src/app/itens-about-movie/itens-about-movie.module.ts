@@ -24,6 +24,7 @@ import { GooglePayButtonModule } from '@google-pay/button-angular';
 import { ModalLoginCheckoutComponent } from './modal-login-checkout/modal-login-checkout.component';
 import { HeaderPartToCheckoutLoginComponent } from './header-part-to-checkout-login/header-part-to-checkout-login.component';
 import { Step1ToCreateNewAccountComponent } from './step-1-to-create-new-account/step-1-to-create-new-account.component';
+import { Step2ToCreateNewAccountComponent } from './step-2-to-create-new-account/step-2-to-create-new-account.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { Step1ToCreateNewAccountComponent } from './step-1-to-create-new-account
     ModalLoginCheckoutComponent,
     HeaderPartToCheckoutLoginComponent,
     Step1ToCreateNewAccountComponent,
+    Step2ToCreateNewAccountComponent,
   ],
   imports: [
     CommonModule,

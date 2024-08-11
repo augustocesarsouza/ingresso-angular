@@ -30,8 +30,6 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
   // inputValuePassword = "";
   errorInputEmailOrCpfNotHaveValueRight = false;
   showLoadingCicle = false;
-  // showLoadingCicleToCreateAccount = false;
-  showLoadingCicleToCreateAccountCheckout = false;
   cpfNotExist = false;
   showStep2CreateAccount = false;
 
@@ -42,9 +40,8 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
   showInsertCpfOrEmail = true;
   showInputEmailUser = false;
   EyeCutSvgOrEyeOpen = true;
-  EyeCutSvgOrEyeOpenCreateAccount = true;
 
-  valueForEmailChooseForUser = "tuinmoto7@gmail.com";
+  valueForEmailChooseForUser = "augustocesarsantana90@gmail.com";
   valueForCpfChooseForUser = "";
 
   containerMainSvgInput!: HTMLElement;
@@ -79,24 +76,20 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
   showModalForLogin = false;
   tokenEmailSendToEmail = false;
 
-  // spanNomeErrorCreateNewAccount = false;
-  // spanPhoneErrorCreateNewAccount = false;
-  // spanCpfErrorCreateNewAccount = false;
-
   valueNomeInput = "";
   valuePhoneInput = "";
   valuePhoneInputToSave = "";
   valueCpfInput = "";
-  valuePassword = "";
   valurCpfInput = "";
 
   @ViewChildren('inputCreate0, inputCreate1, inputCreate2, inputCreate3, inputCreate4, inputCreate5') inputsCreateAccount!: QueryList<ElementRef>;
   confirmationEmailNotSameEmail = true;
-  codeSendForEmailCreateAccount = false;
+  onClickTroubleLoggingIncodeSendForEmailCreateAccount = false;
   codeSendToEmailLoginAccount = false;
   inputNotAllHasValueCreateAccount = false;
   codeSentToEmail = false;
   showModalToUrlSentToEmail = false;
+  codeSendForEmailCreateAccount = false;
 
   constructor(private router: Router, private loginUserService: LoginUserService, private UserService: UserService, private dataService: DataService,
     private check_if_info_user_already_exsits_service: CheckIfInfoUserAlreadyExsitsService, private login_user_service: LoginUserService){
@@ -115,6 +108,8 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
     this.changeValueValuePhoneInputToSave = this.changeValueValuePhoneInputToSave.bind(this);
     this.changeValueValueCpfInput = this.changeValueValueCpfInput.bind(this);
     this.changeValueValurCpfInput = this.changeValueValurCpfInput.bind(this);
+    this.changeValueUserLogin = this.changeValueUserLogin.bind(this);
+    this.changeValueCodeSendForEmailCreateAccount = this.changeValueCodeSendForEmailCreateAccount.bind(this);
   }
 
   onInput(event: Event, index: number) {
@@ -184,7 +179,7 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
 
     this.settimeOutAny = setTimeout(() => {
       this.inputPassword = document.querySelector('.input-password-send-code') as HTMLInputElement;
-    });
+    }, 50);
   }
 
   onClickCloseEnterUser(){
@@ -256,6 +251,18 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
     }
   }
 
+  onClickInputCpfOrEmailTroubleLoggingIn(){
+  }
+
+  onInputCpfEmailTroubleLoggingIn(event: Event) {
+    let input = event.target as HTMLInputElement;
+    this.inputValueEmailOrCpf = input.value;
+  }
+
+  onBlurInputCpfOrEmailTroubleLoggingIn(){
+
+  }
+
   changeValueShowStep2CreateAccount(value: boolean){
     this.showStep2CreateAccount = value;
   }
@@ -288,48 +295,16 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
     this.cpfNotExist = value;
   }
 
-  onInputConfirmationEmail(event: Event, containerInputConfirmationEmailCreateNewAccount: HTMLDivElement) {
-    let input = event.target as HTMLInputElement;
-    let valueConfirmationEmail = input.value;
-
-    if(this.inputValueEmailOrCpf === valueConfirmationEmail){
-      this.confirmationEmailNotSameEmail = false;
-
-      if(this.alreadyClickedCreateAccount){
-        containerInputConfirmationEmailCreateNewAccount.style.borderColor = this.colorBorderGreen;
-      }
-    }else {
-      this.confirmationEmailNotSameEmail = true;
-
-      if(this.alreadyClickedCreateAccount){
-        containerInputConfirmationEmailCreateNewAccount.style.borderColor = this.colorBorderRed;
-      }
-    }
+  changeValueUserLogin(value: Data | null){
+    this.userLogin = value;
   }
 
-  onClickInputConfirmationEmailCreateAccount(inputCpfOrEmail: HTMLInputElement, spanNomeCreateNewAccount: HTMLSpanElement, containerInputConfirmationEmailCreateNewAccount: HTMLDivElement
-  ){
-    if(spanNomeCreateNewAccount){
-      spanNomeCreateNewAccount.style.display = 'block';
-      containerInputConfirmationEmailCreateNewAccount.style.padding = '2px 5px';
-
-      // containerInputConfirmationEmailCreateNewAccount.style.borderColor = this.colorBorderBlue;
-    }
+  changeValueCodeSendForEmailCreateAccount(value: boolean){
+    this.codeSendForEmailCreateAccount = value;
   }
 
-  onBlurInputConfirmationEmailCreateAccount(input: HTMLInputElement, spanNomeCreateNewAccount: HTMLSpanElement, containerInputConfirmationEmailCreateNewAccount: HTMLDivElement){
-    let valueInput = input.value;
-
-    if(spanNomeCreateNewAccount){
-      if(valueInput.length <= 0){
-        spanNomeCreateNewAccount.style.display = 'none';
-        containerInputConfirmationEmailCreateNewAccount.style.padding = '10px 5px';
-      }
-
-      if(containerInputConfirmationEmailCreateNewAccount.style.borderColor !== this.colorBorderGreen && containerInputConfirmationEmailCreateNewAccount.style.borderColor !== this.colorBorderRed){
-        containerInputConfirmationEmailCreateNewAccount.style.borderColor = this.colorBorderGrey;
-      }
-    }
+  changeValueValueForEmailChooseForUser(value: string){
+    this.valueForEmailChooseForUser = value;
   }
 
   onClickContinue(){
@@ -523,9 +498,9 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
           this.userLogin = user;
           this.codeSendToEmailLoginAccount = user.codeSentSuccessfullyEmail;
 
-          if(user.confirmEmail){
-            this.codeSendForEmailConfirmedLogin = true;
-          }
+          // if(user.confirmEmail){
+          //   this.codeSendForEmailConfirmedLogin = true;
+          // }
         }
       },
       error: error => {
@@ -555,61 +530,10 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
 
   onClickContinueConfirmEmailEmail(){
     this.showModalToUrlSentToEmail = false;
-
   }
 
   onClickSvgExitConfirmEmailEmail(){
     this.showModalToUrlSentToEmail = false;
-  }
-
-  onClickInputPasswordCreateAccount(inputCpfOrEmail: HTMLInputElement, spanNomeCreateNewAccount: HTMLSpanElement, containerInputConfirmationEmailCreateNewAccount: HTMLDivElement,
-    containerSvgPasswordCreateNewAccount: HTMLDivElement
-  ){
-
-    // containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderGrey;
-
-    if(spanNomeCreateNewAccount){
-      spanNomeCreateNewAccount.style.display = 'block';
-
-      containerSvgPasswordCreateNewAccount.style.padding = "0px";
-      containerInputConfirmationEmailCreateNewAccount.style.padding = '2px 5px';
-
-      containerInputConfirmationEmailCreateNewAccount.style.borderColor = this.colorBorderBlue;
-
-      // if(containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderGreen && containerInputNomeCreateNewAccount.style.borderColor !== this.colorBorderRed){
-      //   containerInputNomeCreateNewAccount.style.borderColor = this.colorBorderBlue;
-      // }
-    }
-  }
-
-  onBlurInputPasswordCreateAccount(input: HTMLInputElement, spanNomeCreateNewAccount: HTMLSpanElement, containerInputConfirmationEmailCreateNewAccount: HTMLDivElement,
-    containerSvgPasswordCreateNewAccount: HTMLDivElement
-  ){
-    let valueInput = input.value;
-
-    if(spanNomeCreateNewAccount){
-      if(valueInput.length <= 0){
-        spanNomeCreateNewAccount.style.display = 'none';
-        containerSvgPasswordCreateNewAccount.style.padding = '10px 5px';
-        containerInputConfirmationEmailCreateNewAccount.style.padding = '0px';
-      }
-
-      if(containerInputConfirmationEmailCreateNewAccount.style.borderColor !== this.colorBorderGreen && containerInputConfirmationEmailCreateNewAccount.style.borderColor !== this.colorBorderRed){
-        containerInputConfirmationEmailCreateNewAccount.style.borderColor = this.colorBorderGrey;
-      }
-    }
-  }
-
-  onClickContainerSvgEyeCutCreateAccount(inputPasswordCreateNewAccount: HTMLInputElement){
-    this.EyeCutSvgOrEyeOpenCreateAccount = false;
-
-    inputPasswordCreateNewAccount.type = "text";
-  }
-
-  onClickContainerSvgEyeOpenCreateAccount(inputPasswordCreateNewAccount: HTMLInputElement){
-    this.EyeCutSvgOrEyeOpenCreateAccount = true;
-
-    inputPasswordCreateNewAccount.type = "password";
   }
 
   onClickInputPassword(){
@@ -638,109 +562,6 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
     let input = event.target as HTMLInputElement;
   }
 
-  hasUppercase = false;
-  hasLowercase = false;
-  hasNumber = false;
-  hasEightNumber = false;
-  alreadyClickedCreateAccount = false;
-  errorPasswordWrong = true;
-
-  onInputPasswordCreateAccount(event: Event, spanMinimumOneLowercaseLetter:HTMLParagraphElement, spanMinimunOneUppercaseLetter:HTMLParagraphElement, spanMinimunOneNumber:HTMLParagraphElement, spanMinimunEightCharacters:HTMLParagraphElement, containerSvgPasswordCreateNewAccount: HTMLDivElement) {
-    let input = event.target as HTMLInputElement;
-    let inputValuePassword = input.value;
-    this.valuePassword = inputValuePassword;
-
-    let hasUppercase = false;
-    let hasLowercase = false;
-    let hasNumber = false;
-    let hasEightNumber = false;
-
-    if(inputValuePassword.length > 0){
-      for (let i = 0; i < inputValuePassword.length; i++) {
-        const caracter = inputValuePassword[i];
-
-        if (/[A-Z]/.test(caracter)) {
-          hasUppercase = true;
-          spanMinimunOneUppercaseLetter.style.color = "rgb(56 195 105)";
-          break;
-
-        }else {
-          hasUppercase = false;
-        }
-
-        if (hasUppercase && hasLowercase && hasNumber) {
-          break;
-        }
-      }
-
-      for (let i = 0; i < inputValuePassword.length; i++) {
-        const caracter = inputValuePassword[i];
-
-        if (/[a-z]/.test(caracter)) {
-          hasLowercase = true;
-          spanMinimumOneLowercaseLetter.style.color = "rgb(56 195 105)";
-          break;
-        }else {
-          hasLowercase = false;
-        }
-
-        if (hasUppercase && hasLowercase && hasNumber) {
-          break;
-        }
-      }
-
-      for (let i = 0; i < inputValuePassword.length; i++) {
-        const caracter = inputValuePassword[i];
-
-        if (/[0-9]/.test(caracter)) {
-          hasNumber = true;
-          spanMinimunOneNumber.style.color = "rgb(56 195 105)";
-          break;
-        }else {
-          hasNumber = false;
-        }
-
-        if (hasUppercase && hasLowercase && hasNumber) {
-          break;
-        }
-      }
-    }
-
-    if(!hasUppercase){
-      spanMinimunOneUppercaseLetter.style.color = "rgb(155, 155, 155)";
-    }
-
-    if(!hasLowercase){
-      spanMinimumOneLowercaseLetter.style.color = "rgb(155, 155, 155)";
-    }
-
-    if(!hasNumber){
-      spanMinimunOneNumber.style.color = "rgb(155, 155, 155)";
-    }
-
-    if(inputValuePassword.length >= 9){
-      hasEightNumber = true;
-      spanMinimunEightCharacters.style.color = "rgb(56 195 105)";
-    }else {
-      spanMinimunEightCharacters.style.color = "rgb(155, 155, 155)";
-    }
-
-    if(hasUppercase && hasLowercase && hasNumber && hasEightNumber){
-      containerSvgPasswordCreateNewAccount.style.borderColor = this.colorBorderGreen;
-      this.errorPasswordWrong = false;
-    }else {
-      this.errorPasswordWrong = true;
-      if(this.alreadyClickedCreateAccount){
-        containerSvgPasswordCreateNewAccount.style.borderColor = this.colorBorderRed;
-      }
-    }
-
-    this.hasUppercase = hasUppercase;
-    this.hasLowercase = hasLowercase;
-    this.hasNumber = hasNumber;
-    this.hasEightNumber = hasEightNumber;
-  }
-
   onClickContainerSvgEyeCut(){
     this.EyeCutSvgOrEyeOpen = false;
 
@@ -753,71 +574,15 @@ export class ModalLoginCheckoutComponent implements OnInit, AfterViewInit, OnDes
     this.inputPassword.type = "password";
   }
 
-  onClickButtonCreateAccount(containerSvgPasswordCreateNewAccount: HTMLDivElement, containerInputConfirmationEmailCreateNewAccount: HTMLDivElement,
-    buttonCreateAccountCheckout: HTMLButtonElement
-  ){
-    this.alreadyClickedCreateAccount = true;
-    this.showLoadingCicleToCreateAccountCheckout = true;
-    buttonCreateAccountCheckout.style.backgroundImage = "linear-gradient(to left, #717171, #535353)";
-    buttonCreateAccountCheckout.style.color = "rgb(0 0 0)";
-
-    if(!this.hasUppercase || !this.hasLowercase || !this.hasNumber || !this.hasEightNumber){
-      containerSvgPasswordCreateNewAccount.style.borderColor = this.colorBorderRed;
-    }
-
-    if(this.confirmationEmailNotSameEmail){
-      containerInputConfirmationEmailCreateNewAccount.style.borderColor = this.colorBorderRed;
-    }else {
-      containerInputConfirmationEmailCreateNewAccount.style.borderColor = this.colorBorderGreen;
-    }
-
-    if(this.hasUppercase && this.hasLowercase && this.hasNumber && this.hasEightNumber && !this.confirmationEmailNotSameEmail){
-      let objUserCreate = {
-        name: this.valueNomeInput,
-        email: this.inputValueEmailOrCpf,
-        cpf: this.valueCpfInput,
-        password: this.valuePassword,
-        birthDateString: "",
-        gender: "",
-        phone: this.valuePhoneInput,
-        cep: "",
-        logradouro: "",
-        numero: "",
-        complemento: "",
-        referencia: "",
-        bairro: "",
-        estado: "",
-        cidade: ""
-      };
-
-      this.login_user_service.createAccountUserCheckout(objUserCreate).subscribe((data: any) => {
-        console.log(data);
-        this.showLoadingCicleToCreateAccountCheckout = false;
-
-        buttonCreateAccountCheckout.style.backgroundImage = "linear-gradient(to left, #6c04ba, #3255e2)";
-        buttonCreateAccountCheckout.style.color = "rgb(255, 255, 255)";
-
-        // tenta fazer o REENVIAR CODE DE EMAIL AMANHA e "SE NÃO CONFIRMAR O CODE E Mudar no banco de dados que foi confirmado o email"
-        // Tem que avisar o usuario tipo quando ele for se logar "FALAR QUE ELE TEM QUE CONFIRMAR O EMAIL MANDANDO O CODIGO NO EMAIL DELE NOVAMENTE"
-        let dataUser = data.data;
-        this.userLogin = dataUser; // - aqui tem que ter o "ID" que acabou de criar do usuario
-        this.codeSendForEmailCreateAccount = dataUser.emailSendSuccessfully;
-      });
-    }else {
-      setTimeout(() => {
-        this.showLoadingCicleToCreateAccountCheckout = false;
-        buttonCreateAccountCheckout.style.backgroundImage = "linear-gradient(to left, #6c04ba, #3255e2)";
-        buttonCreateAccountCheckout.style.color = "rgb(255, 255, 255)";
-      }, 3000);
-    }
-  }
-
   onClickSvgExitCodeEmail(){
     this.codeSendForEmailConfirmedLogin = !this.codeSendForEmailConfirmedLogin;
+
   }
 
   onClickSvgExitCodeEmailCreateAccount(){
-    this.codeSendForEmailCreateAccount = !this.codeSendForEmailCreateAccount;
+    this.codeSendForEmailConfirmedLogin = false;
+    this.codeSendForEmailCreateAccount = false;
+    this.codeSendToEmailLoginAccount = false;
   }
 
   onInputCreateAccount(event: Event, index: number) {

@@ -25,7 +25,8 @@
         onClickContainerSvgArrowStep2CreateAccount
       "
     ></app-header-part-to-checkout-login>
-    <div class="container-input-and-button-continue">
+
+    <div class="container-if-user-already-created-login">
       <div class="container-cpf-or-email" *ngIf="showInsertCpfOrEmail">
         <div class="container-svg-user">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21">
@@ -64,6 +65,7 @@
         />
         <label (click)="onClickChangeEmail()">Trocar</label>
       </div>
+
       <div
         class="container-input-password-and-span-problems"
         *ngIf="AccountExist"
@@ -213,325 +215,6 @@
         </div>
       </div>
 
-      <app-step-1-to-create-new-account
-        *ngIf="clickCreateNewAccount"
-        [valueNomeInput]="valueNomeInput"
-        [valuePhoneInputToSave]="valuePhoneInputToSave"
-        [changeValueValueNomeInput]="changeValueValueNomeInput"
-        [changeValueValuePhoneInput]="changeValueValuePhoneInput"
-        [changeValueValuePhoneInputToSave]="changeValueValuePhoneInputToSave"
-        [changeValueValueCpfInput]="changeValueValueCpfInput"
-        [changeValueValurCpfInput]="changeValueValurCpfInput"
-        [changeValueShowStep2CreateAccount]="changeValueShowStep2CreateAccount"
-        [changeValueClickCreateNewAccount]="changeValueClickCreateNewAccount"
-        [changeValueCpfNotExist]="changeValueCpfNotExist"
-        [cpfNotExist]="cpfNotExist"
-        [valurCpfInput]="valurCpfInput"
-      ></app-step-1-to-create-new-account>
-
-      <div
-        class="container-step-2-for-create-account"
-        *ngIf="showStep2CreateAccount"
-      >
-        <div
-          class="container-info-input-create-account"
-          #containerInputConfirmationEmailCreateNewAccount
-        >
-          <span #spanConfirmationEmailCreateNewAccount
-            >*Confirmação de e-mail</span
-          >
-          <input
-            type="text"
-            placeholder="*Confirmação de e-mail"
-            #inputConfirmationEmailCreateNewAccount
-            class="input-name-create-account"
-            (input)="
-              onInputConfirmationEmail(
-                $event,
-                containerInputConfirmationEmailCreateNewAccount
-              )
-            "
-            (click)="
-              onClickInputConfirmationEmailCreateAccount(
-                inputConfirmationEmailCreateNewAccount,
-                spanConfirmationEmailCreateNewAccount,
-                containerInputConfirmationEmailCreateNewAccount
-              )
-            "
-            (blur)="
-              onBlurInputConfirmationEmailCreateAccount(
-                inputConfirmationEmailCreateNewAccount,
-                spanConfirmationEmailCreateNewAccount,
-                containerInputConfirmationEmailCreateNewAccount
-              )
-            "
-          />
-        </div>
-        <div
-          class="container-info-about-error-input"
-          *ngIf="confirmationEmailNotSameEmail && alreadyClickedCreateAccount"
-        >
-          <app-svg-exclamation-mark
-            width="16px"
-            height="16px"
-            fill="rgb(255, 90, 80)"
-            class="container-svg-exclamation-mark"
-          ></app-svg-exclamation-mark>
-          <span>Esse campo deve ser igual ao de e-mail.</span>
-        </div>
-        <div
-          class="container-svg-password-create-new-account"
-          #containerSvgPasswordCreateNewAccount
-        >
-          <div
-            class="container-password-input-create-new-account"
-            #containerInputPasswordCreateNewAccount
-          >
-            <span #spanPasswordCreateNewAccount>*Senha</span>
-            <input
-              type="password"
-              placeholder="*Senha"
-              class="input-password-send-code"
-              #inputPasswordCreateNewAccount
-              (input)="
-                onInputPasswordCreateAccount(
-                  $event,
-                  spanMinimumOneLowercaseLetter,
-                  spanMinimunOneUppercaseLetter,
-                  spanMinimunOneNumber,
-                  spanMinimunEightCharacters,
-                  containerSvgPasswordCreateNewAccount
-                )
-              "
-              (click)="
-                onClickInputPasswordCreateAccount(
-                  inputPasswordCreateNewAccount,
-                  spanPasswordCreateNewAccount,
-                  containerInputPasswordCreateNewAccount,
-                  containerSvgPasswordCreateNewAccount
-                )
-              "
-              (blur)="
-                onBlurInputPasswordCreateAccount(
-                  inputPasswordCreateNewAccount,
-                  spanPasswordCreateNewAccount,
-                  containerInputPasswordCreateNewAccount,
-                  containerSvgPasswordCreateNewAccount
-                )
-              "
-            />
-            <app-svg-eye-cut
-              *ngIf="EyeCutSvgOrEyeOpenCreateAccount"
-              fill="gray"
-              class="container-svg-eye-cut"
-              (click)="
-                onClickContainerSvgEyeCutCreateAccount(
-                  inputPasswordCreateNewAccount
-                )
-              "
-            ></app-svg-eye-cut>
-            <app-svg-eye-open
-              *ngIf="!EyeCutSvgOrEyeOpenCreateAccount"
-              fill="gray"
-              class="container-svg-eye-cut"
-              (click)="
-                onClickContainerSvgEyeOpenCreateAccount(
-                  inputPasswordCreateNewAccount
-                )
-              "
-            ></app-svg-eye-open>
-          </div>
-        </div>
-        <div
-          class="container-info-about-error-input"
-          *ngIf="errorPasswordWrong && alreadyClickedCreateAccount"
-        >
-          <app-svg-exclamation-mark
-            width="16px"
-            height="16px"
-            fill="rgb(255, 90, 80)"
-            class="container-svg-exclamation-mark"
-          ></app-svg-exclamation-mark>
-          <span>A senha não atende aos critérios necessários.</span>
-        </div>
-        <div class="container-password-requirement">
-          <p class="para-1">
-            Sua senha precisa atender aos seguintes critérios:
-          </p>
-          <p class="para-2" #spanMinimumOneLowercaseLetter>
-            Mínimo uma letra minúscula *
-          </p>
-          <p class="para-3" #spanMinimunOneUppercaseLetter>
-            Mínimo uma letra maiúscula *
-          </p>
-          <p class="para-4" #spanMinimunOneNumber>Mínimo um número *</p>
-          <p class="para-5" #spanMinimunEightCharacters>
-            Mínimo de 8 caracteres *
-          </p>
-        </div>
-        <div class="container-receive-news">
-          <input type="checkbox" />
-          <span>Quero receber novidades e mensagens da Ingresso.com.</span>
-        </div>
-        <div class="container-span-info-above-receive-new">
-          <span class="span-info-create-account"
-            >Ao continuar, aceito os
-            <span class="span-service">Termos de Uso</span> e
-            <span class="span-service">Política de Privacidade.</span></span
-          >
-          <span
-            >Deseja excluir sua conta? Siga os
-            <span class="span-service">passos a seguir</span></span
-          >
-        </div>
-        <div class="modal-footer">
-          <div
-            class="container-cicle-loading"
-            *ngIf="showLoadingCicleToCreateAccountCheckout"
-          >
-            <div class="cicle-loading"></div>
-          </div>
-          <button
-            class="button-create-account"
-            #buttonCreateAccountCheckout
-            (click)="
-              onClickButtonCreateAccount(
-                containerSvgPasswordCreateNewAccount,
-                containerInputConfirmationEmailCreateNewAccount,
-                buttonCreateAccountCheckout
-              )
-            "
-          >
-            CRIAR CONTA
-          </button>
-        </div>
-      </div>
-
-      <div
-        class="container-modal-confirmed-code-send-email"
-        *ngIf="codeSendForEmailCreateAccount || codeSendToEmailLoginAccount"
-      >
-        <div class="container-modal-central-send-code-email">
-          <div class="container-img-background-code">
-            <div class="container-svg-lock">
-              <app-svg-notification-code-sent-email></app-svg-notification-code-sent-email>
-            </div>
-            <div class="container-slice-img"></div>
-            <app-svg-exit
-              class="container-svg-exit"
-              (click)="onClickSvgExitCodeEmailCreateAccount()"
-            ></app-svg-exit>
-          </div>
-          <div class="container-main-part-bottom-code">
-            <div class="container-part-bottom-code">
-              <h1>Falta pouco!</h1>
-              <span class="span-code-confirmed-1"
-                >Enviamos um código de verificação para o seu e-mail. Digite-o
-                abaixo:</span
-              >
-            </div>
-            <div class="container-where-insert-the-code">
-              <div class="container-input-code">
-                <input
-                  type="text"
-                  maxlength="1"
-                  placeholder="·"
-                  autocomplete="off"
-                  id="input-code-one"
-                  (input)="onInputCreateAccount($event, 0)"
-                  (keydown)="onKeyDownCreateAccount($event, 0)"
-                  #inputCreate0
-                />
-                <input
-                  type="text"
-                  maxlength="1"
-                  placeholder="·"
-                  autocomplete="off"
-                  id="input-code-two"
-                  (input)="onInputCreateAccount($event, 1)"
-                  (keydown)="onKeyDownCreateAccount($event, 1)"
-                  #inputCreate1
-                />
-                <input
-                  type="text"
-                  maxlength="1"
-                  placeholder="·"
-                  autocomplete="off"
-                  id="input-code-three"
-                  (input)="onInputCreateAccount($event, 2)"
-                  (keydown)="onKeyDownCreateAccount($event, 2)"
-                  #inputCreate2
-                />
-                <input
-                  type="text"
-                  maxlength="1"
-                  placeholder="·"
-                  autocomplete="off"
-                  id="input-code-four"
-                  (input)="onInputCreateAccount($event, 3)"
-                  (keydown)="onKeyDownCreateAccount($event, 3)"
-                  #inputCreate3
-                />
-                <input
-                  type="text"
-                  maxlength="1"
-                  placeholder="·"
-                  autocomplete="off"
-                  id="input-code-five"
-                  (input)="onInputCreateAccount($event, 4)"
-                  (keydown)="onKeyDownCreateAccount($event, 4)"
-                  #inputCreate4
-                />
-                <input
-                  type="text"
-                  maxlength="1"
-                  placeholder="·"
-                  autocomplete="off"
-                  id="input-code-six"
-                  (input)="onInputCreateAccount($event, 5)"
-                  (keydown)="onKeyDownCreateAccount($event, 5)"
-                  #inputCreate5
-                />
-              </div>
-              <div
-                class="container-info-about-error-input"
-                *ngIf="inputNotAllHasValueCreateAccount"
-              >
-                <app-svg-exclamation-mark
-                  class="container-svg-exclamation-mark-error-input"
-                  fill="#db4444"
-                  width="20px"
-                  height="20px"
-                ></app-svg-exclamation-mark>
-                <span>Digite o código de verificação.</span>
-              </div>
-            </div>
-            <div class="container-resend-code-and-continue">
-              <span
-                class="span-code-resent-to-email"
-                (click)="onClickResendCodeCreateAccount()"
-                >Reenviar código</span
-              >
-              <span
-                class="span-code-resent-to-email-successfully"
-                *ngIf="codeSentToEmail"
-                >Codigo Reenviado para Email!</span
-              >
-              <a
-                (click)="onClickContinueCodeCreateAccount()"
-                *ngIf="codeSendForEmailCreateAccount"
-                >Continuar</a
-              >
-              <a
-                (click)="onClickContinueCodeCreateAccount()"
-                *ngIf="codeSendToEmailLoginAccount"
-                >Continuar</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="container-trouble-logging-in" *ngIf="clickTroubleLoggingIn">
         <h1>Digite seu cpf ou e-mail e selecione o que aconteceu com você.</h1>
 
@@ -553,9 +236,9 @@
               #inputCpfOrEmail
               class="input-cpf-email"
               [value]="valueForEmailChooseForUser"
-              (input)="onInputCpfEmail($event)"
-              (click)="onClickInputCpfOrEmail()"
-              (blur)="onBlurInputCpfOrEmail()"
+              (input)="onInputCpfEmailTroubleLoggingIn($event)"
+              (click)="onClickInputCpfOrEmailTroubleLoggingIn()"
+              (blur)="onBlurInputCpfOrEmailTroubleLoggingIn()"
             />
           </div>
         </div>
@@ -575,174 +258,323 @@
           CONFIRMAR
         </button>
       </div>
+    </div>
 
-      <div
-        class="container-modal-confirmed-code-send-email"
-        *ngIf="codeSendForEmailConfirmedLogin"
-      >
-        <div class="container-modal-central-send-code-email">
-          <div class="container-img-background-code">
-            <div class="container-svg-lock">
-              <app-svg-notification-code-sent-email></app-svg-notification-code-sent-email>
-            </div>
-            <div class="container-slice-img"></div>
-            <app-svg-exit
-              class="container-svg-exit"
-              (click)="onClickSvgExitCodeEmail()"
-            ></app-svg-exit>
+    <app-step-1-to-create-new-account
+      *ngIf="clickCreateNewAccount"
+      [valueNomeInput]="valueNomeInput"
+      [valuePhoneInputToSave]="valuePhoneInputToSave"
+      [changeValueValueNomeInput]="changeValueValueNomeInput"
+      [changeValueValuePhoneInput]="changeValueValuePhoneInput"
+      [changeValueValuePhoneInputToSave]="changeValueValuePhoneInputToSave"
+      [changeValueValueCpfInput]="changeValueValueCpfInput"
+      [changeValueValurCpfInput]="changeValueValurCpfInput"
+      [changeValueShowStep2CreateAccount]="changeValueShowStep2CreateAccount"
+      [changeValueClickCreateNewAccount]="changeValueClickCreateNewAccount"
+      [changeValueCpfNotExist]="changeValueCpfNotExist"
+      [cpfNotExist]="cpfNotExist"
+      [valurCpfInput]="valurCpfInput"
+    ></app-step-1-to-create-new-account>
+
+    <app-step-2-to-create-new-account
+      *ngIf="showStep2CreateAccount"
+      [inputValueEmailOrCpf]="inputValueEmailOrCpf"
+      [confirmationEmailNotSameEmail]="confirmationEmailNotSameEmail"
+      [valueNomeInput]="valueNomeInput"
+      [valueCpfInput]="valueCpfInput"
+      [valuePhoneInput]="valuePhoneInput"
+      [changeValueUserLogin]="changeValueUserLogin"
+      [changeValueCodeSendForEmailCreateAccount]="
+        changeValueCodeSendForEmailCreateAccount
+      "
+    ></app-step-2-to-create-new-account>
+
+    <div
+      class="container-modal-confirmed-code-send-email"
+      *ngIf="codeSendForEmailCreateAccount || codeSendToEmailLoginAccount"
+    >
+      <div class="container-modal-central-send-code-email">
+        <div class="container-img-background-code">
+          <div class="container-svg-lock">
+            <app-svg-notification-code-sent-email></app-svg-notification-code-sent-email>
           </div>
-          <div class="container-main-part-bottom-code">
-            <div class="container-part-bottom-code">
-              <h1>Falta pouco!</h1>
-              <span class="span-code-confirmed-1"
-                >Enviamos um código de verificação para o seu e-mail. Digite-o
-                abaixo:</span
-              >
+          <div class="container-slice-img"></div>
+          <app-svg-exit
+            class="container-svg-exit"
+            (click)="onClickSvgExitCodeEmailCreateAccount()"
+          ></app-svg-exit>
+        </div>
+        <div class="container-main-part-bottom-code">
+          <div class="container-part-bottom-code">
+            <h1>Falta pouco!</h1>
+            <span class="span-code-confirmed-1"
+              >Enviamos um código de verificação para o seu e-mail. Digite-o
+              abaixo:</span
+            >
+          </div>
+          <div class="container-where-insert-the-code">
+            <div class="container-input-code">
+              <input
+                type="text"
+                maxlength="1"
+                placeholder="·"
+                autocomplete="off"
+                id="input-code-one"
+                (input)="onInputCreateAccount($event, 0)"
+                (keydown)="onKeyDownCreateAccount($event, 0)"
+                #inputCreate0
+              />
+              <input
+                type="text"
+                maxlength="1"
+                placeholder="·"
+                autocomplete="off"
+                id="input-code-two"
+                (input)="onInputCreateAccount($event, 1)"
+                (keydown)="onKeyDownCreateAccount($event, 1)"
+                #inputCreate1
+              />
+              <input
+                type="text"
+                maxlength="1"
+                placeholder="·"
+                autocomplete="off"
+                id="input-code-three"
+                (input)="onInputCreateAccount($event, 2)"
+                (keydown)="onKeyDownCreateAccount($event, 2)"
+                #inputCreate2
+              />
+              <input
+                type="text"
+                maxlength="1"
+                placeholder="·"
+                autocomplete="off"
+                id="input-code-four"
+                (input)="onInputCreateAccount($event, 3)"
+                (keydown)="onKeyDownCreateAccount($event, 3)"
+                #inputCreate3
+              />
+              <input
+                type="text"
+                maxlength="1"
+                placeholder="·"
+                autocomplete="off"
+                id="input-code-five"
+                (input)="onInputCreateAccount($event, 4)"
+                (keydown)="onKeyDownCreateAccount($event, 4)"
+                #inputCreate4
+              />
+              <input
+                type="text"
+                maxlength="1"
+                placeholder="·"
+                autocomplete="off"
+                id="input-code-six"
+                (input)="onInputCreateAccount($event, 5)"
+                (keydown)="onKeyDownCreateAccount($event, 5)"
+                #inputCreate5
+              />
             </div>
-            <div class="container-where-insert-the-code">
-              <div class="container-input-code">
-                <input
-                  type="text"
-                  maxlength="1"
-                  placeholder="·"
-                  autocomplete="off"
-                  id="input-code-one"
-                  (input)="onInput($event, 0)"
-                  (keydown)="onKeyDown($event, 0)"
-                  #input0
-                />
-                <input
-                  type="text"
-                  maxlength="1"
-                  placeholder="·"
-                  autocomplete="off"
-                  id="input-code-two"
-                  (input)="onInput($event, 1)"
-                  (keydown)="onKeyDown($event, 1)"
-                  #input1
-                />
-                <input
-                  type="text"
-                  maxlength="1"
-                  placeholder="·"
-                  autocomplete="off"
-                  id="input-code-three"
-                  (input)="onInput($event, 2)"
-                  (keydown)="onKeyDown($event, 2)"
-                  #input2
-                />
-                <input
-                  type="text"
-                  maxlength="1"
-                  placeholder="·"
-                  autocomplete="off"
-                  id="input-code-four"
-                  (input)="onInput($event, 3)"
-                  (keydown)="onKeyDown($event, 3)"
-                  #input3
-                />
-                <input
-                  type="text"
-                  maxlength="1"
-                  placeholder="·"
-                  autocomplete="off"
-                  id="input-code-five"
-                  (input)="onInput($event, 4)"
-                  (keydown)="onKeyDown($event, 4)"
-                  #input4
-                />
-                <input
-                  type="text"
-                  maxlength="1"
-                  placeholder="·"
-                  autocomplete="off"
-                  id="input-code-six"
-                  (input)="onInput($event, 5)"
-                  (keydown)="onKeyDown($event, 5)"
-                  #input5
-                />
-              </div>
-              <div
-                class="container-info-about-error-input"
-                *ngIf="inputNotAllHasValue"
-              >
-                <app-svg-exclamation-mark
-                  class="container-svg-exclamation-mark-error-input"
-                  fill="#db4444"
-                  width="20px"
-                  height="20px"
-                ></app-svg-exclamation-mark>
-                <span>Digite o código de verificação.</span>
-              </div>
+            <div
+              class="container-info-about-error-input"
+              *ngIf="inputNotAllHasValueCreateAccount"
+            >
+              <app-svg-exclamation-mark
+                class="container-svg-exclamation-mark-error-input"
+                fill="#db4444"
+                width="20px"
+                height="20px"
+              ></app-svg-exclamation-mark>
+              <span>Digite o código de verificação.</span>
             </div>
-            <div class="container-resend-code-and-continue">
-              <span (click)="onClickResendCode()">Reenviar código</span>
-              <a (click)="onClickContinueCode()">Continuar</a>
-            </div>
+          </div>
+          <div class="container-resend-code-and-continue">
+            <span
+              class="span-code-resent-to-email"
+              (click)="onClickResendCodeCreateAccount()"
+              >Reenviar código</span
+            >
+            <span
+              class="span-code-resent-to-email-successfully"
+              *ngIf="codeSentToEmail"
+              >Codigo Reenviado para Email!</span
+            >
+            <a
+              (click)="onClickContinueCodeCreateAccount()"
+              *ngIf="codeSendForEmailCreateAccount"
+              >Continuar</a
+            >
+            <a
+              (click)="onClickContinueCodeCreateAccount()"
+              *ngIf="codeSendToEmailLoginAccount"
+              >Continuar</a
+            >
           </div>
         </div>
       </div>
+    </div>
 
-      <div
-        class="container-modal-main-about-send-token-to-email"
-        *ngIf="tokenEmailSendToEmail"
-      >
-        <div class="container-modal-central-send-token-to-email">
-          <div class="container-img-background-code">
-            <app-svg-notification-code-sent-email
-              class="container-svg-notification-token-sent-email"
-            ></app-svg-notification-code-sent-email>
-            <div class="container-slice-img"></div>
-            <app-svg-exit
-              class="container-svg-exit-token-send-to-email"
-              (click)="onClickSvgExitCodeEmail()"
-              fill="#03A9F4"
-            ></app-svg-exit>
+    <!-- <div
+      class="container-modal-confirmed-code-send-email"
+      *ngIf="codeSendForEmailConfirmedLogin"
+    >
+      <div class="container-modal-central-send-code-email">
+        <div class="container-img-background-code">
+          <div class="container-svg-lock">
+            <app-svg-notification-code-sent-email></app-svg-notification-code-sent-email>
           </div>
-          <div class="container-body-part">
-            <div class="container-info-about-send-to-email">
-              <h1>Pronto!</h1>
-              <span
-                >Se suas informações estiverem corretas, um link será enviado
-                para o e-mail cadastrado para que você defina uma nova
-                senha.</span
-              >
-              <span
-                >Em caso de dúvidas, entre em contato por e-mail, com a
-                <span class="span-send-to-email-token"
-                  >Central de Ajuda</span
-                ></span
-              >
+          <div class="container-slice-img"></div>
+          <app-svg-exit
+            class="container-svg-exit"
+            (click)="onClickSvgExitCodeEmail()"
+          ></app-svg-exit>
+        </div>
+        <div class="container-main-part-bottom-code">
+          <div class="container-part-bottom-code">
+            <h1>Falta pouco!</h1>
+            <span class="span-code-confirmed-1"
+              >Enviamos um código de verificação para o seu e-mail. Digite-o
+              abaixo:</span
+            >
+          </div>
+          <div class="container-where-insert-the-code">
+            <div class="container-input-code">
+              <input
+                type="text"
+                maxlength="1"
+                placeholder="·"
+                autocomplete="off"
+                id="input-code-one"
+                (input)="onInput($event, 0)"
+                (keydown)="onKeyDown($event, 0)"
+                #input0
+              />
+              <input
+                type="text"
+                maxlength="1"
+                placeholder="·"
+                autocomplete="off"
+                id="input-code-two"
+                (input)="onInput($event, 1)"
+                (keydown)="onKeyDown($event, 1)"
+                #input1
+              />
+              <input
+                type="text"
+                maxlength="1"
+                placeholder="·"
+                autocomplete="off"
+                id="input-code-three"
+                (input)="onInput($event, 2)"
+                (keydown)="onKeyDown($event, 2)"
+                #input2
+              />
+              <input
+                type="text"
+                maxlength="1"
+                placeholder="·"
+                autocomplete="off"
+                id="input-code-four"
+                (input)="onInput($event, 3)"
+                (keydown)="onKeyDown($event, 3)"
+                #input3
+              />
+              <input
+                type="text"
+                maxlength="1"
+                placeholder="·"
+                autocomplete="off"
+                id="input-code-five"
+                (input)="onInput($event, 4)"
+                (keydown)="onKeyDown($event, 4)"
+                #input4
+              />
+              <input
+                type="text"
+                maxlength="1"
+                placeholder="·"
+                autocomplete="off"
+                id="input-code-six"
+                (input)="onInput($event, 5)"
+                (keydown)="onKeyDown($event, 5)"
+                #input5
+              />
             </div>
-            <button (click)="onClickContinueSendToEmail()">Continuar</button>
+            <div
+              class="container-info-about-error-input"
+              *ngIf="inputNotAllHasValue"
+            >
+              <app-svg-exclamation-mark
+                class="container-svg-exclamation-mark-error-input"
+                fill="#db4444"
+                width="20px"
+                height="20px"
+              ></app-svg-exclamation-mark>
+              <span>Digite o código de verificação.</span>
+            </div>
+          </div>
+          <div class="container-resend-code-and-continue">
+            <span (click)="onClickResendCode()">Reenviar código</span>
+            <a (click)="onClickContinueCode()">Continuar</a>
           </div>
         </div>
       </div>
+    </div> -->
 
-      <div
-        class="container-info-about-error-input"
-        *ngIf="errorInputEmailOrCpfNotHaveValueRight"
-      >
-        <app-svg-exclamation-mark
-          width="16px"
-          height="16px"
-          fill="rgb(255, 90, 80)"
-          class="container-svg-exclamation-mark"
-        ></app-svg-exclamation-mark>
-        <span>É obrigatório informar o CPF ou e-mail.</span>
-      </div>
-      <div class="modal-footer" *ngIf="showInsertCpfOrEmail">
-        <div class="container-cicle-loading" *ngIf="showLoadingCicle">
-          <div class="cicle-loading"></div>
+    <div
+      class="container-modal-main-about-send-token-to-email"
+      *ngIf="tokenEmailSendToEmail"
+    >
+      <div class="container-modal-central-send-token-to-email">
+        <div class="container-img-background-code">
+          <app-svg-notification-code-sent-email
+            class="container-svg-notification-token-sent-email"
+          ></app-svg-notification-code-sent-email>
+          <div class="container-slice-img"></div>
+          <app-svg-exit
+            class="container-svg-exit-token-send-to-email"
+            (click)="onClickSvgExitCodeEmail()"
+            fill="#03A9F4"
+          ></app-svg-exit>
         </div>
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="onClickContinue()"
-        >
-          CONTINUAR
-        </button>
+        <div class="container-body-part">
+          <div class="container-info-about-send-to-email">
+            <h1>Pronto!</h1>
+            <span
+              >Se suas informações estiverem corretas, um link será enviado para
+              o e-mail cadastrado para que você defina uma nova senha.</span
+            >
+            <span
+              >Em caso de dúvidas, entre em contato por e-mail, com a
+              <span class="span-send-to-email-token"
+                >Central de Ajuda</span
+              ></span
+            >
+          </div>
+          <button (click)="onClickContinueSendToEmail()">Continuar</button>
+        </div>
       </div>
+    </div>
+
+    <div
+      class="container-info-about-error-input"
+      *ngIf="errorInputEmailOrCpfNotHaveValueRight"
+    >
+      <app-svg-exclamation-mark
+        width="16px"
+        height="16px"
+        fill="rgb(255, 90, 80)"
+        class="container-svg-exclamation-mark"
+      ></app-svg-exclamation-mark>
+      <span>É obrigatório informar o CPF ou e-mail.</span>
+    </div>
+    <div class="modal-footer" *ngIf="showInsertCpfOrEmail">
+      <div class="container-cicle-loading" *ngIf="showLoadingCicle">
+        <div class="cicle-loading"></div>
+      </div>
+      <button type="button" class="btn btn-primary" (click)="onClickContinue()">
+        CONTINUAR
+      </button>
     </div>
   </div>
 </div>
