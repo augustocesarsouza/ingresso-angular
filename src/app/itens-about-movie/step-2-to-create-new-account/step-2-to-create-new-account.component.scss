@@ -1,0 +1,223 @@
+.container-step-2-for-create-account {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container-info-input-create-account {
+  display: flex;
+  // gap: 10px;
+  border-left: 4px solid rgb(217 217 217);
+  border-top: 1px solid rgb(217 217 217);
+  border-bottom: 1px solid rgb(217 217 217);
+  border-right: 1px solid rgb(217 217 217);
+  padding: 10px 5px;
+  background: #fff;
+  border-radius: 3px;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.container-info-input-create-account > span {
+  font-size: 10px;
+  color: rgb(177 177 177);
+  display: none;
+}
+
+.container-info-input-create-account > input {
+  border: none;
+  font-size: 13px;
+  width: 100%;
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-bottom: 0px;
+}
+
+.container-info-input-create-account > input:focus {
+  outline: none;
+}
+
+.container-info-about-error-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.2;
+}
+
+.container-info-about-error-input > span {
+  font-size: 14px;
+  color: rgb(255, 90, 80);
+}
+
+.container-svg-exclamation-mark{
+  display: flex;
+}
+
+.container-svg-password-create-new-account {
+  display: flex;
+  border-left: 4px solid rgb(217 217 217);
+  border-top: 1px solid rgb(217 217 217);
+  border-bottom: 1px solid rgb(217 217 217);
+  border-right: 1px solid rgb(217 217 217);
+  padding: 10px 5px;
+  // padding: 2px 5px; depois de click
+  align-items: center;
+  background: #fff;
+  border-radius: 3px;
+  position: relative;
+  width: 100%;
+}
+
+.container-password-input-create-new-account {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.container-password-input-create-new-account > span {
+  font-size: 10px;
+  color: rgb(177 177 177);
+  display: none;
+}
+
+.container-password-input-create-new-account > input {
+  border: none;
+  font-size: 13px;
+  width: 100%;
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-bottom: 0px;
+}
+
+.container-password-input-create-new-account > input:focus {
+  outline: none;
+}
+
+.container-svg-eye-cut {
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  display: flex;
+  cursor: pointer;
+  user-select: none;
+}
+
+.container-password-requirement {
+  line-height: 1.3;
+}
+
+.para-1{
+  font-size: 13px;
+  line-height: 1.3;
+  margin-bottom: 5px;
+}
+
+.para-2,
+.para-3,
+.para-4,
+.para-5 {
+  color: rgb(155, 155, 155);
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.color-sucess {
+  color: rgb(56 195 105);
+}
+
+.container-receive-news {
+  display: flex;
+  gap: 5px;
+  line-height: 1.2;
+  width: 80%;
+  font-size: 15px;
+}
+
+.container-receive-news > input {
+  width: 30px;
+}
+
+.container-receive-news > span {
+  color: rgb(155, 155, 155);
+}
+
+.container-span-info-above-receive-new{
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  line-height: 1.2;
+  color: rgb(155, 155, 155);
+}
+
+.span-info-create-account {
+  font-size: 14px;
+  line-height: 1.2;
+  color: rgb(155, 155, 155);
+  margin-bottom: 7px;
+}
+
+.span-service {
+  cursor: pointer;
+  color: rgb(0, 153, 255);
+}
+
+.modal-footer {
+  justify-content: center;
+  border: none;
+  padding: 0;
+  position: relative;
+}
+
+.modal-footer > button {
+  width: 100%;
+  margin: 0;
+  background-image: linear-gradient(to left,#6c04ba, #3255e2);
+  color: rgb(255, 255, 255);
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0;
+  height: 48px;
+
+  &:hover {
+    background-image: linear-gradient(to left,#591091, #162f94);
+    color: #ffffffa2;
+  }
+}
+
+@keyframes gywwQJ {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.container-cicle-loading {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+  position: absolute;
+  left: 60px;
+}
+
+.cicle-loading{
+  width: 100%;
+  height: 100%;
+  border-width: 4px;
+  border-style: solid;
+  border-color: rgb(255, 255, 255) rgb(0, 0, 0) rgb(0, 0, 0);
+  border-image: initial;
+  border-radius: 50%;
+  // animation: 1.5s linear 0s infinite normal none running gywwQJ;
+  animation: gywwQJ 1.5s linear infinite;
+}
