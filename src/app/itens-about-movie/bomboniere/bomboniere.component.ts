@@ -4,6 +4,7 @@ import { BomboniereService } from '../service-bomboniere/bomboniere.service';
 import { OrderSummaryService } from '../service/order-summary.service';
 
 interface Product {
+  id: string;
   title: string;
   imgUrl: string;
   price: string;
@@ -11,6 +12,7 @@ interface Product {
 }
 
 export interface ObjProductClicked {
+  id: string;
   title: string;
   quanityClicked: number;
   priceTotal: string;
@@ -200,7 +202,7 @@ export class BomboniereComponent implements OnInit {
         let price = Number(form.price) + Number(form.fee);
         this.totalFeeSum += Number(form.fee);
         this.totalFeeSum = parseFloat(this.totalFeeSum.toFixed(1));
-        this.listOfProductClicked.push({ title: form.title, quanityClicked: 1, priceTotal: String(price.toFixed(2)), price: Number(form.price), fee: Number(form.fee) });
+        this.listOfProductClicked.push({ id: form.id, title: form.title, quanityClicked: 1, priceTotal: String(price.toFixed(2)), price: Number(form.price), fee: Number(form.fee) });
       };
 
       this.makeTheSumForPutTotalValue();

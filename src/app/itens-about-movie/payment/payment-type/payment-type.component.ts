@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OrderSummaryService } from '../../service/order-summary.service';
 import { Subscription } from 'rxjs';
 import { ObjectForOrderSummary } from '../../../movie-info/movie-choose-movie-theater/movie-choose-movie-theater.component';
+import { SeatsService } from '../../service/seats.service';
 
 @Component({
   selector: 'app-payment-type',
@@ -35,11 +36,14 @@ export class PaymentTypeComponent implements OnInit, OnDestroy {
     if(typeof document !== 'undefined' && typeof window !== 'undefined'){
       this.allContainerCreditDebitPixPay = document.querySelectorAll(".type-payment-method") as NodeListOf<HTMLElement>;
 
-      this.subscription.push(this.order_summary_service.currentOrderSummary$.subscribe((el: ObjectForOrderSummary | null) => {
-        if(el){
-          console.log(el);
-        }
-      }));
+      // this.subscription.push(this.order_summary_service.currentOrderSummary$.subscribe((el: ObjectForOrderSummary | null) => {
+      //   if(el){
+      //     console.log(el);
+      //     // PEGAR OS ID 'TICKETS' ID 'PIPOCA' E AINDA FALTA 'ASSENTO'
+      //   }
+      // }));
+
+
 
       this.paymentRequest = {
         apiVersion: 2,

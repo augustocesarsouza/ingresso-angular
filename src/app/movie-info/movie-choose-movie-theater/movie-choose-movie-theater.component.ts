@@ -3,7 +3,7 @@ import { MovieService } from '../../home-page/services/movie.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { movieChooseMovieTheater } from '../../interface-models/movie-interface/movie-choose-movie-theater';
 import { CinemaMovieService } from '../../home-page/services/cinema-movie.service';
-import { CinemaMovieGetAll } from '../../interface-models/cinema-movie-interface/cinema-movie-get-all';
+import { CinemaDTO, CinemaMovieGetAll } from '../../interface-models/cinema-movie-interface/cinema-movie-get-all';
 
 export interface ObjHoursCinemaMovie {
   type: string;
@@ -21,6 +21,7 @@ export interface ObjectForOrderSummary {
   spanRegion: string;
   imgMovie: string;
   room: number;
+  cinemaDTO: CinemaDTO;
 }
 
 @Component({
@@ -49,7 +50,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
   spanSessions!: HTMLSpanElement;
   spanAboutTheMovie!: HTMLSpanElement;
   @ViewChild('containerScheduleDublado') containerScheduleDublado!: ElementRef<HTMLDivElement>;
-  room = 0;
 
   constructor(private route: ActivatedRoute, private router: Router, private movieService: MovieService, private cinemaMovieService: CinemaMovieService,
     private cdRef: ChangeDetectorRef

@@ -13,7 +13,6 @@ export class MovieInfoLocationAndScheduleHourComponent implements OnInit, AfterV
   @Input() cinemaMovieAll!: CinemaMovieGetAll[];
   @Input() objSchedule!: {key: string; value: ObjHoursCinemaMovie[];}[];
   @Input() movieChooseMovieTheater!: movieChooseMovieTheater;
-  @Input() room!: number;
   @Input() movieId!: string;
   @Input() onClickSeats!: (item: CinemaMovieGetAll) => void;
   @ViewChild('containerScheduleDublado') containerScheduleDublado!: ElementRef<HTMLDivElement>;
@@ -106,7 +105,8 @@ export class MovieInfoLocationAndScheduleHourComponent implements OnInit, AfterV
           locationMovieTheater: item.cinemaDTO.nameCinema,
           spanRegion: spanRegion,
           imgMovie: movieChooseMovieTheater.imgUrl,
-          room: item.room
+          room: item.room,
+          cinemaDTO: item.cinemaDTO
         };
 
         this.router.navigate(['/itens-about-movie'], { state: { objectForOrderSummary } });

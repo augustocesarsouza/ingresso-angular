@@ -6,6 +6,10 @@ import { TicketsClickedForTheUserPaymentMethodService } from '../service/tickets
 import { NumberOfTheTicketsClickedService } from '../service/number-of-the-tickets-clicked.service';
 import { PositionType } from '../enum/app.enums-type-of-itens';
 import { CanPassToPopcornService } from '../service/can-pass-to-popcorn.service';
+import { SeatsService } from '../service/seats.service';
+import { OrderSummaryService } from '../service/order-summary.service';
+import { TypeOfThePaymentService } from '../service/type-of-the-payment.service';
+import { BomboniereService } from '../service-bomboniere/bomboniere.service';
 
 @Component({
   selector: 'app-back-or-progress-footer',
@@ -26,7 +30,8 @@ export class BackOrProgressFooterComponent implements OnInit, AfterViewInit {
   codeConfirmedForTheUser = false;
 
   constructor(private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService, private witch_function_was_clicked_service: WitchFunctionWasClickedService, private tickets_clicked_for_the_user_payment_method_service: TicketsClickedForTheUserPaymentMethodService, private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService,
-    private can_pass_to_popcorn_service: CanPassToPopcornService
+    private can_pass_to_popcorn_service: CanPassToPopcornService, private seatsClickedService: SeatsService, private order_summary_service: OrderSummaryService,
+    private type_of_the_payment_service: TypeOfThePaymentService, private bomboniere_service: BomboniereService
   ){
   }
 
@@ -153,5 +158,36 @@ export class BackOrProgressFooterComponent implements OnInit, AfterViewInit {
 
   funcionaCodeConfirmedForTheUser = (value: boolean) => {
     this.codeConfirmedForTheUser = value;
+  }
+
+  onClickPay(){
+    console.log(this.order_summary_service.currentOrderSummary);
+    if(this.order_summary_service.currentOrderSummary === null) return;
+
+    let cinemaId = this.order_summary_service.currentOrderSummary?.cinemaDTO.id;
+    let movieId = this.order_summary_service.currentOrderSummary?.movieId;
+
+    let seats = this.seatsClickedService.currentSeats.join(', ');
+
+    let allTickets = this.type_of_the_payment_service.currentItens;
+    let allIdTickets: string[] = []; // tem que resolver se for dois tickets do mesmo id ai ele nao coloca os dois
+    // eu tenho que saber se são dois ids
+
+    allTickets.forEach((el) => {
+      allIdTickets.push(el.id);
+    });
+
+    let allProducts = this.bomboniere_service.currentProducts;
+    let allIdProcut: string[] = [];
+
+    allProducts.forEach((product) => {
+      allIdProcut.push(product.id);
+    });
+
+    console.log(allIdProcut); // pensar depois de um jeito se tiver mais de um product selecionado só vai aparecer
+    // uma vz nesse array de id, tem que ver um jeito de fazer e eu saber que ele foi escolhido mais de uma vez
+    // a ideia é pegar esses id e salvar numa tabela de "pay" pagamento ai eu recupero e coloco para pessoa listando
+    // o assentos o lugar do filmes os product tudo oque ele já pagou a data e tudo mais
+
   }
 }

@@ -4,7 +4,7 @@ export interface CinemaMovieGetAll {
   room: number;
 }
 
-interface CinemaDTO {
+export interface CinemaDTO {
   district: string;
   id: string;
   nameCinema: string;

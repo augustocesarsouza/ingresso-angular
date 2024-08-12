@@ -37,8 +37,6 @@ export class BodyChooseSeatsComponent implements OnInit {
 
   ngOnInit(): void {
     if(typeof document !== 'undefined'){
-      // let containerChooseSeatsAndOrderSummary = document.querySelector(".container-itens-about-movie-and-order-summary") as HTMLElement;
-
       this.subscription.push(this.witch_function_was_clicked_service.arrayWhatWasClicked$.subscribe((whatFunctionClicked) => {
         if(whatFunctionClicked.length <= 0) return;
 
