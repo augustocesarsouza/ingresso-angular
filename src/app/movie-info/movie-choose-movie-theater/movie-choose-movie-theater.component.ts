@@ -37,7 +37,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
   cinemaMovieScheduleFiltered: { [key: string]: ObjHoursCinemaMovie[] } = {};
   typesThatAlreadyClicked: string[] = [];
   containerTypeAll!: NodeListOf<HTMLElement>;
-  containerDateAll!: NodeListOf<HTMLElement>;
   containerDateFirst!: HTMLElement;
   arrayWhichTypeOfMovieTheaterHave: string[] = [];
   allIdCinemaMovie: string[] = [];
@@ -85,15 +84,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
         });
 
         this.containerTypeAll = document.querySelectorAll(".container-type");
-        this.containerDateAll = document.querySelectorAll(".container-date");
-
-        if(this.containerDateAll[0]){
-          this.containerDateAll[0].className = "container-date-1";
-        }
-
-        this.containerDateAll.forEach((el) => {
-          el.addEventListener("click", () => this.onClickContainerDate(el));
-        });
       }, 30);
     }
 
@@ -204,15 +194,6 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
     this.spanSessions.style.fontWeight = '600';
     this.spanAboutTheMovie.style.border = "none";
     this.spanAboutTheMovie.style.fontWeight = '100';
-  }
-
-  onClickContainerDate(el: HTMLElement){
-
-    this.containerDateAll.forEach((elFor) => {
-      elFor.className = "container-date";
-    });
-
-    el.className = "container-date-1";
   }
 
   objHourss!: {key: string; value: ObjHoursCinemaMovie[];}[];
