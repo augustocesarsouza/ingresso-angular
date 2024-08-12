@@ -26,7 +26,7 @@ export class SchuduleMovieTheaterComponent implements AfterViewInit, OnInit, OnD
   ngAfterViewInit(): void {
   }
 
-  onClickHour(itemHour: string, typeView: string){
+  onClickHour(itemHour: string){
     if (this.onClickChooseSeatsForThisHour) {
       this.onClickChooseSeatsForThisHour(this.movieChooseMovieTheater, this.item, itemHour, this.containerScheduleDublado);
     } else {

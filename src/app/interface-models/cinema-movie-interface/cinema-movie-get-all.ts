@@ -1,6 +1,7 @@
 export interface CinemaMovieGetAll {
   cinemaDTO: CinemaDTO;
   screeningSchedule: string;
+  room: number;
 }
 
 interface CinemaDTO {

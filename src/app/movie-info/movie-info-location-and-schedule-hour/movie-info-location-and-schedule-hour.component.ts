@@ -97,7 +97,6 @@ export class MovieInfoLocationAndScheduleHourComponent implements OnInit, AfterV
       let spanRegion = containerRegion?.lastChild?.textContent;
 
       if(spanRegion){
-        this.room += 1;
         let objectForOrderSummary: ObjectForOrderSummary = {
           movieId: this.movieId,
           title: movieChooseMovieTheater.title,
@@ -107,7 +106,7 @@ export class MovieInfoLocationAndScheduleHourComponent implements OnInit, AfterV
           locationMovieTheater: item.cinemaDTO.nameCinema,
           spanRegion: spanRegion,
           imgMovie: movieChooseMovieTheater.imgUrl,
-          room: this.room
+          room: item.room
         };
 
         this.router.navigate(['/itens-about-movie'], { state: { objectForOrderSummary } });

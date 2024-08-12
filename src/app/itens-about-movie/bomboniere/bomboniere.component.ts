@@ -206,7 +206,6 @@ export class BomboniereComponent implements OnInit {
       this.makeTheSumForPutTotalValue();
 
       this.spanTotalTaxaPrice.textContent = `R$ ${this.totalFeeSum.toFixed(2)}`;
-      console.log(this.listOfProductClicked);
 
       this.bomboniere_service.updateNumberOfTheClickProduct(this.listOfProductClicked);
 

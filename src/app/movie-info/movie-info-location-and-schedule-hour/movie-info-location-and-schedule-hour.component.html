@@ -76,7 +76,7 @@
               <div class="container-hours">
                 <div
                   class="container-schedule-hour"
-                  *ngFor="let itemHour of itemSchedule.arryHours"
+                  *ngFor="let itemHour of itemSchedule.arryHours; let i = index"
                   (click)="
                     onClickChooseSeatsForThisHour(
                       movieChooseMovieTheater,
