@@ -40,7 +40,12 @@ export class MovieInfoLocationAndScheduleHourComponent implements OnInit, AfterV
         'sábado'
       ];
 
-      let containerDate = document.querySelector(".container-date-1");
+      let containerDate = document.querySelector(".container-date-1") as HTMLElement;
+
+      if(containerDate === null || containerDate === undefined || !containerDate){
+        containerDate = document.querySelector(".container-date-1") as HTMLElement;
+      }
+
       let spanDayMonth = containerDate?.firstChild?.textContent;
       let indiceDia = new Date().getDay();
 
@@ -53,6 +58,21 @@ export class MovieInfoLocationAndScheduleHourComponent implements OnInit, AfterV
 
       let dayMonthAndDayWeek = `${nameDaySplit} ${spanDayMonth} ${itemHour.slice(0, 5)}`;
       let typeMovieTheater = "";
+
+      if(dayMonthAndDayWeek === null || dayMonthAndDayWeek === undefined){
+        containerDate = document.querySelector(".container-date-1") as HTMLElement;
+        let spanDayMonth = containerDate?.firstChild?.textContent;
+        let indiceDia = new Date().getDay();
+
+        const nomeDia = diasDaSemana[indiceDia];
+        let nameDaySplit = nomeDia.slice(0, 3).toUpperCase();
+
+        itemHour = itemHour.trim();
+        spanDayMonth = spanDayMonth?.trim();
+        nameDaySplit = nameDaySplit.trim();
+
+        dayMonthAndDayWeek = `${nameDaySplit} ${spanDayMonth} ${itemHour.slice(0, 5)}`;
+      }
 
       if(containerScheduleDublado){
         let containerSpanTypeMoreThanOne = containerScheduleDublado.nativeElement.querySelector(".container-span-type-view");

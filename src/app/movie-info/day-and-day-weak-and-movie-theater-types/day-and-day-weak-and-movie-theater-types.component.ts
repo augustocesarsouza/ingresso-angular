@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { addDays, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
@@ -12,9 +12,11 @@ export interface next7DaysProps {
   templateUrl: './day-and-day-weak-and-movie-theater-types.component.html',
   styleUrl: './day-and-day-weak-and-movie-theater-types.component.scss'
 })
-export class DayAndDayWeakAndMovieTheaterTypesComponent {
+export class DayAndDayWeakAndMovieTheaterTypesComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() arrayWhichTypeOfMovieTheaterHave: string[] = [];
   @Input() onClickContainerType!: (item: string) => void;
+
+  containerDateAll!: NodeListOf<HTMLElement>;
   next7Days!: next7DaysProps[];
 
   constructor(){
@@ -54,7 +56,25 @@ export class DayAndDayWeakAndMovieTheaterTypesComponent {
   }
 
   ngAfterViewInit(): void {
+    if(typeof document === "undefined") return;
 
+    this.containerDateAll = document.querySelectorAll(".container-date") as NodeListOf<HTMLElement>;
+
+    if(this.containerDateAll[0]){
+      this.containerDateAll[0].className = "container-date-1";
+    }
+
+    this.containerDateAll.forEach((el) => {
+      el.addEventListener("click", () => this.onClickContainerDate(el));
+    });
+  }
+
+  onClickContainerDate(el: HTMLElement){
+    this.containerDateAll.forEach((elFor) => {
+      elFor.className = "container-date";
+    });
+
+    el.className = "container-date-1";
   }
 
   ngOnDestroy(): void {
