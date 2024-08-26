@@ -60,32 +60,32 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
   }
 
   ngAfterViewInit(): void {
-    if(typeof document !== "undefined"){
-      document.body.style.position = "relative";
-      this.timeoutId = setTimeout(() => {
-        document.body.style.backgroundColor = "rgb(4, 18, 24)";
+    if(typeof document === "undefined") return;
 
-        this.spanSessions = document.querySelector(".span-sessions") as HTMLSpanElement;
-        this.spanAboutTheMovie = document.querySelector(".span-about-the-movie") as HTMLSpanElement;
+    document.body.style.position = "relative";
+    this.timeoutId = setTimeout(() => {
+      document.body.style.backgroundColor = "rgb(4, 18, 24)";
 
-        this.spanSessions?.addEventListener("click", () => {
-          this.putValueSpanSessions();
+      this.spanSessions = document.querySelector(".span-sessions") as HTMLSpanElement;
+      this.spanAboutTheMovie = document.querySelector(".span-about-the-movie") as HTMLSpanElement;
 
-          this.isClickedSpanAbountTheMovie = false;
-        });
+      this.spanSessions?.addEventListener("click", () => {
+        this.putValueSpanSessions();
 
-        this.spanAboutTheMovie?.addEventListener("click", () => {
-          this.spanSessions.style.border = "none";
-          this.spanSessions.style.fontWeight = '100';
-          this.spanAboutTheMovie.style.borderBottom = "4px solid rgb(50, 85, 226)";
-          this.spanAboutTheMovie.style.fontWeight = '600';
+        this.isClickedSpanAbountTheMovie = false;
+      });
 
-          this.isClickedSpanAbountTheMovie = true;
-        });
+      this.spanAboutTheMovie?.addEventListener("click", () => {
+        this.spanSessions.style.border = "none";
+        this.spanSessions.style.fontWeight = '100';
+        this.spanAboutTheMovie.style.borderBottom = "4px solid rgb(50, 85, 226)";
+        this.spanAboutTheMovie.style.fontWeight = '600';
 
-        this.containerTypeAll = document.querySelectorAll(".container-type");
-      }, 30);
-    }
+        this.isClickedSpanAbountTheMovie = true;
+      });
+
+      this.containerTypeAll = document.querySelectorAll(".container-type");
+    }, 30);
 
     this.route.params.subscribe((movieData: any) => {
       let movieId = movieData.movieId;
@@ -95,7 +95,12 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
         this.movieChooseMovieTheater = data.data;
       });
 
-      this.cinemaMovieService.getMoviesAllTrending(movieId).subscribe((data: any) => {
+      let region = document.querySelector(".span-what-region-selected")?.textContent;
+
+      if(region === null || region === undefined) return;
+      // console.log(region);
+
+      this.cinemaMovieService.getMoviesAllTrending(movieId, region).subscribe((data: any) => {
         this.cinemaMovieGetAll = data.data;
 
         let objHour: { [key: string]: ObjHoursCinemaMovie[] } = {};
@@ -107,6 +112,8 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
           let arrayOnlyDublado: string[] = [];
           let arrayOnlyLegendado: string[] = [];
           let arrayOnlyLegendadoVip: string[] = [];
+          let arrayOnlyDubladoVip: string[] = [];
+          let arrayOnlyDublado3D: string[] = [];
 
           array.forEach((elInner: string) => {
             if(elInner.includes("D")){
@@ -125,6 +132,18 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
               }
             }
 
+            if(elInner.includes("DV")){
+              arrayOnlyDubladoVip.push(elInner);
+
+              if(!this.arrayWhichTypeOfMovieTheaterHave.some((el) => el === "Dublado")){
+                this.arrayWhichTypeOfMovieTheaterHave.push("Legendado");
+              }
+
+              if(!this.arrayWhichTypeOfMovieTheaterHave.some((el) => el === "Vip")){
+                this.arrayWhichTypeOfMovieTheaterHave.push("Vip");
+              }
+            }
+
             if(elInner.includes("LV")){
               arrayOnlyLegendadoVip.push(elInner);
 
@@ -134,6 +153,18 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
 
               if(!this.arrayWhichTypeOfMovieTheaterHave.some((el) => el === "Vip")){
                 this.arrayWhichTypeOfMovieTheaterHave.push("Vip");
+              }
+            }
+
+            if(elInner.includes("D3")){
+              arrayOnlyDublado3D.push(elInner);
+
+              if(!this.arrayWhichTypeOfMovieTheaterHave.some((el) => el === "Dublado")){
+                this.arrayWhichTypeOfMovieTheaterHave.push("Dublado");
+              }
+
+              if(!this.arrayWhichTypeOfMovieTheaterHave.some((el) => el === "3D")){
+                this.arrayWhichTypeOfMovieTheaterHave.push("3D");
               }
             }
           });
@@ -150,10 +181,22 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
             arryHours: arrayOnlyLegendado
           }
 
+          let objHoursDubladoVip: ObjHoursCinemaMovie = {
+            type: "DV",
+            typeResumido: "DV",
+            arryHours: arrayOnlyDubladoVip
+          }
+
           let objHoursLegendadoVip: ObjHoursCinemaMovie = {
             type: "LV",
             typeResumido: "LV",
             arryHours: arrayOnlyLegendadoVip
+          }
+
+          let objHoursDublado3D: ObjHoursCinemaMovie = {
+            type: "D3",
+            typeResumido: "D3",
+            arryHours: arrayOnlyDublado3D
           }
 
           if(objHoursDublado.arryHours.length > 0){
@@ -164,8 +207,16 @@ export class MovieChooseMovieTheaterComponent implements OnInit, OnDestroy, Afte
             objHourAll.push(objHoursLegendado);
           }
 
+          if(objHoursDubladoVip.arryHours.length > 0){
+            objHourAll.push(objHoursDubladoVip);
+          }
+
           if(objHoursLegendadoVip.arryHours.length > 0){
             objHourAll.push(objHoursLegendadoVip);
+          }
+
+          if(objHoursDublado3D.arryHours.length > 0){
+            objHourAll.push(objHoursDublado3D);
           }
 
           objHour[el.cinemaDTO.id] = objHourAll;

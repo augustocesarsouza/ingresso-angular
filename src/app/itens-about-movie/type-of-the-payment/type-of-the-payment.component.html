@@ -17,30 +17,32 @@
     >
   </div>
   <div class="container-types-payment-main">
-    <div class="container-type" *ngFor="let form of formsOfPayment">
-      <div class="container-svg-ticket-info-about-payment-method">
-        <app-svg-ticket-full width="46px" height="46px"></app-svg-ticket-full>
-        <div class="container-info-about-payment">
-          <span class="span-form-name">{{ form.formName }}</span>
-          <span class="span-price">{{ form.price }}</span>
+    <div *ngFor="let form of formsOfPayment">
+      <div class="container-type" *ngIf="form.formName !== 'null'">
+        <div class="container-svg-ticket-info-about-payment-method">
+          <app-svg-ticket-full width="46px" height="46px"></app-svg-ticket-full>
+          <div class="container-info-about-payment">
+            <span class="span-form-name">{{ form.formName }}</span>
+            <span class="span-price">{{ form.price }}</span>
+          </div>
         </div>
-      </div>
-      <div class="container-less-and-more" #containerLessAndMore>
-        <app-svg-less-for-payment-method
-          width="19px"
-          height="19px"
-          fill="rgb(4, 18, 24)"
-          class="container-less-for-payment-method"
-          (click)="onClickLessButton(form, containerLessAndMore)"
-        ></app-svg-less-for-payment-method>
-        <span class="span-quantity-more">0</span>
-        <app-svg-more-for-payment-method
-          width="19px"
-          height="19px"
-          fill="rgb(4, 18, 24)"
-          class="container-more-for-payment-method"
-          (click)="onClickMoreButton(form, containerLessAndMore)"
-        ></app-svg-more-for-payment-method>
+        <div class="container-less-and-more" #containerLessAndMore>
+          <app-svg-less-for-payment-method
+            width="19px"
+            height="19px"
+            fill="rgb(4, 18, 24)"
+            class="container-less-for-payment-method"
+            (click)="onClickLessButton(form, containerLessAndMore)"
+          ></app-svg-less-for-payment-method>
+          <span class="span-quantity-more">0</span>
+          <app-svg-more-for-payment-method
+            width="19px"
+            height="19px"
+            fill="rgb(4, 18, 24)"
+            class="container-more-for-payment-method"
+            (click)="onClickMoreButton(form, containerLessAndMore)"
+          ></app-svg-more-for-payment-method>
+        </div>
       </div>
     </div>
   </div>

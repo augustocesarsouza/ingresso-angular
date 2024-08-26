@@ -66,10 +66,36 @@
             ></app-schudule-movie-theater>
             <div
               class="container-schedule-dublado"
-              *ngIf="itemSchedule.type === 'LV'"
-              #containerScheduleDublado
+              *ngIf="itemSchedule.type === 'DV'"
+              #containerScheduleDubladoVip
             >
-              <div class="container-span-type-more-than-one">
+              <div class="container-span-type-view">
+                <span>VIP</span>
+                <span>DUBLADO</span>
+              </div>
+              <div class="container-hours">
+                <div
+                  class="container-schedule-hour"
+                  *ngFor="let itemHour of itemSchedule.arryHours; let i = index"
+                  (click)="
+                    onClickChooseSeatsForThisHour(
+                      movieChooseMovieTheater,
+                      item,
+                      itemHour,
+                      containerScheduleDubladoVip
+                    )
+                  "
+                >
+                  {{ replaceStringHours(itemHour) }}
+                </div>
+              </div>
+            </div>
+            <div
+              class="container-schedule-dublado"
+              *ngIf="itemSchedule.type === 'LV'"
+              #containerScheduleLegendadoVip
+            >
+              <div class="container-span-type-view">
                 <span>VIP</span>
                 <span>LEGENDADO</span>
               </div>
@@ -82,7 +108,33 @@
                       movieChooseMovieTheater,
                       item,
                       itemHour,
-                      null
+                      containerScheduleLegendadoVip
+                    )
+                  "
+                >
+                  {{ replaceStringHours(itemHour) }}
+                </div>
+              </div>
+            </div>
+            <div
+              class="container-schedule-dublado"
+              *ngIf="itemSchedule.type === 'D3'"
+              #containerScheduleDublado3D
+            >
+              <div class="container-span-type-view">
+                <span>3D</span>
+                <span>DUBLADO</span>
+              </div>
+              <div class="container-hours">
+                <div
+                  class="container-schedule-hour"
+                  *ngFor="let itemHour of itemSchedule.arryHours; let i = index"
+                  (click)="
+                    onClickChooseSeatsForThisHour(
+                      movieChooseMovieTheater,
+                      item,
+                      itemHour,
+                      containerScheduleDublado3D
                     )
                   "
                 >

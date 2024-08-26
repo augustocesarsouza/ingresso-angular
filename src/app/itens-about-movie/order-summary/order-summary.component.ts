@@ -22,6 +22,7 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
   stringSeats = "";
   totalPriceTickets = "0,00";
   listProduct: ObjProductClicked[] = [];
+  typeMovieTheater: string[] = [];
 
   constructor(private seats_service: SeatsService, private bomboniere_service: BomboniereService,
     private tickets_clicked_for_the_user_payment_method_service: TicketsClickedForTheUserPaymentMethodService){
@@ -58,6 +59,12 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
       let stringDayMonth = this.objectForOrderSummary.dayMonthAndDayWeek.split(" ");
       this.stringFullOnlyDate = `${stringDayMonth[0]} ${stringDayMonth[1]}`;
       this.stringOnlyHour = stringDayMonth[2];
+
+      this.typeMovieTheater =  this.objectForOrderSummary.typeMovieTheater.split(",");
+
+      let movieRatingGet = this.objectForOrderSummary.movieRating;
+      console.log(movieRatingGet);
+
     }
 
     this.seatsSubscription.push(this.seats_service.seats$.subscribe((seatsElClicked) => {

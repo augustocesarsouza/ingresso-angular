@@ -32,9 +32,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.states = this.statesAndCitysService.getStates();
-    if(typeof window !== "undefined"){
-      localStorage.removeItem("cities");
-    }
+
+    if(typeof window === "undefined") return;
+
+    // localStorage.removeItem("cities");
 
     this.citiesLocalState = ["Campinas"];
 
@@ -51,10 +52,27 @@ export class NavigationComponent implements OnInit, OnDestroy {
     }
 
     let userLocalStorage = null;
+    let citiesLocalStorage = null;
 
-    if(typeof window !== "undefined"){
-      userLocalStorage = localStorage.getItem('userLogin');
+    userLocalStorage = localStorage.getItem('userLogin');
+
+    citiesLocalStorage = localStorage.getItem('cities');
+
+    if(citiesLocalStorage === null) return;
+
+    citiesLocalStorage = JSON.parse(citiesLocalStorage);
+    let citieArrayFist = "";
+
+    if(citiesLocalStorage.length <= 0){
+      citieArrayFist = citiesLocalStorage[0];
+    }else {
+      citieArrayFist = citiesLocalStorage[citiesLocalStorage.length - 1];
     }
+
+    let region = document.querySelector(".span-what-region-selected") as HTMLElement;
+    region.textContent = citieArrayFist;
+
+    this.citiesLocalState = citiesLocalStorage;
 
     if(userLocalStorage === "null" || userLocalStorage === null){
       this.subscription = this.dataService.data$.subscribe((data: UserLogin) => {
@@ -80,6 +98,21 @@ export class NavigationComponent implements OnInit, OnDestroy {
     }
 
     this.formatNameOfTheUser();
+
+    window.addEventListener('beforeunload', () => {
+      if(typeof localStorage === "undefined") return;
+
+      let citiesLocalStorage = null;
+
+      citiesLocalStorage = localStorage.getItem('cities');
+
+      if(citiesLocalStorage === null) return;
+
+      citiesLocalStorage = JSON.parse(citiesLocalStorage);
+
+      let newArray = citiesLocalStorage.slice(-1);
+      localStorage.setItem('cities', JSON.stringify(newArray));
+    });
   }
 
   formatNameOfTheUser(){
@@ -135,10 +168,16 @@ export class NavigationComponent implements OnInit, OnDestroy {
         localStorage.setItem('cities', statesJSON);
       }
 
-      citiesLocalStage = ["Campinas", ...citiesLocalStage];
+      // citiesLocalStage = ["Campinas", ...citiesLocalStage];
+      citiesLocalStage = citiesLocalStage;
+
 
       this.citiesLocalState = citiesLocalStage;
     }
+
+    let region = document.querySelector(".span-what-region-selected") as HTMLElement;
+    region.textContent = city;
+    this.isClickedRegion = false;
   }
 
   clickedLoupe(){
@@ -180,8 +219,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   onClickLogOutOfTheAccount(){
     if(typeof window !== "undefined"){
-      console.log("sdfvkjsd");
-
       localStorage.removeItem('userLogin');
     }
 

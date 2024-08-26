@@ -54,6 +54,7 @@ export class BomboniereComponent implements OnInit {
         if(el){
           this.bomboniere_service.getMovieIdInfo(el.movieId).subscribe((result: any) => {
             this.listProductForChoose = result.data;
+
           });
         }
       }));

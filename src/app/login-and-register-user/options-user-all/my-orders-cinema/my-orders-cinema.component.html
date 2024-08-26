@@ -1,3 +1,91 @@
 <div class="container-my-orders">
-  <h1>Você ainda não tem pedidos :(</h1>
+  <h1 *ngIf="getInfoAboutFinalInfoUserId.length <= 0">
+    Você ainda não tem pedidos :(
+  </h1>
+  <h1 *ngIf="getInfoAboutFinalInfoUserId.length > 0">Seus Pedidos</h1>
+  <div
+    class="container-info-about-order"
+    *ngFor="let getInfo of getInfoAboutFinalInfoUserId"
+  >
+    <div class="container-img-about-movie-and-title">
+      <div class="container-img-movie">
+        <img [src]="getInfo.movieDTO.imgUrl" [alt]="getInfo.movieDTO.title" />
+      </div>
+      <div class="container-others-info-about-movie">
+        <h1>{{ getInfo.movieDTO.title }}</h1>
+        <p>{{ getInfo.movieDTO.duration }}</p>
+        <h3 class="h3-cinema-district">{{ getInfo.cinemaDTO.district }}</h3>
+      </div>
+      <div class="container-main">
+        <h1>Tipo de pagamento</h1>
+        <div
+          *ngFor="let getInfoBayFinal of getInfoAboutBayFinal; let i = index"
+          class="container-ticket-product"
+        >
+          <div *ngFor="let item of getInfoBayFinal">
+            <div
+              *ngIf="
+                item.finalPaymentCheckoutMovieDTO
+                  .finalPaymentCheckoutMovieId ===
+                getInfo.finalPaymentCheckoutMovieId
+              "
+              class="container-ticket"
+            >
+              <p
+                *ngIf="
+                  item.finalPaymentCheckoutMovieTicketDTO.formOfPaymentDTO
+                    .formName !== 'null'
+                "
+              >
+                {{
+                  item.finalPaymentCheckoutMovieTicketDTO.formOfPaymentDTO
+                    .formName
+                }}
+                <span class="span-quantity"
+                  >{{
+                    item.finalPaymentCheckoutMovieTicketDTO.quantityTicket
+                  }}x</span
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-main-product">
+        <h1>Produtos Comprados</h1>
+        <div
+          *ngFor="let getInfoBayFinal of getInfoAboutBayFinal"
+          class="container-ticket-product"
+        >
+          <div *ngFor="let item of getInfoBayFinal">
+            <div
+              *ngIf="
+                item.finalPaymentCheckoutMovieDTO
+                  .finalPaymentCheckoutMovieId ===
+                getInfo.finalPaymentCheckoutMovieId
+              "
+              class="container-ticket"
+            >
+              <p
+                *ngIf="
+                  item.finalPaymentCheckoutMovieProductDTO
+                    .additionalFoodMovieDTO.title !== 'null'
+                "
+              >
+                {{
+                  item.finalPaymentCheckoutMovieProductDTO
+                    .additionalFoodMovieDTO.title
+                }}
+                <span class="span-quantity"
+                  >{{
+                    item.finalPaymentCheckoutMovieProductDTO.quantityProduct
+                  }}x</span
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
