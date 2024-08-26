@@ -13,10 +13,9 @@ export class MovieInfoLocationAndScheduleHourComponent implements OnInit, AfterV
   @Input() cinemaMovieAll!: CinemaMovieGetAll[];
   @Input() objSchedule!: {key: string; value: ObjHoursCinemaMovie[];}[];
   @Input() movieChooseMovieTheater!: movieChooseMovieTheater;
-  @Input() room!: number;
   @Input() movieId!: string;
   @Input() onClickSeats!: (item: CinemaMovieGetAll) => void;
-  @ViewChild('containerScheduleDublado') containerScheduleDublado!: ElementRef<HTMLDivElement>;
+  // @ViewChild('containerScheduleDublado') containerScheduleDublado!: ElementRef<HTMLDivElement>;
 
   constructor(private router: Router){
   }
@@ -28,7 +27,7 @@ export class MovieInfoLocationAndScheduleHourComponent implements OnInit, AfterV
   ngAfterViewInit(): void {
   }
 
-  onClickChooseSeatsForThisHour(movieChooseMovieTheater: movieChooseMovieTheater, item: CinemaMovieGetAll, itemHour: string, containerScheduleDublado: ElementRef<HTMLDivElement> | null): void{
+  onClickChooseSeatsForThisHour(movieChooseMovieTheater: movieChooseMovieTheater, item: CinemaMovieGetAll, itemHour: string, containerScheduleDublado: HTMLDivElement): void{
     if(typeof document !== 'undefined'){
       const diasDaSemana = [
         'domingo',
@@ -75,29 +74,40 @@ export class MovieInfoLocationAndScheduleHourComponent implements OnInit, AfterV
       }
 
       if(containerScheduleDublado){
-        let containerSpanTypeMoreThanOne = containerScheduleDublado.nativeElement.querySelector(".container-span-type-view");
+        let containerSpanTypeMoreThanOne = containerScheduleDublado.querySelector(".container-span-type-view");
+
         let spans = containerSpanTypeMoreThanOne?.childNodes;
-        if(spans && spans[0] && spans[0].textContent){
-          typeMovieTheater = spans[0].textContent;
+
+        if(spans && spans.length <= 1){
+          if(spans && spans[0] && spans[0].textContent){
+            typeMovieTheater = spans[0].textContent;
+          }
+        }else {
+          spans?.forEach((el: ChildNode, index: number) => {
+            typeMovieTheater += el.textContent;
+
+            if(index < spans.length - 1){
+              typeMovieTheater += ",";
+            }
+          });
         }
       }else {
-        let containerSpanTypeMoreThanOne = this.containerScheduleDublado.nativeElement.querySelector(".container-span-type-more-than-one");
-        let spans = containerSpanTypeMoreThanOne?.childNodes;
+        // let containerSpanTypeMoreThanOne = this.containerScheduleDublado.nativeElement.querySelector(".container-span-type-more-than-one");
+        // let spans = containerSpanTypeMoreThanOne?.childNodes;
 
-        spans?.forEach((span: ChildNode, index: number) => {
-          typeMovieTheater += span.textContent;
+        // spans?.forEach((span: ChildNode, index: number) => {
+        //   typeMovieTheater += span.textContent;
 
-          if(spans.length > index + 1){
-            typeMovieTheater += ",";
-          }
-        });
+        //   if(spans.length > index + 1){
+        //     typeMovieTheater += ",";
+        //   }
+        // });
       }
 
       let containerRegion = document.querySelector(".container-region");
       let spanRegion = containerRegion?.lastChild?.textContent;
 
       if(spanRegion){
-        this.room += 1;
         let objectForOrderSummary: ObjectForOrderSummary = {
           movieId: this.movieId,
           title: movieChooseMovieTheater.title,
@@ -107,7 +117,8 @@ export class MovieInfoLocationAndScheduleHourComponent implements OnInit, AfterV
           locationMovieTheater: item.cinemaDTO.nameCinema,
           spanRegion: spanRegion,
           imgMovie: movieChooseMovieTheater.imgUrl,
-          room: this.room
+          room: item.room,
+          cinemaDTO: item.cinemaDTO
         };
 
         this.router.navigate(['/itens-about-movie'], { state: { objectForOrderSummary } });
@@ -116,6 +127,10 @@ export class MovieInfoLocationAndScheduleHourComponent implements OnInit, AfterV
   }
 
   replaceStringHours(hour: string){
-    return hour.replace(/[^0-9:]/g, '');
+    let hourAtt = hour.trim().slice(0, 5);
+
+    return hourAtt.replace(/[^0-9:]/g, '');
+
+    // return hour.replace(/[^0-9:]/g, '');
   }
 }

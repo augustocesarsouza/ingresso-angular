@@ -43,7 +43,11 @@
     >
       Ir para Pagamento
     </button>
-    <button class="button-payment" *ngIf="whatFunctionClicked === 'payment'">
+    <button
+      class="button-payment"
+      *ngIf="whatFunctionClicked === 'payment'"
+      (click)="onClickPay()"
+    >
       Pagar
     </button>
   </div>

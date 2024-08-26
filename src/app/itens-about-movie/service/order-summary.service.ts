@@ -12,4 +12,8 @@ export class OrderSummaryService {
   setOrderSummary(orderSummary: ObjectForOrderSummary): void {
     this.orderSummarySource.next(orderSummary);
   }
+
+  get currentOrderSummary(): ObjectForOrderSummary | null {
+    return this.orderSummarySource.getValue();
+  }
 }

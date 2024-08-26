@@ -6,6 +6,30 @@ import { TicketsClickedForTheUserPaymentMethodService } from '../service/tickets
 import { NumberOfTheTicketsClickedService } from '../service/number-of-the-tickets-clicked.service';
 import { PositionType } from '../enum/app.enums-type-of-itens';
 import { CanPassToPopcornService } from '../service/can-pass-to-popcorn.service';
+import { SeatsService } from '../service/seats.service';
+import { OrderSummaryService } from '../service/order-summary.service';
+import { TypeOfThePaymentService } from '../service/type-of-the-payment.service';
+import { BomboniereService } from '../service-bomboniere/bomboniere.service';
+import { FinalPaymentCheckoutMovieService } from '../service/final-payment-checkout-movie.service';
+
+interface ObjProduct {
+  id: string;
+  quantityProduct: number;
+}
+
+interface ObjTicket {
+  id: string;
+  quantityTicket: number;
+}
+
+export interface objBodyCreate {
+  userId: string;
+  movieId: string;
+  cinemaId: string;
+  seats: string;
+  objTicketDTO: ObjTicket[];
+  objProductDTO: ObjProduct[];
+}
 
 @Component({
   selector: 'app-back-or-progress-footer',
@@ -26,7 +50,9 @@ export class BackOrProgressFooterComponent implements OnInit, AfterViewInit {
   codeConfirmedForTheUser = false;
 
   constructor(private number_of_the_seats_clicked_service: NumberOfTheSeatsClickedService, private witch_function_was_clicked_service: WitchFunctionWasClickedService, private tickets_clicked_for_the_user_payment_method_service: TicketsClickedForTheUserPaymentMethodService, private number_of_the_tickets_clicked_service: NumberOfTheTicketsClickedService,
-    private can_pass_to_popcorn_service: CanPassToPopcornService
+    private can_pass_to_popcorn_service: CanPassToPopcornService, private seatsClickedService: SeatsService, private order_summary_service: OrderSummaryService,
+    private type_of_the_payment_service: TypeOfThePaymentService, private bomboniere_service: BomboniereService,
+    private final_payment_checkout_movie_service: FinalPaymentCheckoutMovieService
   ){
   }
 
@@ -153,5 +179,74 @@ export class BackOrProgressFooterComponent implements OnInit, AfterViewInit {
 
   funcionaCodeConfirmedForTheUser = (value: boolean) => {
     this.codeConfirmedForTheUser = value;
+  }
+
+  onClickPay(){
+    // console.log(this.order_summary_service.currentOrderSummary);
+    if(this.order_summary_service.currentOrderSummary === null) return;
+
+    let userLocalStorage = localStorage.getItem("userLogin");
+
+    if(userLocalStorage === null) return;
+
+    let user: any = JSON.parse(userLocalStorage);
+
+    let userId: string = user.id;
+    let movieId = this.order_summary_service.currentOrderSummary.movieId;
+    let cinemaId = this.order_summary_service.currentOrderSummary.cinemaDTO.id;
+
+    let seats = this.seatsClickedService.currentSeats.join(', ');
+
+    let allTickets = this.type_of_the_payment_service.currentItens;
+    // mandar esse 'allTickets' para o backend, lá ele vai tratar vai pegar "id" e a "quantity" e salvar na "tabela"
+    let allTicket: ObjTicket[] = [];
+
+    allTickets.forEach((ticket) => {
+      if(!allTicket.some((el) => el.id === ticket.id)){
+        let ticketNew = {
+          id: ticket.id,
+          quantityTicket: ticket.quantityClicked,
+        }
+
+        allTicket.push(ticketNew);
+      }
+    });
+
+    let allProducts = this.bomboniere_service.currentProducts;
+    let allProcut: ObjProduct[] = [];
+
+    allProducts.forEach((product) => {
+      if(!allProcut.some((el) => el.id === product.id)){
+        let productNew = {
+          id: product.id,
+          quantityProduct: product.quanityClicked,
+        }
+
+        allProcut.push(productNew);
+      }
+    });
+
+    let objBodyCreate: objBodyCreate = {
+      userId: userId,
+      movieId: movieId,
+      cinemaId: cinemaId,
+      seats: seats,
+      objTicketDTO: allTicket,
+      objProductDTO: allProcut,
+    };
+
+    this.final_payment_checkout_movie_service.createFinalPaymentCheckoutMovie(objBodyCreate).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+
+    // pegar esse "allProcut" e mandar para o backend, lá ele vai tratar vai pegar "id" e a "quantity" e salvar na "tabela"
+
+    // criar um objeto que manda para o backend nessa tabela que tem que criar ainda no BACKEND "tb_final_payment_checkout_movie"
+    // TEM QUE CRIAR AS CLASS NO BAKCEND AINDA
   }
 }

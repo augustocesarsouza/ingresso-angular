@@ -9,8 +9,8 @@ export class CinemaMovieService {
 
   constructor(private _http: HttpClient) { }
 
-  getMoviesAllTrending(movieId: string){
-    let region = "Campinas";
+  getMoviesAllTrending(movieId: string, region: string){
+    // let region = "Campo Grande";
     let response = this._http.get(`/api/v1/public/cinemaMovie/getAll/${region}/${movieId}`).pipe(take(1));
     // o get lá está certo ele fala que está vindo mais coisa "BUT IS NOT"
     return response;

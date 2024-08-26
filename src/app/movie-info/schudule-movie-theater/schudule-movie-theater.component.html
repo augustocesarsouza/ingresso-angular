@@ -10,7 +10,7 @@
     <div
       class="container-schedule-hour"
       *ngFor="let itemHour of itemSchedule.arryHours"
-      (click)="onClickHour(itemHour, typeView)"
+      (click)="onClickHour(itemHour, containerScheduleDublado)"
     >
       <span>{{ replaceStringHours(itemHour) }}</span>
     </div>

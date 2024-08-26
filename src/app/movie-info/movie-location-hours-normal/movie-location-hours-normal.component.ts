@@ -20,7 +20,6 @@ export class MovieLocationHoursNormalComponent implements OnInit {
   @Input() objHourss!: {key: string; value: ObjHoursCinemaMovie[];}[];
   @Input() movieChooseMovieTheater!: movieChooseMovieTheater;
   @Input() movieId!: string;
-  @Input() room!: number;
   @ViewChild('containerScheduleDublado') containerScheduleDublado!: ElementRef<HTMLDivElement>;
 
   constructor(){

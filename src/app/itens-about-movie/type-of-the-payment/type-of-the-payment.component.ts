@@ -13,11 +13,13 @@ import { CanPassToPopcornService } from '../service/can-pass-to-popcorn.service'
 
 interface FormsOfPayment {
   formName: string;
+  id: string;
   price: string;
 }
 
 export interface ItensClickedByUser {
   formName: string;
+  id: string;
   quantityClicked: number;
 }
 
@@ -122,7 +124,6 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
         this.form_of_payment_service.getMovieIdInfo(this.objectForOrderSummary.movieId).subscribe({
           next: (data: any) => {
             this.formsOfPayment = data.data;
-
           },
           error: (error: any) => {
             console.log(error);
@@ -150,7 +151,7 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
           return el;
         })
       }else {
-        this.itensClickedByUser.push({ formName: form.formName, quantityClicked: 1 });
+        this.itensClickedByUser.push({ formName: form.formName, id: form.id, quantityClicked: 1 });
       }
 
       this.type_of_the_payment_service.updateItensClickedTypeOfPayment(this.itensClickedByUser);
@@ -220,7 +221,6 @@ export class TypeOfThePaymentComponent implements OnInit, OnDestroy {
       });
 
       this.itensClickedByUser = this.itensClickedByUser.filter((el) => el.quantityClicked > 0);
-
       this.type_of_the_payment_service.updateItensClickedTypeOfPayment(this.itensClickedByUser);
 
       this.itemsPaymentClicked = Array.from({ length: this.quantityAlreadyBeenClickedLessMore }, (_, i) => i);

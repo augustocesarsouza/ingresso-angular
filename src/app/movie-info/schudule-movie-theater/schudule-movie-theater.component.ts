@@ -14,7 +14,7 @@ export class SchuduleMovieTheaterComponent implements AfterViewInit, OnInit, OnD
   @Input() typeView!: string;
   @Input() movieChooseMovieTheater!: movieChooseMovieTheater;
   @Input() item!: CinemaMovieGetAll;
-  @Input() onClickChooseSeatsForThisHour!: (movieChooseMovieTheater: movieChooseMovieTheater, item: CinemaMovieGetAll, itemHour: string, containerScheduleDublado: ElementRef<HTMLDivElement>) => void;
+  @Input() onClickChooseSeatsForThisHour!: (movieChooseMovieTheater: movieChooseMovieTheater, item: CinemaMovieGetAll, itemHour: string, containerScheduleDublado: HTMLDivElement) => void;
   @ViewChild('containerScheduleDublado') containerScheduleDublado!: ElementRef<HTMLDivElement>;
 
   constructor(){
@@ -25,17 +25,19 @@ export class SchuduleMovieTheaterComponent implements AfterViewInit, OnInit, OnD
 
   ngAfterViewInit(): void {
   }
-
-  onClickHour(itemHour: string, typeView: string){
+  // containerScheduleDublado: HTMLDivElement
+  onClickHour(itemHour: string, containerScheduleDublado: HTMLDivElement){
     if (this.onClickChooseSeatsForThisHour) {
-      this.onClickChooseSeatsForThisHour(this.movieChooseMovieTheater, this.item, itemHour, this.containerScheduleDublado);
+      this.onClickChooseSeatsForThisHour(this.movieChooseMovieTheater, this.item, itemHour, containerScheduleDublado);
     } else {
       console.error('onClickChooseSeatsForThisHour is not defined');
     }
   }
 
   replaceStringHours(hour: string){
-    return hour.replace(/[^0-9:]/g, '');
+    let hourAtt = hour.trim().slice(0, 5);
+
+    return hourAtt.replace(/[^0-9:]/g, '');
   }
 
   ngOnDestroy(): void {

@@ -24,9 +24,16 @@
           <span class="span-movie-rating">{{
             objectForOrderSummary.movieRating
           }}</span>
-          <span class="span-type-movie-theater">{{
+          <!-- <span class="span-type-movie-theater">{{
             objectForOrderSummary.typeMovieTheater
-          }}</span>
+          }}</span> -->
+        </div>
+        <div class="container-type-movie-theater">
+          <span
+            class="span-type-movie-theater"
+            *ngFor="let type of typeMovieTheater"
+            >{{ type }}</span
+          >
         </div>
         <div class="container-location-region">
           <span class="span-location-movie-theater">{{
